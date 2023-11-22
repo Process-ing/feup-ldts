@@ -1,4 +1,4 @@
 package timelessodyssey.view;
 
-public class Viewer
+public class Viewer{
 }
