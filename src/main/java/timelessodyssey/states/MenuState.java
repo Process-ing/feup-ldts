@@ -1,2 +1,4 @@
-package timelessodyssey.states;public class MenuState {
+package timelessodyssey.states;
+
+public class MenuState {
 }

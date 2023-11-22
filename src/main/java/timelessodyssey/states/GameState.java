@@ -1,2 +1,4 @@
-package timelessodyssey.states;public class GameState {
+package timelessodyssey.states;
+
+public class GameState {
 }

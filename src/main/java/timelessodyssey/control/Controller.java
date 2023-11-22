@@ -1,5 +1,8 @@
 package timelessodyssey.control;
 
+import timelessodyssey.Game;
+import timelessodyssey.gui.GUI;
+
 import java.io.IOException;
 
 public abstract class Controller<T> {
