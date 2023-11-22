@@ -1,9 +1,8 @@
 package timelessodyssey.view.screens;
 
 import timelessodyssey.gui.GUI;
-import timelessodyssey.view.Model;
 
-public abstract class ScreenViewer<T extends Model> {
+public abstract class ScreenViewer<T> {
     final protected GUI gui;
     final protected T model;
 

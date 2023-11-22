@@ -1,7 +1,7 @@
 package timelessodyssey.view.screens;
 
 import timelessodyssey.gui.GUI;
-import timelessodyssey.view.Model;
+import timelessodyssey.model.menu.Menu;
 
 public class MenuViewer extends ScreenViewer<Menu> {
     public MenuViewer(GUI gui, Menu model) {
