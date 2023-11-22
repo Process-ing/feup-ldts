@@ -1,17 +1,30 @@
 plugins {
     id 'java'
+    id 'application'
+    id "org.kordamp.gradle.errorprone" version "0.47.0"
 }
 
 group = 'timelessodyssey'
-version = '1.0-SNAPSHOT'
+version = '1.0'
 
 repositories {
     mavenCentral()
 }
 
+application {
+    mainClass.set('timelessodyssey.Game')
+}
+
 dependencies {
+    implementation 'com.googlecode.lanterna:lanterna:3.1.1'
+
     testImplementation platform('org.junit:junit-bom:5.9.1')
+
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:3.7.7'
+    testImplementation 'net.jqwik:jqwik:1.5.1'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {
