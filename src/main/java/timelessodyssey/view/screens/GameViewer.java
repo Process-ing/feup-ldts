@@ -1,11 +1,11 @@
 package timelessodyssey.view.screens;
 
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.game.map.Map;
+import timelessodyssey.model.game.map.Scene;
 
-public class GameViewer extends ScreenViewer<Map> {
-    public GameViewer(GUI gui, Map map) {
-        super(gui, map);
+public class GameViewer extends ScreenViewer<Scene> {
+    public GameViewer(GUI gui, Scene model) {
+        super(gui, model);
     }
 
     @Override

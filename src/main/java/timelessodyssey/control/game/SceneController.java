@@ -2,10 +2,13 @@ package timelessodyssey.control.game;
 
 import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.game.map.Scene;
 import timelessodyssey.model.menu.Menu;
 import timelessodyssey.states.MenuState;
 
 import java.io.IOException;
+
+import static timelessodyssey.gui.GUI.Action.QUIT;
 
 public class SceneController extends GameController{
     private final PlayerController playerController;
@@ -15,8 +18,9 @@ public class SceneController extends GameController{
         this.playerController = new PlayerController(scene);
     }
 
-    public void step(Game game, GUI.ACTION action, long time) throws IOException {
-        if (action == GUI.ACTION.QUIT)
+    @Override
+    public void step(Game game, GUI.Action action, long time) {
+        if (action == QUIT)
             game.setState(new MenuState(new Menu()));
         else {
             playerController.step(game, action, time);

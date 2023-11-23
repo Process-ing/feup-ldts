@@ -8,22 +8,38 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class LanternaGUI implements GUI {
     private final Screen screen;
 
-    public LanternaGUI(int width, int height) throws IOException {
+    public LanternaGUI(int width, int height) throws IOException, URISyntaxException, FontFormatException {
         Terminal terminal = createTerminal(width, height);
         this.screen = createScreen(terminal);
     }
 
-    private Terminal createTerminal(int width, int height) throws IOException {
+    private Terminal createTerminal(int width, int height) throws IOException, URISyntaxException, FontFormatException {
         TerminalSize size = new TerminalSize(width, height + 1);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory()
                 .setInitialTerminalSize(size);
+
+        AWTTerminalFontConfiguration fontConfig = loadFont();
+        terminalFactory.setForceAWTOverSwing(true);
+        terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
         return terminalFactory.createTerminal();
+    }
+
+    private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, IOException, FontFormatException {
+        URL resource = getClass().getClassLoader().getResource("fonts/pixel.ttf");
+        File fontFile = new File(resource.toURI());
+        Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, 9);
+        return AWTTerminalFontConfiguration.newInstance(font);
     }
 
     private Screen createScreen(Terminal terminal) throws IOException {

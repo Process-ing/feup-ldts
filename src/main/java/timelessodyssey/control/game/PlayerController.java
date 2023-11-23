@@ -3,7 +3,7 @@ package timelessodyssey.control.game;
 import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Position;
-import timelessodyssey.model.game.*;
+import timelessodyssey.model.game.map.Scene;
 
 public class PlayerController extends GameController {
 
@@ -32,20 +32,21 @@ public class PlayerController extends GameController {
     }
 
     @Override
-    public void step(Game game, GUI.ACTION action, long time) {
+    public void step(Game game, GUI.Action action, long time) {
         switch (action){
-            case GUI.ACTION.UP:
+            case UP:
                 movePlayerUp();
                 break;
-            case GUI.ACTION.DOWN:
+            case DOWN:
                 movePlayerDown();
                 break;
-            case GUI.ACTION.LEFT:
+            case LEFT:
                 movePlayerLeft();
                 break;
-            case GUI.ACTION.RIGHT:
+            case RIGHT:
                 movePlayerRight();
                 break;
+            default:
         }
     }
 }
