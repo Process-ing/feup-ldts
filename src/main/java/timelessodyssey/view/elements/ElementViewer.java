@@ -2,12 +2,6 @@ package timelessodyssey.view.elements;
 
 import timelessodyssey.gui.GUI;
 
-public abstract class ElementViewer<T> {
-    final protected GUI gui;
-
-    public ElementViewer(GUI gui) {
-        this.gui = gui;
-    }
-
-    public abstract void draw(T model);
+public interface ElementViewer<T> {
+    void draw(T model, GUI gui);
 }

@@ -1,4 +1,4 @@
-package timelessodyssey.model.game.map;
+package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Position;
 import timelessodyssey.model.game.elements.Player;

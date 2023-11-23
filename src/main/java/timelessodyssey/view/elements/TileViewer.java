@@ -3,13 +3,9 @@ package timelessodyssey.view.elements;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Tile;
 
-public class TileViewer extends ElementViewer<Tile>  {
-    public TileViewer(GUI gui) {
-        super(gui);
-    }
-
+public class TileViewer implements ElementViewer<Tile>  {
     @Override
-    public void draw(Tile model) {
+    public void draw(Tile model, GUI gui) {
 
     }
 }

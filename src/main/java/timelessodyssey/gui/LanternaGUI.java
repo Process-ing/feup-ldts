@@ -38,7 +38,7 @@ public class LanternaGUI implements GUI {
     private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, IOException, FontFormatException {
         URL resource = getClass().getClassLoader().getResource("fonts/pixel.ttf");
         File fontFile = new File(resource.toURI());
-        Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, 9);
+        Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, 8);
         return AWTTerminalFontConfiguration.newInstance(font);
     }
 
@@ -64,7 +64,7 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public Action getAction() throws IOException {
+    public Action getNextAction() throws IOException {
         KeyStroke keyStroke = screen.pollInput();
         if (keyStroke == null)
             return Action.NONE;
@@ -74,6 +74,7 @@ public class LanternaGUI implements GUI {
             case ArrowDown -> Action.DOWN;
             case ArrowLeft -> Action.LEFT;
             case ArrowRight -> Action.RIGHT;
+            case Character -> keyStroke.getCharacter() == 'q' ? Action.QUIT : Action.NONE;
             case Enter -> Action.SELECT;
             case EOF -> Action.QUIT;
             default -> Action.NONE;

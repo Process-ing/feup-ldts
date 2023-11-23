@@ -1,7 +1,7 @@
 package timelessodyssey;
 
 import timelessodyssey.gui.*;
-import timelessodyssey.model.menu.Menu;
+import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.states.*;
 
 import java.awt.*;
@@ -15,8 +15,10 @@ public class Game {
     private State state;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
-        this.gui = new LanternaGUI(120, 67);
-        this.state = new MenuState(new Menu());
+        int SCREEN_WIDTH = 160;
+        int SCREEN_HEIGHT = 90;
+        this.gui = new LanternaGUI(SCREEN_WIDTH, SCREEN_HEIGHT);
+        this.state = new GameState(new Scene(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
     public static void main(String[] args) {

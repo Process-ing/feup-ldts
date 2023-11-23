@@ -4,10 +4,6 @@ import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.menu.Menu;
-import timelessodyssey.states.State;
-import timelessodyssey.states.GameState;
-
-import java.io.IOException;
 
 public class MenuController extends Controller<Menu> {
 
