@@ -3,7 +3,7 @@ package timelessodyssey.control.game;
 import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Position;
-import timelessodyssey.model.game.map.Scene;
+import timelessodyssey.model.game.scene.Scene;
 
 public class PlayerController extends GameController {
 

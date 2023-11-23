@@ -2,7 +2,7 @@ package timelessodyssey.control.game;
 
 import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.game.map.Scene;
+import timelessodyssey.model.game.scene.Scene;
 
 import static timelessodyssey.gui.GUI.Action.QUIT;
 

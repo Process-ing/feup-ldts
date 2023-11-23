@@ -1,7 +1,7 @@
 package timelessodyssey.view.screens;
 
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.game.map.Scene;
+import timelessodyssey.model.game.scene.Scene;
 
 public class GameViewer extends ScreenViewer<Scene> {
     public GameViewer(Scene model) {

@@ -2,7 +2,7 @@ package timelessodyssey.states;
 
 import timelessodyssey.control.Controller;
 import timelessodyssey.control.game.SceneController;
-import timelessodyssey.model.game.map.Scene;
+import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.screens.GameViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
