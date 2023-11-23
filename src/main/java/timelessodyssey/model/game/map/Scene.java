@@ -6,7 +6,7 @@ import timelessodyssey.model.game.elements.Tile;
 
 import java.util.List;
 
-public class Map {
+public class Scene {
     private final int width;
     private final int height;
 
@@ -14,7 +14,7 @@ public class Map {
 
     private List<Tile> tiles;
 
-    public Map(int width, int height) {
+    public Scene(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -27,11 +27,11 @@ public class Map {
         return height;
     }
 
-    public Player getHero() {
+    public Player getPlayer() {
         return player;
     }
 
-    public void setHero(Player player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 

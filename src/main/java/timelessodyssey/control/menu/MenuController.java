@@ -16,26 +16,20 @@ public class MenuController extends Controller<Menu> {
     }
 
     @Override
-    public void step(Game game, GUI.ACTION action, long time) throws IOException {
+    public void step(Game game, GUI.Action action, long time) {
         switch (action) {
             case UP:
                 this.getModel().moveUp();
                 break;
-
             case DOWN:
                 this.getModel().moveDown();
                 break;
-
             case SELECT:
-                if (this.getModel().isExit()) {
+                if (this.getModel().isSelectedExit()) {
                     game.setState(null);
                 }
-                else {
-                    State nextState = new GameState(new LoaderMapBuilder(1).createMap());
-                    game.setState(nextState);
-                }
+                break;
+            default:
         }
-
     }
-
 }

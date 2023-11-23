@@ -15,13 +15,13 @@ public class Menu {
         return this.entries.size();
     }
 
-    public void nextEntry() {
+    public void moveDown() {
         currentEntry++;
         if (currentEntry > getNumberEntries() - 1)
             currentEntry = 0;
     }
 
-    public void previousEntry() {
+    public void moveUp() {
         currentEntry--;
         if (currentEntry < 0)
             currentEntry = getNumberEntries() - 1;
