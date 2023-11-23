@@ -4,12 +4,12 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.map.Scene;
 
 public class GameViewer extends ScreenViewer<Scene> {
-    public GameViewer(GUI gui, Scene model) {
-        super(gui, model);
+    public GameViewer(Scene model) {
+        super(model);
     }
 
     @Override
-    public void draw() {
+    public void draw(GUI gui) {
 
     }
 }

@@ -3,11 +3,9 @@ package timelessodyssey.view.screens;
 import timelessodyssey.gui.GUI;
 
 public abstract class ScreenViewer<T> {
-    final protected GUI gui;
     final protected T model;
 
-    public ScreenViewer(GUI gui, T model) {
-        this.gui = gui;
+    public ScreenViewer(T model) {
         this.model = model;
     }
 
@@ -15,5 +13,5 @@ public abstract class ScreenViewer<T> {
         return model;
     }
 
-    public abstract void draw();
+    public abstract void draw(GUI gui);
 }

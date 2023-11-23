@@ -3,13 +3,9 @@ package timelessodyssey.view.elements;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Player;
 
-public class PlayerViewer extends ElementViewer<Player> {
-    public PlayerViewer(GUI gui) {
-        super(gui);
-    }
-
+public class PlayerViewer implements ElementViewer<Player> {
     @Override
-    public void draw(Player model) {
+    public void draw(Player model, GUI gui) {
 
     }
 }
