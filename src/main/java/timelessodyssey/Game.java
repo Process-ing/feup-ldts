@@ -2,6 +2,7 @@ package timelessodyssey;
 
 import timelessodyssey.gui.*;
 import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.states.*;
 
 import java.awt.*;
@@ -18,7 +19,7 @@ public class Game {
         int SCREEN_WIDTH = 160;
         int SCREEN_HEIGHT = 90;
         this.gui = new LanternaGUI(SCREEN_WIDTH, SCREEN_HEIGHT);
-        this.state = new GameState(new Scene(SCREEN_WIDTH, SCREEN_HEIGHT));
+        this.state = new GameState(new SceneBuilder().createScene());
     }
 
     public static void main(String[] args) {
