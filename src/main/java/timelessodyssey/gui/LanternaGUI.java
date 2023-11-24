@@ -29,7 +29,7 @@ public class LanternaGUI implements GUI {
     }
 
     private Terminal createTerminal(int width, int height) throws IOException, URISyntaxException, FontFormatException {
-        TerminalSize size = new TerminalSize(width, height + 1);
+        TerminalSize size = new TerminalSize(width, height);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory()
                 .setInitialTerminalSize(size);
 
@@ -40,7 +40,7 @@ public class LanternaGUI implements GUI {
     }
 
     private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, IOException, FontFormatException {
-        URL resource = getClass().getClassLoader().getResource("fonts/pixel.ttf");
+        URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, 8);
         return AWTTerminalFontConfiguration.newInstance(font);
@@ -61,9 +61,9 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawPixel(int x, int y, String color) {
+    public void drawPixel(int x, int y, TextColor.RGB color) {
         TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(TextColor.Factory.fromString(color));
+        tg.setBackgroundColor(color);
         tg.putString(x, y, " ");
     }
 
