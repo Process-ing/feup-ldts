@@ -21,21 +21,20 @@ public class LanternaGUITest {
     }
 
     @Property
-    public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") String color) {
+    public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor.RGB color) {
         gui.drawPixel(x, y, color);
 
         Mockito.verify(tg, Mockito.times(1))
-            .setBackgroundColor(TextColor.Factory.fromString(color));
+            .setBackgroundColor(color);
         Mockito.verify(tg, Mockito.times(1)).putString(x, y, " ");
     }
 
     @Provide
-    public Arbitrary<String> color() {
-        final String HEX_CHARS = "0123456789ABCDEF";
+    public Arbitrary<TextColor.RGB> color() {
         return Combinators.combine(
-            Arbitraries.strings().withChars(HEX_CHARS).ofLength(2),
-            Arbitraries.strings().withChars(HEX_CHARS).ofLength(2),
-            Arbitraries.strings().withChars(HEX_CHARS).ofLength(2)
-        ).as((r, g, b) -> "#" + r + g + b);
+            Arbitraries.integers().between(0, 255),
+            Arbitraries.integers().between(0, 255),
+            Arbitraries.integers().between(0, 255)
+        ).as(TextColor.RGB::new);
     }
 }
