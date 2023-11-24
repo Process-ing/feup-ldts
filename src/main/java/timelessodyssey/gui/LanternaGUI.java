@@ -19,6 +19,10 @@ import java.net.URL;
 public class LanternaGUI implements GUI {
     private final Screen screen;
 
+    public LanternaGUI(Screen screen) {
+        this.screen = screen;
+    }
+
     public LanternaGUI(int width, int height) throws IOException, URISyntaxException, FontFormatException {
         Terminal terminal = createTerminal(width, height);
         this.screen = createScreen(terminal);
