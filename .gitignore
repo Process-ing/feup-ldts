@@ -4,3 +4,4 @@ build/
 gradle/
 gradlew.bat
 gradlew
+.jqwik-database
