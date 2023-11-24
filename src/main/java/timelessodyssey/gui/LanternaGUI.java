@@ -23,26 +23,26 @@ public class LanternaGUI implements GUI {
         this.screen = screen;
     }
 
-    public LanternaGUI(int width, int height) throws IOException, URISyntaxException, FontFormatException {
-        Terminal terminal = createTerminal(width, height);
+    public LanternaGUI(int width, int height, int fontSize) throws IOException, URISyntaxException, FontFormatException {
+        Terminal terminal = createTerminal(width, height, fontSize);
         this.screen = createScreen(terminal);
     }
 
-    private Terminal createTerminal(int width, int height) throws IOException, URISyntaxException, FontFormatException {
+    private Terminal createTerminal(int width, int height, int fontSize) throws IOException, URISyntaxException, FontFormatException {
         TerminalSize size = new TerminalSize(width, height);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory()
                 .setInitialTerminalSize(size);
 
-        AWTTerminalFontConfiguration fontConfig = loadFont();
+        AWTTerminalFontConfiguration fontConfig = loadFont(fontSize);
         terminalFactory.setForceAWTOverSwing(true);
         terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
         return terminalFactory.createTerminal();
     }
 
-    private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, IOException, FontFormatException {
+    private AWTTerminalFontConfiguration loadFont(int fontSize) throws URISyntaxException, IOException, FontFormatException {
         URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
         File fontFile = new File(resource.toURI());
-        Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, 8);
+        Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
         return AWTTerminalFontConfiguration.newInstance(font);
     }
 
