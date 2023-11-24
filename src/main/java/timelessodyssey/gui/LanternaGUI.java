@@ -25,7 +25,7 @@ public class LanternaGUI implements GUI {
     }
 
     private Terminal createTerminal(int width, int height) throws IOException, URISyntaxException, FontFormatException {
-        TerminalSize size = new TerminalSize(width, height + 1);
+        TerminalSize size = new TerminalSize(width, height);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory()
                 .setInitialTerminalSize(size);
 
@@ -57,10 +57,10 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawPixel(int x, int y, String color) {
+    public void drawPixel(int x, int y, TextColor.RGB color) {
         TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(TextColor.Factory.fromString(color));
-        tg.putString(x, y + 1, " ");
+        tg.setBackgroundColor(color);
+        tg.putString(x, y, " ");
     }
 
     @Override
