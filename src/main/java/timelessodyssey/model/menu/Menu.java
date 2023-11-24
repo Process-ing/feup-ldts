@@ -11,6 +11,10 @@ public class Menu {
         this.entries = Arrays.asList("Start", "Exit");
     }
 
+    public List<String> getEntries(){
+        return entries;
+    }
+
     public int getNumberEntries() {
         return this.entries.size();
     }
