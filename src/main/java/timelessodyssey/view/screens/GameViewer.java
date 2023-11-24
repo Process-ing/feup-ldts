@@ -10,7 +10,8 @@ import timelessodyssey.view.elements.TileViewer;
 import java.io.IOException;
 import java.util.List;
 import timelessodyssey.view.elements.PlayerViewer;
-import timelessodyssey.model.game.elements.Element;
+import timelessodyssey.view.sprites.Sprite;
+import timelessodyssey.view.sprites.SpriteLoader;
 
 public class GameViewer extends ScreenViewer<Scene> {
     public GameViewer(Scene model) {
@@ -28,9 +29,10 @@ public class GameViewer extends ScreenViewer<Scene> {
             }
         }
 
-        // DRAW Everything
         drawElement(gui, getModel().getPlayer(), new PlayerViewer());
         drawElements(gui, getModel().getTiles(), new TileViewer());
+        Sprite sprite = new SpriteLoader().createSprite("sprites/player/player.png");
+        sprite.draw(gui, 64, 64);
 
         gui.refresh();
     }
