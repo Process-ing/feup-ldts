@@ -17,6 +17,7 @@ public class Scene {
     public Scene(int width, int height) {
         this.width = width;
         this.height = height;
+        this.player = new Player(width / 2, height / 2);
     }
 
     public int getWidth() {
