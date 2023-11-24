@@ -4,14 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Menu {
-    private final List<String> entries;
+    private final List<Entry> entries;
     private int currentEntry = 0;
 
     public Menu() {
-        this.entries = Arrays.asList("Start", "Exit");
+        Entry start = new Entry(5, 55, "Start");
+        Entry settings = new Entry(5, 65, "Settings");
+        Entry exit = new Entry(5, 75, "Exit");
+        this.entries = Arrays.asList(start, settings, exit);
     }
 
-    public List<String> getEntries(){
+    public List<Entry> getEntries(){
         return entries;
     }
 
@@ -31,7 +34,7 @@ public class Menu {
             currentEntry = getNumberEntries() - 1;
     }
 
-    public String getEntry(int i) {
+    public Entry getEntry(int i) {
         return entries.get(i);
     }
 
@@ -40,7 +43,7 @@ public class Menu {
     }
 
     public boolean isSelectedExit() {
-        return isSelected(1);
+        return isSelected(getNumberEntries()-1);
     }
 
     public boolean isSelectedStart() {
