@@ -4,7 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import net.jqwik.api.*;
-import org.junit.jupiter.api.BeforeEach;
+import net.jqwik.api.lifecycle.BeforeTry;
 import org.mockito.Mockito;
 
 public class LanternaGUITest {
@@ -12,7 +12,7 @@ public class LanternaGUITest {
     TextGraphics tg;
     LanternaGUI gui;
 
-    @BeforeEach
+    @BeforeTry
     public void setup() {
         screen = Mockito.mock(Screen.class);
         tg = Mockito.mock(TextGraphics.class);
@@ -22,10 +22,10 @@ public class LanternaGUITest {
 
     @Property
     public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") String color) {
-        setup();
         gui.drawPixel(x, y, color);
 
-        Mockito.verify(tg, Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString(color));
+        Mockito.verify(tg, Mockito.times(1))
+            .setBackgroundColor(TextColor.Factory.fromString(color));
         Mockito.verify(tg, Mockito.times(1)).putString(x, y, " ");
     }
 
