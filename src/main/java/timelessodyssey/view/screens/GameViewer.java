@@ -1,6 +1,7 @@
 package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
+import org.w3c.dom.Text;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
@@ -22,10 +23,11 @@ public class GameViewer extends ScreenViewer<Scene> {
     public void draw(GUI gui) throws IOException {
         gui.clear();
 
-        // BACKGROUND (NOT SCENE RELATED)
+        // Background color
+        TextColor.RGB background = new TextColor.RGB(28, 28, 28);
         for (int w = 0; w < 160; w++) {
             for (int h = 0; h < 90; h++) {
-                gui.drawPixel(w, h, new TextColor.RGB(28, 28, 28));
+                gui.drawPixel(w, h, background);
             }
         }
 
