@@ -7,8 +7,8 @@ import timelessodyssey.model.game.elements.Tile;
 import java.util.List;
 
 public class Scene {
-    private final int width;
-    private final int height;
+    private int width;
+    private int height;
 
     private Player player;
 
@@ -17,6 +17,7 @@ public class Scene {
     public Scene(int width, int height) {
         this.width = width;
         this.height = height;
+        this.player = new Player(width / 2, height / 2);
     }
 
     public int getWidth() {
