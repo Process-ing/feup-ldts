@@ -11,19 +11,19 @@ public class PlayerController extends GameController {
         super(scene);
     }
 
-    public void movePlayerLeft() {
+    private void movePlayerLeft() {
         movePlayer(this.getModel().getPlayer().getPosition().getLeft());
     }
 
-    public void movePlayerRight() {
+    private void movePlayerRight() {
         movePlayer(this.getModel().getPlayer().getPosition().getRight());
     }
 
-    public void movePlayerUp() {
+    private void movePlayerUp() {
         movePlayer(this.getModel().getPlayer().getPosition().getUp());
     }
 
-    public void movePlayerDown() {
+    private void movePlayerDown() {
         movePlayer(this.getModel().getPlayer().getPosition().getDown());
     }
 

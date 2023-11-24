@@ -16,4 +16,11 @@ public record Position(int x, int y) {
     public Position getDown() {
         return new Position(x, y + 1);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Position position)) return false;
+        return x == position.x && y == position.y;
+    }
 }
