@@ -9,9 +9,9 @@ import static timelessodyssey.gui.GUI.Action.QUIT;
 public class SceneController extends GameController {
     private final PlayerController playerController;
 
-    public SceneController(Scene scene){
+    public SceneController(Scene scene, PlayerController playerController) {
         super(scene);
-        this.playerController = new PlayerController(scene);
+        this.playerController = playerController;
     }
 
     @Override
