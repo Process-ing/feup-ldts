@@ -1,8 +1,7 @@
 package timelessodyssey;
 
 import timelessodyssey.gui.*;
-import timelessodyssey.model.game.scene.Scene;
-import timelessodyssey.model.game.scene.SceneBuilder;
+import timelessodyssey.model.menu.Menu;
 import timelessodyssey.states.*;
 
 import java.awt.*;
@@ -27,7 +26,7 @@ public class Game {
         int fontSize = (int) Math.min(maxFontWidth, maxFontHeight);
 
         this.gui = new LanternaGUI(SCREEN_WIDTH, SCREEN_HEIGHT, fontSize);
-        this.state = new GameState(new SceneBuilder().createScene());
+        this.state = new MenuState(new Menu());
     }
 
     public static void main(String[] args) {
@@ -44,7 +43,7 @@ public class Game {
     }
 
     private void start() throws IOException, InterruptedException {
-        int FPS = 60;
+        int FPS = 30;
         int frameTime = 1000 / FPS;
 
         while (this.state != null) {
