@@ -8,18 +8,18 @@ import timelessodyssey.view.screens.ScreenViewer;
 import java.io.IOException;
 
 public abstract class State<T> {
-    protected final T model;
-    protected final Controller<T> controller;
-    protected final ScreenViewer<T> screenViewer;
+    private final T model;
+    private final Controller<T> controller;
+    private final ScreenViewer<T> screenViewer;
 
     public State(T model) {
         this.model = model;
-        this.screenViewer = getScreenViewer();
-        this.controller = getController();
+        this.screenViewer = createScreenViewer();
+        this.controller = createController();
     }
 
-    protected abstract ScreenViewer<T> getScreenViewer();
-    protected abstract Controller<T> getController();
+    protected abstract ScreenViewer<T> createScreenViewer();
+    protected abstract Controller<T> createController();
 
     public T getModel() {
         return model;
