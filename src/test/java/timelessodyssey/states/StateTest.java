@@ -34,12 +34,12 @@ public class StateTest {
         mockControllerAndViewer();
         this.state = new State<>(model) {
             @Override
-            protected ScreenViewer<TestObject> getScreenViewer() {
+            protected ScreenViewer<TestObject> createScreenViewer() {
                 return stateScreenViewer;
             }
 
             @Override
-            protected Controller<TestObject> getController() {
+            protected Controller<TestObject> createController() {
                 return stateController;
             }
         };

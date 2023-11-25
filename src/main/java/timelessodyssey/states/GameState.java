@@ -13,12 +13,12 @@ public class GameState extends State<Scene> {
     }
 
     @Override
-    protected Controller<Scene> getController() {
-        return new SceneController(model, new PlayerController(model));
+    protected Controller<Scene> createController() {
+        return new SceneController(getModel(), new PlayerController(getModel()));
     }
 
     @Override
-    protected ScreenViewer<Scene> getScreenViewer() {
-        return new GameViewer(model);
+    protected ScreenViewer<Scene> createScreenViewer() {
+        return new GameViewer(getModel());
     }
 }
