@@ -1,12 +1,13 @@
 package timelessodyssey.control.game;
 
 import timelessodyssey.Game;
+import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.scene.Scene;
 
 import static timelessodyssey.gui.GUI.Action.QUIT;
 
-public class SceneController extends GameController {
+public class SceneController extends Controller<Scene> {
     private final PlayerController playerController;
 
     public SceneController(Scene scene, PlayerController playerController) {
