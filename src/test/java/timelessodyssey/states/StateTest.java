@@ -11,29 +11,35 @@ import timelessodyssey.view.screens.ScreenViewer;
 import java.io.IOException;
 
 public class StateTest {
-    Object model;
+    private static class TestObject {}
+
+    TestObject model;
     Game game;
     GUI gui;
-    Controller<Object> stateController;
-    ScreenViewer<Object> stateScreenViewer;
-    State<Object> state;
+    Controller<TestObject> stateController;
+    ScreenViewer<TestObject> stateScreenViewer;
+    State<TestObject> state;
+
+    @SuppressWarnings("unchecked")
+    private void mockControllerAndViewer() {
+        this.stateController = Mockito.mock(Controller.class);
+        this.stateScreenViewer = Mockito.mock(ScreenViewer.class);
+    }
 
     @BeforeEach
     public void setup() {
-        this.model = Mockito.mock(Object.class);
+        this.model = Mockito.mock(TestObject.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(GUI.class);
-        this.stateController = Mockito.mock(Controller.class);
-        this.stateScreenViewer = Mockito.mock(ScreenViewer.class);
-
+        mockControllerAndViewer();
         this.state = new State<>(model) {
             @Override
-            protected ScreenViewer<Object> getScreenViewer() {
+            protected ScreenViewer<TestObject> getScreenViewer() {
                 return stateScreenViewer;
             }
 
             @Override
-            protected Controller<Object> getController() {
+            protected Controller<TestObject> getController() {
                 return stateController;
             }
         };
