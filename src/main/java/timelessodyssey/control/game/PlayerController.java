@@ -1,11 +1,12 @@
 package timelessodyssey.control.game;
 
 import timelessodyssey.Game;
+import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Position;
 import timelessodyssey.model.game.scene.Scene;
 
-public class PlayerController extends GameController {
+public class PlayerController extends Controller<Scene> {
 
     public PlayerController(Scene scene) {
         super(scene);
