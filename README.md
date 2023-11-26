@@ -35,4 +35,4 @@
 
 ### GENERAL STRUCTURE
 
-<img src="docs/resources/timelessOdysseyUML.png"/>
+<img src="docs/resources/uml/structure.png"/>
