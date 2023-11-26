@@ -1,15 +1,21 @@
-package timelessodyssey.view.sprites;
+package timelessodyssey.view;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 public class Sprite {
-    private BufferedImage image;
+    private final BufferedImage image;
 
-    public Sprite(BufferedImage image) {
-        this.image = image;
+    public Sprite(String filepath) throws IOException {
+        URL resource = getClass().getClassLoader().getResource(filepath);
+        assert resource != null;
+        image = ImageIO.read(new File(resource.getFile()));
     }
     public BufferedImage getImage() {
         return image;

@@ -5,7 +5,7 @@ import timelessodyssey.gui.GUI;
 import java.io.IOException;
 
 public abstract class ScreenViewer<T> {
-    final protected T model;
+    private final T model;
 
     public ScreenViewer(T model) {
         this.model = model;
