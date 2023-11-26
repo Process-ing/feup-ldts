@@ -8,7 +8,7 @@ import timelessodyssey.view.screens.ScreenViewer;
 
 public class MenuState extends State<Menu>{
 
-    public MenuState(Menu model) { super(model);}
+    public MenuState(Menu model) { super(model); }
 
     @Override
     protected ScreenViewer<Menu> createScreenViewer() {
