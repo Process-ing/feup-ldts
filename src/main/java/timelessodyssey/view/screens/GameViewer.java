@@ -31,8 +31,6 @@ public class GameViewer extends ScreenViewer<Scene> {
 
         drawElement(gui, getModel().getPlayer(), new PlayerViewer());
         drawElements(gui, getModel().getTiles(), new TileViewer());
-        Sprite sprite = new Sprite("sprites/player/player.png");
-        sprite.draw(gui, 64, 64);
 
         gui.refresh();
     }

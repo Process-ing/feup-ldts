@@ -24,7 +24,7 @@ public class SceneBuilder {
     }
 
     public SceneBuilder() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("levels/level.lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/scene1.lvl");
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
 
         lines = readLines(br);
@@ -51,10 +51,10 @@ public class SceneBuilder {
     protected List<Tile> createWalls() {
         List<Tile> walls = new ArrayList<>();
 
-        for (int y = 0; y < lines.size(); y++) {
+        for (int y = 0; y < lines.size(); y ++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == '#') walls.add(new Tile(x, y));
+            for (int x = 0; x < line.length(); x ++)
+                if (line.charAt(x) == '#') walls.add(new Tile(x * 8, y * 8));
         }
 
         return walls;
@@ -64,7 +64,7 @@ public class SceneBuilder {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'P') return new Player(x, y);
+                if (line.charAt(x) == 'P') return new Player(x * 8, y * 8);
         }
         return null;
     }

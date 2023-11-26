@@ -16,7 +16,7 @@ public class Game {
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         int SCREEN_WIDTH = 160;
-        int SCREEN_HEIGHT = 90;
+        int SCREEN_HEIGHT = 88;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
@@ -25,7 +25,7 @@ public class Game {
         double maxFontHeight = height / SCREEN_HEIGHT;
         int fontSize = (int) Math.min(maxFontWidth, maxFontHeight);
 
-        this.gui = new LanternaGUI(SCREEN_WIDTH, SCREEN_HEIGHT, fontSize);
+        this.gui = new LanternaGUI(SCREEN_WIDTH, SCREEN_HEIGHT, fontSize - 1);
         this.state = new MenuState(new Menu());
     }
 

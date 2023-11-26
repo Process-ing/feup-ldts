@@ -3,15 +3,18 @@ package timelessodyssey.view.elements;
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Player;
+import timelessodyssey.view.Sprite;
+
+import java.io.IOException;
 
 public class PlayerViewer implements ElementViewer<Player> {
+    private Sprite sprite = new Sprite("sprites/player/player.png");
+
+    public PlayerViewer() throws IOException {
+    }
+
     @Override
     public void draw(Player model, GUI gui) {
-        TextColor.RGB color = new TextColor.RGB(255,255,255);
-        gui.drawPixel(model.getPosition().x(), model.getPosition().y(), color);
-        gui.drawPixel(model.getPosition().x() + 1, model.getPosition().y(), color);
-        gui.drawPixel(model.getPosition().x() - 1, model.getPosition().y(), color);
-        gui.drawPixel(model.getPosition().x(), model.getPosition().y() + 1, color);
-        gui.drawPixel(model.getPosition().x(), model.getPosition().y() - 1, color);
+        sprite.draw(gui, model.getPosition().x(), model.getPosition().y());
     }
 }
