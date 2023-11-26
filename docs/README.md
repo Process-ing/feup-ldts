@@ -144,7 +144,7 @@ Here is a diagram representation of the pattern:
 By using this pattern, we get rid of the need to treat the State logic with if-statements or switch-statements that filter the State by its type and use the power of polymorphism to control all of them using a single interface.  
 We no longer have to deal with application-specific classes as they can be controlled using the same methods (as if they were just general "States").
 
-### Adapter Pattern
+### Simplification of Lanterna's interface
 
 #### Problem in Context
 
