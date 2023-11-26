@@ -8,9 +8,10 @@ import timelessodyssey.view.Sprite;
 import java.io.IOException;
 
 public class PlayerViewer implements ElementViewer<Player> {
-    private Sprite sprite = new Sprite("sprites/player/player.png");
+    private Sprite sprite;
 
     public PlayerViewer() throws IOException {
+        sprite = new Sprite("sprites/player/player.png");
     }
 
     @Override

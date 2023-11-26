@@ -23,9 +23,9 @@ public class Game {
         double height = screenSize.getHeight();
         double maxFontWidth = width / SCREEN_WIDTH;
         double maxFontHeight = height / SCREEN_HEIGHT;
-        int fontSize = (int) Math.min(maxFontWidth, maxFontHeight);
+        int fontSize = (int) Math.min(maxFontWidth, maxFontHeight) - 1;
 
-        this.gui = new LanternaGUI(SCREEN_WIDTH, SCREEN_HEIGHT, fontSize - 1);
+        this.gui = new LanternaGUI(SCREEN_WIDTH, SCREEN_HEIGHT, fontSize);
         this.state = new MenuState(new Menu());
     }
 
