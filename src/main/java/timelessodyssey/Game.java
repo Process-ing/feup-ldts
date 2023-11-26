@@ -16,7 +16,7 @@ public class Game {
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         int SCREEN_WIDTH = 160;
-        int SCREEN_HEIGHT = 88;
+        int SCREEN_HEIGHT = 90;
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
