@@ -4,11 +4,14 @@ import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Tile;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class SceneBuilder {
 
@@ -25,7 +28,8 @@ public class SceneBuilder {
 
     public SceneBuilder() throws IOException {
         URL resource = getClass().getClassLoader().getResource("levels/scene1.lvl");
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+        assert resource != null;
+        BufferedReader br = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
         lines = readLines(br);
     }

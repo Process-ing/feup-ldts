@@ -18,12 +18,12 @@ public class Game {
         int SCREEN_WIDTH = 160;
         int SCREEN_HEIGHT = 90;
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Rectangle screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
         double maxFontWidth = width / SCREEN_WIDTH;
         double maxFontHeight = height / SCREEN_HEIGHT;
-        int fontSize = (int) Math.min(maxFontWidth, maxFontHeight) - 1;
+        int fontSize = (int) Math.min(maxFontWidth, maxFontHeight);
 
         this.gui = new LanternaGUI(SCREEN_WIDTH, SCREEN_HEIGHT, fontSize);
         this.state = new MenuState(new Menu());
