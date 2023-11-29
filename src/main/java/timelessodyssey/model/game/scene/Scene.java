@@ -4,6 +4,8 @@ import timelessodyssey.model.Position;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Tile;
 
+import javax.management.loading.ClassLoaderRepository;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Scene {
@@ -44,9 +46,28 @@ public class Scene {
     }
 
     public boolean isEmpty(Position position) {
-        for (Tile tile : tiles)
-            if (tile.getPosition().equals(position))
-                return false;
+        for (Tile tile : tiles) {
+            for (int w = 0; w < 8; w++) {
+                Position pos1 = new Position(tile.getPosition().x() + w, tile.getPosition().y());
+                Position pos2 = new Position(tile.getPosition().x() + w, tile.getPosition().y() + 7);
+                if (pos1.equals(position)) {
+                    return false;
+                }
+                if (pos2.equals(position)) {
+                    return false;
+                }
+            }
+            for (int h = 0; h < 8; h++) {
+                Position pos1 = new Position(tile.getPosition().x(), tile.getPosition().y() + h);
+                Position pos2 = new Position(tile.getPosition().x() + 7, tile.getPosition().y() + h);
+                if (pos1.equals(position)) {
+                    return false;
+                }
+                if (pos2.equals(position)) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 }
