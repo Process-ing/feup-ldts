@@ -47,7 +47,6 @@ public class PlayerController extends Controller<Scene> {
             case RIGHT:
                 movePlayerRight();
                 break;
-            default:
         }
     }
 }
