@@ -23,6 +23,7 @@ public class PlayerControllerTest {
         Mockito.when(scene.getPlayer()).thenReturn(player);
         this.game = Mockito.mock(Game.class);
         this.playerController = new PlayerController(scene);
+        Mockito.when(scene.isEmpty(Mockito.any())).thenReturn(true);
     }
 
     @Test
