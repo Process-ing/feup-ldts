@@ -23,7 +23,7 @@ public class SpriteTest {
 
         sprite.draw(gui, x, y);
 
-        Mockito.verify(gui, Mockito.times(0)).drawPixel(x, y, new TextColor.RGB(0, 0, 0));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x, y, new TextColor.RGB(0, 0, 0));
         Mockito.verify(gui, Mockito.times(1)).drawPixel(x + 1, y, new TextColor.RGB(0, 0, 255));
         Mockito.verify(gui, Mockito.times(1)).drawPixel(x, y + 1, new TextColor.RGB(0, 255, 0));
         Mockito.verify(gui, Mockito.times(1)).drawPixel(x + 1, y + 1, new TextColor.RGB(255, 0, 0));
