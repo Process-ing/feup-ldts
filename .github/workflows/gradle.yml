@@ -24,10 +24,8 @@ jobs:
       uses: gradle/gradle-build-action@v2
 
     - name: Build Project
-      uses: actions/checkout@v2
       run: ./gradlew build
 
     - name: Execute Tests
-      uses: actions/checkout@v2
       run: ./gradlew test
   
