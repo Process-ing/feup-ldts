@@ -3,6 +3,7 @@ package timelessodyssey.model.game.scene;
 import timelessodyssey.model.Position;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.Spike;
 
 import javax.management.loading.ClassLoaderRepository;
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ public class Scene {
     private final int height;
 
     private Player player;
-
     private List<Tile> tiles;
+    private List<Spike> spikes;
 
     public Scene(int width, int height) {
         this.width = width;
@@ -43,6 +44,14 @@ public class Scene {
 
     public void setTiles(List<Tile> tiles) {
         this.tiles = tiles;
+    }
+
+    public List<Spike> getSpikes() {
+        return spikes;
+    }
+
+    public void setSpikes(List<Spike> spikes) {
+        this.spikes = spikes;
     }
 
     public boolean isEmpty(Position position) {

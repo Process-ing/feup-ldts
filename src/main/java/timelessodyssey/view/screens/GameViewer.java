@@ -3,8 +3,10 @@ package timelessodyssey.view.screens;
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Element;
+import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.elements.ElementViewer;
+import timelessodyssey.view.elements.SpikeViewer;
 import timelessodyssey.view.elements.TileViewer;
 
 import java.io.IOException;
@@ -31,6 +33,7 @@ public class GameViewer extends ScreenViewer<Scene> {
 
         drawElement(gui, getModel().getPlayer(), new PlayerViewer());
         drawElements(gui, getModel().getTiles(), new TileViewer());
+        drawElements(gui, getModel().getSpikes(), new SpikeViewer());
 
         gui.refresh();
     }
