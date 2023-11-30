@@ -2,6 +2,7 @@ package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.Spike;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,12 +23,13 @@ public class SceneBuilder {
 
         scene.setPlayer(createPlayer());
         scene.setTiles(createWalls());
+        scene.setSpikes(createSpikes());
 
         return scene;
     }
 
     public SceneBuilder() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("levels/scene1.lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/level.lvl");
         assert resource != null;
         BufferedReader br = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
@@ -62,6 +64,18 @@ public class SceneBuilder {
         }
 
         return walls;
+    }
+
+    protected List<Spike> createSpikes() {
+        List<Spike> spikes = new ArrayList<>();
+
+        for (int y = 0; y < lines.size(); y ++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x ++)
+                if (line.charAt(x) == '^') spikes.add(new Spike(x * 8, y * 8));
+        }
+
+        return spikes;
     }
 
     protected Player createPlayer() {
