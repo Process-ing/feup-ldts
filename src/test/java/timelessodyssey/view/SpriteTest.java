@@ -1,12 +1,20 @@
 package timelessodyssey.view;
 
 import com.googlecode.lanterna.TextColor;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.gui.GUI;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Arrays;
 
 public class SpriteTest {
     GUI gui;
@@ -14,6 +22,29 @@ public class SpriteTest {
     @BeforeEach
     public void setup() {
         gui = Mockito.mock(GUI.class);
+    }
+
+    private boolean equalImages(BufferedImage image1, BufferedImage image2) {
+        int[] colors1 = image1.getRGB(0, 0, image1.getWidth(), image1.getHeight(), null, 0, image1.getWidth());
+        int[] colors2 = image2.getRGB(0, 0, image2.getWidth(), image2.getHeight(), null, 0, image2.getWidth());
+        return Arrays.equals(colors1, colors2);
+    }
+
+    @Test
+    public void constructor() throws IOException {
+        Sprite sprite1 = new Sprite("sprites/test-sprite1.png");
+        URL resource1 = getClass().getClassLoader().getResource("sprites/test-sprite1.png");
+        Assertions.assertNotNull(resource1);
+        BufferedImage image1 = ImageIO.read(new File(resource1.getFile()));
+
+        Assertions.assertTrue(equalImages(image1, sprite1.getImage()));
+
+        Sprite sprite2 = new Sprite("sprites/test-sprite2.png");
+        URL resource2 = getClass().getClassLoader().getResource("sprites/test-sprite2.png");
+        Assertions.assertNotNull(resource2);
+        BufferedImage image2 = ImageIO.read(new File(resource2.getFile()));
+
+        Assertions.assertTrue(equalImages(image2, sprite2.getImage()));
     }
 
     @Test
