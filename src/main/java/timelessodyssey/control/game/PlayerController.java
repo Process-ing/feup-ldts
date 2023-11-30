@@ -29,7 +29,12 @@ public class PlayerController extends Controller<Scene> {
     }
 
     private void movePlayer(Position position) {
-        this.getModel().getPlayer().setPosition(position);
+        Position position2 = new Position(position.x() + 5, position.y());
+        Position position3 = new Position(position.x() + 5, position.y() + 7);
+        Position position4 = new Position(position.x(), position.y() + 7);
+        if (this.getModel().isEmpty(position) && this.getModel().isEmpty(position2) && this.getModel().isEmpty(position3) && this.getModel().isEmpty(position4)){
+            this.getModel().getPlayer().setPosition(position);
+        }
     }
 
     @Override
