@@ -12,13 +12,13 @@ public abstract class State<T> {
     private final Controller<T> controller;
     private final ScreenViewer<T> screenViewer;
 
-    public State(T model) {
+    public State(T model) throws IOException {
         this.model = model;
         this.screenViewer = createScreenViewer();
         this.controller = createController();
     }
 
-    protected abstract ScreenViewer<T> createScreenViewer();
+    protected abstract ScreenViewer<T> createScreenViewer() throws IOException;
     protected abstract Controller<T> createController();
 
     public T getModel() {

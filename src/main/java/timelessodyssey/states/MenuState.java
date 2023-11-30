@@ -6,9 +6,11 @@ import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
+import java.io.IOException;
+
 public class MenuState extends State<Menu>{
 
-    public MenuState(Menu model) { super(model); }
+    public MenuState(Menu model) throws IOException { super(model); }
 
     @Override
     protected ScreenViewer<Menu> createScreenViewer() {

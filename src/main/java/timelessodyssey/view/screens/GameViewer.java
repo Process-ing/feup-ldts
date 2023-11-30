@@ -10,11 +10,15 @@ import timelessodyssey.view.elements.TileViewer;
 import java.io.IOException;
 import java.util.List;
 import timelessodyssey.view.elements.PlayerViewer;
-import timelessodyssey.view.Sprite;
 
 public class GameViewer extends ScreenViewer<Scene> {
-    public GameViewer(Scene model) {
+    private final PlayerViewer playerViewer;
+    private final TileViewer tileViewer;
+
+    public GameViewer(Scene model) throws IOException {
         super(model);
+        this.playerViewer = new PlayerViewer();
+        this.tileViewer = new TileViewer();
     }
 
     @Override
@@ -29,8 +33,8 @@ public class GameViewer extends ScreenViewer<Scene> {
             }
         }
 
-        drawElement(gui, getModel().getPlayer(), new PlayerViewer());
-        drawElements(gui, getModel().getTiles(), new TileViewer());
+        drawElement(gui, getModel().getPlayer(), playerViewer);
+        drawElements(gui, getModel().getTiles(), tileViewer);
 
         gui.refresh();
     }

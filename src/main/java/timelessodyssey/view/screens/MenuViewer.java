@@ -1,20 +1,20 @@
 package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
-import org.w3c.dom.Text;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.model.menu.Menu;
-import timelessodyssey.view.elements.ElementViewer;
 import timelessodyssey.view.menu.EntryViewer;
 
 import java.io.IOException;
 import java.util.List;
 
 public class MenuViewer extends ScreenViewer<Menu> {
+    private final EntryViewer entryViewer;
+
     public MenuViewer(Menu model) {
         super(model);
+        this.entryViewer = new EntryViewer();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MenuViewer extends ScreenViewer<Menu> {
             gui.drawPixel(159, h, white);
         }
 
-        this.drawEntries(gui, getModel().getEntries(), new EntryViewer());
+        drawEntries(gui, getModel().getEntries(), entryViewer);
 
         gui.refresh();
     }
