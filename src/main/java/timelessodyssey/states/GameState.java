@@ -7,8 +7,10 @@ import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.screens.GameViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
+import java.io.IOException;
+
 public class GameState extends State<Scene> {
-    public GameState(Scene model) {
+    public GameState(Scene model) throws IOException {
         super(model);
     }
 

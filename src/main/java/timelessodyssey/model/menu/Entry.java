@@ -4,7 +4,6 @@ import timelessodyssey.model.Position;
 
 
 public class Entry {
-
     private Position position;
     private String text;
 

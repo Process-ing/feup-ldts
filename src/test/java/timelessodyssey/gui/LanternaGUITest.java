@@ -1,5 +1,6 @@
 package timelessodyssey.gui;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -17,6 +18,7 @@ public class LanternaGUITest {
         screen = Mockito.mock(Screen.class);
         tg = Mockito.mock(TextGraphics.class);
         Mockito.when(screen.newTextGraphics()).thenReturn(tg);
+        Mockito.when(screen.getTerminalSize()).thenReturn(new TerminalSize(160, 90));
         gui = new LanternaGUI(screen);
     }
 

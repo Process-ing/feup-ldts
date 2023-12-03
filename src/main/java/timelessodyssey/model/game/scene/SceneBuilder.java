@@ -15,7 +15,6 @@ import java.util.List;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class SceneBuilder {
-
     private final List<String> lines;
 
     public Scene createScene() {
@@ -31,14 +30,14 @@ public class SceneBuilder {
     public SceneBuilder() throws IOException {
         URL resource = getClass().getClassLoader().getResource("levels/level.lvl");
         assert resource != null;
-        BufferedReader br = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
+        BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
-        lines = readLines(br);
+        lines = readLines(bufferedReader);
     }
 
-    private List<String> readLines(BufferedReader br) throws IOException {
+    private List<String> readLines(BufferedReader bufferedReader) throws IOException {
         List<String> lines = new ArrayList<>();
-        for (String line; (line = br.readLine()) != null; )
+        for (String line; (line = bufferedReader.readLine()) != null; )
             lines.add(line);
         return lines;
     }
