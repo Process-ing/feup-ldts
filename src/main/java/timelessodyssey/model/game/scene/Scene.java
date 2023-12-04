@@ -70,6 +70,12 @@ public class Scene {
     }
 
     public boolean isEmpty(Position position) {
+        if (position.x() < 0 || position.x() > 155){
+            return false;
+        }
+        if (position.y() < 0 || position.y() > 85){
+            return false;
+        }
         for (Tile tile : tiles) {
             for (int w = 0; w < 8; w++) {
                 Position pos1 = new Position(tile.getPosition().x() + w, tile.getPosition().y());
@@ -93,5 +99,11 @@ public class Scene {
             }
         }
         return true;
+    }
+
+    public boolean isAtWinningPosition() {
+        boolean checkXvalues = player.getPosition().x() >= winningPosition.x();
+        boolean checkYvalues = player.getPosition().y() >= winningPosition.y();
+        return  checkXvalues && checkYvalues;
     }
 }

@@ -26,7 +26,7 @@ public class SceneBuilder {
         scene.setPlayer(createPlayer());
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
-        scene.setWinningPosition(new Position(145, 0));
+        scene.setWinningPosition(createWinningPosition());
 
         return scene;
     }
@@ -89,6 +89,11 @@ public class SceneBuilder {
                 if (line.charAt(x) == 'P') return new Player(x * 8, y * 8);
         }
         return null;
+    }
+
+    protected Position createWinningPosition() {
+        return new Position(Integer.parseInt(lines.get(lines.size()-2)) * 8,
+                            Integer.parseInt(lines.get(lines.size()-1)) * 8);
     }
 
 }

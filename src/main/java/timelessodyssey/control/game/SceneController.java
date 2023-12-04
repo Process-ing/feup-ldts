@@ -9,6 +9,7 @@ import timelessodyssey.states.GameState;
 
 import java.io.IOException;
 
+import static timelessodyssey.gui.GUI.Action.NONE;
 import static timelessodyssey.gui.GUI.Action.QUIT;
 
 public class SceneController extends Controller<Scene> {
@@ -23,11 +24,11 @@ public class SceneController extends Controller<Scene> {
     public void step(Game game, GUI.Action action, long time) throws IOException {
         if (action == QUIT)
             game.setState(null);
-        else if (playerController.getModel().getPlayer().getPosition().x() > getModel().getWinningPosition().x()){
-            game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
-        }
         else {
             playerController.step(game, action, time);
+            if (getModel().isAtWinningPosition()){
+                game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
+            }
         }
     }
 }
