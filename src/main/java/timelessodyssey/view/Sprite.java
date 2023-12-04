@@ -14,7 +14,6 @@ public class Sprite {
 
     public Sprite(String filepath) throws IOException {
         URL resource = getClass().getClassLoader().getResource(filepath);
-        assert resource != null;
         image = ImageIO.read(new File(resource.getFile()));
     }
     public BufferedImage getImage() {

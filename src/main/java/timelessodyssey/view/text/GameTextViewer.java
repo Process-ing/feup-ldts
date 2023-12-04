@@ -28,7 +28,6 @@ public class GameTextViewer implements TextViewer {
 
     public GameTextViewer() throws IOException {
         URL resource = getClass().getClassLoader().getResource("gamefont/font.png");
-        assert resource != null;
         this.fontImage = ImageIO.read(new File(resource.getFile()));
         this.charMap = parseCharMap();
     }
@@ -36,7 +35,6 @@ public class GameTextViewer implements TextViewer {
     private Map<Character, CharPosition> parseCharMap() throws IOException {
         Map<Character, CharPosition> charMap = new HashMap<>();
         URL resource = getClass().getClassLoader().getResource("gamefont/font-map.txt");
-        assert resource != null;
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
         int y = 0;
