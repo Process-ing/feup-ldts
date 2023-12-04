@@ -29,7 +29,7 @@ public class SceneBuilder {
     }
 
     public SceneBuilder() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("levels/level.lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/scene2.lvl");
         assert resource != null;
         BufferedReader br = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
