@@ -29,7 +29,7 @@ public class MenuController extends Controller<Menu> {
                     game.setState(null);
                 }
                 else if (this.getModel().isSelectedStart()){
-                    game.setState(new GameState(new SceneBuilder().createScene()));
+                    game.setState(new GameState(new SceneBuilder(0).createScene()));
                 }
                 break;
             default:

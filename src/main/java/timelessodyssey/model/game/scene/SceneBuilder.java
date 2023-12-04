@@ -1,5 +1,6 @@
 package timelessodyssey.model.game.scene;
 
+import timelessodyssey.model.Position;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.Spike;
@@ -17,19 +18,22 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class SceneBuilder {
 
     private final List<String> lines;
+    private final int sceneCode;
 
     public Scene createScene() {
-        Scene scene = new Scene(getWidth(), getHeight());
+        Scene scene = new Scene(getWidth(), getHeight(), sceneCode);
 
         scene.setPlayer(createPlayer());
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
+        scene.setWinningPosition(new Position(145, 0));
 
         return scene;
     }
 
-    public SceneBuilder() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("levels/scene2.lvl");
+    public SceneBuilder(int n) throws IOException {
+        this.sceneCode = n;
+        URL resource = getClass().getClassLoader().getResource("levels/scene" + n + ".lvl");
         assert resource != null;
         BufferedReader br = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
@@ -86,4 +90,5 @@ public class SceneBuilder {
         }
         return null;
     }
+
 }

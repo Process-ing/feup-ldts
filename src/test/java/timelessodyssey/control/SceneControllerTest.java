@@ -9,6 +9,8 @@ import timelessodyssey.control.game.SceneController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.scene.Scene;
 
+import java.io.IOException;
+
 public class SceneControllerTest {
     private Game game;
     private SceneController sceneController;
@@ -25,7 +27,7 @@ public class SceneControllerTest {
     }
 
     @Test
-    public void stepWithoutQuit() {
+    public void stepWithoutQuit() throws IOException {
         GUI.Action action = GUI.Action.NONE;
         long time = 0;
 
@@ -35,7 +37,7 @@ public class SceneControllerTest {
     }
 
     @Test
-    public void stepWithQuit() {
+    public void stepWithQuit() throws IOException {
         GUI.Action action = GUI.Action.QUIT;
         long time = 0;
 

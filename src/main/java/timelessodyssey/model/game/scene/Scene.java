@@ -12,14 +12,17 @@ import java.util.List;
 public class Scene {
     private final int width;
     private final int height;
+    private final int sceneCode;
 
     private Player player;
     private List<Tile> tiles;
     private List<Spike> spikes;
+    private Position winningPosition;
 
-    public Scene(int width, int height) {
+    public Scene(int width, int height, int sceneCode) {
         this.width = width;
         this.height = height;
+        this.sceneCode = sceneCode;
     }
 
     public int getWidth() {
@@ -28,6 +31,10 @@ public class Scene {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getSceneCode() {
+        return sceneCode;
     }
 
     public Player getPlayer() {
@@ -52,6 +59,14 @@ public class Scene {
 
     public void setSpikes(List<Spike> spikes) {
         this.spikes = spikes;
+    }
+
+    public Position getWinningPosition() {
+        return winningPosition;
+    }
+
+    public void setWinningPosition(Position winningPosition) {
+        this.winningPosition = winningPosition;
     }
 
     public boolean isEmpty(Position position) {
