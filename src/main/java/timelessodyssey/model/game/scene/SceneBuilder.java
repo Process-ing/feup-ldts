@@ -1,8 +1,8 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.game.elements.Player;
-import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.Spike;
+import timelessodyssey.model.game.elements.Tile;
 
 import java.io.BufferedReader;
 import java.io.IOException;

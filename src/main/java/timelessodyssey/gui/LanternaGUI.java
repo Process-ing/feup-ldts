@@ -77,14 +77,14 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawPixel(int x, int y, TextColor.RGB color) {
+    public void drawPixel(int x, int y, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
         tg.putString(x, y, " ");
     }
 
     @Override
-    public void drawRectangle(int x, int y, int width, int height, TextColor.RGB color) {
+    public void drawRectangle(int x, int y, int width, int height, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
         for (int dy = 0; dy < height; dy++) {

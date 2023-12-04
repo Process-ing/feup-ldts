@@ -1,6 +1,5 @@
 package timelessodyssey.view.elements;
 
-import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.view.Sprite;

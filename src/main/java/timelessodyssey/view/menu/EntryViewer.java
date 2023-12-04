@@ -16,7 +16,7 @@ public class EntryViewer {
     }
 
 
-    public void draw(Entry model, GUI gui, TextColor.RGB color) throws IOException {
+    public void draw(Entry model, GUI gui, TextColor color) throws IOException {
         textViewer.draw(model.getText(), model.getPosition().x(), model.getPosition().y(), color, gui);
     }
 }

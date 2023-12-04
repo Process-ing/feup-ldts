@@ -9,21 +9,23 @@ import net.jqwik.api.lifecycle.BeforeTry;
 import org.mockito.Mockito;
 
 public class LanternaGUITest {
-    Screen screen;
-    TextGraphics tg;
-    LanternaGUI gui;
+    private static final int SCREEN_WIDTH = 160;
+    private static final int SCREEN_HEIGHT = 160;
+
+    private Screen screen;
+    private TextGraphics tg;
 
     @BeforeTry
     public void setup() {
         screen = Mockito.mock(Screen.class);
         tg = Mockito.mock(TextGraphics.class);
         Mockito.when(screen.newTextGraphics()).thenReturn(tg);
-        Mockito.when(screen.getTerminalSize()).thenReturn(new TerminalSize(160, 90));
-        gui = new LanternaGUI(screen);
+        Mockito.when(screen.getTerminalSize()).thenReturn(new TerminalSize(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
     @Property
-    public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor.RGB color) {
+    public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor color) {
+        GUI gui = new LanternaGUI(screen);
         gui.drawPixel(x, y, color);
 
         Mockito.verify(tg, Mockito.times(1))
@@ -32,7 +34,7 @@ public class LanternaGUITest {
     }
 
     @Provide
-    public Arbitrary<TextColor.RGB> color() {
+    public Arbitrary<TextColor> color() {
         return Combinators.combine(
             Arbitraries.integers().between(0, 255),
             Arbitraries.integers().between(0, 255),

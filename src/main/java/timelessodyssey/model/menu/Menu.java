@@ -3,8 +3,6 @@ package timelessodyssey.model.menu;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.Math.abs;
-
 public class Menu {
     private final List<Entry> entries;
     private int currentEntry = 0;

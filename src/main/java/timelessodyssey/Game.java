@@ -1,8 +1,10 @@
 package timelessodyssey;
 
-import timelessodyssey.gui.*;
+import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.LanternaGUI;
 import timelessodyssey.model.menu.Menu;
-import timelessodyssey.states.*;
+import timelessodyssey.states.MenuState;
+import timelessodyssey.states.State;
 
 import java.awt.*;
 import java.io.IOException;

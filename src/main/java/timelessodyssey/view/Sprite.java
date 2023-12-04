@@ -36,7 +36,7 @@ public class Sprite {
         return ARGB >> 24;
     }
 
-    private TextColor.RGB getRGB(int ARGB) {
+    private TextColor getRGB(int ARGB) {
         int red = ARGB >> 16 & 0xFF;
         int green = ARGB >> 8 & 0xFF;
         int blue = ARGB & 0xFF;

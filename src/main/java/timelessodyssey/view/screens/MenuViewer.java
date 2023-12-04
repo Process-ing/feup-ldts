@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class MenuViewer extends ScreenViewer<Menu> {
-    private static final TextColor.RGB unselectedColor = new TextColor.RGB(234,234,234);
-    private static final TextColor.RGB selectedColor = new TextColor.RGB(255,234,69);
-    private static final TextColor.RGB backgroundColor = new TextColor.RGB(28, 28, 70);
-    private static final TextColor.RGB frameColor = new TextColor.RGB(255, 255, 255);
+    private static final TextColor unselectedColor = new TextColor.RGB(234,234,234);
+    private static final TextColor selectedColor = new TextColor.RGB(255,234,69);
+    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 70);
+    private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
 
     private final EntryViewer entryViewer;
 

@@ -10,8 +10,8 @@ public interface GUI {
     int getWidth();
     int getHeight();
 
-    void drawPixel(int x, int y, TextColor.RGB color);
-    void drawRectangle(int x, int y, int width, int height, TextColor.RGB color);
+    void drawPixel(int x, int y, TextColor color);
+    void drawRectangle(int x, int y, int width, int height, TextColor color);
     void clear();
     void refresh() throws IOException;
     void close() throws IOException;
