@@ -22,8 +22,8 @@ public class GameTextViewerTest {
     private static final Color RECTANGLE_COLOR = Color.BLUE;
     private static final Color PLACEHOLDER_COLOR = Color.DARK_GRAY;
 
-    private static int SCREEN_WIDTH = 40;
-    private static int SCREEN_HEIGHT = 30;
+    private static final int SCREEN_WIDTH = 40;
+    private static final int SCREEN_HEIGHT = 30;
 
     private GUI gui;
     private TextColor foregroundColor;

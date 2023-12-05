@@ -16,11 +16,10 @@ public class SceneController extends Controller<Scene> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, long time) {
+    public void step(Game game, GUI gui, GUI.Action action, long time) {
         if (action == QUIT)
             game.setState(null);
-        else {
-            playerController.step(game, action, time);
-        }
+        else
+            playerController.step(game, gui, action, time);
     }
 }

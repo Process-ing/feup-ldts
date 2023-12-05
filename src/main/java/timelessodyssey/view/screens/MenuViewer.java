@@ -9,7 +9,7 @@ import timelessodyssey.view.menu.EntryViewer;
 import java.io.IOException;
 import java.util.List;
 
-public class MenuViewer extends ScreenViewer<Menu> {
+public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
     private static final TextColor unselectedColor = new TextColor.RGB(234,234,234);
     private static final TextColor selectedColor = new TextColor.RGB(255,234,69);
     private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 70);
@@ -17,7 +17,7 @@ public class MenuViewer extends ScreenViewer<Menu> {
 
     private final EntryViewer entryViewer;
 
-    public MenuViewer(Menu model) throws IOException {
+    public MenuViewer(T model) throws IOException {
         super(model);
         this.entryViewer = new EntryViewer();
     }
@@ -39,8 +39,7 @@ public class MenuViewer extends ScreenViewer<Menu> {
     }
 
     private void drawEntries(GUI gui, List<Entry> entries) throws IOException {
-        for (int idx = 0; idx < entries.size(); idx++){
-            entryViewer.draw(entries.get(idx), gui, getModel().isSelected(idx) ? selectedColor : unselectedColor);
-        }
+        for (Entry entry: entries)
+            entryViewer.draw(entry, gui, getModel().getCurrentEntry() == entry ? selectedColor : unselectedColor);
     }
 }

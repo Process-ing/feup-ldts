@@ -17,9 +17,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class LanternaGUI implements GUI {
-    private final Screen screen;
+    private Screen screen;
     private final int width;
     private final int height;
+    private Resolution resolution;
 
     public LanternaGUI(Screen screen) {
         this.screen = screen;
@@ -27,11 +28,11 @@ public class LanternaGUI implements GUI {
         this.height = screen.getTerminalSize().getRows();
     }
 
-    public LanternaGUI(int width, int height, int fontSize) throws IOException, URISyntaxException, FontFormatException {
-        Terminal terminal = createTerminal(width, height, fontSize);
-        this.screen = createScreen(terminal);
+    public LanternaGUI(int width, int height)
+        throws IOException, URISyntaxException, FontFormatException {
         this.width = width;
         this.height = height;
+        setResolution(null);
     }
 
     private Terminal createTerminal(int width, int height, int fontSize) throws IOException, URISyntaxException, FontFormatException {
@@ -61,6 +62,12 @@ public class LanternaGUI implements GUI {
         return screen;
     }
 
+    private int getBestFontSize(int width, int height, Rectangle terminalBounds) {
+        double maxFontWidth = terminalBounds.getWidth() / width;
+        double maxFontHeight = terminalBounds.getHeight() / height;
+        return (int) Math.min(maxFontWidth, maxFontHeight);
+    }
+
     @Override
     public int getWidth() {
         return width;
@@ -69,6 +76,27 @@ public class LanternaGUI implements GUI {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public Resolution getResolution() {
+        return resolution;
+    }
+
+    @Override
+    public void setResolution(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
+        if (screen != null)
+            screen.close();
+        this.resolution = resolution;
+
+        Rectangle terminalBounds;
+        if (resolution == null)
+            terminalBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        else
+            terminalBounds = new Rectangle(resolution.getWidth(), resolution.getHeight());
+        int fontSize = getBestFontSize(width, height, terminalBounds);
+        Terminal terminal = createTerminal(width, height, fontSize);
+        this.screen = createScreen(terminal);
     }
 
     @Override
@@ -105,9 +133,8 @@ public class LanternaGUI implements GUI {
             case ArrowDown -> Action.DOWN;
             case ArrowLeft -> Action.LEFT;
             case ArrowRight -> Action.RIGHT;
-            case Character -> keyStroke.getCharacter() == 'q' ? Action.QUIT : Action.NONE;
+            case Escape, EOF -> Action.QUIT;
             case Enter -> Action.SELECT;
-            case EOF -> Action.QUIT;
             default -> Action.NONE;
         };
     }

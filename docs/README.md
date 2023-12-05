@@ -169,6 +169,9 @@ An explanation is also provided in the following diagram:
 
 <img src="resources/uml/adapter.png"/>
 
+### Entry => Strategy Pattern
+### Entry => Factory Method
+
 ## KNOWN CODE SMELLS
 
 Since we have been using Google's Error Prone plugin and good code practices, we don't have any known code smells to note.  
