@@ -70,10 +70,10 @@ public class Scene {
     }
 
     public boolean isEmpty(Position position) {
-        if (position.x() < 0 || position.x() > 155){
+        if (position.x() < 0 || position.x() > 160){
             return false;
         }
-        if (position.y() < 0 || position.y() > 85){
+        if (position.y() < 0 || position.y() > 90){
             return false;
         }
         for (Tile tile : tiles) {
