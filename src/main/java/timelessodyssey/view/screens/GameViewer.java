@@ -13,8 +13,15 @@ import java.io.IOException;
 import java.util.List;
 
 public class GameViewer extends ScreenViewer<Scene> {
-    public GameViewer(Scene model) {
+    private final PlayerViewer playerViewer;
+    private final TileViewer tileViewer;
+    private final SpikeViewer spikeViewer;
+
+    public GameViewer(Scene model) throws IOException {
         super(model);
+        this.playerViewer = new PlayerViewer();
+        this.tileViewer = new TileViewer();
+        this.spikeViewer = new SpikeViewer();
     }
 
     @Override
@@ -29,9 +36,9 @@ public class GameViewer extends ScreenViewer<Scene> {
             }
         }
 
-        drawElement(gui, getModel().getPlayer(), new PlayerViewer());
-        drawElements(gui, getModel().getTiles(), new TileViewer());
-        drawElements(gui, getModel().getSpikes(), new SpikeViewer());
+        drawElement(gui, getModel().getPlayer(), playerViewer);
+        drawElements(gui, getModel().getTiles(), tileViewer);
+        drawElements(gui, getModel().getSpikes(), spikeViewer);
 
         gui.refresh();
     }
