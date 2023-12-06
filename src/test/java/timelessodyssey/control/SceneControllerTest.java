@@ -8,6 +8,10 @@ import timelessodyssey.control.game.PlayerController;
 import timelessodyssey.control.game.SceneController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.model.game.scene.SceneBuilder;
+import timelessodyssey.states.GameState;
+
+import java.io.IOException;
 
 public class SceneControllerTest {
     private Game game;
@@ -25,21 +29,37 @@ public class SceneControllerTest {
     }
 
     @Test
-    public void stepWithoutQuit() {
+    public void stepWithoutQuit() throws IOException {
         GUI.Action action = GUI.Action.NONE;
         long time = 0;
+        Mockito.when(scene.isAtTransitionPosition()).thenReturn(false);
 
         sceneController.step(game, action, time);
         Mockito.verify(playerController, Mockito.times(1))
                 .step(game, action, time);
+        Mockito.verify(game, Mockito.times(0))
+                .setState(Mockito.any());
     }
 
     @Test
-    public void stepWithQuit() {
+    public void stepWithQuit() throws IOException {
         GUI.Action action = GUI.Action.QUIT;
         long time = 0;
 
         sceneController.step(game, action, time);
         Mockito.verify(game, Mockito.times(1)).setState(null);
+    }
+
+    @Test
+    public void stepWithSceneChange() throws IOException {
+        GUI.Action action = GUI.Action.NONE;
+        long time = 0;
+        Mockito.when(scene.isAtTransitionPosition()).thenReturn(true);
+
+        sceneController.step(game, action, time);
+        Mockito.verify(playerController, Mockito.times(1))
+                .step(game, action, time);
+        Mockito.verify(game, Mockito.times(1))
+                .setState(Mockito.any());
     }
 }
