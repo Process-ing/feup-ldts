@@ -1,39 +1,24 @@
 package timelessodyssey.model.menu;
 
-import timelessodyssey.Game;
-import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Position;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
+public class Entry {
+    public enum Type { START_GAME, SETTINGS, EXIT, RESOLUTION, TO_MAIN_MENU }
 
-public abstract class Entry {
-    private Position position;
-    private String text;
+    private final Position position;
+    private final Type type;
 
-    public Entry(int x, int y) {
+    public Entry(int x, int y, Type type) {
         this.position = new Position(x, y);
-        this.text = createEntryText();
+        this.type = type;
     }
 
     public Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public Type getType() {
+        return type;
     }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    protected abstract String createEntryText();
-    public abstract void doAction(Game game, GUI gui, GUI.Action action) throws IOException, URISyntaxException, FontFormatException;
 }

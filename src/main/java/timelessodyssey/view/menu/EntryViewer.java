@@ -15,8 +15,27 @@ public class EntryViewer {
         this.textViewer = new GameTextViewer();
     }
 
-
     public void draw(Entry model, GUI gui, TextColor color) {
-        textViewer.draw(model.getText(), model.getPosition().x(), model.getPosition().y(), color, gui);
+        String entryText = switch (model.getType()) {
+            case START_GAME -> "Start";
+            case SETTINGS -> "Settings";
+            case EXIT -> "Exit";
+            case RESOLUTION -> getResolutionLabel(gui);
+            case TO_MAIN_MENU -> "Go Back";
+        };
+        textViewer.draw(entryText, model.getPosition().x(), model.getPosition().y(), color, gui);
+    }
+
+    private String getResolutionLabel(GUI gui) {
+        final GUI.Resolution[] resolutions = GUI.Resolution.values();
+        if (gui.getResolution() == null)
+            return "Resolution:   Automatic >";
+
+        return String.format(
+                "Resolution: < %dX%d %c ",
+                gui.getResolution().getWidth(),
+                gui.getResolution().getHeight(),
+                resolutions[resolutions.length - 1] == gui.getResolution() ? ' ' : '>'
+        );
     }
 }

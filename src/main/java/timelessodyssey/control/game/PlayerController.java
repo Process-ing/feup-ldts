@@ -38,7 +38,7 @@ public class PlayerController extends Controller<Scene> {
     }
 
     @Override
-    public void step(Game game, GUI gui, GUI.Action action, long time) {
+    public void step(Game game, GUI.Action action, long time) {
         switch (action){
             case UP:
                 movePlayerUp();

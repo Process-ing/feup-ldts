@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public abstract class Controller<T> {
-
     private final T model;
 
     public Controller(T model) {
@@ -19,5 +18,5 @@ public abstract class Controller<T> {
         return model;
     }
 
-    public abstract void step(Game game, GUI gui, GUI.Action action, long time) throws IOException, URISyntaxException, FontFormatException;
+    public abstract void step(Game game, GUI.Action action, long time) throws IOException, URISyntaxException, FontFormatException;
 }

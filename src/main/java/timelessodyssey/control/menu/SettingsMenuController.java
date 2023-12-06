@@ -1,15 +1,15 @@
 package timelessodyssey.control.menu;
 
 import timelessodyssey.Game;
-import timelessodyssey.model.menu.main.MainMenu;
-import timelessodyssey.model.menu.settings.SettingsMenu;
+import timelessodyssey.model.menu.MainMenu;
+import timelessodyssey.model.menu.SettingsMenu;
 import timelessodyssey.states.MainMenuState;
 
 import java.io.IOException;
 
 public class SettingsMenuController extends MenuController<SettingsMenu> {
-    public SettingsMenuController(SettingsMenu menu) {
-        super(menu);
+    public SettingsMenuController(SettingsMenu menu, EntryController entryController) {
+        super(menu, entryController);
     }
 
     @Override

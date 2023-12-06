@@ -10,13 +10,16 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public abstract class MenuController<T extends Menu> extends Controller<T> {
+    private final EntryController entryController;
 
-    public MenuController(T menu) {
+
+    public MenuController(T menu, EntryController entryController) {
         super(menu);
+        this.entryController = entryController;
     }
 
     @Override
-    public void step(Game game, GUI gui, GUI.Action action, long time) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Game game, GUI.Action action, long time) throws IOException, URISyntaxException, FontFormatException {
         switch (action) {
             case UP:
                 this.getModel().moveUp();
@@ -28,7 +31,7 @@ public abstract class MenuController<T extends Menu> extends Controller<T> {
                 onQuit(game);
                 break;
             default:
-                this.getModel().getCurrentEntry().doAction(game, gui, action);
+                entryController.step(game, action, time);
         }
     }
 

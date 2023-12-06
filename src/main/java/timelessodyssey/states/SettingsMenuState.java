@@ -1,8 +1,9 @@
 package timelessodyssey.states;
 
 import timelessodyssey.control.Controller;
+import timelessodyssey.control.menu.EntryController;
 import timelessodyssey.control.menu.SettingsMenuController;
-import timelessodyssey.model.menu.settings.SettingsMenu;
+import timelessodyssey.model.menu.SettingsMenu;
 import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
@@ -15,7 +16,7 @@ public class SettingsMenuState extends State<SettingsMenu> {
 
     @Override
     protected Controller<SettingsMenu> createController() {
-        return new SettingsMenuController(getModel());
+        return new SettingsMenuController(getModel(), new EntryController(getModel()));
     }
 
     @Override

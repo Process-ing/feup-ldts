@@ -2,7 +2,7 @@ package timelessodyssey;
 
 import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.LanternaGUI;
-import timelessodyssey.model.menu.main.MainMenu;
+import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.states.MainMenuState;
 import timelessodyssey.states.State;
 
@@ -34,6 +34,14 @@ public class Game {
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public GUI.Resolution getResolution() {
+        return gui.getResolution();
+    }
+
+    public void setResolution(GUI.Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
+        gui.setResolution(resolution);
     }
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {

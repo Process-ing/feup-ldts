@@ -14,7 +14,6 @@ public class PlayerControllerTest {
     private Scene scene;
     private Player player;
     private Game game;
-    private GUI gui;
     private PlayerController playerController;
 
     @BeforeEach
@@ -23,7 +22,6 @@ public class PlayerControllerTest {
         this.player = Mockito.mock(Player.class);
         Mockito.when(scene.getPlayer()).thenReturn(player);
         this.game = Mockito.mock(Game.class);
-        this.gui = Mockito.mock(GUI.class);
         this.playerController = new PlayerController(scene);
         Mockito.when(scene.isEmpty(Mockito.any())).thenReturn(true);
     }
@@ -34,7 +32,7 @@ public class PlayerControllerTest {
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
-        playerController.step(game, gui, GUI.Action.LEFT, time);
+        playerController.step(game, GUI.Action.LEFT, time);
 
         Mockito.verify(player, Mockito.times(1)).setPosition(pos.getLeft());
     }
@@ -45,7 +43,7 @@ public class PlayerControllerTest {
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
-        playerController.step(game, gui, GUI.Action.RIGHT, time);
+        playerController.step(game, GUI.Action.RIGHT, time);
 
         Mockito.verify(player, Mockito.times(1)).setPosition(pos.getRight());
     }
@@ -56,7 +54,7 @@ public class PlayerControllerTest {
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
-        playerController.step(game, gui, GUI.Action.UP, time);
+        playerController.step(game, GUI.Action.UP, time);
 
         Mockito.verify(player, Mockito.times(1)).setPosition(pos.getUp());
     }
@@ -67,7 +65,7 @@ public class PlayerControllerTest {
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
-        playerController.step(game, gui, GUI.Action.DOWN, time);
+        playerController.step(game, GUI.Action.DOWN, time);
 
         Mockito.verify(player, Mockito.times(1)).setPosition(pos.getDown());
     }

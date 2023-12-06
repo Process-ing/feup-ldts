@@ -56,7 +56,7 @@ public class StateTest {
 
         Mockito.verify(gui, Mockito.times(1)).getNextAction();
         Mockito.verify(stateController, Mockito.times(1))
-                .step(game, gui, GUI.Action.NONE, time);
+                .step(game, GUI.Action.NONE, time);
         Mockito.verify(stateScreenViewer, Mockito.times(1)).draw(gui);
     }
 }

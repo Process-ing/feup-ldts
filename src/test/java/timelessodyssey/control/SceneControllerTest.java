@@ -13,7 +13,6 @@ import java.io.IOException;
 
 public class SceneControllerTest {
     private Game game;
-    private GUI gui;
     private SceneController sceneController;
     private Scene scene;
     private PlayerController playerController;
@@ -21,7 +20,6 @@ public class SceneControllerTest {
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);
-        this.gui = Mockito.mock(GUI.class);
         this.scene = Mockito.mock(Scene.class);
         this.playerController = Mockito.mock(PlayerController.class);
 
@@ -34,9 +32,9 @@ public class SceneControllerTest {
         long time = 0;
         Mockito.when(scene.isAtTransitionPosition()).thenReturn(false);
 
-        sceneController.step(game, gui, action, time);
+        sceneController.step(game, action, time);
         Mockito.verify(playerController, Mockito.times(1))
-                .step(game, gui, action, time);
+                .step(game, action, time);
         Mockito.verify(game, Mockito.times(0))
                 .setState(Mockito.any());
     }
@@ -46,7 +44,7 @@ public class SceneControllerTest {
         GUI.Action action = GUI.Action.QUIT;
         long time = 0;
 
-        sceneController.step(game, gui, action, time);
+        sceneController.step(game, action, time);
         Mockito.verify(game, Mockito.times(1)).setState(null);
     }
 
@@ -56,9 +54,9 @@ public class SceneControllerTest {
         long time = 0;
         Mockito.when(scene.isAtTransitionPosition()).thenReturn(true);
 
-        sceneController.step(game, gui, action, time);
+        sceneController.step(game, action, time);
         Mockito.verify(playerController, Mockito.times(1))
-                .step(game, gui, action, time);
+                .step(game, action, time);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any());
     }

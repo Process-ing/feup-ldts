@@ -29,7 +29,7 @@ public abstract class State<T> {
 
     public void step(Game game, GUI gui, long time) throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = gui.getNextAction();
-        controller.step(game, gui, action, time);
+        controller.step(game, action, time);
         screenViewer.draw(gui);
     }
 }
