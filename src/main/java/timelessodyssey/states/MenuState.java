@@ -1,7 +1,9 @@
 package timelessodyssey.states;
 
+import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.control.menu.MenuController;
+import timelessodyssey.gui.GUI;
 import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
@@ -20,6 +22,14 @@ public class MenuState extends State<Menu>{
     @Override
     protected Controller<Menu> createController() {
         return new MenuController(getModel());
+    }
+
+    @Override
+    public void step(Game game, GUI gui, long time) throws IOException {
+        GUI.Action action = gui.getNextAction();
+        gui.clearAction();
+        controller.step(game, action, time);
+        screenViewer.draw(gui);
     }
 
 }

@@ -12,6 +12,7 @@ public interface GUI {
     void drawPixel(int x, int y, TextColor.RGB color);
 
     Action getNextAction() throws IOException;
+    void clearAction();
     void refresh() throws IOException;
     void close() throws IOException;
 }

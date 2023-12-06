@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public abstract class State<T> {
     private final T model;
-    private final Controller<T> controller;
-    private final ScreenViewer<T> screenViewer;
+    protected Controller<T> controller;
+    protected ScreenViewer<T> screenViewer;
 
     public State(T model) throws IOException {
         this.model = model;
@@ -25,9 +25,5 @@ public abstract class State<T> {
         return model;
     }
 
-    public void step(Game game, GUI gui, long time) throws IOException {
-        GUI.Action action = gui.getNextAction();
-        controller.step(game, action, time);
-        screenViewer.draw(gui);
-    }
+    public abstract void step(Game game, GUI gui, long time) throws IOException;
 }

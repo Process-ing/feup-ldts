@@ -72,6 +72,11 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
+    public void clearAction(){
+        this.pressedKey = null;
+    }
+
+    @Override
     public void clear() {
         screen.clear();
     }
