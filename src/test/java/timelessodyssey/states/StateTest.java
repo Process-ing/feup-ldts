@@ -42,6 +42,13 @@ public class StateTest {
             protected Controller<TestObject> createController() {
                 return stateController;
             }
+
+            @Override
+            public void step(Game game, GUI gui, long time) throws IOException {
+                GUI.Action action = gui.getNextAction();
+                controller.step(game, action, time);
+                screenViewer.draw(gui);
+            }
         };
     }
 
