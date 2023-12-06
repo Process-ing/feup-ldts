@@ -27,7 +27,7 @@ public class StateTest {
     }
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws IOException {
         this.model = Mockito.mock(TestObject.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(GUI.class);
