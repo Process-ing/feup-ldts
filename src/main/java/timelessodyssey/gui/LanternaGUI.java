@@ -3,22 +3,27 @@ package timelessodyssey.gui;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import static java.awt.event.KeyEvent.*;
+
+
 public class LanternaGUI implements GUI {
     private final Screen screen;
-
+    private KeyEvent pressedKey = null;
     public LanternaGUI(Screen screen) {
         this.screen = screen;
     }
@@ -26,6 +31,17 @@ public class LanternaGUI implements GUI {
     public LanternaGUI(int width, int height, int fontSize) throws IOException, URISyntaxException, FontFormatException {
         Terminal terminal = createTerminal(width, height, fontSize);
         this.screen = createScreen(terminal);
+        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                pressedKey = e;
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                pressedKey = null;
+            }
+        });
+        ((AWTTerminalFrame)terminal).setTitle("Timeless Odyssey");
     }
 
     private Terminal createTerminal(int width, int height, int fontSize) throws IOException, URISyntaxException, FontFormatException {
@@ -69,18 +85,16 @@ public class LanternaGUI implements GUI {
 
     @Override
     public Action getNextAction() throws IOException {
-        KeyStroke keyStroke = screen.pollInput();
-        if (keyStroke == null)
+        if (pressedKey == null)
             return Action.NONE;
 
-        return switch (keyStroke.getKeyType()) {
-            case ArrowUp -> Action.UP;
-            case ArrowDown -> Action.DOWN;
-            case ArrowLeft -> Action.LEFT;
-            case ArrowRight -> Action.RIGHT;
-            case Character -> keyStroke.getCharacter() == 'q' ? Action.QUIT : Action.NONE;
-            case Enter -> Action.SELECT;
-            case EOF -> Action.QUIT;
+        return switch (pressedKey.getKeyCode()) {
+            case VK_UP -> Action.UP;
+            case VK_DOWN -> Action.DOWN;
+            case VK_LEFT -> Action.LEFT;
+            case VK_RIGHT -> Action.RIGHT;
+            case VK_ESCAPE -> Action.QUIT;
+            case VK_ENTER -> Action.SELECT;
             default -> Action.NONE;
         };
     }
