@@ -169,13 +169,13 @@ An explanation is also provided in the following diagram:
 
 <img src="resources/uml/adapter.png"/>
 
-### Entry => Strategy Pattern
-### Entry => Factory Method
 
 ## KNOWN CODE SMELLS
 
 Since we have been using Google's Error Prone plugin and good code practices, we don't have any known code smells to note.  
 Although we hope this continues, the number of code smells may change as we scrutinize our code further or as we keep implementing more features.
+
+[Entry](/src/main/java/timelessodyssey/model/menu/Entry.java), [EntryViewer](/src/main/java/timelessodyssey/view/menu/EntryViewer.java), [EntryController](/src/main/java/timelessodyssey/control/menu/EntryController.java) => Switch statements
 
 ## TESTING
 
