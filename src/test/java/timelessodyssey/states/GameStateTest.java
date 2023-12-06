@@ -11,7 +11,9 @@ import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.screens.ScreenViewer;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class GameStateTest {
 
@@ -37,7 +39,7 @@ public class GameStateTest {
     }
 
     @Test
-    public void step() throws IOException {
+    public void step() throws IOException, URISyntaxException, FontFormatException {
         long time = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new GameState(model){

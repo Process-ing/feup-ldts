@@ -14,7 +14,6 @@ public class Sprite {
 
     public Sprite(String filepath) throws IOException {
         URL resource = getClass().getClassLoader().getResource(filepath);
-        assert resource != null;
         image = ImageIO.read(new File(resource.getFile()));
     }
     public BufferedImage getImage() {
@@ -36,7 +35,7 @@ public class Sprite {
         return ARGB >> 24;
     }
 
-    private TextColor.RGB getRGB(int ARGB) {
+    private TextColor getRGB(int ARGB) {
         int red = ARGB >> 16 & 0xFF;
         int green = ARGB >> 8 & 0xFF;
         int blue = ARGB & 0xFF;

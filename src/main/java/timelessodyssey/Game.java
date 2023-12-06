@@ -1,8 +1,10 @@
 package timelessodyssey;
 
-import timelessodyssey.gui.*;
-import timelessodyssey.model.menu.Menu;
-import timelessodyssey.states.*;
+import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.LanternaGUI;
+import timelessodyssey.model.menu.MainMenu;
+import timelessodyssey.states.MainMenuState;
+import timelessodyssey.states.State;
 
 import java.awt.*;
 import java.io.IOException;
@@ -11,22 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Game {
+    private static final int PIXEL_WIDTH = 160;
+    private static final int PIXEL_HEIGHT = 90;
     private final GUI gui;
     private State state;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
-        int SCREEN_WIDTH = 160;
-        int SCREEN_HEIGHT = 90;
-
-        Rectangle screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        double width = screenSize.getWidth();
-        double height = screenSize.getHeight();
-        double maxFontWidth = width / SCREEN_WIDTH;
-        double maxFontHeight = height / SCREEN_HEIGHT;
-        int fontSize = (int) Math.min(maxFontWidth, maxFontHeight);
-
-        this.gui = new LanternaGUI(SCREEN_WIDTH, SCREEN_HEIGHT, fontSize);
-        this.state = new MenuState(new Menu());
+        this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);
+        this.state = new MainMenuState(new MainMenu());
     }
 
     public static void main(String[] args) {
@@ -42,7 +36,15 @@ public class Game {
         this.state = state;
     }
 
-    private void start() throws IOException, InterruptedException {
+    public GUI.Resolution getResolution() {
+        return gui.getResolution();
+    }
+
+    public void setResolution(GUI.Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
+        gui.setResolution(resolution);
+    }
+
+    private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {
         int FPS = 30;
         int frameTime = 1000 / FPS;
 

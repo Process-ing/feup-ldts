@@ -8,7 +8,6 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -22,27 +21,25 @@ import static java.awt.event.KeyEvent.*;
 
 
 public class LanternaGUI implements GUI {
-    private final Screen screen;
+    private Screen screen;
+    private final int width;
+    private final int height;
+    private Resolution resolution;
     private KeyEvent pressedKey = null;
+
     public LanternaGUI(Screen screen) {
         this.screen = screen;
+        this.width = screen.getTerminalSize().getColumns();
+        this.height = screen.getTerminalSize().getRows();
     }
 
-    public LanternaGUI(int width, int height, int fontSize) throws IOException, URISyntaxException, FontFormatException {
-        Terminal terminal = createTerminal(width, height, fontSize);
-        this.screen = createScreen(terminal);
-        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                pressedKey = e;
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                pressedKey = null;
-            }
-        });
-        ((AWTTerminalFrame)terminal).setTitle("Timeless Odyssey");
+    public LanternaGUI(int width, int height)
+        throws IOException, URISyntaxException, FontFormatException {
+        this.width = width;
+        this.height = height;
+        setResolution(null);
     }
+
 
     private Terminal createTerminal(int width, int height, int fontSize) throws IOException, URISyntaxException, FontFormatException {
         TerminalSize size = new TerminalSize(width, height);
@@ -52,7 +49,18 @@ public class LanternaGUI implements GUI {
         AWTTerminalFontConfiguration fontConfig = loadFont(fontSize);
         terminalFactory.setForceAWTOverSwing(true);
         terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
-        return terminalFactory.createTerminal();
+        Terminal terminal = terminalFactory.createTerminal();
+        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    pressedKey = e;
+                }
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    pressedKey = null;
+                }
+        });
+        ((AWTTerminalFrame)terminal).setTitle("Timeless Odyssey");
     }
 
     private AWTTerminalFontConfiguration loadFont(int fontSize) throws URISyntaxException, IOException, FontFormatException {
@@ -71,6 +79,43 @@ public class LanternaGUI implements GUI {
         return screen;
     }
 
+    private int getBestFontSize(int width, int height, Rectangle terminalBounds) {
+        double maxFontWidth = terminalBounds.getWidth() / width;
+        double maxFontHeight = terminalBounds.getHeight() / height;
+        return (int) Math.min(maxFontWidth, maxFontHeight);
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public Resolution getResolution() {
+        return resolution;
+    }
+
+    @Override
+    public void setResolution(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
+        if (screen != null)
+            screen.close();
+        this.resolution = resolution;
+
+        Rectangle terminalBounds;
+        if (resolution == null)
+            terminalBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        else
+            terminalBounds = new Rectangle(resolution.getWidth(), resolution.getHeight());
+        int fontSize = getBestFontSize(width, height, terminalBounds);
+        Terminal terminal = createTerminal(width, height, fontSize);
+        this.screen = createScreen(terminal);
+    }
+
     @Override
     public void clearAction(){
         this.pressedKey = null;
@@ -82,10 +127,21 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawPixel(int x, int y, TextColor.RGB color) {
+    public void drawPixel(int x, int y, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
         tg.putString(x, y, " ");
+    }
+
+    @Override
+    public void drawRectangle(int x, int y, int width, int height, TextColor color) {
+        TextGraphics tg = screen.newTextGraphics();
+        tg.setBackgroundColor(color);
+        for (int dy = 0; dy < height; dy++) {
+            for (int dx = 0; dx < width; dx++) {
+                tg.putString(x + dx, y + dy, " ");
+            }
+        }
     }
 
     @Override

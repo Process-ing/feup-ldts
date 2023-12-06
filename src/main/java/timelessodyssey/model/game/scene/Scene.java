@@ -2,11 +2,9 @@ package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Position;
 import timelessodyssey.model.game.elements.Player;
-import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.Spike;
+import timelessodyssey.model.game.elements.Tile;
 
-import javax.management.loading.ClassLoaderRepository;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Scene {

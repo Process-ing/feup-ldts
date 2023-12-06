@@ -2,8 +2,8 @@ package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Position;
 import timelessodyssey.model.game.elements.Player;
-import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.Spike;
+import timelessodyssey.model.game.elements.Tile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,6 @@ import java.util.List;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class SceneBuilder {
-
     private final List<String> lines;
     private final int sceneCode;
 
@@ -35,14 +34,14 @@ public class SceneBuilder {
         this.sceneCode = n;
         URL resource = getClass().getClassLoader().getResource("levels/scene" + n + ".lvl");
         assert resource != null;
-        BufferedReader br = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
+        BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
-        lines = readLines(br);
+        lines = readLines(bufferedReader);
     }
 
-    private List<String> readLines(BufferedReader br) throws IOException {
+    private List<String> readLines(BufferedReader bufferedReader) throws IOException {
         List<String> lines = new ArrayList<>();
-        for (String line; (line = br.readLine()) != null; )
+        for (String line; (line = bufferedReader.readLine()) != null; )
             lines.add(line);
         return lines;
     }

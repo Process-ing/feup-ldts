@@ -9,10 +9,15 @@ import timelessodyssey.view.menu.EntryViewer;
 import java.io.IOException;
 import java.util.List;
 
-public class MenuViewer extends ScreenViewer<Menu> {
+public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
+    private static final TextColor unselectedColor = new TextColor.RGB(234,234,234);
+    private static final TextColor selectedColor = new TextColor.RGB(255,234,69);
+    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 70);
+    private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
+
     private final EntryViewer entryViewer;
 
-    public MenuViewer(Menu model) {
+    public MenuViewer(T model) throws IOException {
         super(model);
         this.entryViewer = new EntryViewer();
     }
@@ -20,39 +25,21 @@ public class MenuViewer extends ScreenViewer<Menu> {
     @Override
     public void draw(GUI gui) throws IOException {
         gui.clear();
-
-        // Background color
-        TextColor.RGB background = new TextColor.RGB(28, 28, 70);
-        for (int w = 0; w < 160; w++) {
-            for (int h = 0; h < 90; h++) {
-                gui.drawPixel(w, h, background);
-            }
-        }
-        TextColor.RGB white = new TextColor.RGB(255,255,255);
-        for (int w = 0; w < 160; w++){
-            gui.drawPixel(w, 0, white);
-            gui.drawPixel(w, 89, white);
-        }
-        for (int h = 1; h < 89; h++){
-            gui.drawPixel(0, h, white);
-            gui.drawPixel(159, h, white);
-        }
-
-        drawEntries(gui, getModel().getEntries(), entryViewer);
-
+        drawBackgroundAndFrame(gui);
+        drawEntries(gui, getModel().getEntries());
         gui.refresh();
     }
 
-    private void drawEntries(GUI gui, List<Entry> entries, EntryViewer viewer) throws IOException {
-        TextColor.RGB selected = new TextColor.RGB(255,234,69);
-        TextColor.RGB deselected = new TextColor.RGB(234,234,234);
-        for (int idx = 0; idx < entries.size(); idx++){
-            if (getModel().isSelected(idx)){
-                viewer.draw(entries.get(idx), gui, selected);
-            }
-            else {
-                viewer.draw(entries.get(idx), gui, deselected);
-            }
-        }
+    private void drawBackgroundAndFrame(GUI gui) {
+        gui.drawRectangle(0, 0, gui.getWidth(), 1, frameColor);
+        gui.drawRectangle(0, gui.getHeight() - 1, gui.getWidth(), 1, frameColor);
+        gui.drawRectangle(0, 1, 1, gui.getHeight() - 2, frameColor);
+        gui.drawRectangle(gui.getWidth() - 1, 1, 1, gui.getHeight() - 2, frameColor);
+        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
+    }
+
+    private void drawEntries(GUI gui, List<Entry> entries) throws IOException {
+        for (Entry entry: entries)
+            entryViewer.draw(entry, gui, getModel().getCurrentEntry() == entry ? selectedColor : unselectedColor);
     }
 }

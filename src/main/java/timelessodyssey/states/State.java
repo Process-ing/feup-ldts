@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public abstract class State<T> {
     private final T model;
-    protected Controller<T> controller;
-    protected ScreenViewer<T> screenViewer;
+    private final Controller<T> controller;
+    private final ScreenViewer<T> screenViewer;
 
     public State(T model) throws IOException {
         this.model = model;

@@ -8,8 +8,6 @@ import timelessodyssey.control.game.PlayerController;
 import timelessodyssey.control.game.SceneController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.scene.Scene;
-import timelessodyssey.model.game.scene.SceneBuilder;
-import timelessodyssey.states.GameState;
 
 import java.io.IOException;
 
