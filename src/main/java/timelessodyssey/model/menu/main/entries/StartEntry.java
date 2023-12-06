@@ -21,6 +21,6 @@ public class StartEntry extends Entry {
     @Override
     public void doAction(Game game, GUI gui, GUI.Action action) throws IOException {
         if (action == GUI.Action.SELECT)
-            game.setState(new GameState(new SceneBuilder().createScene()));
+            game.setState(new GameState(new SceneBuilder(0).createScene()));
     }
 }
