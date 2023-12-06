@@ -39,9 +39,6 @@ public interface GUI {
     void drawPixel(int x, int y, TextColor color);
     void drawRectangle(int x, int y, int width, int height, TextColor color);
     void clear();
-
-    void drawPixel(int x, int y, TextColor.RGB color);
-
     Action getNextAction() throws IOException;
     void clearAction();
     void refresh() throws IOException;

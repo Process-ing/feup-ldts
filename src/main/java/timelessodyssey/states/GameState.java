@@ -9,7 +9,9 @@ import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.screens.GameViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class GameState extends State<Scene> {
     public GameState(Scene model) throws IOException {
@@ -27,7 +29,7 @@ public class GameState extends State<Scene> {
     }
 
     @Override
-    public void step(Game game, GUI gui, long time) throws IOException{
+    public void step(Game game, GUI gui, long time) throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = gui.getNextAction();
         controller.step(game, action, time);
         screenViewer.draw(gui);
