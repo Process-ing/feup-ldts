@@ -10,14 +10,17 @@ import java.util.List;
 public class Scene {
     private final int width;
     private final int height;
+    private final int sceneCode;
 
     private Player player;
     private List<Tile> tiles;
     private List<Spike> spikes;
+    private Position transitionPosition;
 
-    public Scene(int width, int height) {
+    public Scene(int width, int height, int sceneCode) {
         this.width = width;
         this.height = height;
+        this.sceneCode = sceneCode;
     }
 
     public int getWidth() {
@@ -26,6 +29,10 @@ public class Scene {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getSceneCode() {
+        return sceneCode;
     }
 
     public Player getPlayer() {
@@ -52,7 +59,21 @@ public class Scene {
         this.spikes = spikes;
     }
 
+    public Position getTransitionPosition() {
+        return transitionPosition;
+    }
+
+    public void setTransitionPosition(Position transitionPosition) {
+        this.transitionPosition = transitionPosition;
+    }
+
     public boolean isEmpty(Position position) {
+        if (position.x() < 0 || position.x() > 160){
+            return false;
+        }
+        if (position.y() < 0 || position.y() > 90){
+            return false;
+        }
         for (Tile tile : tiles) {
             for (int w = 0; w < 8; w++) {
                 Position pos1 = new Position(tile.getPosition().x() + w, tile.getPosition().y());
@@ -76,5 +97,9 @@ public class Scene {
             }
         }
         return true;
+    }
+
+    public boolean isAtTransitionPosition() {
+        return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
     }
 }
