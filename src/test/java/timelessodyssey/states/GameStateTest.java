@@ -1,26 +1,28 @@
 package timelessodyssey.states;
 
+import com.googlecode.lanterna.screen.Screen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class StateTest {
-    private static class TestObject {}
+public class GameStateTest {
 
-    TestObject model;
+    Scene model;
     Game game;
     GUI gui;
-    Controller<TestObject> stateController;
-    ScreenViewer<TestObject> stateScreenViewer;
-    State<TestObject> state;
+    Controller<Scene> stateController;
+    ScreenViewer<Scene> stateScreenViewer;
+    GameState state;
 
     @SuppressWarnings("unchecked")
     private void mockControllerAndViewer() {
@@ -30,31 +32,33 @@ public class StateTest {
 
     @BeforeEach
     public void setup() throws IOException {
-        this.model = Mockito.mock(TestObject.class);
+        this.model = Mockito.mock(Scene.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(GUI.class);
         mockControllerAndViewer();
-        this.state = new State<>(model) {
-            @Override
-            protected ScreenViewer<TestObject> createScreenViewer() {
-                return stateScreenViewer;
-            }
-
-            @Override
-            protected Controller<TestObject> createController() {
-                return stateController;
-            }
-        };
     }
 
     @Test
     public void step() throws IOException, URISyntaxException, FontFormatException {
         long time = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
+        this.state = new GameState(model){
+            @Override
+            protected ScreenViewer<Scene> createScreenViewer() {
+                return stateScreenViewer;
+            }
+            @Override
+            protected Controller<Scene> createController() {
+                return stateController;
+            }
+
+        };
+
 
         state.step(game, gui, time);
 
         Mockito.verify(gui, Mockito.times(1)).getNextAction();
+        Mockito.verify(gui, Mockito.times(0)).clearAction();
         Mockito.verify(stateController, Mockito.times(1))
                 .step(game, GUI.Action.NONE, time);
         Mockito.verify(stateScreenViewer, Mockito.times(1)).draw(gui);
