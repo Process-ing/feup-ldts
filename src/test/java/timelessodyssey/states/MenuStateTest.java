@@ -5,20 +5,22 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
+import timelessodyssey.control.menu.MenuController;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.menu.Menu;
+import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.io.IOException;
 
-public class StateTest {
-    private static class TestObject {}
+public class MenuStateTest {
 
-    TestObject model;
+    Menu model;
     Game game;
     GUI gui;
-    Controller<TestObject> stateController;
-    ScreenViewer<TestObject> stateScreenViewer;
-    State<TestObject> state;
+    Controller<Menu> stateController;
+    ScreenViewer<Menu> stateScreenViewer;
+    MenuState state;
 
     @SuppressWarnings("unchecked")
     private void mockControllerAndViewer() {
@@ -28,38 +30,33 @@ public class StateTest {
 
     @BeforeEach
     public void setup() throws IOException {
-        this.model = Mockito.mock(TestObject.class);
+        this.model = Mockito.mock(Menu.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(GUI.class);
         mockControllerAndViewer();
-        this.state = new State<>(model) {
-            @Override
-            protected ScreenViewer<TestObject> createScreenViewer() {
-                return stateScreenViewer;
-            }
-
-            @Override
-            protected Controller<TestObject> createController() {
-                return stateController;
-            }
-
-            @Override
-            public void step(Game game, GUI gui, long time) throws IOException {
-                GUI.Action action = gui.getNextAction();
-                controller.step(game, action, time);
-                screenViewer.draw(gui);
-            }
-        };
     }
 
     @Test
     public void step() throws IOException {
         long time = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
+        this.state = new MenuState(model){
+            @Override
+            protected ScreenViewer<Menu> createScreenViewer() {
+                return stateScreenViewer;
+            }
+            @Override
+            protected Controller<Menu> createController() {
+                return stateController;
+            }
+
+        };
+
 
         state.step(game, gui, time);
 
         Mockito.verify(gui, Mockito.times(1)).getNextAction();
+        Mockito.verify(gui, Mockito.times(1)).clearAction();
         Mockito.verify(stateController, Mockito.times(1))
                 .step(game, GUI.Action.NONE, time);
         Mockito.verify(stateScreenViewer, Mockito.times(1)).draw(gui);
