@@ -7,20 +7,23 @@ import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.control.menu.MenuController;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class MenuStateTest {
 
-    Menu model;
+    MainMenu model;
     Game game;
     GUI gui;
-    Controller<Menu> stateController;
-    ScreenViewer<Menu> stateScreenViewer;
-    MenuState state;
+    Controller<MainMenu> stateController;
+    ScreenViewer<MainMenu> stateScreenViewer;
+    MainMenuState state;
 
     @SuppressWarnings("unchecked")
     private void mockControllerAndViewer() {
@@ -30,23 +33,23 @@ public class MenuStateTest {
 
     @BeforeEach
     public void setup() throws IOException {
-        this.model = Mockito.mock(Menu.class);
+        this.model = Mockito.mock(MainMenu.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(GUI.class);
         mockControllerAndViewer();
     }
 
     @Test
-    public void step() throws IOException {
+    public void MainMenuStep() throws IOException, URISyntaxException, FontFormatException {
         long time = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
-        this.state = new MenuState(model){
+        this.state = new MainMenuState(model){
             @Override
-            protected ScreenViewer<Menu> createScreenViewer() {
+            protected ScreenViewer<MainMenu> createScreenViewer() {
                 return stateScreenViewer;
             }
             @Override
-            protected Controller<Menu> createController() {
+            protected Controller<MainMenu> createController() {
                 return stateController;
             }
 
