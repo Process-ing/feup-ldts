@@ -3,20 +3,23 @@ package timelessodyssey.control.menu;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.model.menu.Menu;
-import timelessodyssey.states.GameState;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
-public class MenuController extends Controller<Menu> {
+public abstract class MenuController<T extends Menu> extends Controller<T> {
+    private final EntryController entryController;
 
-    public MenuController(Menu menu) {
+
+    public MenuController(T menu, EntryController entryController) {
         super(menu);
+        this.entryController = entryController;
     }
 
     @Override
-    public void step(Game game, GUI.Action action, long time) throws IOException {
+    public void step(Game game, GUI.Action action, long time) throws IOException, URISyntaxException, FontFormatException {
         switch (action) {
             case UP:
                 this.getModel().moveUp();
@@ -24,15 +27,13 @@ public class MenuController extends Controller<Menu> {
             case DOWN:
                 this.getModel().moveDown();
                 break;
-            case SELECT:
-                if (this.getModel().isSelectedExit()) {
-                    game.setState(null);
-                }
-                else if (this.getModel().isSelectedStart()){
-                    game.setState(new GameState(new SceneBuilder(0).createScene()));
-                }
+            case QUIT:
+                onQuit(game);
                 break;
             default:
+                entryController.step(game, action, time);
         }
     }
+
+    protected abstract void onQuit(Game game) throws IOException;
 }

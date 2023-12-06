@@ -8,7 +8,9 @@ import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.view.screens.ScreenViewer;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class StateTest {
     private static class TestObject {}
@@ -46,7 +48,7 @@ public class StateTest {
     }
 
     @Test
-    public void step() throws IOException {
+    public void step() throws IOException, URISyntaxException, FontFormatException {
         long time = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
 

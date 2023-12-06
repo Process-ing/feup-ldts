@@ -4,28 +4,21 @@ import timelessodyssey.model.Position;
 
 
 public class Entry {
+    public enum Type { START_GAME, SETTINGS, EXIT, RESOLUTION, TO_MAIN_MENU }
 
-    private Position position;
-    private String text;
+    private final Position position;
+    private final Type type;
 
-    public Entry(int x, int y, String text) {
+    public Entry(int x, int y, Type type) {
         this.position = new Position(x, y);
-        this.text = text;
+        this.type = type;
     }
 
     public Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
+    public Type getType() {
+        return type;
     }
 }

@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'net.ltgt.errorprone' version '3.1.0'
+    id 'jacoco'
 }
 
 group = 'timelessodyssey'
@@ -29,12 +30,17 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+compileJava {
+    options.compilerArgs << "-Werror"
+}
+
 test {
     useJUnitPlatform {
         includeEngines ('junit-jupiter', 'jqwik')
     }
+    finalizedBy jacocoTestReport
 }
 
-compileJava {
-    options.compilerArgs << "-Werror"
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
 }
