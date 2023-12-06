@@ -32,7 +32,7 @@ public class SceneControllerTest {
     public void stepWithoutQuit() throws IOException {
         GUI.Action action = GUI.Action.NONE;
         long time = 0;
-        Mockito.when(scene.isAtWinningPosition()).thenReturn(false);
+        Mockito.when(scene.isAtTransitionPosition()).thenReturn(false);
 
         sceneController.step(game, action, time);
         Mockito.verify(playerController, Mockito.times(1))
@@ -54,7 +54,7 @@ public class SceneControllerTest {
     public void stepWithSceneChange() throws IOException {
         GUI.Action action = GUI.Action.NONE;
         long time = 0;
-        Mockito.when(scene.isAtWinningPosition()).thenReturn(true);
+        Mockito.when(scene.isAtTransitionPosition()).thenReturn(true);
 
         sceneController.step(game, action, time);
         Mockito.verify(playerController, Mockito.times(1))

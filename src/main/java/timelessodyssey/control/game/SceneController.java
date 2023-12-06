@@ -26,7 +26,7 @@ public class SceneController extends Controller<Scene> {
             game.setState(null);
         else {
             playerController.step(game, action, time);
-            if (getModel().isAtWinningPosition()){
+            if (getModel().isAtTransitionPosition()){
                 game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
             }
         }

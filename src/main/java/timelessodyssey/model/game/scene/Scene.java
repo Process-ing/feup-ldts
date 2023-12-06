@@ -17,7 +17,7 @@ public class Scene {
     private Player player;
     private List<Tile> tiles;
     private List<Spike> spikes;
-    private Position winningPosition;
+    private Position transitionPosition;
 
     public Scene(int width, int height, int sceneCode) {
         this.width = width;
@@ -61,12 +61,12 @@ public class Scene {
         this.spikes = spikes;
     }
 
-    public Position getWinningPosition() {
-        return winningPosition;
+    public Position getTransitionPosition() {
+        return transitionPosition;
     }
 
-    public void setWinningPosition(Position winningPosition) {
-        this.winningPosition = winningPosition;
+    public void setTransitionPosition(Position transitionPosition) {
+        this.transitionPosition = transitionPosition;
     }
 
     public boolean isEmpty(Position position) {
@@ -101,9 +101,7 @@ public class Scene {
         return true;
     }
 
-    public boolean isAtWinningPosition() {
-        boolean checkXvalues = player.getPosition().x() >= winningPosition.x();
-        boolean checkYvalues = player.getPosition().y() >= winningPosition.y();
-        return  checkXvalues && checkYvalues;
+    public boolean isAtTransitionPosition() {
+        return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
     }
 }
