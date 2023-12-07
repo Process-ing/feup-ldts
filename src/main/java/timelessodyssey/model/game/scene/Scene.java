@@ -78,6 +78,7 @@ public class Scene {
     public boolean isGrounded(){
         Position position = player.getPosition();
         int xIdx = (int) (position.x() / 8), yIdx = (int) (position.y() / 8);
+        if (yIdx >= 11) {return true;}
         return tiles[yIdx+1][xIdx] != null;
     }
     public Position resolveCollisions(Position newPosition) {
@@ -88,30 +89,32 @@ public class Scene {
 
         Position resolvedCollision = new Position(newPosition.x(), newPosition.y());
 
-        boolean movedRight = oldPosition.x() < newPosition.x();
-        int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
-        if (movedRight){
-            if (tiles[yIdx][xIdx+1] != null){
-                return new Position(8.0 * (int)(resolvedCollision.x()/8),  resolvedCollision.y());
-            }
-        }
-        else {
-            if (tiles[yIdx][xIdx] != null){
-                return new Position(8.0 * (int)(resolvedCollision.x()/8)+8.0,  resolvedCollision.y());
-            }
-        }
-
         boolean movedDown = oldPosition.y() < newPosition.y();
-        xIdx = (int) (resolvedCollision.x() / 8);
-        yIdx = (int) (resolvedCollision.y() / 8);
         if (movedDown){
+            int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
             if (tiles[yIdx+1][xIdx] != null){
-                return new Position(resolvedCollision.x(), 8.0 * (int) (resolvedCollision.y()/8));
+                resolvedCollision = new Position(resolvedCollision.x(), 8.0 * yIdx);
             }
         }
-        else {
+        boolean movedUp = oldPosition.y() > newPosition.y();
+        if (movedUp){
+            int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
             if (tiles[yIdx][xIdx] != null){
-                return new Position(resolvedCollision.x(), 8.0 * (int) (resolvedCollision.y()/8)+8.0);
+                resolvedCollision = new Position(resolvedCollision.x(), 8.0 * yIdx + 8.0);
+            }
+        }
+        boolean movedRight = oldPosition.x() < resolvedCollision.x();
+        if (movedRight){
+            int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
+            if (tiles[yIdx][xIdx+1] != null){
+                resolvedCollision = new Position(8.0 * xIdx,  resolvedCollision.y());
+            }
+        }
+        boolean movedLeft = oldPosition.x() > resolvedCollision.x();
+        if(movedLeft) {
+            int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
+            if (tiles[yIdx][xIdx] != null){
+                resolvedCollision = new Position(8.0 * xIdx + 8.0,  resolvedCollision.y());
             }
         }
 

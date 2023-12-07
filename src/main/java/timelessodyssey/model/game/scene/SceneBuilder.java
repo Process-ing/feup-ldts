@@ -33,7 +33,7 @@ public class SceneBuilder {
 
     public SceneBuilder(int n) throws IOException {
         this.sceneCode = n;
-        URL resource = getClass().getClassLoader().getResource("levels/playground.lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/scene"+n+".lvl");
         assert resource != null;
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
@@ -59,11 +59,11 @@ public class SceneBuilder {
     }
 
     protected Tile[][] createWalls() {
-        Tile[][] walls = new Tile[lines.size()-2][lines.get(0).length()];
+        Tile[][] walls = new Tile[lines.size()-2][lines.get(0).length()+1];
 
         for (int y = 0; y < lines.size() - 2; y++) {
             String line = lines.get(y);
-            Tile[] lineTiles = new Tile[20];
+            Tile[] lineTiles = new Tile[21];
             for (int x = 0; x < line.length(); x++)
                 if (line.charAt(x) == '#') {
                     lineTiles[x] = new Tile(x * 8, y * 8);
@@ -71,6 +71,7 @@ public class SceneBuilder {
                 else{
                     lineTiles[x] = null;
                 }
+            lineTiles[20] = null;
             walls[y] = lineTiles;
         }
         return walls;
