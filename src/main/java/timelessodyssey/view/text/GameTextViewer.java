@@ -51,20 +51,20 @@ public class GameTextViewer implements TextViewer {
     public void draw(char character, int x, int y, TextColor foregroundColor, GUI gui) {
         if (charMap.containsKey(character)) {
             CharPosition position = charMap.get(character);
-            drawKnownChar(position, new Position(x, y), foregroundColor, gui);
+            drawKnownChar(position, x, y, foregroundColor, gui);
         } else {
             drawUnknownChar(new Position(x, y), foregroundColor, gui);
         }
     }
 
-    private void drawKnownChar(CharPosition position, Position pixelPosition, TextColor foregroundColor, GUI gui) {
+    private void drawKnownChar(CharPosition position, int x, int y, TextColor foregroundColor, GUI gui) {
         final int COLOR_WHITE = 0xFFFFFFFF;
         int imgX = position.row() * (charWidth + 1);
         int imgY = position.col() * (charHeight + 1);
         for (int dy = 0; dy < charHeight; dy++) {
             for (int dx = 0; dx < charWidth; dx++) {
                 if (fontImage.getRGB(imgX + dx, imgY + dy) != COLOR_WHITE)
-                    gui.drawPixel(pixelPosition, foregroundColor);
+                    gui.drawPixel(new Position(x+dx,y+dy), foregroundColor);
             }
         }
     }
