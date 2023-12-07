@@ -6,6 +6,8 @@ import timelessodyssey.view.Sprite;
 
 import java.io.IOException;
 
+import static java.lang.Math.round;
+
 public class PlayerViewer implements ElementViewer<Player> {
     private final Sprite sprite;
 
@@ -15,6 +17,6 @@ public class PlayerViewer implements ElementViewer<Player> {
 
     @Override
     public void draw(Player model, GUI gui) {
-        sprite.draw(gui, (int) model.getPosition().x(), (int) model.getPosition().y());
+        sprite.draw(gui, model.getPosition());
     }
 }

@@ -21,13 +21,13 @@ public class Sprite {
         return image;
     }
 
-    public void draw(GUI gui, int x, int y) {
+    public void draw(GUI gui, Position position) {
         for (int dx = 0; dx < image.getWidth(); dx++) {
             for (int dy = 0; dy < image.getHeight(); dy++) {
                 int ARGB = image.getRGB(dx, dy);
                 if (getTransparency(ARGB) == 0)
                     continue;
-                gui.drawPixel(new Position(x + dx, y + dy), getRGB(ARGB));
+                gui.drawPixel(new Position(position.x() + dx, position.y() + dy), getRGB(ARGB));
             }
         }
     }
