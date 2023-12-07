@@ -1,7 +1,8 @@
 package timelessodyssey.control;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import net.jqwik.api.ForAll;
+import net.jqwik.api.Property;
+import net.jqwik.api.lifecycle.BeforeTry;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.game.PlayerController;
@@ -16,7 +17,7 @@ public class PlayerControllerTest {
     private Game game;
     private PlayerController playerController;
 
-    @BeforeEach
+    @BeforeTry
     public void setup() {
         this.scene = Mockito.mock(Scene.class);
         this.player = Mockito.mock(Player.class);
@@ -26,47 +27,47 @@ public class PlayerControllerTest {
         Mockito.when(scene.isEmpty(Mockito.any())).thenReturn(true);
     }
 
-    @Test
-    public void movePlayerLeft() {
-        Position pos = new Position(5, 5);
+    @Property
+    public void movePlayerLeft(@ForAll double x, @ForAll double y) {
+        Position pos = new Position(x, y);
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
         playerController.step(game, GUI.Action.LEFT, time);
 
-        Mockito.verify(player, Mockito.times(1)).setPosition(pos.getLeft());
+        Mockito.verify(player, Mockito.times(1)).setPosition(Mockito.eq(new Position(x - 1, y)));
     }
 
-    @Test
-    public void movePlayerRight() {
-        Position pos = new Position(5, 5);
+    @Property
+    public void movePlayerRight(@ForAll double x, @ForAll double y) {
+        Position pos = new Position(x, y);
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
         playerController.step(game, GUI.Action.RIGHT, time);
 
-        Mockito.verify(player, Mockito.times(1)).setPosition(pos.getRight());
+        Mockito.verify(player, Mockito.times(1)).setPosition(Mockito.eq(new Position(x + 1, y)));
     }
 
-    @Test
-    public void movePlayerUp() {
-        Position pos = new Position(5, 5);
+    @Property
+    public void movePlayerUp(@ForAll double x, @ForAll double y) {
+        Position pos = new Position(x, y);
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
         playerController.step(game, GUI.Action.UP, time);
 
-        Mockito.verify(player, Mockito.times(1)).setPosition(pos.getUp());
+        Mockito.verify(player, Mockito.times(1)).setPosition(Mockito.eq(new Position(x, y - 1)));
     }
 
-    @Test
-    public void movePlayerDown() {
-        Position pos = new Position(5, 5);
+    @Property
+    public void movePlayerDown(@ForAll double x, @ForAll double y) {
+        Position pos = new Position(x, y);
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
         playerController.step(game, GUI.Action.DOWN, time);
 
-        Mockito.verify(player, Mockito.times(1)).setPosition(pos.getDown());
+        Mockito.verify(player, Mockito.times(1)).setPosition(Mockito.eq(new Position(x, y + 1)));
     }
 }

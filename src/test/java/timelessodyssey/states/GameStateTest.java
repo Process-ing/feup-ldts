@@ -1,6 +1,5 @@
 package timelessodyssey.states;
 
-import com.googlecode.lanterna.screen.Screen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -8,7 +7,6 @@ import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.scene.Scene;
-import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
@@ -16,7 +14,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class GameStateTest {
-
     Scene model;
     Game game;
     GUI gui;
@@ -31,7 +28,7 @@ public class GameStateTest {
     }
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         this.model = Mockito.mock(Scene.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(GUI.class);

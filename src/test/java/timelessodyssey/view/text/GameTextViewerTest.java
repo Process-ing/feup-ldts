@@ -67,7 +67,7 @@ public class GameTextViewerTest {
 
     @Test
     public void drawKnownCharacter() throws IOException {
-        int x = 0, y = 0;
+        double x = 0, y = 0;
         char character = 'A';
         String text_image = "text/test-text1.png";
         TextViewer textViewer = new GameTextViewer();
@@ -79,7 +79,7 @@ public class GameTextViewerTest {
 
     @Test
     public void drawKnownCharacterOffset() throws IOException {
-        int x = 32, y = 16;
+        double x = 32, y = 16;
         char character = '$';
         String text_image = "text/test-text2.png";
         TextViewer textViewer = new GameTextViewer();
@@ -91,7 +91,7 @@ public class GameTextViewerTest {
 
     @Test
     public void drawUnknownCharacter() throws IOException {
-        int x = 15, y = 25;
+        double x = 15, y = 25;
         char character = '&';
         String text_image = "text/test-text3.png";
         TextViewer textViewer = new GameTextViewer();
@@ -103,7 +103,7 @@ public class GameTextViewerTest {
 
     @Test
     public void drawString() throws IOException {
-        int x = 5, y = 14;
+        double x = 5, y = 14;
         String string = "+Foo\nBar";
         String text_image = "text/test-text4.png";
         TextViewer textViewer = new GameTextViewer();

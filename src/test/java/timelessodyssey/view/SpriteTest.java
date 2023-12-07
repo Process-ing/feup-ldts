@@ -48,7 +48,7 @@ public class SpriteTest {
     @Test
     public void drawNoTransparentPixels() throws IOException {
         Sprite sprite = new Sprite("sprites/test-sprite1.png");
-        int x = 0, y = 0;
+        double x = 0, y = 0;
 
         sprite.draw(gui, x, y);
 

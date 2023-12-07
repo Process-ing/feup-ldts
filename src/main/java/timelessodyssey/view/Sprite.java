@@ -20,7 +20,7 @@ public class Sprite {
         return image;
     }
 
-    public void draw(GUI gui, int x, int y) {
+    public void draw(GUI gui, double x, double y) {
         for (int dx = 0; dx < image.getWidth(); dx++) {
             for (int dy = 0; dy < image.getHeight(); dy++) {
                 int ARGB = image.getRGB(dx, dy);

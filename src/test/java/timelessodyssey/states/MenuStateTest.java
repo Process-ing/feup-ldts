@@ -5,11 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
-import timelessodyssey.control.menu.MenuController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.menu.MainMenu;
-import timelessodyssey.model.menu.Menu;
-import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
@@ -17,7 +14,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MenuStateTest {
-
     MainMenu model;
     Game game;
     GUI gui;
@@ -32,7 +28,7 @@ public class MenuStateTest {
     }
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         this.model = Mockito.mock(MainMenu.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(GUI.class);
