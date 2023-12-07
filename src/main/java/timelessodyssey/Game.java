@@ -46,17 +46,17 @@ public class Game {
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {
         int FPS = 30;
-        int frameTime = 1000 / FPS;
+        double frameTime = 1000.0 / FPS;
 
         while (this.state != null) {
-            long startTime = System.currentTimeMillis();
+            double startTime = System.currentTimeMillis();
 
             state.step(this, gui, startTime);
 
-            long elapsedTime = System.currentTimeMillis() - startTime;
-            long sleepTime = frameTime - elapsedTime;
+            double elapsedTime = System.currentTimeMillis() - startTime;
+            double sleepTime = frameTime - elapsedTime;
 
-            if (sleepTime > 0) Thread.sleep(sleepTime);
+            if (sleepTime > 0) Thread.sleep((long) sleepTime);
         }
 
         gui.close();

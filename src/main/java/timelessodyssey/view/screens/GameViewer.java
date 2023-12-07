@@ -2,6 +2,7 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.Position;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.elements.ElementViewer;
@@ -32,7 +33,7 @@ public class GameViewer extends ScreenViewer<Scene> {
         TextColor background = new TextColor.RGB(28, 28, 28);
         for (int w = 0; w < 160; w++) {
             for (int h = 0; h < 90; h++) {
-                gui.drawPixel(w, h, background);
+                gui.drawPixel(new Position(w, h), background);
             }
         }
 

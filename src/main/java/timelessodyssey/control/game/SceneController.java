@@ -20,7 +20,7 @@ public class SceneController extends Controller<Scene> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, long time) throws IOException {
+    public void step(Game game, GUI.Action action, double time) throws IOException {
         if (action == QUIT) {
             game.setState(null);
         } else {

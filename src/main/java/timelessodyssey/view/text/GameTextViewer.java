@@ -2,6 +2,7 @@ package timelessodyssey.view.text;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.Position;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -50,26 +51,26 @@ public class GameTextViewer implements TextViewer {
     public void draw(char character, int x, int y, TextColor foregroundColor, GUI gui) {
         if (charMap.containsKey(character)) {
             CharPosition position = charMap.get(character);
-            drawKnownChar(position, x, y, foregroundColor, gui);
+            drawKnownChar(position, new Position(x, y), foregroundColor, gui);
         } else {
-            drawUnknownChar(x, y, foregroundColor, gui);
+            drawUnknownChar(new Position(x, y), foregroundColor, gui);
         }
     }
 
-    private void drawKnownChar(CharPosition position, int x, int y, TextColor foregroundColor, GUI gui) {
+    private void drawKnownChar(CharPosition position, Position pixelPosition, TextColor foregroundColor, GUI gui) {
         final int COLOR_WHITE = 0xFFFFFFFF;
         int imgX = position.row() * (charWidth + 1);
         int imgY = position.col() * (charHeight + 1);
         for (int dy = 0; dy < charHeight; dy++) {
             for (int dx = 0; dx < charWidth; dx++) {
                 if (fontImage.getRGB(imgX + dx, imgY + dy) != COLOR_WHITE)
-                    gui.drawPixel(x + dx, y + dy, foregroundColor);
+                    gui.drawPixel(pixelPosition, foregroundColor);
             }
         }
     }
 
-    private void drawUnknownChar(int x, int y, TextColor foregroundColor, GUI gui) {
-        gui.drawRectangle(x, y, charWidth, charHeight, foregroundColor);
+    private void drawUnknownChar(Position position, TextColor foregroundColor, GUI gui) {
+        gui.drawRectangle(position, charWidth, charHeight, foregroundColor);
     }
 
     @Override

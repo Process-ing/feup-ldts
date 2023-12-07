@@ -15,6 +15,6 @@ public class PlayerViewer implements ElementViewer<Player> {
 
     @Override
     public void draw(Player model, GUI gui) {
-        sprite.draw(gui, model.getPosition().x(), model.getPosition().y());
+        sprite.draw(gui, (int) model.getPosition().x(), (int) model.getPosition().y());
     }
 }

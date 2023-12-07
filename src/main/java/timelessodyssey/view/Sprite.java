@@ -2,6 +2,7 @@ package timelessodyssey.view;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.Position;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -26,7 +27,7 @@ public class Sprite {
                 int ARGB = image.getRGB(dx, dy);
                 if (getTransparency(ARGB) == 0)
                     continue;
-                gui.drawPixel(x + dx, y + dy, getRGB(ARGB));
+                gui.drawPixel(new Position(x + dx, y + dy), getRGB(ARGB));
             }
         }
     }

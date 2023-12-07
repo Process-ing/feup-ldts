@@ -9,6 +9,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
+import timelessodyssey.model.Position;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -129,19 +130,19 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawPixel(int x, int y, TextColor color) {
+    public void drawPixel(Position position, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
-        tg.putString(x, y, " ");
+        tg.putString((int) position.x(), (int) position.y(), " ");
     }
 
     @Override
-    public void drawRectangle(int x, int y, int width, int height, TextColor color) {
+    public void drawRectangle(Position position, int width, int height, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
         for (int dy = 0; dy < height; dy++) {
             for (int dx = 0; dx < width; dx++) {
-                tg.putString(x + dx, y + dy, " ");
+                tg.putString((int) (position.x() + dx), (int) (position.y() + dy), " ");
             }
         }
     }

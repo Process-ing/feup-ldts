@@ -23,7 +23,7 @@ public class EntryViewer {
             case RESOLUTION -> getResolutionLabel(gui);
             case TO_MAIN_MENU -> "Go Back";
         };
-        textViewer.draw(entryText, model.getPosition().x(), model.getPosition().y(), color, gui);
+        textViewer.draw(entryText, (int) model.getPosition().x(), (int) model.getPosition().y(), color, gui);
     }
 
     private String getResolutionLabel(GUI gui) {

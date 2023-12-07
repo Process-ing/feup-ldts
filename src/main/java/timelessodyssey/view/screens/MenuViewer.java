@@ -2,6 +2,7 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.Position;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.menu.EntryViewer;
@@ -31,11 +32,11 @@ public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
     }
 
     private void drawBackgroundAndFrame(GUI gui) {
-        gui.drawRectangle(0, 0, gui.getWidth(), 1, frameColor);
-        gui.drawRectangle(0, gui.getHeight() - 1, gui.getWidth(), 1, frameColor);
-        gui.drawRectangle(0, 1, 1, gui.getHeight() - 2, frameColor);
-        gui.drawRectangle(gui.getWidth() - 1, 1, 1, gui.getHeight() - 2, frameColor);
-        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
+        gui.drawRectangle(new Position(0, 0), gui.getWidth(), 1, frameColor);
+        gui.drawRectangle(new Position(0, gui.getHeight() - 1), gui.getWidth(), 1, frameColor);
+        gui.drawRectangle(new Position(0, 1), 1, gui.getHeight() - 2, frameColor);
+        gui.drawRectangle(new Position(gui.getWidth() - 1, 1), 1, gui.getHeight() - 2, frameColor);
+        gui.drawRectangle(new Position(1, 1), gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
     }
 
     private void drawEntries(GUI gui, List<Entry> entries) throws IOException {
