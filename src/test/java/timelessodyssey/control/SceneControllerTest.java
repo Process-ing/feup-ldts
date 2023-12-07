@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
+import timelessodyssey.control.game.ParticleController;
 import timelessodyssey.control.game.PlayerController;
 import timelessodyssey.control.game.SceneController;
 import timelessodyssey.gui.GUI;
@@ -16,14 +17,16 @@ public class SceneControllerTest {
     private SceneController sceneController;
     private Scene scene;
     private PlayerController playerController;
+    private ParticleController particleController;
 
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);
         this.scene = Mockito.mock(Scene.class);
         this.playerController = Mockito.mock(PlayerController.class);
+        this.particleController = Mockito.mock(ParticleController.class);
 
-        this.sceneController = new SceneController(scene, playerController);
+        this.sceneController = new SceneController(scene, playerController, particleController);
     }
 
     @Test

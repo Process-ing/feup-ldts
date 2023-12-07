@@ -1,9 +1,12 @@
 package timelessodyssey.model.game.scene;
 
+import com.googlecode.lanterna.TextColor;
 import timelessodyssey.model.Position;
+import timelessodyssey.model.game.elements.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.view.elements.TileViewer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -26,6 +30,7 @@ public class SceneBuilder {
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
         scene.setTransitionPosition(createTransitionPosition());
+        scene.setParticles(createParticles(30, scene));
 
         return scene;
     }
@@ -46,53 +51,69 @@ public class SceneBuilder {
         return lines;
     }
 
-    protected int getWidth() {
+    private int getWidth() {
         int width = 0;
         for (String line : lines)
             width = Math.max(width, line.length());
         return width;
     }
 
-    protected int getHeight() {
+    private int getHeight() {
         return lines.size();
     }
 
-    protected List<Tile> createWalls() {
+    private List<Tile> createWalls() {
         List<Tile> walls = new ArrayList<>();
 
-        for (int y = 0; y < lines.size(); y ++) {
+        for (int y = 0; y < getHeight(); y ++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '#') walls.add(new Tile(x * 8, y * 8));
+                if (line.charAt(x) == '#') walls.add(new Tile(x * TileViewer.TILE_SIZE, y * TileViewer.TILE_SIZE));
         }
 
         return walls;
     }
 
-    protected List<Spike> createSpikes() {
+    private List<Spike> createSpikes() {
         List<Spike> spikes = new ArrayList<>();
 
-        for (int y = 0; y < lines.size(); y ++) {
+        for (int y = 0; y < getHeight(); y ++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '^') spikes.add(new Spike(x * 8, y * 8));
+                if (line.charAt(x) == '^') spikes.add(new Spike(x * TileViewer.TILE_SIZE, y * TileViewer.TILE_SIZE));
         }
 
         return spikes;
     }
 
-    protected Player createPlayer() {
-        for (int y = 0; y < lines.size(); y++) {
+    private Player createPlayer() {
+        for (int y = 0; y < getHeight(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'P') return new Player(x * 8, y * 8);
+                if (line.charAt(x) == 'P') return new Player(x * TileViewer.TILE_SIZE, y * TileViewer.TILE_SIZE);
         }
         return null;
     }
 
-    protected Position createTransitionPosition() {
-        return new Position(Integer.parseInt(lines.get(lines.size()-2)) * 8,
-                            Integer.parseInt(lines.get(lines.size()-1)) * 8);
+    private Position createTransitionPosition() {
+        return new Position(Integer.parseInt(lines.get(lines.size()-2)) * TileViewer.TILE_SIZE,
+                            Integer.parseInt(lines.get(lines.size()-1)) * TileViewer.TILE_SIZE);
     }
 
+    private List<Particle> createParticles(int number, Scene scene) {
+        List<Particle> particles = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < number; i++) {
+            Particle particle = new Particle(
+                    random.nextInt(scene.getWidth() * TileViewer.TILE_SIZE),
+                    random.nextInt(scene.getHeight() * TileViewer.TILE_SIZE),
+                    random.nextInt(2, 5) / 2,
+                    TextColor.ANSI.WHITE_BRIGHT,
+                    random.nextDouble(0.005, 0.05)
+            );
+            particles.add(particle);
+        }
+
+        return particles;
+    }
 }

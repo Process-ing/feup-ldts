@@ -5,6 +5,7 @@ import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Position;
 import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.view.elements.TileViewer;
 
 public class PlayerController extends Controller<Scene> {
 
@@ -30,8 +31,8 @@ public class PlayerController extends Controller<Scene> {
 
     private void movePlayer(Position position) {
         Position position2 = new Position(position.x() + 5, position.y());
-        Position position3 = new Position(position.x() + 5, position.y() + 7);
-        Position position4 = new Position(position.x(), position.y() + 7);
+        Position position3 = new Position(position.x() + 5, position.y() + TileViewer.TILE_SIZE - 1);
+        Position position4 = new Position(position.x(), position.y() + TileViewer.TILE_SIZE - 1);
         if (this.getModel().isEmpty(position) && this.getModel().isEmpty(position2) && this.getModel().isEmpty(position3) && this.getModel().isEmpty(position4)){
             this.getModel().getPlayer().setPosition(position);
         }

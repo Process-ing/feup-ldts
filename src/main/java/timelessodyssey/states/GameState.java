@@ -2,6 +2,7 @@ package timelessodyssey.states;
 
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
+import timelessodyssey.control.game.ParticleController;
 import timelessodyssey.control.game.PlayerController;
 import timelessodyssey.control.game.SceneController;
 import timelessodyssey.gui.GUI;
@@ -20,7 +21,7 @@ public class GameState extends State<Scene> {
 
     @Override
     protected Controller<Scene> createController() {
-        return new SceneController(getModel(), new PlayerController(getModel()));
+        return new SceneController(getModel(), new PlayerController(getModel()), new ParticleController(getModel()));
     }
 
     @Override
