@@ -12,7 +12,7 @@ public class PlayerViewer implements ElementViewer<Player> {
     private final Sprite sprite;
 
     public PlayerViewer() throws IOException {
-        sprite = new Sprite("sprites/player/player.png");
+        sprite = new Sprite("sprites/player/playersq.png");
     }
 
     @Override

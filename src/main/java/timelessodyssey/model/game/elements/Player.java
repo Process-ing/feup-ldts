@@ -18,12 +18,14 @@ public class Player extends Element {
         super(x, y);
     }
 
-    public Position move(double time){
+    public Position move(double time, boolean isGrounded){
         System.out.printf("x=%f\ty=%f\n",getPosition().x(),getPosition().y());
         double timeInSeconds = time / 1000.0;
 
         // Constant Forces
-        Fy += gravity * mass;
+        if (!isGrounded) {
+            Fy += gravity * mass;
+        }
 
         // Update Velocity
         vx += (Fx / mass) * timeInSeconds;
@@ -33,10 +35,13 @@ public class Player extends Element {
         if (abs(vx) > MAX_VELOCITY){
             vx = vx > 0 ? MAX_VELOCITY : -MAX_VELOCITY;
         }
+        if (isGrounded && Fy >= 0){
+            vy = 0;
+        }
 
         // Update Position
         double x = max(min(getPosition().x() + vx * timeInSeconds, 182),0);
-        double y = max(min(getPosition().y() + vy * timeInSeconds, 72),0);
+        double y = max(min(getPosition().y() + vy * timeInSeconds, 80),0);
 
         // Reset Forces
         Fy = 0;

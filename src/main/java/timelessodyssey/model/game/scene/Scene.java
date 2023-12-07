@@ -75,8 +75,46 @@ public class Scene {
         return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
     }
 
-    public Position checkColisions(Position position) {
+    public boolean isGrounded(){
+        Position position = player.getPosition();
+        int xIdx = (int) (position.x() / 8), yIdx = (int) (position.y() / 8);
+        return tiles[yIdx+1][xIdx] != null;
+    }
+    public Position resolveCollisions(Position newPosition) {
+        Position oldPosition = player.getPosition();
+        if (oldPosition.equals(newPosition)){
+            return newPosition;
+        }
 
-        return position;
+        Position resolvedCollision = new Position(newPosition.x(), newPosition.y());
+
+        boolean movedRight = oldPosition.x() < newPosition.x();
+        int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
+        if (movedRight){
+            if (tiles[yIdx][xIdx+1] != null){
+                return new Position(8.0 * (int)(resolvedCollision.x()/8),  resolvedCollision.y());
+            }
+        }
+        else {
+            if (tiles[yIdx][xIdx] != null){
+                return new Position(8.0 * (int)(resolvedCollision.x()/8)+8.0,  resolvedCollision.y());
+            }
+        }
+
+        boolean movedDown = oldPosition.y() < newPosition.y();
+        xIdx = (int) (resolvedCollision.x() / 8);
+        yIdx = (int) (resolvedCollision.y() / 8);
+        if (movedDown){
+            if (tiles[yIdx+1][xIdx] != null){
+                return new Position(resolvedCollision.x(), 8.0 * (int) (resolvedCollision.y()/8));
+            }
+        }
+        else {
+            if (tiles[yIdx][xIdx] != null){
+                return new Position(resolvedCollision.x(), 8.0 * (int) (resolvedCollision.y()/8)+8.0);
+            }
+        }
+
+        return resolvedCollision;
     }
 }

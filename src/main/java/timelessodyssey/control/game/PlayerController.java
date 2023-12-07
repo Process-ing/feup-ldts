@@ -8,8 +8,6 @@ import timelessodyssey.model.game.scene.Scene;
 
 public class PlayerController extends Controller<Scene> {
 
-    private boolean isGrounded = true;
-
     public PlayerController(Scene scene) {
         super(scene);
     }
@@ -31,27 +29,23 @@ public class PlayerController extends Controller<Scene> {
     }
 
     private void jump(double time) {
-        if (isGrounded) {
+        if (getModel().isGrounded()) {
             getModel().getPlayer().setvy(0);
             getModel().getPlayer().setFy(-4500);
-            isGrounded = false;
         }
         movePlayer(time);
     }
 
     private void continueMovement(double time) {
-        if (isGrounded){
+        if (getModel().isGrounded()){
             getModel().getPlayer().setvx(0);
         }
         movePlayer(time);
     }
 
     private void movePlayer(double time) {
-        Position position = getModel().getPlayer().move(time);
-        if (getModel().getPlayer().getPosition().y() >= 71.5){
-            isGrounded = true;
-        }
-        position = getModel().checkColisions(position);
+        Position position = getModel().getPlayer().move(time, getModel().isGrounded());
+        position = getModel().resolveCollisions(position);
 
         this.getModel().getPlayer().setPosition(position);
     }

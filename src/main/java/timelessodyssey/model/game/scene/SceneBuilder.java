@@ -59,14 +59,18 @@ public class SceneBuilder {
     }
 
     protected Tile[][] createWalls() {
-        Tile[][] walls = new Tile[lines.size()][];
+        Tile[][] walls = new Tile[lines.size()-2][lines.get(0).length()];
 
-        for (int y = 0; y < lines.size(); y++) {
+        for (int y = 0; y < lines.size() - 2; y++) {
             String line = lines.get(y);
-            Tile[] lineTiles = new Tile[line.length()];
+            Tile[] lineTiles = new Tile[20];
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == '#')
-                    lineTiles[x] = new Tile(x*8, y*8);
+                if (line.charAt(x) == '#') {
+                    lineTiles[x] = new Tile(x * 8, y * 8);
+                }
+                else{
+                    lineTiles[x] = null;
+                }
             walls[y] = lineTiles;
         }
         return walls;
