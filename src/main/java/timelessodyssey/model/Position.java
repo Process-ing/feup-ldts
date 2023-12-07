@@ -1,6 +1,6 @@
 package timelessodyssey.model;
 
-public record Position(int x, int y) {
+public record Position(double x, double y) {
     public Position getLeft() {
         return new Position(x - 1, y);
     }

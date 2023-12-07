@@ -36,8 +36,8 @@ public interface GUI {
     int getHeight();
     Resolution getResolution();
     void setResolution(Resolution resolution) throws IOException, URISyntaxException, FontFormatException;
-    void drawPixel(int x, int y, TextColor color);
-    void drawRectangle(int x, int y, int width, int height, TextColor color);
+    void drawPixel(double x, double y, TextColor color);
+    void drawRectangle(double x, double y, int width, int height, TextColor color);
     void clear();
     Action getNextAction() throws IOException;
     void clearAction();
