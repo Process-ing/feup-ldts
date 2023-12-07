@@ -48,8 +48,12 @@ public class GameViewer extends ScreenViewer<Scene> {
         viewer.draw(element, gui);
     }
 
-    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) throws IOException {
-        for (T element : elements)
-            drawElement(gui, element, viewer);
+    private <T extends Element> void drawElements(GUI gui, T[][] elements, ElementViewer<T> viewer) throws IOException {
+        for (T[] elementLine : elements)
+            for (T element : elementLine)
+                if (element != null){
+                    drawElement(gui, element, viewer);
+
+                }
     }
 }

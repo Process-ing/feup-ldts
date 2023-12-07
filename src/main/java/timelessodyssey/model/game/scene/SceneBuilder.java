@@ -11,6 +11,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -57,27 +58,31 @@ public class SceneBuilder {
         return lines.size();
     }
 
-    protected List<Tile> createWalls() {
-        List<Tile> walls = new ArrayList<>();
+    protected Tile[][] createWalls() {
+        Tile[][] walls = new Tile[lines.size()][];
 
-        for (int y = 0; y < lines.size(); y ++) {
+        for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '#') walls.add(new Tile(x * 8, y * 8));
+            Tile[] lineTiles = new Tile[line.length()];
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == '#')
+                    lineTiles[x] = new Tile(x*8, y*8);
+            walls[y] = lineTiles;
         }
-
         return walls;
     }
 
-    protected List<Spike> createSpikes() {
-        List<Spike> spikes = new ArrayList<>();
+    protected Spike[][] createSpikes() {
+        Spike[][] spikes = new Spike[lines.size()][];
 
-        for (int y = 0; y < lines.size(); y ++) {
+        for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '^') spikes.add(new Spike(x * 8, y * 8));
+            Spike[] lineSpikes = new Spike[line.length()];
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == '^')
+                    lineSpikes[x] = new Spike(x*8, y*8);
+            spikes[y] = lineSpikes;
         }
-
         return spikes;
     }
 

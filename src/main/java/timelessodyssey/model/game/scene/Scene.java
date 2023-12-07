@@ -13,8 +13,8 @@ public class Scene {
     private final int sceneCode;
 
     private Player player;
-    private List<Tile> tiles;
-    private List<Spike> spikes;
+    private Tile[][] tiles;
+    private Spike[][] spikes;
     private Position transitionPosition;
 
     public Scene(int width, int height, int sceneCode) {
@@ -43,19 +43,19 @@ public class Scene {
         this.player = player;
     }
 
-    public List<Tile> getTiles() {
+    public Tile[][] getTiles() {
         return tiles;
     }
 
-    public void setTiles(List<Tile> tiles) {
+    public void setTiles(Tile[][] tiles) {
         this.tiles = tiles;
     }
 
-    public List<Spike> getSpikes() {
+    public Spike[][] getSpikes() {
         return spikes;
     }
 
-    public void setSpikes(List<Spike> spikes) {
+    public void setSpikes(Spike[][] spikes) {
         this.spikes = spikes;
     }
 
@@ -67,39 +67,16 @@ public class Scene {
         this.transitionPosition = transitionPosition;
     }
 
-    public boolean isEmpty(Position position) {
-        if (position.x() < 0 || position.x() > 160){
-            return false;
-        }
-        if (position.y() < 0 || position.y() > 90){
-            return false;
-        }
-        for (Tile tile : tiles) {
-            for (int w = 0; w < 8; w++) {
-                Position pos1 = new Position(tile.getPosition().x() + w, tile.getPosition().y());
-                Position pos2 = new Position(tile.getPosition().x() + w, tile.getPosition().y() + 7);
-                if (pos1.equals(position)) {
-                    return false;
-                }
-                if (pos2.equals(position)) {
-                    return false;
-                }
-            }
-            for (int h = 0; h < 8; h++) {
-                Position pos1 = new Position(tile.getPosition().x(), tile.getPosition().y() + h);
-                Position pos2 = new Position(tile.getPosition().x() + 7, tile.getPosition().y() + h);
-                if (pos1.equals(position)) {
-                    return false;
-                }
-                if (pos2.equals(position)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+    public Position canMove(Position position) {
+        return position;
     }
 
     public boolean isAtTransitionPosition() {
         return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
+    }
+
+    public Position checkColisions(Position position) {
+
+        return position;
     }
 }

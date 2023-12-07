@@ -2,7 +2,7 @@ package timelessodyssey.model.game.elements;
 
 import timelessodyssey.model.Position;
 
-import static java.lang.Math.abs;
+import static java.lang.Math.*;
 
 public class Player extends Element {
 
@@ -12,7 +12,7 @@ public class Player extends Element {
     private double Fx = 0;
     private double Fy = 0;
     private double mass = 1;
-    //private double gravity = 30;
+    private double gravity = 400;
     private double MAX_VELOCITY = 30;
     public Player(double x, double y) {
         super(x, y);
@@ -23,7 +23,8 @@ public class Player extends Element {
         double timeInSeconds = time / 1000.0;
 
         // Constant Forces
-        //Fy += gravity * mass;
+        Fy += gravity * mass;
+
         // Update Velocity
         vx += (Fx / mass) * timeInSeconds;
         vy += (Fy / mass) * timeInSeconds;
@@ -32,13 +33,10 @@ public class Player extends Element {
         if (abs(vx) > MAX_VELOCITY){
             vx = vx > 0 ? MAX_VELOCITY : -MAX_VELOCITY;
         }
-        if (abs(vy) > MAX_VELOCITY){
-            vy = vy > 0 ? MAX_VELOCITY : -MAX_VELOCITY;
-        }
 
         // Update Position
-        double x = getPosition().x() + vx * timeInSeconds;
-        double y = getPosition().y() + vy * timeInSeconds;
+        double x = max(min(getPosition().x() + vx * timeInSeconds, 182),0);
+        double y = max(min(getPosition().y() + vy * timeInSeconds, 72),0);
 
         // Reset Forces
         Fy = 0;
