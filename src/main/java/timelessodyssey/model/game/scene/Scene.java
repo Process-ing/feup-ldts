@@ -77,9 +77,10 @@ public class Scene {
 
     public boolean isGrounded(){
         Position position = player.getPosition();
-        int xIdx = (int) (position.x() / 8), yIdx = (int) (position.y() / 8);
-        if (yIdx >= 11) {return true;}
-        return tiles[yIdx+1][xIdx] != null;
+        int xIdx1 = (int) (position.x() / 8), yIdx1 = (int) (position.y() / 8);
+        int xIdx2 = (int) ((position.x()+7) / 8), yIdx2 = (int) (position.y() / 8);
+        if (yIdx1 >= 11 || yIdx2 >= 11) {return true;}
+        return tiles[yIdx1+1][xIdx1] != null || tiles[yIdx2+1][xIdx2] != null;
     }
     public Position resolveCollisions(Position newPosition) {
         Position oldPosition = player.getPosition();
@@ -91,36 +92,34 @@ public class Scene {
 
         boolean movedDown = oldPosition.y() < newPosition.y();
         if (movedDown){
-            int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
-            int xIdxc = (int) ((resolvedCollision.x()+7) / 8), yIdxc = (int) (resolvedCollision.y() / 8);
-            if (tiles[yIdx+1][xIdx] != null || tiles[yIdxc+1][xIdxc] != null){
-                resolvedCollision = new Position(resolvedCollision.x(), 8.0 * yIdx);
-            }
-            else {
-                resolvedCollision = new Position(resolvedCollision.x(), resolvedCollision.y());
+            int xIdx1 = (int) (resolvedCollision.x() / 8), yIdx1 = (int) ((resolvedCollision.y()+7) / 8);
+            int xIdx2 = (int) ((resolvedCollision.x()+7) / 8), yIdx2 = (int) ((resolvedCollision.y()+7) / 8);
+            if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
+                resolvedCollision = new Position(resolvedCollision.x(), 8.0 * (int) (resolvedCollision.y() / 8));
             }
         }
         boolean movedUp = oldPosition.y() > newPosition.y();
         if (movedUp){
-            int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
-            if (tiles[yIdx][xIdx] != null){
-                resolvedCollision = new Position(resolvedCollision.x(), 8.0 * yIdx + 8.0);
+            int xIdx1 = (int) (resolvedCollision.x() / 8), yIdx1 = (int) (resolvedCollision.y() / 8);
+            int xIdx2 = (int) ((resolvedCollision.x()+7) / 8), yIdx2 = (int) (resolvedCollision.y() / 8);
+            if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
+                resolvedCollision = new Position(resolvedCollision.x(), 8.0 * (int) (resolvedCollision.y() / 8) + 8.0);
             }
         }
         boolean movedRight = oldPosition.x() < resolvedCollision.x();
         if (movedRight){
-            int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
-            int xIdxc = (int) (resolvedCollision.x() / 8), yIdxc = (int) ((resolvedCollision.y()+7) / 8);
-            if (tiles[yIdx][xIdx+1] != null || tiles[yIdxc][xIdxc+1] != null){
-                resolvedCollision = new Position(8.0 * xIdx,  resolvedCollision.y());
+            int xIdx1 = (int) ((resolvedCollision.x()+7) / 8), yIdx1 = (int) (resolvedCollision.y() / 8);
+            int xIdx2 = (int) ((resolvedCollision.x()+7) / 8), yIdx2 = (int) ((resolvedCollision.y()+7) / 8);
+            if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
+                resolvedCollision = new Position(8.0 * (int) (resolvedCollision.x() / 8),  resolvedCollision.y());
             }
         }
         boolean movedLeft = oldPosition.x() > resolvedCollision.x();
         if(movedLeft) {
-            int xIdx = (int) (resolvedCollision.x() / 8), yIdx = (int) (resolvedCollision.y() / 8);
-            int xIdxc = (int) (resolvedCollision.x() / 8), yIdxc = (int) ((resolvedCollision.y()+7) / 8);
-            if (tiles[yIdx][xIdx] != null || tiles[yIdxc][xIdxc] != null){
-                resolvedCollision = new Position(8.0 * xIdx + 8.0,  resolvedCollision.y());
+            int xIdx1 = (int) (resolvedCollision.x() / 8), yIdx1 = (int) (resolvedCollision.y() / 8);
+            int xIdx2 = (int) (resolvedCollision.x() / 8), yIdx2 = (int) ((resolvedCollision.y()+7) / 8);
+            if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
+                resolvedCollision = new Position(8.0 * (int) (resolvedCollision.x() / 8) + 8.0,  resolvedCollision.y());
             }
         }
 
