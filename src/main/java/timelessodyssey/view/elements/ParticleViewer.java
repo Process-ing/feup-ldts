@@ -1,7 +1,7 @@
 package timelessodyssey.view.elements;
 
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.game.elements.Particle;
+import timelessodyssey.model.game.elements.particles.Particle;
 
 public class ParticleViewer implements ElementViewer<Particle> {
     @Override

@@ -1,8 +1,11 @@
-package timelessodyssey.model.game.elements;
+package timelessodyssey.model.game.elements.particles;
 
 import com.googlecode.lanterna.TextColor;
+import timelessodyssey.model.Position;
+import timelessodyssey.model.game.elements.Element;
+import timelessodyssey.model.game.scene.Scene;
 
-public class Particle extends Element {
+public abstract class Particle extends Element {
     private final int size;
     private final TextColor color;
     private final double velocity;
@@ -25,4 +28,6 @@ public class Particle extends Element {
     public double getVelocity() {
         return velocity;
     }
+
+    public abstract Position move(double time, Scene scene);
 }

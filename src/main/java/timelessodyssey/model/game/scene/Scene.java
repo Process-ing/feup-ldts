@@ -1,7 +1,7 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Position;
-import timelessodyssey.model.game.elements.Particle;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;

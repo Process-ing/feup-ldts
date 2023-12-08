@@ -7,8 +7,9 @@ import timelessodyssey.Game;
 import timelessodyssey.control.game.ParticleController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Position;
-import timelessodyssey.model.game.elements.Particle;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Snow;
 import timelessodyssey.model.game.scene.Scene;
 
 import java.io.IOException;
@@ -22,8 +23,8 @@ public class ParticleControllerTest {
     private static final int HEIGHT = 90;
 
     @Property
-    public void particlesInBounds(
-            @ForAll List<@From("particle") Particle> particles,
+    public void snowInBounds(
+            @ForAll List<@From("snow") Particle> particles,
             @ForAll @DoubleRange(max = 16) double time,
             @ForAll @From("action") GUI.Action action
     ) throws IOException {
@@ -45,7 +46,7 @@ public class ParticleControllerTest {
     }
 
     @Provide
-    public Arbitrary<Particle> particle() {
+    public Arbitrary<Snow> snow() {
         return Combinators.combine(
                 Arbitraries.doubles().greaterOrEqual(0).lessThan(WIDTH * Tile.SIZE),
                 Arbitraries.doubles().greaterOrEqual(0).lessThan(HEIGHT * Tile.SIZE),
@@ -54,7 +55,7 @@ public class ParticleControllerTest {
                 Arbitraries.integers().between(0, 255),
                 Arbitraries.integers().between(0, 255),
                 Arbitraries.doubles().between(0, 1000)
-        ).as((x, y, size, r, g, b, velocity) -> new Particle(x, y, size, new TextColor.RGB(r, g, b), velocity));
+        ).as((x, y, size, r, g, b, velocity) -> new Snow(x, y, size, new TextColor.RGB(r, g, b), velocity));
     }
 
     @Provide

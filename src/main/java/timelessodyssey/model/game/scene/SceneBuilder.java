@@ -2,10 +2,11 @@ package timelessodyssey.model.game.scene;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.model.Position;
-import timelessodyssey.model.game.elements.Particle;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Snow;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -104,12 +105,12 @@ public class SceneBuilder {
         List<Particle> particles = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < number; i++) {
-            Particle particle = new Particle(
+            Particle particle = new Snow(
                     random.nextInt(scene.getWidth() * Tile.SIZE),
                     random.nextInt(scene.getHeight() * Tile.SIZE),
                     random.nextInt(2, 5) / 2,
                     TextColor.ANSI.WHITE_BRIGHT,
-                    random.nextDouble(0.005, 0.05)
+                    random.nextDouble(0.02, 0.05)
             );
             particles.add(particle);
         }
