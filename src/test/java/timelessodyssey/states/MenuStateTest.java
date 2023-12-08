@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MenuStateTest {
-
     MainMenu model;
     Game game;
     GUI gui;
@@ -29,7 +28,7 @@ public class MenuStateTest {
     }
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         this.model = Mockito.mock(MainMenu.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(GUI.class);

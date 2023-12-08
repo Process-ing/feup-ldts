@@ -14,19 +14,23 @@ public class PlayerController extends Controller<Scene> {
     }
 
     private void movePlayerLeft() {
-        movePlayer(this.getModel().getPlayer().getPosition().getLeft());
+        Position position = getModel().getPlayer().getPosition();
+        movePlayer(new Position(position.x() - 1, position.y()));
     }
 
     private void movePlayerRight() {
-        movePlayer(this.getModel().getPlayer().getPosition().getRight());
+        Position position = getModel().getPlayer().getPosition();
+        movePlayer(new Position(position.x() + 1, position.y()));
     }
 
     private void movePlayerUp() {
-        movePlayer(this.getModel().getPlayer().getPosition().getUp());
+        Position position = getModel().getPlayer().getPosition();
+        movePlayer(new Position(position.x(), position.y() - 1));
     }
 
     private void movePlayerDown() {
-        movePlayer(this.getModel().getPlayer().getPosition().getDown());
+        Position position = getModel().getPlayer().getPosition();
+        movePlayer(new Position(position.x(), position.y() + 1));
     }
 
     private void movePlayer(Position position) {
