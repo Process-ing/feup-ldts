@@ -22,8 +22,12 @@ public class ParticleController extends Controller<Scene> {
     }
 
     private void moveParticle(Particle particle, double time) {
-        double newX = (particle.getPosition().x() + particle.getVelocity() * time) % (getModel().getWidth() * Tile.SIZE);
-        double newY = (particle.getPosition().y() + Math.sin(newX / 10)) % (getModel().getHeight() * Tile.SIZE);
+        double newX = floorMod(particle.getPosition().x() + particle.getVelocity() * time, getModel().getWidth() * Tile.SIZE);
+        double newY = floorMod(particle.getPosition().y() + Math.sin(newX / 10),getModel().getHeight() * Tile.SIZE);
         particle.setPosition(new Position(newX, newY));
+    }
+
+    private double floorMod(double x, int y) {
+        return x - Math.floor(x / y) * y;
     }
 }

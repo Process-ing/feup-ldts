@@ -5,7 +5,6 @@ import timelessodyssey.model.game.elements.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
-import timelessodyssey.view.elements.TileViewer;
 
 import java.util.ArrayList;
 import java.util.List;

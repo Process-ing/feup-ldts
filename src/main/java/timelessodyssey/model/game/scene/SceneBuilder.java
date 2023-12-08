@@ -6,7 +6,6 @@ import timelessodyssey.model.game.elements.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
-import timelessodyssey.view.elements.TileViewer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,13 +23,14 @@ public class SceneBuilder {
     private final int sceneCode;
 
     public Scene createScene() {
+        int numberParticles = 30;
         Scene scene = new Scene(getWidth(), getHeight(), sceneCode);
 
         scene.setPlayer(createPlayer());
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
         scene.setTransitionPosition(createTransitionPosition());
-        scene.setParticles(createParticles(30, scene));
+        scene.setParticles(createParticles(numberParticles, scene));
 
         return scene;
     }
