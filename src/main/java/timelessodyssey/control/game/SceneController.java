@@ -7,7 +7,9 @@ import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.states.GameState;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static timelessodyssey.gui.GUI.Action.QUIT;
 
@@ -22,7 +24,7 @@ public class SceneController extends Controller<Scene> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, long time) throws IOException {
+    public void step(Game game, GUI.Action action, double time) throws IOException, URISyntaxException, FontFormatException {
         if (action == QUIT) {
             game.setState(null);
         } else {

@@ -68,7 +68,7 @@ public class SceneBuilder {
         for (int y = 0; y < getHeight(); y ++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '#') walls.add(new Tile(x * TileViewer.TILE_SIZE, y * TileViewer.TILE_SIZE));
+                if (line.charAt(x) == '#') walls.add(new Tile(x * Tile.SIZE, y * Tile.SIZE));
         }
 
         return walls;
@@ -80,7 +80,7 @@ public class SceneBuilder {
         for (int y = 0; y < getHeight(); y ++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '^') spikes.add(new Spike(x * TileViewer.TILE_SIZE, y * TileViewer.TILE_SIZE));
+                if (line.charAt(x) == '^') spikes.add(new Spike(x * Tile.SIZE, y * Tile.SIZE));
         }
 
         return spikes;
@@ -90,14 +90,14 @@ public class SceneBuilder {
         for (int y = 0; y < getHeight(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'P') return new Player(x * TileViewer.TILE_SIZE, y * TileViewer.TILE_SIZE);
+                if (line.charAt(x) == 'P') return new Player(x * Tile.SIZE, y * Tile.SIZE);
         }
         return null;
     }
 
     private Position createTransitionPosition() {
-        return new Position(Integer.parseInt(lines.get(lines.size()-2)) * TileViewer.TILE_SIZE,
-                            Integer.parseInt(lines.get(lines.size()-1)) * TileViewer.TILE_SIZE);
+        return new Position(Integer.parseInt(lines.get(lines.size()-2)) * Tile.SIZE,
+                            Integer.parseInt(lines.get(lines.size()-1)) * Tile.SIZE);
     }
 
     private List<Particle> createParticles(int number, Scene scene) {
@@ -105,8 +105,8 @@ public class SceneBuilder {
         Random random = new Random();
         for (int i = 0; i < number; i++) {
             Particle particle = new Particle(
-                    random.nextInt(scene.getWidth() * TileViewer.TILE_SIZE),
-                    random.nextInt(scene.getHeight() * TileViewer.TILE_SIZE),
+                    random.nextInt(scene.getWidth() * Tile.SIZE),
+                    random.nextInt(scene.getHeight() * Tile.SIZE),
                     random.nextInt(2, 5) / 2,
                     TextColor.ANSI.WHITE_BRIGHT,
                     random.nextDouble(0.005, 0.05)

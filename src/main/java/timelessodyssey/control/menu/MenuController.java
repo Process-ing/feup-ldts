@@ -19,7 +19,7 @@ public abstract class MenuController<T extends Menu> extends Controller<T> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, long time) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Game game, GUI.Action action, double time) throws IOException, URISyntaxException, FontFormatException {
         switch (action) {
             case UP:
                 this.getModel().moveUp();

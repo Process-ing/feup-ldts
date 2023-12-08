@@ -90,9 +90,9 @@ public class Scene {
             return false;
         }
         for (Tile tile : tiles) {
-            for (int w = 0; w < TileViewer.TILE_SIZE; w++) {
+            for (int w = 0; w < Tile.SIZE; w++) {
                 Position pos1 = new Position(tile.getPosition().x() + w, tile.getPosition().y());
-                Position pos2 = new Position(tile.getPosition().x() + w, tile.getPosition().y() + TileViewer.TILE_SIZE - 1);
+                Position pos2 = new Position(tile.getPosition().x() + w, tile.getPosition().y() + Tile.SIZE - 1);
                 if (pos1.equals(position)) {
                     return false;
                 }
@@ -100,9 +100,9 @@ public class Scene {
                     return false;
                 }
             }
-            for (int h = 0; h < TileViewer.TILE_SIZE; h++) {
+            for (int h = 0; h < Tile.SIZE; h++) {
                 Position pos1 = new Position(tile.getPosition().x(), tile.getPosition().y() + h);
-                Position pos2 = new Position(tile.getPosition().x() + TileViewer.TILE_SIZE - 1, tile.getPosition().y() + h);
+                Position pos2 = new Position(tile.getPosition().x() + Tile.SIZE - 1, tile.getPosition().y() + h);
                 if (pos1.equals(position)) {
                     return false;
                 }

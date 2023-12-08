@@ -10,7 +10,9 @@ import timelessodyssey.control.game.SceneController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.scene.Scene;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class SceneControllerTest {
     private Game game;
@@ -30,9 +32,9 @@ public class SceneControllerTest {
     }
 
     @Test
-    public void stepWithoutQuit() throws IOException {
+    public void stepWithoutQuit() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.NONE;
-        long time = 0;
+        double time = 0;
         Mockito.when(scene.isAtTransitionPosition()).thenReturn(false);
 
         sceneController.step(game, action, time);
@@ -43,18 +45,18 @@ public class SceneControllerTest {
     }
 
     @Test
-    public void stepWithQuit() throws IOException {
+    public void stepWithQuit() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.QUIT;
-        long time = 0;
+        double time = 0;
 
         sceneController.step(game, action, time);
         Mockito.verify(game, Mockito.times(1)).setState(null);
     }
 
     @Test
-    public void stepWithSceneChange() throws IOException {
+    public void stepWithSceneChange() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.NONE;
-        long time = 0;
+        double time = 0;
         Mockito.when(scene.isAtTransitionPosition()).thenReturn(true);
 
         sceneController.step(game, action, time);

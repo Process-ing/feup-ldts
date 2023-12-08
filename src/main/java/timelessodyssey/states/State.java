@@ -27,5 +27,5 @@ public abstract class State<T> {
         return model;
     }
 
-    public abstract void step(Game game, GUI gui, long time) throws IOException, URISyntaxException, FontFormatException;
+    public abstract void step(Game game, GUI gui, double time) throws IOException, URISyntaxException, FontFormatException;
 }
