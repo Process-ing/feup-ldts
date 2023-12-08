@@ -19,7 +19,6 @@ public class Player extends Element {
     }
 
     public Position move(double time, boolean isGrounded){
-        System.out.printf("x=%f\ty=%f\n",getPosition().x(),getPosition().y());
         double timeInSeconds = time / 1000.0;
 
         // Constant Forces

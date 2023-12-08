@@ -90,38 +90,46 @@ public class Scene {
 
         Position resolvedCollision = new Position(newPosition.x(), newPosition.y());
 
-        boolean movedDown = oldPosition.y() < newPosition.y();
-        if (movedDown){
-            int xIdx1 = (int) (resolvedCollision.x() / 8), yIdx1 = (int) ((resolvedCollision.y()+7) / 8);
-            int xIdx2 = (int) ((resolvedCollision.x()+7) / 8), yIdx2 = (int) ((resolvedCollision.y()+7) / 8);
-            if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
-                resolvedCollision = new Position(resolvedCollision.x(), 8.0 * (int) (resolvedCollision.y() / 8));
-            }
-        }
-        boolean movedUp = oldPosition.y() > newPosition.y();
-        if (movedUp){
-            int xIdx1 = (int) (resolvedCollision.x() / 8), yIdx1 = (int) (resolvedCollision.y() / 8);
-            int xIdx2 = (int) ((resolvedCollision.x()+7) / 8), yIdx2 = (int) (resolvedCollision.y() / 8);
-            if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
-                resolvedCollision = new Position(resolvedCollision.x(), 8.0 * (int) (resolvedCollision.y() / 8) + 8.0);
-            }
-        }
         boolean movedRight = oldPosition.x() < resolvedCollision.x();
+        boolean movedLeft = oldPosition.x() > resolvedCollision.x();
+
         if (movedRight){
             int xIdx1 = (int) ((resolvedCollision.x()+7) / 8), yIdx1 = (int) (resolvedCollision.y() / 8);
             int xIdx2 = (int) ((resolvedCollision.x()+7) / 8), yIdx2 = (int) ((resolvedCollision.y()+7) / 8);
             if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
                 resolvedCollision = new Position(8.0 * (int) (resolvedCollision.x() / 8),  resolvedCollision.y());
             }
+            System.out.println("Move right");
         }
-        boolean movedLeft = oldPosition.x() > resolvedCollision.x();
-        if(movedLeft) {
+        else if(movedLeft) {
             int xIdx1 = (int) (resolvedCollision.x() / 8), yIdx1 = (int) (resolvedCollision.y() / 8);
             int xIdx2 = (int) (resolvedCollision.x() / 8), yIdx2 = (int) ((resolvedCollision.y()+7) / 8);
             if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
                 resolvedCollision = new Position(8.0 * (int) (resolvedCollision.x() / 8) + 8.0,  resolvedCollision.y());
             }
+            System.out.println("Move left");
         }
+        boolean movedDown = oldPosition.y() < resolvedCollision.y();
+        if (movedDown){
+            int xIdx1 = (int) (resolvedCollision.x() / 8), yIdx1 = (int) ((resolvedCollision.y()+7) / 8);
+            int xIdx2 = (int) ((resolvedCollision.x()+7) / 8), yIdx2 = (int) ((resolvedCollision.y()+7) / 8);
+            if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
+                resolvedCollision = new Position(resolvedCollision.x(), 8.0 * (int) (resolvedCollision.y() / 8));
+                player.setvy(0);
+            }
+            System.out.println("Move down");
+        }
+        boolean movedUp = oldPosition.y() > resolvedCollision.y();
+        if (movedUp){
+            int xIdx1 = (int) (resolvedCollision.x() / 8), yIdx1 = (int) (resolvedCollision.y() / 8);
+            int xIdx2 = (int) ((resolvedCollision.x()+7) / 8), yIdx2 = (int) (resolvedCollision.y() / 8);
+            if (tiles[yIdx1][xIdx1] != null || tiles[yIdx2][xIdx2] != null){
+                resolvedCollision = new Position(newPosition.x(), 8.0 * (int) (resolvedCollision.y() / 8) + 8.0);
+                player.setvy(0);
+            }
+            System.out.println("Move up");
+        }
+
 
         return resolvedCollision;
     }

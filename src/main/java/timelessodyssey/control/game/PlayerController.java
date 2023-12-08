@@ -46,7 +46,9 @@ public class PlayerController extends Controller<Scene> {
     private void movePlayer(double time) {
         Position position = getModel().getPlayer().move(time, getModel().isGrounded());
         position = getModel().resolveCollisions(position);
-
+        if (!getModel().getPlayer().getPosition().equals(position)) {
+            System.out.printf("x=%f\ty=%f\n", position.x(), position.y());
+        }
         this.getModel().getPlayer().setPosition(position);
     }
 
