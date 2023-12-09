@@ -1,7 +1,6 @@
 package timelessodyssey.gui;
 
 import com.googlecode.lanterna.TextColor;
-import timelessodyssey.model.Vector;
 
 import java.awt.*;
 import java.io.IOException;

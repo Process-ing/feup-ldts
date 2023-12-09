@@ -3,8 +3,6 @@ package timelessodyssey.control.game;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Position;
-import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.scene.Scene;
@@ -31,6 +29,8 @@ public class PlayerController extends Controller<Scene> {
             vx = Math.min(vx + player.getAcceleration(), MAX_VELOCITY_X);
             player.setFacingRight(true);
         }
+
+        System.out.println(player.hasLanded());
 
         if (action == GUI.Action.JUMP && player.hasLanded()) {
             vy = -player.getBoost();

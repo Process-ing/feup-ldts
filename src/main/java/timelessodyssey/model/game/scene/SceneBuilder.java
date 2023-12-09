@@ -1,11 +1,11 @@
 package timelessodyssey.model.game.scene;
 
-import timelessodyssey.model.Vector;
 import com.googlecode.lanterna.TextColor;
-import timelessodyssey.model.game.elements.particles.Particle;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.particles.Snow;
 
 import java.io.BufferedReader;

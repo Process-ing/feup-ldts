@@ -2,7 +2,6 @@ package timelessodyssey.view.elements;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
 

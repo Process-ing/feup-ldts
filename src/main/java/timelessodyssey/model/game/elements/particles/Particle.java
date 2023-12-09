@@ -1,7 +1,7 @@
 package timelessodyssey.model.game.elements.particles;
 
 import com.googlecode.lanterna.TextColor;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
 
@@ -29,5 +29,5 @@ public abstract class Particle extends Element {
         return velocity;
     }
 
-    public abstract Position move(double time, Scene scene);
+    public abstract Vector move(double time, Scene scene);
 }

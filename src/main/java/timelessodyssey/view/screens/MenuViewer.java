@@ -32,11 +32,11 @@ public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
     }
 
     private void drawBackgroundAndFrame(GUI gui) {
-        gui.drawRectangle(new Vector(0, 0), gui.getWidth(), 1, frameColor);
-        gui.drawRectangle(new Vector(0, gui.getHeight() - 1), gui.getWidth(), 1, frameColor);
-        gui.drawRectangle(new Vector(0, 1), 1, gui.getHeight() - 2, frameColor);
-        gui.drawRectangle(new Vector(gui.getWidth() - 1, 1), 1, gui.getHeight() - 2, frameColor);
-        gui.drawRectangle(new Vector(1, 1), gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
+        gui.drawRectangle(0, 0, gui.getWidth(), 1, frameColor);
+        gui.drawRectangle(0, gui.getHeight() - 1, gui.getWidth(), 1, frameColor);
+        gui.drawRectangle(0, 1, 1, gui.getHeight() - 2, frameColor);
+        gui.drawRectangle(gui.getWidth() - 1, 1, 1, gui.getHeight() - 2, frameColor);
+        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
     }
 
     private void drawEntries(GUI gui, List<Entry> entries) {

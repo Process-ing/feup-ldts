@@ -2,12 +2,12 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.elements.*;
 
 import java.io.IOException;
+import java.util.List;
 
 public class GameViewer extends ScreenViewer<Scene> {
     private final PlayerViewer playerViewer;
@@ -47,12 +47,17 @@ public class GameViewer extends ScreenViewer<Scene> {
         viewer.draw(element, gui);
     }
 
-    private <T extends Element> void drawElements(GUI gui, T[][] elements, ElementViewer<T> viewer) throws IOException {
-        for (T[] elementLine : elements)
-            for (T element : elementLine)
-                if (element != null){
-                    drawElement(gui, element, viewer);
+    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
+        for (T element: elements)
+            drawElement(gui, element, viewer);
+    }
 
-                }
+    private <T extends Element> void drawElements(GUI gui, T[][] elements, ElementViewer<T> viewer) {
+        for (T[] elementLine : elements) {
+            for (T element : elementLine) {
+                if (element != null)
+                    drawElement(gui, element, viewer);
+            }
+        }
     }
 }

@@ -9,7 +9,6 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
-import timelessodyssey.model.Vector;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -159,6 +158,7 @@ public class LanternaGUI implements GUI {
             case VK_RIGHT -> Action.RIGHT;
             case VK_ESCAPE -> Action.QUIT;
             case VK_ENTER -> Action.SELECT;
+            case VK_SPACE -> Action.JUMP;
             default -> Action.NONE;
         };
     }
