@@ -1,16 +1,13 @@
 package timelessodyssey.control.game;
 
-import com.sun.tools.javac.Main;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.credits.Credits;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.model.game.scene.SceneBuilder;
-import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.states.CreditsState;
 import timelessodyssey.states.GameState;
-import timelessodyssey.states.MainMenuState;
 
 import java.awt.*;
 import java.io.IOException;
@@ -37,7 +34,6 @@ public class SceneController extends Controller<Scene> {
             playerController.step(game, action, time);
             if (getModel().isDying())
                 getModel().getPlayer().setPosition(getModel().getStartingPosition());
-            particleController.step(game, action, time);
             if (getModel().isAtTransitionPosition()) {
                 if (getModel().getSceneCode() + 1 >= getNumberOfLevels()) {
                     game.setState(new CreditsState(new Credits()));
@@ -45,6 +41,7 @@ public class SceneController extends Controller<Scene> {
                     game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
                 }
             }
+            particleController.step(game, action, time);
         }
     }
 }

@@ -5,10 +5,11 @@ import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
-import timelessodyssey.model.game.elements.particles.Particle;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static timelessodyssey.model.game.elements.Spike.SPIKE_HEIGHT;
 
 public class Scene {
     public double getGravity() {
@@ -147,14 +148,11 @@ public class Scene {
     }
 
     public boolean isDying() {
-        int spikeWidth = 8;
-        for (Spike spike : spikes){
-            if (player.getPosition().y() == spike.getPosition().y()){
-                if (player.getPosition().x() >= spike.getPosition().x() && player.getPosition().x() <= spike.getPosition().x() + spikeWidth - 1){
-                    return true;
-                }
-            }
-        }
-        return false;
+        double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();
+        double width = player.getWidth(), height = player.getHeight();
+        double x1 = x, x2 = x + width - 1, y1 = y + height - 1 - SPIKE_HEIGHT, y2 = y + height - 1 - SPIKE_HEIGHT;
+        int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
+
+        return spikes[tiley1][tilex1] != null || spikes[tiley2][tilex2] != null;
     }
 }
