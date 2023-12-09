@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class PositionTest {
+public class VectorTest {
     @Test
     public void equals() {
-        Position position1 = new Position(32, 15);
-        Position position2 = new Position(32, 15);
-        Position position3 = new Position(-56, 15);
-        Position position4 = new Position(32, Integer.MAX_VALUE);
+        Vector position1 = new Vector(32, 15);
+        Vector position2 = new Vector(32, 15);
+        Vector position3 = new Vector(-56, 15);
+        Vector position4 = new Vector(32, Integer.MAX_VALUE);
         Object obj = new Object();
 
         assertEquals(position1, position1);
@@ -26,8 +26,8 @@ public class PositionTest {
 
     @Property
     public void equalHashes(@ForAll double x, @ForAll double y) {
-        Position position1 = new Position(x, y);
-        Position position2 = new Position(x, y);
+        Vector position1 = new Vector(x, y);
+        Vector position2 = new Vector(x, y);
 
         assertEquals(position1.hashCode(), position2.hashCode());
     }

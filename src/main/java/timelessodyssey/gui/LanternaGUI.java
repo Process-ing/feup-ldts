@@ -26,12 +26,15 @@ public class LanternaGUI implements GUI {
     private final int width;
     private final int height;
     private Resolution resolution;
-    private KeyEvent pressedKey = null;
+    private KeyEvent arrowKeyPressed;
+    private KeyEvent specialKeyPressed;
 
     public LanternaGUI(Screen screen) {
         this.screen = screen;
         this.width = screen.getTerminalSize().getColumns();
         this.height = screen.getTerminalSize().getRows();
+        this.arrowKeyPressed = null;
+        this.specialKeyPressed = null;
     }
 
     public LanternaGUI(int width, int height)
@@ -54,11 +57,17 @@ public class LanternaGUI implements GUI {
         ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
-                    pressedKey = e;
+                    switch (e.getKeyCode()) {
+                        case VK_LEFT, VK_RIGHT -> arrowKeyPressed = e;
+                        default -> specialKeyPressed = e;
+                    }
                 }
                 @Override
                 public void keyReleased(KeyEvent e) {
-                    pressedKey = null;
+                    switch (e.getKeyCode()) {
+                        case VK_LEFT, VK_RIGHT -> arrowKeyPressed = null;
+                        default -> specialKeyPressed = null;
+                    }
                 }
         });
         ((AWTTerminalFrame)terminal).setTitle("Timeless Odyssey");
@@ -119,11 +128,6 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void clearAction(){
-        this.pressedKey = null;
-    }
-
-    @Override
     public void clear() {
         screen.clear();
     }
@@ -147,17 +151,26 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public Action getNextAction() throws IOException {
-        if (pressedKey == null)
-            return Action.NONE;
+    public Action getNextAction() {
+        if (specialKeyPressed != null) {
+            int keyCode = specialKeyPressed.getKeyCode();
+            specialKeyPressed = null;
 
-        return switch (pressedKey.getKeyCode()) {
-            case VK_UP -> Action.UP;
-            case VK_DOWN -> Action.DOWN;
+            return switch (keyCode) {
+                case VK_UP -> Action.UP;
+                case VK_DOWN -> Action.DOWN;
+                case VK_ESCAPE -> Action.QUIT;
+                case VK_ENTER -> Action.SELECT;
+                case VK_SPACE -> Action.JUMP;
+                default -> Action.NONE;
+            };
+        }
+
+        if (arrowKeyPressed == null)
+            return Action.NONE;
+        return switch (arrowKeyPressed.getKeyCode()) {
             case VK_LEFT -> Action.LEFT;
             case VK_RIGHT -> Action.RIGHT;
-            case VK_ESCAPE -> Action.QUIT;
-            case VK_ENTER -> Action.SELECT;
             default -> Action.NONE;
         };
     }

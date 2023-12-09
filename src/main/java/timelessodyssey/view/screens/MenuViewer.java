@@ -2,6 +2,7 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.menu.EntryViewer;
@@ -38,7 +39,7 @@ public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
         gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
     }
 
-    private void drawEntries(GUI gui, List<Entry> entries) throws IOException {
+    private void drawEntries(GUI gui, List<Entry> entries) {
         for (Entry entry: entries)
             entryViewer.draw(entry, gui, getModel().getCurrentEntry() == entry ? selectedColor : unselectedColor);
     }

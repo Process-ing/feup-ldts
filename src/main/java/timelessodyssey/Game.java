@@ -54,14 +54,14 @@ public class Game {
         double frameTime = 1000.0 / FPS;
 
         while (this.state != null) {
-            long startTime = System.currentTimeMillis();
+            double startTime = System.currentTimeMillis();
 
             state.step(this, gui, frameTime);
 
-            long elapsedTime = System.currentTimeMillis() - startTime;
-            long sleepTime = (long)frameTime - elapsedTime;
+            double elapsedTime = System.currentTimeMillis() - startTime;
+            double sleepTime = frameTime - elapsedTime;
 
-            if (sleepTime > 0) Thread.sleep(sleepTime);
+            if (sleepTime > 0) Thread.sleep((long) sleepTime);
         }
 
         gui.close();

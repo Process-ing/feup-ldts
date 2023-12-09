@@ -4,7 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.scene.Scene;
 
@@ -29,7 +29,7 @@ public class ParticleViewerTest {
         TextColor color = TextColor.ANSI.BLUE;
         Particle particle = new Particle(x, y, size, color, velocity) {
             @Override
-            public Position move(double time, Scene scene) {
+            public Vector move(double time, Scene scene) {
                 return null;
             }
         };

@@ -6,9 +6,9 @@ import net.jqwik.api.constraints.DoubleRange;
 import timelessodyssey.Game;
 import timelessodyssey.control.game.ParticleController;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Position;
-import timelessodyssey.model.game.elements.particles.Particle;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.particles.Snow;
 import timelessodyssey.model.game.scene.Scene;
 
@@ -37,7 +37,7 @@ public class ParticleControllerTest {
         particleController.step(game, action, time);
 
         for (Particle particle: particles) {
-            Position position = particle.getPosition();
+            Vector position = particle.getPosition();
             assertTrue(0 <= position.x(), "X out of bounds: " + position.x());
             assertTrue(position.x() < WIDTH * Tile.SIZE, "X out of bounds: " + position.x());
             assertTrue(0 <= position.y(), "Y out of bounds: " + position.y());

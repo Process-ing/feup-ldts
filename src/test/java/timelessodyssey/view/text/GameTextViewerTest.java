@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.Vector;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

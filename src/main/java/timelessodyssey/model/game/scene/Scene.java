@@ -1,32 +1,47 @@
 package timelessodyssey.model.game.scene;
 
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Particle;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Scene {
+    public double getGravity() {
+        return gravity;
+    }
+
+    public double getFriction() {
+        return friction;
+    }
+
+    public enum Direction { UP, DOWN, LEFT, RIGHT }
+
     private final int width;
     private final int height;
     private final int sceneCode;
+    private final double gravity;
+    private final double friction;
 
     private Player player;
-    private List<Tile> tiles;
-    private List<Spike> spikes;
+    private Tile[][] tiles;
+    private Spike[][] spikes;
     private List<Particle> particles;
-    private Position transitionPosition;
-    private Position startingPosition;
+    private Vector transitionPosition;
+    private Vector startingPosition;
 
     public Scene(int width, int height, int sceneCode) {
         this.width = width;
         this.height = height;
         this.sceneCode = sceneCode;
-        this.tiles = new ArrayList<>();
-        this.spikes = new ArrayList<>();
+        this.gravity = 0.25;
+        this.friction = 0.75;
+        this.tiles = new Tile[height][width];
+        this.spikes = new Spike[height][width];
         this.particles = new ArrayList<>();
     }
 
@@ -50,19 +65,19 @@ public class Scene {
         this.player = player;
     }
 
-    public List<Tile> getTiles() {
+    public Tile[][] getTiles() {
         return tiles;
     }
 
-    public void setTiles(List<Tile> tiles) {
+    public void setTiles(Tile[][] tiles) {
         this.tiles = tiles;
     }
 
-    public List<Spike> getSpikes() {
+    public Spike[][] getSpikes() {
         return spikes;
     }
 
-    public void setSpikes(List<Spike> spikes) {
+    public void setSpikes(Spike[][] spikes) {
         this.spikes = spikes;
     }
 
@@ -74,56 +89,61 @@ public class Scene {
         this.particles = particles;
     }
 
-    public Position getTransitionPosition() {
+    public Vector getTransitionPosition() {
         return transitionPosition;
     }
 
-    public void setTransitionPosition(Position transitionPosition) {
+    public void setTransitionPosition(Vector transitionPosition) {
         this.transitionPosition = transitionPosition;
-    }
-
-    public Position getStartingPosition() {
-        return startingPosition;
-    }
-
-    public void setStartingPosition(Position startingPosition) {
-        this.startingPosition = startingPosition;
-    }
-
-    public boolean isEmpty(Position position) {
-        if (position.x() < 0 || position.x() > 160){
-            return false;
-        }
-        if (position.y() < 0 || position.y() > 90){
-            return false;
-        }
-        for (Tile tile : tiles) {
-            for (int w = 0; w < Tile.SIZE; w++) {
-                Position pos1 = new Position(tile.getPosition().x() + w, tile.getPosition().y());
-                Position pos2 = new Position(tile.getPosition().x() + w, tile.getPosition().y() + Tile.SIZE - 1);
-                if (pos1.equals(position)) {
-                    return false;
-                }
-                if (pos2.equals(position)) {
-                    return false;
-                }
-            }
-            for (int h = 0; h < Tile.SIZE; h++) {
-                Position pos1 = new Position(tile.getPosition().x(), tile.getPosition().y() + h);
-                Position pos2 = new Position(tile.getPosition().x() + Tile.SIZE - 1, tile.getPosition().y() + h);
-                if (pos1.equals(position)) {
-                    return false;
-                }
-                if (pos2.equals(position)) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     public boolean isAtTransitionPosition() {
         return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
+    }
+
+    public Vector getStartingPosition() {
+        return startingPosition;
+    }
+
+    public void setStartingPosition(Vector startingPosition) {
+        this.startingPosition = startingPosition;
+    }
+
+
+    public boolean isColliding(Vector position, Direction direction) {
+        double x = position.x(), y = position.y();
+        double width = player.getWidth(), height = player.getHeight();
+        double x1 = 0, x2 = 0, y1 = 0, y2 = 0;  // Hitbox corners
+        switch (direction) {
+            case LEFT:
+                x1 = x;
+                x2 = x;
+                y1 = y;
+                y2 = y + height - 1;
+                break;
+            case RIGHT:
+                x1 = x + width - 1;
+                x2 = x + width - 1;
+                y1 = y;
+                y2 = y + height - 1;
+                break;
+            case UP:
+                x1 = x;
+                x2 = x + width - 1;
+                y1 = y;
+                y2 = y;
+                break;
+            case DOWN:
+                x1 = x;
+                x2 = x + width - 1;
+                y1 = y + height - 1;
+                y2 = y + height - 1;
+        }
+
+        int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
+
+        return tiles[tiley1][tilex1] != null || tiles[tiley1][tilex2] != null
+                || tiles[tiley2][tilex1] != null || tiles[tiley2][tilex2] != null;
     }
 
     public boolean isDying() {

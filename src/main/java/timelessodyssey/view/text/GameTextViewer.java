@@ -2,6 +2,7 @@ package timelessodyssey.view.text;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.Vector;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

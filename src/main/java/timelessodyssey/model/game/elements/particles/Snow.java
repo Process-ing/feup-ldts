@@ -1,7 +1,7 @@
 package timelessodyssey.model.game.elements.particles;
 
 import com.googlecode.lanterna.TextColor;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.scene.Scene;
 
@@ -11,10 +11,10 @@ public class Snow extends Particle {
     }
 
     @Override
-    public Position move(double time, Scene scene) {
+    public Vector move(double time, Scene scene) {
         double newX = floorMod(getPosition().x() + getVelocity() * time, scene.getWidth() * Tile.SIZE);
         double newY = floorMod(getPosition().y() + Math.sin(newX / 20),scene.getHeight() * Tile.SIZE);
-        return new Position(newX, newY);
+        return new Vector(newX, newY);
     }
 
     private double floorMod(double x, int y) {
