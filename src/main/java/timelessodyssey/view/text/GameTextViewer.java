@@ -80,4 +80,16 @@ public class GameTextViewer implements TextViewer {
             draw(string.charAt(i), x + xOffset, y, foregroundColor, gui);
         }
     }
+
+    public static int getCharHeight() {
+        return charHeight;
+    }
+
+    public static int getCharWidth() {
+        return charWidth;
+    }
+
+    public static int getSpacing() {
+        return spacing;
+    }
 }
