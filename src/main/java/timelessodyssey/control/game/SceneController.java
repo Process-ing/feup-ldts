@@ -4,9 +4,11 @@ import com.sun.tools.javac.Main;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.credits.Credits;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.model.menu.MainMenu;
+import timelessodyssey.states.CreditsState;
 import timelessodyssey.states.GameState;
 import timelessodyssey.states.MainMenuState;
 
@@ -38,7 +40,7 @@ public class SceneController extends Controller<Scene> {
             particleController.step(game, action, time);
             if (getModel().isAtTransitionPosition()) {
                 if (getModel().getSceneCode() + 1 == getNumberOfLevels()) {
-                    game.setState(new MainMenuState(new MainMenu()));
+                    game.setState(new CreditsState(new Credits()));
                 } else {
                     game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
                 }
