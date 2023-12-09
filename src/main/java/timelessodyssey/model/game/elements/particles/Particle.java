@@ -29,5 +29,5 @@ public abstract class Particle extends Element {
         return velocity;
     }
 
-    public abstract Vector move(double time, Scene scene);
+    public abstract Vector move(Scene scene);
 }

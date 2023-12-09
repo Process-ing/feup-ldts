@@ -37,7 +37,7 @@ public class GameStateTest {
 
     @Test
     public void step() throws IOException, URISyntaxException, FontFormatException {
-        double time = 0;
+        long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new GameState(model){
             @Override
@@ -52,11 +52,11 @@ public class GameStateTest {
         };
 
 
-        state.step(game, gui, time);
+        state.step(game, gui, frameCount);
 
         Mockito.verify(gui, Mockito.times(1)).getNextAction();
         Mockito.verify(stateController, Mockito.times(1))
-                .step(game, GUI.Action.NONE, time);
-        Mockito.verify(stateScreenViewer, Mockito.times(1)).draw(gui);
+                .step(game, GUI.Action.NONE, frameCount);
+        Mockito.verify(stateScreenViewer, Mockito.times(1)).draw(gui, frameCount);
     }
 }

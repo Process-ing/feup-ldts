@@ -16,7 +16,6 @@ public class VectorTest {
         Vector position4 = new Vector(32, Integer.MAX_VALUE);
         Object obj = new Object();
 
-        assertEquals(position1, position1);
         assertNotEquals(position4, null);
         assertNotEquals(position2, obj);
         assertEquals(position1, position2);

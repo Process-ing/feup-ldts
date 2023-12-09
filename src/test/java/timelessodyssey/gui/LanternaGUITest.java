@@ -7,7 +7,6 @@ import com.googlecode.lanterna.screen.Screen;
 import net.jqwik.api.*;
 import net.jqwik.api.lifecycle.BeforeTry;
 import org.mockito.Mockito;
-import timelessodyssey.model.Vector;
 
 public class LanternaGUITest {
     private static final int SCREEN_WIDTH = 160;

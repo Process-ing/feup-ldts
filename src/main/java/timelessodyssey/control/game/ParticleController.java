@@ -14,8 +14,8 @@ public class ParticleController extends Controller<Scene> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, double time) throws IOException {
+    public void step(Game game, GUI.Action action, long frameCount) {
         for (Particle particle: getModel().getParticles())
-            particle.setPosition(particle.move(time, getModel()));
+            particle.setPosition(particle.move(getModel()));
     }
 }

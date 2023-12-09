@@ -18,7 +18,6 @@ public class Player extends Element {
     private boolean isFalling;
     private boolean isFacingRight;
 
-
     public Player(double x, double y) {
         super(x, y);
         this.velocity = new Vector(0, 0);

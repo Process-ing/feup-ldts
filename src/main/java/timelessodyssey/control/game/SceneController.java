@@ -24,14 +24,14 @@ public class SceneController extends Controller<Scene> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, double time) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Game game, GUI.Action action, long frameCount) throws IOException {
         if (action == QUIT) {
             game.setState(null);
         } else {
-            playerController.step(game, action, time);
+            playerController.step(game, action, frameCount);
             if (getModel().isAtTransitionPosition())
                 game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
-            particleController.step(game, action, time);
+            particleController.step(game, action, frameCount);
         }
     }
 }

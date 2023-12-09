@@ -7,14 +7,34 @@ import timelessodyssey.view.Sprite;
 import java.io.IOException;
 
 public class PlayerViewer implements ElementViewer<Player> {
-    private final Sprite sprite;
+    private final Sprite[] sprites;
 
     public PlayerViewer() throws IOException {
-        sprite = new Sprite("sprites/player/player.png");
+        sprites = new Sprite[10];
+        for (int i = 0; i < 5; i++)
+            sprites[i] = new Sprite("sprites/player/player-right-" + (i + 1) + ".png");
+        for (int i = 0; i < 5; i++)
+            sprites[i + 5] = new Sprite("sprites/player/player-left-" + (i + 1) + ".png");
     }
 
     @Override
-    public void draw(Player model, GUI gui) {
-        sprite.draw(gui, model.getPosition().x(), model.getPosition().y());
+    public void draw(Player model, GUI gui, long frameCount) {
+        getSprite(model, frameCount).draw(gui, model.getPosition().x(), model.getPosition().y());
+    }
+
+    private Sprite getSprite(Player model, long frameCount) {
+        int spriteIndex;
+        if (model.isJumping())
+            spriteIndex = 3;
+        else if (model.isFalling())
+            spriteIndex = 4;
+        else if (model.getVelocity().x() != 0)
+            spriteIndex = 1 + (int) ((frameCount / 3) % 2);
+        else
+            spriteIndex = 0;
+
+        if (!model.isFacingRight())
+            spriteIndex += 5;
+        return sprites[spriteIndex];
     }
 }

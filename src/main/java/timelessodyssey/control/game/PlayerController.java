@@ -14,7 +14,7 @@ public class PlayerController extends Controller<Scene> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, double time) {
+    public void step(Game game, GUI.Action action, long frameCount) {
         Player player = getModel().getPlayer();
         double x = player.getPosition().x(), y = player.getPosition().y();
         double vx = player.getVelocity().x(), vy = player.getVelocity().y();

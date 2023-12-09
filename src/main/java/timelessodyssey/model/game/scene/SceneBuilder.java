@@ -38,7 +38,7 @@ public class SceneBuilder {
 
     public SceneBuilder(int n) throws IOException {
         this.sceneCode = n;
-        URL resource = getClass().getClassLoader().getResource("levels/scene" + n + ".lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/playground.lvl");
         assert resource != null;
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
@@ -119,7 +119,7 @@ public class SceneBuilder {
                     random.nextInt(scene.getHeight() * Tile.SIZE),
                     random.nextInt(2, 5) / 2,
                     TextColor.ANSI.WHITE_BRIGHT,
-                    random.nextDouble(0.02, 0.05)
+                    random.nextDouble(.5, 2)
             );
             particles.add(particle);
         }
