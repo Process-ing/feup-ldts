@@ -31,6 +31,8 @@ public class SceneController extends Controller<Scene> {
             playerController.step(game, action, time);
             if (getModel().isAtTransitionPosition())
                 game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
+            if (getModel().isDying())
+                getModel().getPlayer().setPosition(getModel().getStartingPosition());
             particleController.step(game, action, time);
         }
     }

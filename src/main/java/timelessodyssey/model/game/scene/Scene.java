@@ -19,6 +19,7 @@ public class Scene {
     private List<Spike> spikes;
     private List<Particle> particles;
     private Position transitionPosition;
+    private Position startingPosition;
 
     public Scene(int width, int height, int sceneCode) {
         this.width = width;
@@ -81,6 +82,14 @@ public class Scene {
         this.transitionPosition = transitionPosition;
     }
 
+    public Position getStartingPosition() {
+        return startingPosition;
+    }
+
+    public void setStartingPosition(Position startingPosition) {
+        this.startingPosition = startingPosition;
+    }
+
     public boolean isEmpty(Position position) {
         if (position.x() < 0 || position.x() > 160){
             return false;
@@ -115,5 +124,17 @@ public class Scene {
 
     public boolean isAtTransitionPosition() {
         return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
+    }
+
+    public boolean isDying() {
+        int spikeWidth = 8;
+        for (Spike spike : spikes){
+            if (player.getPosition().y() == spike.getPosition().y()){
+                if (player.getPosition().x() >= spike.getPosition().x() && player.getPosition().x() <= spike.getPosition().x() + spikeWidth - 1){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

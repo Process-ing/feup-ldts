@@ -31,6 +31,7 @@ public class SceneBuilder {
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
         scene.setTransitionPosition(createTransitionPosition());
+        scene.setStartingPosition(createStartingPosition());
         scene.setParticles(createParticles(numberParticles, scene));
 
         return scene;
@@ -97,6 +98,11 @@ public class SceneBuilder {
     }
 
     private Position createTransitionPosition() {
+        return new Position(Integer.parseInt(lines.get(lines.size()-4)) * Tile.SIZE,
+                            Integer.parseInt(lines.get(lines.size()-3)) * Tile.SIZE);
+    }
+
+    private Position createStartingPosition() {
         return new Position(Integer.parseInt(lines.get(lines.size()-2)) * Tile.SIZE,
                             Integer.parseInt(lines.get(lines.size()-1)) * Tile.SIZE);
     }
