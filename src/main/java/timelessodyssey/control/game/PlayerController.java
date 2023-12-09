@@ -30,8 +30,14 @@ public class PlayerController extends Controller<Scene> {
         }
 
         if (action == GUI.Action.JUMP && player.hasLanded()) {
-            vy = -player.getBoost();
+            vy = -player.getJumpBoost();
             player.setHasLanded(false);
+        }
+
+        if (action == GUI.Action.DASH && !player.isDashing() && !player.hasDashed()){
+            vx = player.isFacingRight() ? player.getDashBoost() : -player.getDashBoost();
+            player.setDashing(true);
+            player.setHasDashed(true);
         }
 
         if (vy > 0) {
@@ -60,14 +66,23 @@ public class PlayerController extends Controller<Scene> {
                 vx = Math.min(vx + 1, 0);
             }
         } else if (vx > 0) {
-            vx = Math.min(vx, player.getMaxVelocity().y());
+            vx = Math.min(vx, player.getMaxVelocity().x());
             while (getModel().isColliding(new Vector(x + vx, y + vy), Scene.Direction.RIGHT) && vx > 0) {
                 vx = Math.max(vx - 1, 0);
             }
         }
 
+        if (player.hasLanded()) {
+            player.setHasDashed(false);
+        }
+
+        if (Math.abs(vx) < 2 ){
+            player.setDashing(false);
+        }
+
         if (Math.abs(vx) < 0.2)
             vx = 0;
+
         x += vx;
         y += vy;
 
