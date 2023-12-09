@@ -47,24 +47,26 @@ public class PlayerController extends Controller<Scene> {
             if (getModel().isColliding(new Vector(x, y + vy), Scene.Direction.DOWN)) {
                 player.setHasLanded(true);
                 player.setFalling(false);
-                vy = 0;
+                do {
+                    vy = Math.max(vy - 1, 0);
+                } while (getModel().isColliding(new Vector(x, y + vy), Scene.Direction.DOWN) && vy > 0);
             }
         } else if (vy < 0) {
             player.setJumping(true);
-            if (getModel().isColliding(new Vector(x, y + vy), Scene.Direction.UP)) {
-                vy = 0;
+            while (getModel().isColliding(new Vector(x, y + vy), Scene.Direction.UP) && vy < 0) {
+                vy = Math.min(vy + 1, 0);
             }
         }
 
         if (vx < 0) {
             vx = Math.max(vx, -MAX_VELOCITY_X);
-            if (getModel().isColliding(new Vector(x + vx, y + vy), Scene.Direction.LEFT)) {
-                vx = 0;
+            while (getModel().isColliding(new Vector(x + vx, y + vy), Scene.Direction.LEFT) && vx < 0) {
+                vx = Math.min(vx + 1, 0);
             }
         } else if (vx > 0) {
             vx = Math.min(vx, MAX_VELOCITY_X);
-            if (getModel().isColliding(new Vector(x + vx, y + vy), Scene.Direction.RIGHT)) {
-                vx = 0;
+            while (getModel().isColliding(new Vector(x + vx, y + vy), Scene.Direction.RIGHT) && vx > 0) {
+                vx = Math.max(vx - 1, 0);
             }
         }
 
