@@ -3,6 +3,8 @@ package timelessodyssey.control.game;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.Position;
+import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.scene.Scene;

@@ -2,39 +2,33 @@ package timelessodyssey.model;
 
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class VectorTest {
-    @Property
-    void getRight(@ForAll int x, @ForAll int y) {
-        Vector position = new Vector(x, y);
-        Vector right = position.getRight();
-        assertEquals(x + 1, right.x());
-        assertEquals(y, right.y());
+public class PositionTest {
+    @Test
+    public void equals() {
+        Vector position1 = new Vector(32, 15);
+        Vector position2 = new Vector(32, 15);
+        Vector position3 = new Vector(-56, 15);
+        Vector position4 = new Vector(32, Integer.MAX_VALUE);
+        Object obj = new Object();
+
+        assertEquals(position1, position1);
+        assertNotEquals(position4, null);
+        assertNotEquals(position2, obj);
+        assertEquals(position1, position2);
+        assertNotEquals(position1, position3);
+        assertNotEquals(position1, position4);
     }
 
     @Property
-    void getLeft(@ForAll int x, @ForAll int y) {
-        Vector position = new Vector(x, y);
-        Vector left = position.getLeft();
-        assertEquals(x - 1, left.x());
-        assertEquals(y, left.y());
-    }
+    public void equalHashes(@ForAll double x, @ForAll double y) {
+        Vector position1 = new Vector(x, y);
+        Vector position2 = new Vector(x, y);
 
-    @Property
-    void getDown(@ForAll int x, @ForAll int y) {
-        Vector position = new Vector(x, y);
-        Vector down = position.getDown();
-        assertEquals(x, down.x());
-        assertEquals(y + 1, down.y());
-    }
-
-    @Property
-    void getUp(@ForAll int x, @ForAll int y) {
-        Vector position = new Vector(x, y);
-        Vector up = position.getUp();
-        assertEquals(x, up.x());
-        assertEquals(y - 1, up.y());
+        assertEquals(position1.hashCode(), position2.hashCode());
     }
 }

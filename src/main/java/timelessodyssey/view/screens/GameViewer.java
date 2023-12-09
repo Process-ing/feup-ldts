@@ -5,10 +5,7 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
-import timelessodyssey.view.elements.ElementViewer;
-import timelessodyssey.view.elements.PlayerViewer;
-import timelessodyssey.view.elements.SpikeViewer;
-import timelessodyssey.view.elements.TileViewer;
+import timelessodyssey.view.elements.*;
 
 import java.io.IOException;
 
@@ -16,12 +13,14 @@ public class GameViewer extends ScreenViewer<Scene> {
     private final PlayerViewer playerViewer;
     private final TileViewer tileViewer;
     private final SpikeViewer spikeViewer;
+    private final ParticleViewer particleViewer;
 
     public GameViewer(Scene model) throws IOException {
         super(model);
         this.playerViewer = new PlayerViewer();
         this.tileViewer = new TileViewer();
         this.spikeViewer = new SpikeViewer();
+        this.particleViewer = new ParticleViewer();
     }
 
     @Override
@@ -32,14 +31,14 @@ public class GameViewer extends ScreenViewer<Scene> {
         TextColor background = new TextColor.RGB(28, 28, 28);
         for (int w = 0; w < 160; w++) {
             for (int h = 0; h < 90; h++) {
-                gui.drawPixel(new Vector(w, h), background);
+                gui.drawPixel(w, h, background);
             }
         }
 
+        drawElement(gui, getModel().getPlayer(), playerViewer);
         drawElements(gui, getModel().getTiles(), tileViewer);
         drawElements(gui, getModel().getSpikes(), spikeViewer);
-        drawElement(gui, getModel().getPlayer(), playerViewer);
-
+        drawElements(gui, getModel().getParticles(), particleViewer);
 
         gui.refresh();
     }

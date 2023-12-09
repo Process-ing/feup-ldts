@@ -130,19 +130,19 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void drawPixel(Vector position, TextColor color) {
+    public void drawPixel(double x, double y, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
-        tg.putString((int) position.x(), (int) position.y(), " ");
+        tg.putString((int) x, (int) y, " ");
     }
 
     @Override
-    public void drawRectangle(Vector position, int width, int height, TextColor color) {
+    public void drawRectangle(double x, double y, int width, int height, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
         for (int dy = 0; dy < height; dy++) {
             for (int dx = 0; dx < width; dx++) {
-                tg.putString((int) (position.x() + dx), (int) (position.y() + dy), " ");
+                tg.putString((int) (x + dx), (int) (y + dy), " ");
             }
         }
     }
@@ -159,7 +159,6 @@ public class LanternaGUI implements GUI {
             case VK_RIGHT -> Action.RIGHT;
             case VK_ESCAPE -> Action.QUIT;
             case VK_ENTER -> Action.SELECT;
-            case VK_SPACE -> Action.JUMP;
             default -> Action.NONE;
         };
     }

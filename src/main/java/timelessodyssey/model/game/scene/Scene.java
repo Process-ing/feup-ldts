@@ -1,9 +1,13 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Vector;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Scene {
     public double getGravity() {
@@ -25,6 +29,7 @@ public class Scene {
     private Player player;
     private Tile[][] tiles;
     private Spike[][] spikes;
+    private List<Particle> particles;
     private Vector transitionPosition;
 
     public Scene(int width, int height, int sceneCode) {
@@ -33,6 +38,9 @@ public class Scene {
         this.sceneCode = sceneCode;
         this.gravity = 0.25;
         this.friction = 0.75;
+        this.tiles = new Tile[height][width];
+        this.spikes = new Spike[height][width];
+        this.particles = new ArrayList<>();
     }
 
     public int getWidth() {
@@ -71,16 +79,20 @@ public class Scene {
         this.spikes = spikes;
     }
 
+    public List<Particle> getParticles() {
+        return particles;
+    }
+
+    public void setParticles(List<Particle> particles) {
+        this.particles = particles;
+    }
+
     public Vector getTransitionPosition() {
         return transitionPosition;
     }
 
     public void setTransitionPosition(Vector transitionPosition) {
         this.transitionPosition = transitionPosition;
-    }
-
-    public Vector canMove(Vector position) {
-        return position;
     }
 
     public boolean isAtTransitionPosition() {

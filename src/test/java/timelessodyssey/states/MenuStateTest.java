@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MenuStateTest {
-
     MainMenu model;
     Game game;
     GUI gui;
@@ -29,7 +28,7 @@ public class MenuStateTest {
     }
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         this.model = Mockito.mock(MainMenu.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(GUI.class);
@@ -38,7 +37,7 @@ public class MenuStateTest {
 
     @Test
     public void MainMenuStep() throws IOException, URISyntaxException, FontFormatException {
-        long time = 0;
+        double time = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new MainMenuState(model){
             @Override

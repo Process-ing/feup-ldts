@@ -1,9 +1,12 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Vector;
+import com.googlecode.lanterna.TextColor;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Snow;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -20,19 +24,21 @@ public class SceneBuilder {
     private final int sceneCode;
 
     public Scene createScene() {
+        int numberParticles = 30;
         Scene scene = new Scene(getWidth(), getHeight(), sceneCode);
 
         scene.setPlayer(createPlayer());
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
         scene.setTransitionPosition(createTransitionPosition());
+        scene.setParticles(createParticles(numberParticles, scene));
 
         return scene;
     }
 
     public SceneBuilder(int n) throws IOException {
         this.sceneCode = n;
-        URL resource = getClass().getClassLoader().getResource("levels/playground.lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/scene" + n + ".lvl");
         assert resource != null;
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
@@ -46,18 +52,18 @@ public class SceneBuilder {
         return lines;
     }
 
-    protected int getWidth() {
+    private int getWidth() {
         int width = 0;
         for (String line : lines)
             width = Math.max(width, line.length());
         return width;
     }
 
-    protected int getHeight() {
+    private int getHeight() {
         return lines.size();
     }
 
-    protected Tile[][] createWalls() {
+    private Tile[][] createWalls() {
         Tile[][] walls = new Tile[lines.size()-2][lines.get(0).length()+1];
 
         for (int y = 0; y < lines.size() - 2; y++) {
@@ -76,7 +82,7 @@ public class SceneBuilder {
         return walls;
     }
 
-    protected Spike[][] createSpikes() {
+    private Spike[][] createSpikes() {
         Spike[][] spikes = new Spike[lines.size()][];
 
         for (int y = 0; y < lines.size(); y++) {
@@ -90,18 +96,34 @@ public class SceneBuilder {
         return spikes;
     }
 
-    protected Player createPlayer() {
+    private Player createPlayer() {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'P') return new Player(x * 8, y * 8);
+                if (line.charAt(x) == 'P') return new Player(x * Tile.SIZE, y * Tile.SIZE);
         }
         return null;
     }
 
-    protected Vector createTransitionPosition() {
+    private Vector createTransitionPosition() {
         return new Vector(Integer.parseInt(lines.get(lines.size()-2)) * 8,
                             Integer.parseInt(lines.get(lines.size()-1)) * 8);
     }
 
+    private List<Particle> createParticles(int number, Scene scene) {
+        List<Particle> particles = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < number; i++) {
+            Particle particle = new Snow(
+                    random.nextInt(scene.getWidth() * Tile.SIZE),
+                    random.nextInt(scene.getHeight() * Tile.SIZE),
+                    random.nextInt(2, 5) / 2,
+                    TextColor.ANSI.WHITE_BRIGHT,
+                    random.nextDouble(0.02, 0.05)
+            );
+            particles.add(particle);
+        }
+
+        return particles;
+    }
 }
