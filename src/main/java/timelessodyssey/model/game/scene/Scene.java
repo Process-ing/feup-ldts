@@ -6,11 +6,21 @@ import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
 
 public class Scene {
+    public double getGravity() {
+        return gravity;
+    }
+
+    public double getFriction() {
+        return friction;
+    }
+
     public enum Direction { UP, DOWN, LEFT, RIGHT }
 
     private final int width;
     private final int height;
     private final int sceneCode;
+    private final double gravity;
+    private final double friction;
 
     private Player player;
     private Tile[][] tiles;
@@ -21,6 +31,8 @@ public class Scene {
         this.width = width;
         this.height = height;
         this.sceneCode = sceneCode;
+        this.gravity = 0.25;
+        this.friction = 0.75;
     }
 
     public int getWidth() {
