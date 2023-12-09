@@ -40,7 +40,6 @@ public interface GUI {
     void drawRectangle(double x, double y, int width, int height, TextColor color);
     void clear();
     Action getNextAction() throws IOException;
-    void clearAction();
     void refresh() throws IOException;
     void close() throws IOException;
 }

@@ -30,8 +30,6 @@ public class PlayerController extends Controller<Scene> {
             player.setFacingRight(true);
         }
 
-        System.out.println(player.hasLanded());
-
         if (action == GUI.Action.JUMP && player.hasLanded()) {
             vy = -player.getBoost();
             player.setHasLanded(false);

@@ -55,7 +55,6 @@ public class MenuStateTest {
         state.step(game, gui, time);
 
         Mockito.verify(gui, Mockito.times(1)).getNextAction();
-        Mockito.verify(gui, Mockito.times(1)).clearAction();
         Mockito.verify(stateController, Mockito.times(1))
                 .step(game, GUI.Action.NONE, time);
         Mockito.verify(stateScreenViewer, Mockito.times(1)).draw(gui);
