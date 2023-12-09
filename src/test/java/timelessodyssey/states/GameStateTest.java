@@ -1,6 +1,5 @@
 package timelessodyssey.states;
 
-import com.googlecode.lanterna.screen.Screen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -8,7 +7,6 @@ import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.scene.Scene;
-import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;

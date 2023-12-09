@@ -4,7 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -43,13 +43,13 @@ public class GameTextViewerTest {
         for (int y = 0; y < SCREEN_HEIGHT; y++) {
             for (int x = 0; x < SCREEN_WIDTH; x++) {
                 if (image.getRGB(x, y) == PIXEL_COLOR.getRGB()) {
-                    verify(gui, times(1)).drawPixel(new Position(x, y), foregroundColor);
+                    verify(gui, times(1)).drawPixel(new Vector(x, y), foregroundColor);
                 } else if (image.getRGB(x, y) == RECTANGLE_COLOR.getRGB()) {
                     RectangleSize size = getRectangleSize(x, y, image);
                     verify(gui, times(1))
-                        .drawRectangle(new Position(x, y), size.width(), size.height(), foregroundColor);
+                        .drawRectangle(new Vector(x, y), size.width(), size.height(), foregroundColor);
                 } else {
-                    verify(gui, times(0)).drawPixel(new Position(eq(x), eq(y)), any(TextColor.class));
+                    verify(gui, times(0)).drawPixel(new Vector(eq(x), eq(y)), any(TextColor.class));
                 }
             }
         }

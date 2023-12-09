@@ -5,11 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
-import timelessodyssey.control.menu.MenuController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.menu.MainMenu;
-import timelessodyssey.model.menu.Menu;
-import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;

@@ -2,7 +2,7 @@ package timelessodyssey.view.text;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -53,7 +53,7 @@ public class GameTextViewer implements TextViewer {
             CharPosition position = charMap.get(character);
             drawKnownChar(position, x, y, foregroundColor, gui);
         } else {
-            drawUnknownChar(new Position(x, y), foregroundColor, gui);
+            drawUnknownChar(new Vector(x, y), foregroundColor, gui);
         }
     }
 
@@ -64,12 +64,12 @@ public class GameTextViewer implements TextViewer {
         for (int dy = 0; dy < charHeight; dy++) {
             for (int dx = 0; dx < charWidth; dx++) {
                 if (fontImage.getRGB(imgX + dx, imgY + dy) != COLOR_WHITE)
-                    gui.drawPixel(new Position(x+dx,y+dy), foregroundColor);
+                    gui.drawPixel(new Vector(x+dx,y+dy), foregroundColor);
             }
         }
     }
 
-    private void drawUnknownChar(Position position, TextColor foregroundColor, GUI gui) {
+    private void drawUnknownChar(Vector position, TextColor foregroundColor, GUI gui) {
         gui.drawRectangle(position, charWidth, charHeight, foregroundColor);
     }
 

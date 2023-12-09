@@ -1,7 +1,7 @@
 package timelessodyssey.gui;
 
 import com.googlecode.lanterna.TextColor;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 
 import java.awt.*;
 import java.io.IOException;
@@ -37,8 +37,8 @@ public interface GUI {
     int getHeight();
     Resolution getResolution();
     void setResolution(Resolution resolution) throws IOException, URISyntaxException, FontFormatException;
-    void drawPixel(Position position, TextColor color);
-    void drawRectangle(Position position, int width, int height, TextColor color);
+    void drawPixel(Vector position, TextColor color);
+    void drawRectangle(Vector position, int width, int height, TextColor color);
     void clear();
     Action getNextAction() throws IOException;
     void clearAction();

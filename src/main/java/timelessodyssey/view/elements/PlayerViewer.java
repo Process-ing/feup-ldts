@@ -6,8 +6,6 @@ import timelessodyssey.view.Sprite;
 
 import java.io.IOException;
 
-import static java.lang.Math.round;
-
 public class PlayerViewer implements ElementViewer<Player> {
     private final Sprite sprite;
 

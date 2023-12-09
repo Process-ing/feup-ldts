@@ -2,7 +2,7 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.elements.ElementViewer;
@@ -11,7 +11,6 @@ import timelessodyssey.view.elements.SpikeViewer;
 import timelessodyssey.view.elements.TileViewer;
 
 import java.io.IOException;
-import java.util.List;
 
 public class GameViewer extends ScreenViewer<Scene> {
     private final PlayerViewer playerViewer;
@@ -33,7 +32,7 @@ public class GameViewer extends ScreenViewer<Scene> {
         TextColor background = new TextColor.RGB(28, 28, 28);
         for (int w = 0; w < 160; w++) {
             for (int h = 0; h < 90; h++) {
-                gui.drawPixel(new Position(w, h), background);
+                gui.drawPixel(new Vector(w, h), background);
             }
         }
 
@@ -45,7 +44,7 @@ public class GameViewer extends ScreenViewer<Scene> {
         gui.refresh();
     }
 
-    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) throws IOException {
+    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) {
         viewer.draw(element, gui);
     }
 

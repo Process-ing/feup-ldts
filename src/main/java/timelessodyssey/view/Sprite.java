@@ -2,7 +2,7 @@ package timelessodyssey.view;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -21,13 +21,13 @@ public class Sprite {
         return image;
     }
 
-    public void draw(GUI gui, Position position) {
+    public void draw(GUI gui, Vector position) {
         for (int dx = 0; dx < image.getWidth(); dx++) {
             for (int dy = 0; dy < image.getHeight(); dy++) {
                 int ARGB = image.getRGB(dx, dy);
                 if (getTransparency(ARGB) == 0)
                     continue;
-                gui.drawPixel(new Position(position.x() + dx, position.y() + dy), getRGB(ARGB));
+                gui.drawPixel(new Vector(position.x() + dx, position.y() + dy), getRGB(ARGB));
             }
         }
     }

@@ -1,6 +1,6 @@
 package timelessodyssey.model.game.scene;
 
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
@@ -11,7 +11,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -100,8 +99,8 @@ public class SceneBuilder {
         return null;
     }
 
-    protected Position createTransitionPosition() {
-        return new Position(Integer.parseInt(lines.get(lines.size()-2)) * 8,
+    protected Vector createTransitionPosition() {
+        return new Vector(Integer.parseInt(lines.get(lines.size()-2)) * 8,
                             Integer.parseInt(lines.get(lines.size()-1)) * 8);
     }
 

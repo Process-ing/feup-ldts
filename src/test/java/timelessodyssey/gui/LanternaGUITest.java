@@ -7,7 +7,7 @@ import com.googlecode.lanterna.screen.Screen;
 import net.jqwik.api.*;
 import net.jqwik.api.lifecycle.BeforeTry;
 import org.mockito.Mockito;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 
 public class LanternaGUITest {
     private static final int SCREEN_WIDTH = 160;
@@ -27,7 +27,7 @@ public class LanternaGUITest {
     @Property
     public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor color) {
         GUI gui = new LanternaGUI(screen);
-        gui.drawPixel(new Position(x, y), color);
+        gui.drawPixel(new Vector(x, y), color);
 
         Mockito.verify(tg, Mockito.times(1))
             .setBackgroundColor(color);

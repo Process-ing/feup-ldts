@@ -6,7 +6,7 @@ import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.game.PlayerController;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Position;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.scene.Scene;
 
@@ -28,7 +28,7 @@ public class PlayerControllerTest {
 
     @Test
     public void movePlayerLeft() {
-        Position pos = new Position(5, 5);
+        Vector pos = new Vector(5, 5);
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
@@ -39,7 +39,7 @@ public class PlayerControllerTest {
 
     @Test
     public void movePlayerRight() {
-        Position pos = new Position(5, 5);
+        Vector pos = new Vector(5, 5);
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
@@ -50,7 +50,7 @@ public class PlayerControllerTest {
 
     @Test
     public void movePlayerUp() {
-        Position pos = new Position(5, 5);
+        Vector pos = new Vector(5, 5);
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
@@ -61,7 +61,7 @@ public class PlayerControllerTest {
 
     @Test
     public void movePlayerDown() {
-        Position pos = new Position(5, 5);
+        Vector pos = new Vector(5, 5);
         Mockito.when(player.getPosition()).thenReturn(pos);
         long time = 0;
 
