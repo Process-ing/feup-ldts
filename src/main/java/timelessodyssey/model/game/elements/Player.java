@@ -8,6 +8,7 @@ public class Player extends Element {
     private static final int HEIGHT = 8;
 
     private Vector velocity;
+    private final Vector maxVelocity;
     private final double acceleration;
     private final double boost;
 
@@ -21,6 +22,7 @@ public class Player extends Element {
     public Player(double x, double y) {
         super(x, y);
         this.velocity = new Vector(0, 0);
+        this.maxVelocity = new Vector(2.0, 3.0);
         this.acceleration = 0.5;
         this.boost = 4;
     }
@@ -79,5 +81,9 @@ public class Player extends Element {
 
     public double getBoost() {
         return boost;
+    }
+
+    public Vector getMaxVelocity() {
+        return maxVelocity;
     }
 }

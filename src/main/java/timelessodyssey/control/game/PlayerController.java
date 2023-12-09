@@ -21,12 +21,11 @@ public class PlayerController extends Controller<Scene> {
         vy += getModel().getGravity();
         vx *= getModel().getFriction();
 
-        double MAX_VELOCITY_X = 2;
         if (action == GUI.Action.LEFT) {
-            vx = Math.max(vx - player.getAcceleration(), -MAX_VELOCITY_X);
+            vx = Math.max(vx - player.getAcceleration(), -player.getMaxVelocity().x());
             player.setFacingRight(false);
         } if (action == GUI.Action.RIGHT) {
-            vx = Math.min(vx + player.getAcceleration(), MAX_VELOCITY_X);
+            vx = Math.min(vx + player.getAcceleration(), player.getMaxVelocity().x());
             player.setFacingRight(true);
         }
 
@@ -40,8 +39,7 @@ public class PlayerController extends Controller<Scene> {
             player.setHasLanded(false);
             player.setJumping(false);
 
-            double MAX_VELOCITY_Y = 3;
-            vy = Math.min(vy, MAX_VELOCITY_Y);
+            vy = Math.min(vy, player.getMaxVelocity().y());
             if (getModel().isColliding(new Vector(x, y + vy), Scene.Direction.DOWN)) {
                 player.setHasLanded(true);
                 player.setFalling(false);
@@ -57,12 +55,12 @@ public class PlayerController extends Controller<Scene> {
         }
 
         if (vx < 0) {
-            vx = Math.max(vx, -MAX_VELOCITY_X);
+            vx = Math.max(vx, -player.getMaxVelocity().x());
             while (getModel().isColliding(new Vector(x + vx, y + vy), Scene.Direction.LEFT) && vx < 0) {
                 vx = Math.min(vx + 1, 0);
             }
         } else if (vx > 0) {
-            vx = Math.min(vx, MAX_VELOCITY_X);
+            vx = Math.min(vx, player.getMaxVelocity().y());
             while (getModel().isColliding(new Vector(x + vx, y + vy), Scene.Direction.RIGHT) && vx > 0) {
                 vx = Math.max(vx - 1, 0);
             }
