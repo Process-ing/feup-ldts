@@ -39,7 +39,7 @@ public class SceneController extends Controller<Scene> {
                 getModel().getPlayer().setPosition(getModel().getStartingPosition());
             particleController.step(game, action, time);
             if (getModel().isAtTransitionPosition()) {
-                if (getModel().getSceneCode() + 1 == getNumberOfLevels()) {
+                if (getModel().getSceneCode() + 1 >= getNumberOfLevels()) {
                     game.setState(new CreditsState(new Credits()));
                 } else {
                     game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
