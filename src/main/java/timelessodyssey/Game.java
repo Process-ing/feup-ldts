@@ -51,7 +51,7 @@ public class Game {
         while (this.state != null) {
             long startTime = System.currentTimeMillis();
 
-            state.step(this, gui, startTime);
+            state.step(this, gui, frameTime);
 
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = (long)frameTime - elapsedTime;

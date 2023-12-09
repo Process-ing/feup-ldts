@@ -31,7 +31,7 @@ public class PlayerControllerTest {
     public void movePlayerLeft(@ForAll double x, @ForAll double y) {
         Position pos = new Position(x, y);
         Mockito.when(player.getPosition()).thenReturn(pos);
-        long time = 0;
+        double time = 0;
 
         playerController.step(game, GUI.Action.LEFT, time);
 
@@ -42,7 +42,7 @@ public class PlayerControllerTest {
     public void movePlayerRight(@ForAll double x, @ForAll double y) {
         Position pos = new Position(x, y);
         Mockito.when(player.getPosition()).thenReturn(pos);
-        long time = 0;
+        double time = 0;
 
         playerController.step(game, GUI.Action.RIGHT, time);
 
@@ -53,7 +53,7 @@ public class PlayerControllerTest {
     public void movePlayerUp(@ForAll double x, @ForAll double y) {
         Position pos = new Position(x, y);
         Mockito.when(player.getPosition()).thenReturn(pos);
-        long time = 0;
+        double time = 0;
 
         playerController.step(game, GUI.Action.UP, time);
 
@@ -64,7 +64,7 @@ public class PlayerControllerTest {
     public void movePlayerDown(@ForAll double x, @ForAll double y) {
         Position pos = new Position(x, y);
         Mockito.when(player.getPosition()).thenReturn(pos);
-        long time = 0;
+        double time = 0;
 
         playerController.step(game, GUI.Action.DOWN, time);
 

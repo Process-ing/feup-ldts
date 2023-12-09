@@ -7,26 +7,31 @@ import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.states.GameState;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static timelessodyssey.gui.GUI.Action.QUIT;
 
 public class SceneController extends Controller<Scene> {
     private final PlayerController playerController;
+    private final ParticleController particleController;
 
-    public SceneController(Scene scene, PlayerController playerController) {
+    public SceneController(Scene scene, PlayerController playerController, ParticleController particleController) {
         super(scene);
         this.playerController = playerController;
+        this.particleController = particleController;
     }
 
     @Override
-    public void step(Game game, GUI.Action action, long time) throws IOException {
+    public void step(Game game, GUI.Action action, double time) throws IOException, URISyntaxException, FontFormatException {
         if (action == QUIT) {
             game.setState(null);
         } else {
             playerController.step(game, action, time);
             if (getModel().isAtTransitionPosition())
                 game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
+            particleController.step(game, action, time);
         }
     }
 }

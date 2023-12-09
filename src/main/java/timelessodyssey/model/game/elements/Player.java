@@ -1,7 +1,7 @@
 package timelessodyssey.model.game.elements;
 
 public class Player extends Element {
-    public Player(int x, int y) {
+    public Player(double x, double y) {
         super(x, y);
     }
 }

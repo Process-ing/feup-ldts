@@ -24,7 +24,7 @@ public class SettingsMenuState extends State<SettingsMenu> {
     }
 
     @Override
-    public void step(Game game, GUI gui, long time) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Game game, GUI gui, double time) throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = gui.getNextAction();
         gui.clearAction();
         controller.step(game, action, time);

@@ -1,10 +1,12 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Position;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Scene {
@@ -15,12 +17,16 @@ public class Scene {
     private Player player;
     private List<Tile> tiles;
     private List<Spike> spikes;
+    private List<Particle> particles;
     private Position transitionPosition;
 
     public Scene(int width, int height, int sceneCode) {
         this.width = width;
         this.height = height;
         this.sceneCode = sceneCode;
+        this.tiles = new ArrayList<>();
+        this.spikes = new ArrayList<>();
+        this.particles = new ArrayList<>();
     }
 
     public int getWidth() {
@@ -59,6 +65,14 @@ public class Scene {
         this.spikes = spikes;
     }
 
+    public List<Particle> getParticles() {
+        return particles;
+    }
+
+    public void setParticles(List<Particle> particles) {
+        this.particles = particles;
+    }
+
     public Position getTransitionPosition() {
         return transitionPosition;
     }
@@ -75,9 +89,9 @@ public class Scene {
             return false;
         }
         for (Tile tile : tiles) {
-            for (int w = 0; w < 8; w++) {
+            for (int w = 0; w < Tile.SIZE; w++) {
                 Position pos1 = new Position(tile.getPosition().x() + w, tile.getPosition().y());
-                Position pos2 = new Position(tile.getPosition().x() + w, tile.getPosition().y() + 7);
+                Position pos2 = new Position(tile.getPosition().x() + w, tile.getPosition().y() + Tile.SIZE - 1);
                 if (pos1.equals(position)) {
                     return false;
                 }
@@ -85,9 +99,9 @@ public class Scene {
                     return false;
                 }
             }
-            for (int h = 0; h < 8; h++) {
+            for (int h = 0; h < Tile.SIZE; h++) {
                 Position pos1 = new Position(tile.getPosition().x(), tile.getPosition().y() + h);
-                Position pos2 = new Position(tile.getPosition().x() + 7, tile.getPosition().y() + h);
+                Position pos2 = new Position(tile.getPosition().x() + Tile.SIZE - 1, tile.getPosition().y() + h);
                 if (pos1.equals(position)) {
                     return false;
                 }

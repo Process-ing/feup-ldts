@@ -1,9 +1,12 @@
 package timelessodyssey.model.game.scene;
 
+import com.googlecode.lanterna.TextColor;
 import timelessodyssey.model.Position;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Snow;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -20,12 +24,14 @@ public class SceneBuilder {
     private final int sceneCode;
 
     public Scene createScene() {
+        int numberParticles = 30;
         Scene scene = new Scene(getWidth(), getHeight(), sceneCode);
 
         scene.setPlayer(createPlayer());
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
         scene.setTransitionPosition(createTransitionPosition());
+        scene.setParticles(createParticles(numberParticles, scene));
 
         return scene;
     }
@@ -46,53 +52,69 @@ public class SceneBuilder {
         return lines;
     }
 
-    protected int getWidth() {
+    private int getWidth() {
         int width = 0;
         for (String line : lines)
             width = Math.max(width, line.length());
         return width;
     }
 
-    protected int getHeight() {
+    private int getHeight() {
         return lines.size();
     }
 
-    protected List<Tile> createWalls() {
+    private List<Tile> createWalls() {
         List<Tile> walls = new ArrayList<>();
 
-        for (int y = 0; y < lines.size(); y ++) {
+        for (int y = 0; y < getHeight(); y ++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '#') walls.add(new Tile(x * 8, y * 8));
+                if (line.charAt(x) == '#') walls.add(new Tile(x * Tile.SIZE, y * Tile.SIZE));
         }
 
         return walls;
     }
 
-    protected List<Spike> createSpikes() {
+    private List<Spike> createSpikes() {
         List<Spike> spikes = new ArrayList<>();
 
-        for (int y = 0; y < lines.size(); y ++) {
+        for (int y = 0; y < getHeight(); y ++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '^') spikes.add(new Spike(x * 8, y * 8));
+                if (line.charAt(x) == '^') spikes.add(new Spike(x * Tile.SIZE, y * Tile.SIZE));
         }
 
         return spikes;
     }
 
-    protected Player createPlayer() {
-        for (int y = 0; y < lines.size(); y++) {
+    private Player createPlayer() {
+        for (int y = 0; y < getHeight(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'P') return new Player(x * 8, y * 8);
+                if (line.charAt(x) == 'P') return new Player(x * Tile.SIZE, y * Tile.SIZE);
         }
         return null;
     }
 
-    protected Position createTransitionPosition() {
-        return new Position(Integer.parseInt(lines.get(lines.size()-2)) * 8,
-                            Integer.parseInt(lines.get(lines.size()-1)) * 8);
+    private Position createTransitionPosition() {
+        return new Position(Integer.parseInt(lines.get(lines.size()-2)) * Tile.SIZE,
+                            Integer.parseInt(lines.get(lines.size()-1)) * Tile.SIZE);
     }
 
+    private List<Particle> createParticles(int number, Scene scene) {
+        List<Particle> particles = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < number; i++) {
+            Particle particle = new Snow(
+                    random.nextInt(scene.getWidth() * Tile.SIZE),
+                    random.nextInt(scene.getHeight() * Tile.SIZE),
+                    random.nextInt(2, 5) / 2,
+                    TextColor.ANSI.WHITE_BRIGHT,
+                    random.nextDouble(0.02, 0.05)
+            );
+            particles.add(particle);
+        }
+
+        return particles;
+    }
 }
