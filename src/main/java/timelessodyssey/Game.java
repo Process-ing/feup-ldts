@@ -13,8 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Game {
-    private static final int PIXEL_WIDTH = 160;
-    private static final int PIXEL_HEIGHT = 90;
+    public static final int PIXEL_WIDTH = 160;
+    public static final int PIXEL_HEIGHT = 90;
     private final GUI gui;
     private State state;
 
