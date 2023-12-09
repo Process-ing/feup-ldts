@@ -1,11 +1,11 @@
 package timelessodyssey.model.game.scene;
 
 import com.googlecode.lanterna.TextColor;
-import timelessodyssey.model.Position;
-import timelessodyssey.model.game.elements.particles.Particle;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.particles.Snow;
 
 import java.io.BufferedReader;
@@ -63,32 +63,41 @@ public class SceneBuilder {
         return lines.size();
     }
 
-    private List<Tile> createWalls() {
-        List<Tile> walls = new ArrayList<>();
+    private Tile[][] createWalls() {
+        Tile[][] walls = new Tile[lines.size()-2][lines.get(0).length()+1];
 
-        for (int y = 0; y < getHeight(); y ++) {
+        for (int y = 0; y < lines.size() - 2; y++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '#') walls.add(new Tile(x * Tile.SIZE, y * Tile.SIZE));
+            Tile[] lineTiles = new Tile[21];
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == '#') {
+                    lineTiles[x] = new Tile(x * 8, y * 8);
+                }
+                else{
+                    lineTiles[x] = null;
+                }
+            lineTiles[20] = null;
+            walls[y] = lineTiles;
         }
-
         return walls;
     }
 
-    private List<Spike> createSpikes() {
-        List<Spike> spikes = new ArrayList<>();
+    private Spike[][] createSpikes() {
+        Spike[][] spikes = new Spike[lines.size()][];
 
-        for (int y = 0; y < getHeight(); y ++) {
+        for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x ++)
-                if (line.charAt(x) == '^') spikes.add(new Spike(x * Tile.SIZE, y * Tile.SIZE));
+            Spike[] lineSpikes = new Spike[line.length()];
+            for (int x = 0; x < line.length(); x++)
+                if (line.charAt(x) == '^')
+                    lineSpikes[x] = new Spike(x*8, y*8);
+            spikes[y] = lineSpikes;
         }
-
         return spikes;
     }
 
     private Player createPlayer() {
-        for (int y = 0; y < getHeight(); y++) {
+        for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
                 if (line.charAt(x) == 'P') return new Player(x * Tile.SIZE, y * Tile.SIZE);
@@ -96,9 +105,9 @@ public class SceneBuilder {
         return null;
     }
 
-    private Position createTransitionPosition() {
-        return new Position(Integer.parseInt(lines.get(lines.size()-2)) * Tile.SIZE,
-                            Integer.parseInt(lines.get(lines.size()-1)) * Tile.SIZE);
+    private Vector createTransitionPosition() {
+        return new Vector(Integer.parseInt(lines.get(lines.size()-2)) * 8,
+                            Integer.parseInt(lines.get(lines.size()-1)) * 8);
     }
 
     private List<Particle> createParticles(int number, Scene scene) {
