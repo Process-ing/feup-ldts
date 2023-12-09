@@ -53,20 +53,20 @@ public class SpriteTest {
 
         sprite.draw(gui, x, y);
 
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x, y), new TextColor.RGB(0, 0, 0));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x + 1, y), new TextColor.RGB(0, 0, 255));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x, y + 1), new TextColor.RGB(0, 255, 0));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x + 1, y + 1), new TextColor.RGB(255, 0, 0));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x, y, new TextColor.RGB(0, 0, 0));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x + 1, y, new TextColor.RGB(0, 0, 255));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x, y + 1, new TextColor.RGB(0, 255, 0));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x + 1, y + 1, new TextColor.RGB(255, 0, 0));
 
         x = 32;
         y = 16;
 
         sprite.draw(gui, x, y);
 
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x, y), new TextColor.RGB(0, 0, 0));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x + 1, y), new TextColor.RGB(0, 0, 255));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x, y + 1), new TextColor.RGB(0, 255, 0));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x + 1, y + 1), new TextColor.RGB(255, 0, 0));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x, y, new TextColor.RGB(0, 0, 0));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x + 1, y, new TextColor.RGB(0, 0, 255));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x, y + 1, new TextColor.RGB(0, 255, 0));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x + 1, y + 1, new TextColor.RGB(255, 0, 0));
     }
 
     @Test
@@ -76,18 +76,18 @@ public class SpriteTest {
 
         sprite.draw(gui, x, y);
 
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x, y), new TextColor.RGB(0, 255, 255));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x, y, new TextColor.RGB(0, 255, 255));
         Mockito.verify(gui, Mockito.times(0))
-                .drawPixel(new Vector(Mockito.eq(x + 1), Mockito.eq(y)), Mockito.any(TextColor.RGB.class));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x + 2, y), new TextColor.RGB(255, 0, 255));
+                .drawPixel(Mockito.eq(x + 1), Mockito.eq(y), Mockito.any(TextColor.RGB.class));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x + 2, y, new TextColor.RGB(255, 0, 255));
         Mockito.verify(gui, Mockito.times(0))
-                .drawPixel(new Vector(Mockito.eq(x), Mockito.eq(y + 1)), Mockito.any(TextColor.RGB.class));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x + 1, y + 1), new TextColor.RGB(255, 255, 255));
+                .drawPixel(Mockito.eq(x), Mockito.eq(y + 1), Mockito.any(TextColor.RGB.class));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x + 1, y + 1, new TextColor.RGB(255, 255, 255));
         Mockito.verify(gui, Mockito.times(0))
-                .drawPixel(new Vector(Mockito.eq(x + 2), Mockito.eq(y + 1)), Mockito.any(TextColor.RGB.class));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x, y + 2), new TextColor.RGB(255, 255, 0));
+                .drawPixel(Mockito.eq(x + 2), Mockito.eq(y + 1), Mockito.any(TextColor.RGB.class));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x, y + 2, new TextColor.RGB(255, 255, 0));
         Mockito.verify(gui, Mockito.times(0))
-                .drawPixel(new Vector(Mockito.eq(x + 1), Mockito.eq(y + 2)), Mockito.any(TextColor.RGB.class));
-        Mockito.verify(gui, Mockito.times(1)).drawPixel(new Vector(x + 2, y + 2), new TextColor.RGB(0, 0, 0));
+                .drawPixel(Mockito.eq(x + 1), Mockito.eq(y + 2), Mockito.any(TextColor.RGB.class));
+        Mockito.verify(gui, Mockito.times(1)).drawPixel(x + 2, y + 2, new TextColor.RGB(0, 0, 0));
     }
 }

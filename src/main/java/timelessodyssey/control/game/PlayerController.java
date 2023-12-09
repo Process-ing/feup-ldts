@@ -44,26 +44,26 @@ public class PlayerController extends Controller<Scene> {
 
             double MAX_VELOCITY_Y = 3;
             vy = Math.min(vy, MAX_VELOCITY_Y);
-            if (getModel().isPlayerColliding(new Vector(x, y + vy), Scene.Direction.DOWN)) {
+            if (getModel().isColliding(new Vector(x, y + vy), Scene.Direction.DOWN)) {
                 player.setHasLanded(true);
                 player.setFalling(false);
                 vy = 0;
             }
         } else if (vy < 0) {
             player.setJumping(true);
-            if (getModel().isPlayerColliding(new Vector(x, y + vy), Scene.Direction.UP)) {
+            if (getModel().isColliding(new Vector(x, y + vy), Scene.Direction.UP)) {
                 vy = 0;
             }
         }
 
         if (vx < 0) {
             vx = Math.max(vx, -MAX_VELOCITY_X);
-            if (getModel().isPlayerColliding(new Vector(x + vx, y + vy), Scene.Direction.LEFT)) {
+            if (getModel().isColliding(new Vector(x + vx, y + vy), Scene.Direction.LEFT)) {
                 vx = 0;
             }
         } else if (vx > 0) {
             vx = Math.min(vx, MAX_VELOCITY_X);
-            if (getModel().isPlayerColliding(new Vector(x + vx, y + vy), Scene.Direction.RIGHT)) {
+            if (getModel().isColliding(new Vector(x + vx, y + vy), Scene.Direction.RIGHT)) {
                 vx = 0;
             }
         }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class PositionTest {
+public class VectorTest {
     @Test
     public void equals() {
         Vector position1 = new Vector(32, 15);

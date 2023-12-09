@@ -43,13 +43,13 @@ public class GameTextViewerTest {
         for (int y = 0; y < SCREEN_HEIGHT; y++) {
             for (int x = 0; x < SCREEN_WIDTH; x++) {
                 if (image.getRGB(x, y) == PIXEL_COLOR.getRGB()) {
-                    verify(gui, times(1)).drawPixel(new Vector(x, y), foregroundColor);
+                    verify(gui, times(1)).drawPixel(x, y, foregroundColor);
                 } else if (image.getRGB(x, y) == RECTANGLE_COLOR.getRGB()) {
                     RectangleSize size = getRectangleSize(x, y, image);
                     verify(gui, times(1))
-                        .drawRectangle(new Vector(x, y), size.width(), size.height(), foregroundColor);
+                        .drawRectangle(x, y, size.width(), size.height(), foregroundColor);
                 } else {
-                    verify(gui, times(0)).drawPixel(new Vector(eq(x), eq(y)), any(TextColor.class));
+                    verify(gui, times(0)).drawPixel(eq(x), eq(y), any(TextColor.class));
                 }
             }
         }

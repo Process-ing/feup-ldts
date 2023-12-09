@@ -99,7 +99,7 @@ public class Scene {
         return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
     }
 
-    public boolean isPlayerColliding(Vector position, Direction direction) {
+    public boolean isColliding(Vector position, Direction direction) {
         double x = position.x(), y = position.y();
         double width = player.getWidth(), height = player.getHeight();
         double x1 = 0, x2 = 0, y1 = 0, y2 = 0;  // Hitbox corners

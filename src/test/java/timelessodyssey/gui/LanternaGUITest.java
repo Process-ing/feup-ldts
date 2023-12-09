@@ -27,7 +27,7 @@ public class LanternaGUITest {
     @Property
     public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor color) {
         GUI gui = new LanternaGUI(screen);
-        gui.drawPixel(new Vector(x, y), color);
+        gui.drawPixel(x, y, color);
 
         Mockito.verify(tg, Mockito.times(1))
             .setBackgroundColor(color);
