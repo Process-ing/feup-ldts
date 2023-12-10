@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static java.lang.Character.isLetterOrDigit;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class SceneBuilder {
@@ -70,7 +71,7 @@ public class SceneBuilder {
             String line = lines.get(y);
             Tile[] lineTiles = new Tile[21];
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) != ' ' && line.charAt(x) != 'P' && line.charAt(x) != '^') {
+                if (line.charAt(x) != 'P' && isLetterOrDigit(line.charAt(x))) {
                     lineTiles[x] = new Tile(x * 8, y * 8, line.charAt(x));
                 }
                 else {
@@ -89,7 +90,7 @@ public class SceneBuilder {
             String line = lines.get(y);
             Spike[] lineSpikes = new Spike[line.length()];
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == '^')
+                if (!isLetterOrDigit(line.charAt(x)) && line.charAt(x) != ' ')
                     lineSpikes[x] = new Spike(x*8, y*8, line.charAt(x));
             spikes[y] = lineSpikes;
         }
