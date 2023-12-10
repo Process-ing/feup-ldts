@@ -70,10 +70,10 @@ public class SceneBuilder {
             String line = lines.get(y);
             Tile[] lineTiles = new Tile[21];
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == '#') {
-                    lineTiles[x] = new Tile(x * 8, y * 8);
+                if (line.charAt(x) != ' ' && line.charAt(x) != 'P' && line.charAt(x) != '^') {
+                    lineTiles[x] = new Tile(x * 8, y * 8, line.charAt(x));
                 }
-                else{
+                else {
                     lineTiles[x] = null;
                 }
             lineTiles[20] = null;
@@ -90,7 +90,7 @@ public class SceneBuilder {
             Spike[] lineSpikes = new Spike[line.length()];
             for (int x = 0; x < line.length(); x++)
                 if (line.charAt(x) == '^')
-                    lineSpikes[x] = new Spike(x*8, y*8);
+                    lineSpikes[x] = new Spike(x*8, y*8, line.charAt(x));
             spikes[y] = lineSpikes;
         }
         return spikes;

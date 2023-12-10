@@ -1,19 +1,23 @@
 package timelessodyssey.view.elements;
 
-import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Spike;
-import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.view.Sprite;
 
-public class SpikeViewer implements ElementViewer<Spike>{
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+public class SpikeViewer implements ElementViewer<Spike> {
+    private static final Map<Character, String> spikeMap;
+    static {
+        spikeMap = new HashMap<Character, String>();
+        spikeMap.put('^', "sprites/spikes/futuristic/Bottom_Spike.png");
+        spikeMap.put('_', "sprites/spikes/futuristic/Top_Spike.png");
+    }
     @Override
-    public void draw(Spike model, GUI gui) {
-        int noise = 1;
-        for (int x = 0; x < Tile.SIZE; x++) {
-            for (int y = Tile.SIZE / 2; y < Tile.SIZE - 1; y++) {
-                gui.drawPixel(model.getPosition().x() + x, model.getPosition().y() + y + noise, new TextColor.RGB(100, 255, 100));
-                noise = (noise + 1) % 2;
-            }
-        }
+    public void draw(Spike model, GUI gui) throws IOException {
+        Sprite sprite = new Sprite(spikeMap.get(model.getCharacter()));
+        sprite.draw(gui, model.getPosition().x(), model.getPosition().y());
     }
 }
