@@ -1,20 +1,50 @@
 package timelessodyssey.view.elements;
 
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.game.elements.Player;
+import timelessodyssey.model.game.elements.player.*;
 import timelessodyssey.view.Sprite;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerViewer implements ElementViewer<Player> {
-    private final Sprite[] sprites;
+    private final Map<Class<?>, Sprite[][]> spriteMap;
 
     public PlayerViewer() throws IOException {
-        sprites = new Sprite[14];
-        for (int i = 0; i < 7; i++)
-            sprites[i] = new Sprite("sprites/player/player-right-" + (i + 1) + ".png");
-        for (int i = 0; i < 7; i++)
-            sprites[i + 7] = new Sprite("sprites/player/player-left-" + (i + 1) + ".png");
+        spriteMap = new HashMap<>();
+        spriteMap.put(IdleState.class, new Sprite[][] {
+            { new Sprite("sprites/player/player-left-1.png") },
+            { new Sprite("sprites/player/player-right-1.png") },
+        });
+        spriteMap.put(WalkingState.class, new Sprite[][] {
+            {
+                new Sprite("sprites/player/player-left-2.png"),
+                new Sprite("sprites/player/player-left-3.png"),
+            },
+            {
+                new Sprite("sprites/player/player-right-2.png"),
+                new Sprite("sprites/player/player-right-3.png")
+            },
+        });
+        spriteMap.put(RunningState.class, new Sprite[][] {
+            {
+                new Sprite("sprites/player/player-left-4.png"),
+                new Sprite("sprites/player/player-left-5.png"),
+            },
+            {
+                new Sprite("sprites/player/player-right-4.png"),
+                new Sprite("sprites/player/player-right-5.png")
+            },
+        });
+        spriteMap.put(JumpingState.class, new Sprite[][] {
+                { new Sprite("sprites/player/player-left-6.png") },
+                { new Sprite("sprites/player/player-right-6.png") },
+        });
+        spriteMap.put(FallingState.class, new Sprite[][] {
+                { new Sprite("sprites/player/player-left-7.png") },
+                { new Sprite("sprites/player/player-right-7.png") },
+        });
     }
 
     @Override
@@ -23,20 +53,8 @@ public class PlayerViewer implements ElementViewer<Player> {
     }
 
     private Sprite getSprite(Player model, long frameCount) {
-        int spriteIndex;
-        if (model.isJumping())
-            spriteIndex = 5;
-        else if (model.isFalling() && model.getVelocity().y() > 0.5)
-            spriteIndex = 6;
-        else if (Math.abs(model.getVelocity().x()) > 1.7)
-            spriteIndex = 3 + (int) ((frameCount / 3) % 2);
-        else if (Math.abs(model.getVelocity().x()) > 0.7)
-            spriteIndex = 1 + (int) ((frameCount / 3) % 2);
-        else
-            spriteIndex = 0;
-
-        if (!model.isFacingRight())
-            spriteIndex += 7;
-        return sprites[spriteIndex];
+        Sprite[][] spriteSequencePair = spriteMap.get(model.getState().getClass());
+        Sprite[] spriteSequence = spriteSequencePair[model.isFacingRight() ? 1 : 0];
+        return spriteSequence[(int)(frameCount % spriteSequence.length)];
     }
 }

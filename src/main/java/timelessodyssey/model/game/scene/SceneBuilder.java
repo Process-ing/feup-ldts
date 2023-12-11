@@ -2,11 +2,11 @@ package timelessodyssey.model.game.scene;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.model.Vector;
-import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.particles.Snow;
+import timelessodyssey.model.game.elements.player.Player;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class SceneBuilder {
         int numberParticles = 30;
         Scene scene = new Scene(getWidth(), getHeight(), sceneCode);
 
-        scene.setPlayer(createPlayer());
+        scene.setPlayer(createPlayer(scene));
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
         scene.setTransitionPosition(createTransitionPosition());
@@ -39,7 +39,7 @@ public class SceneBuilder {
 
     public SceneBuilder(int n) throws IOException {
         this.sceneCode = n;
-        URL resource = getClass().getClassLoader().getResource("levels/scene" + n + ".lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/playground.lvl");
         assert resource != null;
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
@@ -102,11 +102,11 @@ public class SceneBuilder {
         return spikes;
     }
 
-    private Player createPlayer() {
+    private Player createPlayer(Scene scene) {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'P') return new Player(x * Tile.SIZE, y * Tile.SIZE);
+                if (line.charAt(x) == 'P') return new Player(x * Tile.SIZE, y * Tile.SIZE, scene);
         }
         return null;
     }
