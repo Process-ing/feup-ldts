@@ -56,8 +56,6 @@ public class TileViewer implements ElementViewer<Tile>  {
         tileMap.put('s', "sprites/tiles/cave/ground/Top_Right_Corner.png");
         tileMap.put('d', "sprites/tiles/cave/ground/Bottom_Left_Corner.png");
         tileMap.put('f', "sprites/tiles/cave/ground/Bottom_Right_Corner.png");
-        tileMap.put('i', "sprites/tiles/cave/ground/Top_Spike.png");
-        tileMap.put('o', "sprites/tiles/cave/ground/Bottom_Spike.png");
     }
 
     @Override

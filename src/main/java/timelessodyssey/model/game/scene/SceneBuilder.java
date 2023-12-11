@@ -41,7 +41,7 @@ public class SceneBuilder {
 
     public SceneBuilder(int n) throws IOException {
         this.sceneCode = n;
-        URL resource = getClass().getClassLoader().getResource("levels/scene4.lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/scene5.lvl");
         assert resource != null;
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 

@@ -13,9 +13,6 @@ public class SpikeViewer implements ElementViewer<Spike> {
     {
         spikeMap = new HashMap<>();
         spikeMap.put('^', "sprites/spikes/futuristic/Bottom_Spike.png");
-        spikeMap.put('_', "sprites/spikes/futuristic/Top_Spike.png");
-        spikeMap.put('*', "sprites/spikes/cave/Top_Spike1.png");
-        spikeMap.put('/', "sprites/spikes/cave/Top_Spike2.png");
         spikeMap.put('+', "sprites/spikes/cave/Bottom_Spike1.png");
         spikeMap.put('-', "sprites/spikes/cave/Bottom_Spike2.png");
     }
