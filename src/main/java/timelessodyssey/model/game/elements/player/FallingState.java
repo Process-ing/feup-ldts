@@ -24,11 +24,7 @@ public class FallingState extends PlayerState {
 
     @Override
     public PlayerState getNextState() {
-        Vector positionBelow = new Vector(
-                getPlayer().getPosition().x(),
-                getPlayer().getPosition().y() + 1
-        );
-        if (getPlayer().getScene().isColliding(positionBelow, Scene.Direction.DOWN)) {
+        if (getPlayer().isOnGround()) {
             if (Math.abs(getPlayer().getVelocity().x()) >= RunningState.MIN_VELOCITY)
                 return new RunningState(getPlayer());
             if (Math.abs(getPlayer().getVelocity().x()) >= WalkingState.MIN_VELOCITY)

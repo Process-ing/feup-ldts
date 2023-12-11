@@ -102,4 +102,13 @@ public class Player extends Element {
     public void setScene(Scene scene) {
         this.scene = scene;
     }
+
+
+    public boolean isOnGround() {
+        Vector positionBelow = new Vector(
+            getPosition().x(),
+            getPosition().y() + 1
+        );
+        return scene.isColliding(positionBelow, Scene.Direction.DOWN);
+    }
 }

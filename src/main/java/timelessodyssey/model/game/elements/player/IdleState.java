@@ -19,11 +19,7 @@ public class IdleState extends PlayerState {
 
     @Override
     public PlayerState getNextState() {
-        Vector positionBelow = new Vector(
-                getPlayer().getPosition().x(),
-                getPlayer().getPosition().y() + 1
-        );
-        if (!getPlayer().getScene().isColliding(positionBelow, Scene.Direction.DOWN)) {
+        if (!getPlayer().isOnGround()) {
             if (getPlayer().getVelocity().y() < 0)
                 return new JumpingState(getPlayer());
             return new FallingState(getPlayer());
