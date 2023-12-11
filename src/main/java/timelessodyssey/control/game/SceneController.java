@@ -9,9 +9,7 @@ import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.states.CreditsState;
 import timelessodyssey.states.GameState;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static timelessodyssey.Game.getNumberOfLevels;
 import static timelessodyssey.gui.GUI.Action.QUIT;
@@ -27,22 +25,22 @@ public class SceneController extends Controller<Scene> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, double time) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Game game, GUI.Action action, long frameCount) throws IOException {
         if (action == QUIT) {
             game.setState(null);
         } else {
-            playerController.step(game, action, time);
+            playerController.step(game, action, frameCount);
             if (getModel().isDying())
                 getModel().getPlayer().setPosition(getModel().getStartingPosition());
             if (getModel().isAtTransitionPosition()) {
-                if (getModel().getSceneCode() + 1 >= getNumberOfLevels()) {
+                if (getModel().getSceneCode() + 1 >= getNumberOfLevels())
                     game.setState(new CreditsState(new Credits()));
-                } else {
+                else {
                     game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene(getModel().getPlayer())));
                 }
             }
             getModel().updateStars();
-            particleController.step(game, action, time);
+            particleController.step(game, action, frameCount);
         }
     }
 }

@@ -154,7 +154,7 @@ public class SceneBuilder {
                     random.nextInt(scene.getHeight() * Tile.SIZE),
                     random.nextInt(2, 5) / 2,
                     TextColor.ANSI.WHITE_BRIGHT,
-                    random.nextDouble(0.02, 0.05)
+                    random.nextDouble(.5, 2)
             );
             particles.add(particle);
         }

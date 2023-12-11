@@ -6,7 +6,7 @@ import timelessodyssey.model.game.elements.Tile;
 
 public class TileViewer implements ElementViewer<Tile>  {
     @Override
-    public void draw(Tile model, GUI gui) {
+    public void draw(Tile model, GUI gui, long frameCount) {
         for (int x = 0; x < Tile.SIZE; x++) {
             for (int y = 0; y < Tile.SIZE; y++) {
                 gui.drawPixel(model.getPosition().x() + x, model.getPosition().y() + y, new TextColor.RGB(255, 100, 100));

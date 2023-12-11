@@ -34,12 +34,12 @@ public class SceneControllerTest {
     @Test
     public void stepWithoutQuit() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.NONE;
-        double time = 0;
+        long frameCount = 0;
         Mockito.when(scene.isAtTransitionPosition()).thenReturn(false);
 
-        sceneController.step(game, action, time);
+        sceneController.step(game, action, frameCount);
         Mockito.verify(playerController, Mockito.times(1))
-                .step(game, action, time);
+                .step(game, action, frameCount);
         Mockito.verify(game, Mockito.times(0))
                 .setState(Mockito.any());
     }
@@ -47,21 +47,21 @@ public class SceneControllerTest {
     @Test
     public void stepWithQuit() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.QUIT;
-        double time = 0;
+        long frameCount = 0;
 
-        sceneController.step(game, action, time);
+        sceneController.step(game, action, frameCount);
         Mockito.verify(game, Mockito.times(1)).setState(null);
     }
 
     @Test
     public void stepWithSceneChange() throws IOException, URISyntaxException, FontFormatException {
         GUI.Action action = GUI.Action.NONE;
-        double time = 0;
+        long frameCount = 0;
         Mockito.when(scene.isAtTransitionPosition()).thenReturn(true);
 
-        sceneController.step(game, action, time);
+        sceneController.step(game, action, frameCount);
         Mockito.verify(playerController, Mockito.times(1))
-                .step(game, action, time);
+                .step(game, action, frameCount);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any());
     }

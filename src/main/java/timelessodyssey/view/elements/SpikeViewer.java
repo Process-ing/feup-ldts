@@ -7,7 +7,7 @@ import timelessodyssey.model.game.elements.Tile;
 
 public class SpikeViewer implements ElementViewer<Spike>{
     @Override
-    public void draw(Spike model, GUI gui) {
+    public void draw(Spike model, GUI gui, long frameCount) {
         int noise = 1;
         for (int x = 0; x < Tile.SIZE; x++) {
             for (int y = Tile.SIZE / 2; y < Tile.SIZE - 1; y++) {

@@ -10,10 +10,12 @@ public class Player extends Element {
     private Vector velocity;
     private final Vector maxVelocity;
     private final double acceleration;
-    private final double boost;
+    private final double jumpBoost;
+    private final double dashBoost;
 
     private boolean isJumping;
-
+    private boolean isDashing;
+    private boolean hasDashed;
     private boolean hasLanded;
     private boolean isFalling;
     private boolean isFacingRight;
@@ -24,9 +26,14 @@ public class Player extends Element {
     public Player(double x, double y) {
         super(x, y);
         this.velocity = new Vector(0, 0);
-        this.maxVelocity = new Vector(2.0, 3.0);
+        this.maxVelocity = new Vector(5.0, 3.0);
         this.acceleration = 0.5;
-        this.boost = 4;
+        this.jumpBoost = 4;
+        this.dashBoost = 5;
+        this.isJumping = false;
+        this.isFalling = false;
+        this.hasLanded = true;
+        this.isFacingRight = true;
         this.starCounter = 0;
     }
 
@@ -52,6 +59,22 @@ public class Player extends Element {
 
     public void setJumping(boolean jumping) {
         isJumping = jumping;
+    }
+
+    public boolean isDashing() {
+        return isDashing;
+    }
+
+    public void setDashing(boolean dashing) {
+        isDashing = dashing;
+    }
+
+    public boolean hasDashed() {
+        return hasDashed;
+    }
+
+    public void setHasDashed(boolean hasDashed) {
+        this.hasDashed = hasDashed;
     }
 
     public boolean hasLanded() {
@@ -82,8 +105,12 @@ public class Player extends Element {
         return acceleration;
     }
 
-    public double getBoost() {
-        return boost;
+    public double getJumpBoost() {
+        return jumpBoost;
+    }
+
+    public double getDashBoost() {
+        return dashBoost;
     }
 
     public Vector getMaxVelocity() {
@@ -97,5 +124,9 @@ public class Player extends Element {
 
     public void resetVelocity() {
         this.velocity = new Vector(0, 0);
+        this.isJumping = false;
+        this.isFalling = false;
+        this.hasLanded = true;
+        this.isFacingRight = true;
     }
 }

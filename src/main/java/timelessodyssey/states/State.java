@@ -27,5 +27,9 @@ public abstract class State<T> {
         return model;
     }
 
-    public abstract void step(Game game, GUI gui, double time) throws IOException, URISyntaxException, FontFormatException;
+    public void step(Game game, GUI gui, long frameCount) throws IOException, URISyntaxException, FontFormatException {
+        GUI.Action action = gui.getNextAction();
+        controller.step(game, action, frameCount);
+        screenViewer.draw(gui, frameCount);
+    }
 }
