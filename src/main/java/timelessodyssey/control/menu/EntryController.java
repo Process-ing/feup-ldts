@@ -23,7 +23,7 @@ public class EntryController extends Controller<Menu> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, double time) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Game game, GUI.Action action, long frameCount) throws IOException, URISyntaxException, FontFormatException {
         switch (getModel().getCurrentEntry().getType()) {
             case START_GAME:
                 if (action == GUI.Action.SELECT)

@@ -6,16 +6,14 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.scene.Scene;
 
-import java.io.IOException;
-
 public class ParticleController extends Controller<Scene> {
     public ParticleController(Scene model) {
         super(model);
     }
 
     @Override
-    public void step(Game game, GUI.Action action, double time) throws IOException {
+    public void step(Game game, GUI.Action action, long frameCount) {
         for (Particle particle: getModel().getParticles())
-            particle.setPosition(particle.move(time, getModel()));
+            particle.setPosition(particle.move(getModel()));
     }
 }

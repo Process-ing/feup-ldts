@@ -26,15 +26,16 @@ public class ParticleViewerTest {
     public void draw() {
         int size = 4;
         double x = 72.0, y = 88.0, velocity = 0.2;
+        long frameCount = 0;
         TextColor color = TextColor.ANSI.BLUE;
         Particle particle = new Particle(x, y, size, color, velocity) {
             @Override
-            public Vector move(double time, Scene scene) {
+            public Vector move(Scene scene) {
                 return null;
             }
         };
 
-        particleViewer.draw(particle, gui);
+        particleViewer.draw(particle, gui, frameCount);
 
         verify(gui).drawRectangle(x, y, size, size, color);
     }
