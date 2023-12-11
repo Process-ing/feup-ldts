@@ -45,6 +45,14 @@ public class PlayerViewer implements ElementViewer<Player> {
                 { new Sprite("sprites/player/player-left-7.png") },
                 { new Sprite("sprites/player/player-right-7.png") },
         });
+        spriteMap.put(DashingState.class, new Sprite[][] {
+                { new Sprite("sprites/player/player-left-4.png") },
+                { new Sprite("sprites/player/player-right-4.png") },
+        });
+        spriteMap.put(AfterDashState.class, new Sprite[][] {
+                { new Sprite("sprites/player/player-left-7.png") },
+                { new Sprite("sprites/player/player-right-7.png") },
+        });
     }
 
     @Override

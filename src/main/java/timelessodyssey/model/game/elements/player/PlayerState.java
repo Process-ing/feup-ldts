@@ -32,14 +32,6 @@ public abstract class PlayerState {
         return updateVelocity(newVelocity);
     }
 
-    public Vector jump() {
-        Vector newVelocity = new Vector(
-                player.getVelocity().x(),
-                player.getVelocity().y() - player.getBoost()
-        );
-        return updateVelocity(newVelocity);
-    }
-
     protected Vector applyCollisions(Vector velocity) {
         double x = player.getPosition().x(), y = player.getPosition().y();
         double vx = velocity.x(), vy = velocity.y();
@@ -67,6 +59,16 @@ public abstract class PlayerState {
         return new Vector(vx, vy);
     }
 
+    protected PlayerState getNextGroundState() {
+        if (Math.abs(getPlayer().getVelocity().x()) >= RunningState.MIN_VELOCITY)
+            return new RunningState(getPlayer());
+        if (Math.abs(getPlayer().getVelocity().x()) >= WalkingState.MIN_VELOCITY)
+            return new WalkingState(getPlayer());
+        return new IdleState(getPlayer());
+    }
+
+    public abstract Vector jump();
+    public abstract Vector dash();
     public abstract Vector updateVelocity(Vector velocity);
     public abstract PlayerState getNextState();
 }

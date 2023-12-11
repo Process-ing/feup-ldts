@@ -11,7 +11,8 @@ public class Player extends Element {
     private Vector velocity;
     private final Vector maxVelocity;
     private final double acceleration;
-    private final double boost;
+    private final double jumpBoost;
+    private final double dashBoost;
     private PlayerState state;
     private boolean isFacingRight;
     private Scene scene;
@@ -21,7 +22,8 @@ public class Player extends Element {
         this.velocity = new Vector(0, 0);
         this.maxVelocity = new Vector(2.0, 3.0);
         this.acceleration = 0.65;
-        this.boost = 4;
+        this.jumpBoost = 4;
+        this.dashBoost = 6.5;
         this.isFacingRight = true;
         this.scene = scene;
         this.state = new IdleState(this);
@@ -55,8 +57,8 @@ public class Player extends Element {
         return acceleration;
     }
 
-    public double getBoost() {
-        return boost;
+    public double getJumpBoost() {
+        return jumpBoost;
     }
 
     public Vector getMaxVelocity() {
@@ -91,6 +93,10 @@ public class Player extends Element {
         return state.jump();
     }
 
+    public Vector dash() {
+        return state.dash();
+    }
+
     public Vector updateVelocity() {
         return state.updateVelocity(velocity);
     }
@@ -110,5 +116,13 @@ public class Player extends Element {
             getPosition().y() + 1
         );
         return scene.isColliding(positionBelow, Scene.Direction.DOWN);
+    }
+
+    public boolean isOverMaxXVelocity() {
+        return Math.abs(velocity.x()) > maxVelocity.x();
+    }
+
+    public double getDashBoost() {
+        return dashBoost;
     }
 }

@@ -27,20 +27,13 @@ public class PlayerController extends Controller<Scene> {
             case JUMP:
                 player.setVelocity(player.jump());
                 break;
+            case DASH:
+                player.setVelocity(player.dash());
+                break;
             default:
                 player.setVelocity(player.updateVelocity());
         }
         player.setPosition(player.updatePosition());
         player.setState(player.getNextState());
-
-        if (action == GUI.Action.DASH && !player.isDashing() && !player.hasDashed()){
-            vx = player.isFacingRight() ? player.getDashBoost() : -player.getDashBoost();
-            player.setDashing(true);
-            player.setHasDashed(true);
-        }
-
-        if (Math.abs(vx) < 2 ){
-            player.setDashing(false);
-        }
     }
 }

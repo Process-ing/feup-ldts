@@ -2,8 +2,10 @@ package timelessodyssey.model.game.elements.player;
 
 import timelessodyssey.model.Vector;
 
-public class JumpingState extends PlayerState {
-    public JumpingState(Player player) {
+public class DashingState extends PlayerState {
+    public static final double MIN_VELOCITY = 2.0;
+
+    public DashingState(Player player) {
         super(player);
     }
 
@@ -14,10 +16,7 @@ public class JumpingState extends PlayerState {
 
     @Override
     public Vector dash() {
-        return applyCollisions(new Vector(
-                getPlayer().isFacingRight() ? getPlayer().getDashBoost() : -getPlayer().getDashBoost(),
-                getPlayer().getVelocity().y()
-        ));
+        return updateVelocity(getPlayer().getVelocity());
     }
 
     @Override
@@ -26,15 +25,13 @@ public class JumpingState extends PlayerState {
                 velocity.x() * getPlayer().getScene().getFriction(),
                 velocity.y() + getPlayer().getScene().getGravity()
         );
-        return limitVelocity(applyCollisions(newVelocity));
+        return applyCollisions(newVelocity);
     }
 
     @Override
     public PlayerState getNextState() {
-        if (getPlayer().isOverMaxXVelocity())
-            return new DashingState(getPlayer());
-        if (getPlayer().getVelocity().y() > 0)
-            return new FallingState(getPlayer());
+        if (Math.abs(getPlayer().getVelocity().x()) < MIN_VELOCITY)
+            return new AfterDashState(getPlayer());
         return this;
     }
 }
