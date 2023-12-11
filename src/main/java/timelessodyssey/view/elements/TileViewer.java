@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TileViewer implements ElementViewer<Tile>  {
-    private static final Map<Character, String> tileMap;
-    static {
+    private final Map<Character, String> tileMap;
+    {
         tileMap = new HashMap<>();
         tileMap.put('G', "sprites/tiles/futuristic/Gray.png");
         tileMap.put('K', "sprites/tiles/futuristic/Gray_Spots.png");

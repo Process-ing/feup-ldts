@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 import static java.lang.Character.isLetterOrDigit;
+import static java.lang.Character.isSpaceChar;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class SceneBuilder {
@@ -29,8 +30,8 @@ public class SceneBuilder {
         Scene scene = new Scene(getWidth(), getHeight(), sceneCode);
 
         scene.setPlayer(createPlayer());
-        scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
+        scene.setTiles(createWalls());
         scene.setTransitionPosition(createTransitionPosition());
         scene.setParticles(createParticles(numberParticles, scene));
 
@@ -90,8 +91,8 @@ public class SceneBuilder {
             String line = lines.get(y);
             Spike[] lineSpikes = new Spike[line.length()];
             for (int x = 0; x < line.length(); x++)
-                if (!isLetterOrDigit(line.charAt(x)) && line.charAt(x) != ' ')
-                    lineSpikes[x] = new Spike(x*8, y*8, line.charAt(x));
+                if (!isLetterOrDigit(line.charAt(x)) && !isSpaceChar(line.charAt(x)))
+                    lineSpikes[x] = new Spike(x * 8, y * 8, line.charAt(x));
             spikes[y] = lineSpikes;
         }
         return spikes;
