@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
+import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.particles.Snow;
@@ -30,6 +31,7 @@ public class SceneBuilder {
         scene.setPlayer(createPlayer());
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
+        scene.setStars(createStars());
         scene.setTransitionPosition(createTransitionPosition());
         scene.setStartingPosition(createStartingPosition());
         scene.setParticles(createParticles(numberParticles, scene));
@@ -39,7 +41,7 @@ public class SceneBuilder {
 
     public SceneBuilder(int n) throws IOException {
         this.sceneCode = n;
-        URL resource = getClass().getClassLoader().getResource("levels/scene" + n + ".lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/playground.lvl");
         assert resource != null;
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
@@ -100,6 +102,25 @@ public class SceneBuilder {
             spikes[y] = lineSpikes;
         }
         return spikes;
+    }
+
+    private Star[][] createStars() {
+        Star[][] stars = new Star[lines.size()-4][lines.get(0).length()+1];
+
+        for (int y = 0; y < lines.size() - 4; y++) {
+            String line = lines.get(y);
+            Star[] lineStars = new Star[21];
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == 'x')
+                    lineStars[x] = new Star(x * 8, y * 8);
+                else {
+                    lineStars[x] = null;
+                }
+            }
+            lineStars[20] = null;
+            stars[y] = lineStars;
+        }
+        return stars;
     }
 
     private Player createPlayer() {

@@ -1,6 +1,7 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Vector;
+import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
@@ -31,6 +32,7 @@ public class Scene {
     private Player player;
     private Tile[][] tiles;
     private Spike[][] spikes;
+    private Star[][] stars;
     private List<Particle> particles;
     private Vector transitionPosition;
     private Vector startingPosition;
@@ -43,6 +45,7 @@ public class Scene {
         this.friction = 0.75;
         this.tiles = new Tile[height][width];
         this.spikes = new Spike[height][width];
+        this.stars = new Star[height][width];
         this.particles = new ArrayList<>();
     }
 
@@ -80,6 +83,14 @@ public class Scene {
 
     public void setSpikes(Spike[][] spikes) {
         this.spikes = spikes;
+    }
+
+    public Star[][] getStars() {
+        return stars;
+    }
+
+    public void setStars(Star[][] stars) {
+        this.stars = stars;
     }
 
     public List<Particle> getParticles() {
