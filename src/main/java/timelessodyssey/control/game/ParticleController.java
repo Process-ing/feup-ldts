@@ -6,8 +6,6 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.scene.Scene;
 
-import java.io.IOException;
-
 public class ParticleController extends Controller<Scene> {
     public ParticleController(Scene model) {
         super(model);

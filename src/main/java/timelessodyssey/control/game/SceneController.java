@@ -9,9 +9,7 @@ import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.states.CreditsState;
 import timelessodyssey.states.GameState;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static timelessodyssey.Game.getNumberOfLevels;
 import static timelessodyssey.gui.GUI.Action.QUIT;
