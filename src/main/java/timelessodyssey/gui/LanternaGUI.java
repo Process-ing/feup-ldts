@@ -162,7 +162,7 @@ public class LanternaGUI implements GUI {
                 case VK_ESCAPE -> Action.QUIT;
                 case VK_ENTER -> Action.SELECT;
                 case VK_SPACE -> Action.JUMP;
-                case VK_SHIFT -> Action.DASH;
+                case VK_X -> Action.DASH;
                 default -> Action.NONE;
             };
         }
