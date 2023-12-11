@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public interface GUI {
-    enum Action { UP, RIGHT, DOWN, LEFT, NONE, QUIT, SELECT, JUMP }
+    enum Action { UP, RIGHT, DOWN, LEFT, NONE, QUIT, SELECT, JUMP, DASH }
 
     enum Resolution {
         WXGA(1280, 720),

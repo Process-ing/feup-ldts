@@ -30,8 +30,17 @@ public class PlayerController extends Controller<Scene> {
             default:
                 player.setVelocity(player.updateVelocity());
         }
-        System.out.println(player.getState().getClass());
         player.setPosition(player.updatePosition());
         player.setState(player.getNextState());
+
+        if (action == GUI.Action.DASH && !player.isDashing() && !player.hasDashed()){
+            vx = player.isFacingRight() ? player.getDashBoost() : -player.getDashBoost();
+            player.setDashing(true);
+            player.setHasDashed(true);
+        }
+
+        if (Math.abs(vx) < 2 ){
+            player.setDashing(false);
+        }
     }
 }
