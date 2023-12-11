@@ -33,6 +33,7 @@ public class SceneBuilder {
         scene.setSpikes(createSpikes());
         scene.setTiles(createWalls());
         scene.setTransitionPosition(createTransitionPosition());
+        scene.setStartingPosition(createStartingPosition());
         scene.setParticles(createParticles(numberParticles, scene));
 
         return scene;
@@ -66,18 +67,18 @@ public class SceneBuilder {
     }
 
     private Tile[][] createWalls() {
-        Tile[][] walls = new Tile[lines.size()-2][lines.get(0).length()+1];
+        Tile[][] walls = new Tile[lines.size()-4][lines.get(0).length()+1];
 
-        for (int y = 0; y < lines.size() - 2; y++) {
+        for (int y = 0; y < lines.size() - 4; y++) {
             String line = lines.get(y);
             Tile[] lineTiles = new Tile[21];
-            for (int x = 0; x < line.length(); x++)
+            for (int x = 0; x < line.length(); x++) {
                 if (line.charAt(x) != 'P' && isLetterOrDigit(line.charAt(x))) {
                     lineTiles[x] = new Tile(x * 8, y * 8, line.charAt(x));
-                }
-                else {
+                } else {
                     lineTiles[x] = null;
                 }
+            }
             lineTiles[20] = null;
             walls[y] = lineTiles;
         }
@@ -85,14 +86,19 @@ public class SceneBuilder {
     }
 
     private Spike[][] createSpikes() {
-        Spike[][] spikes = new Spike[lines.size()][];
+        Spike[][] spikes = new Spike[lines.size()-4][lines.get(0).length()+1];
 
-        for (int y = 0; y < lines.size(); y++) {
+        for (int y = 0; y < lines.size() - 4; y++) {
             String line = lines.get(y);
-            Spike[] lineSpikes = new Spike[line.length()];
-            for (int x = 0; x < line.length(); x++)
+            Spike[] lineSpikes = new Spike[21];
+            for (int x = 0; x < line.length(); x++) {
                 if (!isLetterOrDigit(line.charAt(x)) && !isSpaceChar(line.charAt(x)))
                     lineSpikes[x] = new Spike(x * 8, y * 8, line.charAt(x));
+                else {
+                    lineSpikes[x] = null;
+                }
+            }
+            lineSpikes[20] = null;
             spikes[y] = lineSpikes;
         }
         return spikes;
@@ -108,8 +114,12 @@ public class SceneBuilder {
     }
 
     private Vector createTransitionPosition() {
-        return new Vector(Integer.parseInt(lines.get(lines.size()-2)) * 8,
-                            Integer.parseInt(lines.get(lines.size()-1)) * 8);
+        return new Vector(Integer.parseInt(lines.get(lines.size()-4)) * 8,
+                Integer.parseInt(lines.get(lines.size()-3)) * 8);
+    }
+    private Vector createStartingPosition() {
+        return new Vector(Integer.parseInt(lines.get(lines.size()-2)) * Tile.SIZE,
+                            Integer.parseInt(lines.get(lines.size()-1)) * Tile.SIZE);
     }
 
     private List<Particle> createParticles(int number, Scene scene) {
