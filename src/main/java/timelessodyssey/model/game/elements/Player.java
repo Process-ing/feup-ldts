@@ -92,6 +92,7 @@ public class Player extends Element {
 
     public void increaseStars() {
         starCounter++;
+        System.out.println("starCounter = " + starCounter);
     }
 
     public void resetVelocity() {
