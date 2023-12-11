@@ -174,12 +174,12 @@ public class Scene {
         int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
         if (stars[tiley1][tilex1] != null){
             stars[tiley1][tilex1] = null;
-            System.out.println("Got a star!");
+            getPlayer().increaseStars();
             return true;
         }
         if (stars[tiley2][tilex2] != null){
             stars[tiley2][tilex2] = null;
-            System.out.println("Got a star!");
+            getPlayer().increaseStars();
             return true;
         }
         return false;

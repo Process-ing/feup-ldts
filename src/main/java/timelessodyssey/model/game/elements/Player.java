@@ -18,6 +18,8 @@ public class Player extends Element {
     private boolean isFalling;
     private boolean isFacingRight;
 
+    private int starCounter;
+
 
     public Player(double x, double y) {
         super(x, y);
@@ -25,6 +27,7 @@ public class Player extends Element {
         this.maxVelocity = new Vector(2.0, 3.0);
         this.acceleration = 0.5;
         this.boost = 4;
+        this.starCounter = 0;
     }
 
     public Vector getVelocity() {
@@ -85,5 +88,10 @@ public class Player extends Element {
 
     public Vector getMaxVelocity() {
         return maxVelocity;
+    }
+
+    public void increaseStars() {
+        starCounter++;
+        System.out.println("starCounter = " + starCounter);
     }
 }
