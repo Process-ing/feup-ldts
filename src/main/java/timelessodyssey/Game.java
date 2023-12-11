@@ -13,10 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Game {
-    private static final int PIXEL_WIDTH = 160;
-    private static final int PIXEL_HEIGHT = 90;
+    public static final int PIXEL_WIDTH = 160;
+    public static final int PIXEL_HEIGHT = 90;
     private final GUI gui;
     private State state;
+    private static final int NUMBER_OF_LEVELS = 3;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);
@@ -42,6 +43,10 @@ public class Game {
 
     public void setResolution(GUI.Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
         gui.setResolution(resolution);
+    }
+
+    public static int getNumberOfLevels() {
+        return NUMBER_OF_LEVELS;
     }
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {

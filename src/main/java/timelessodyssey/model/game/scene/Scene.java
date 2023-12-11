@@ -1,13 +1,15 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Vector;
+import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Tile;
-import timelessodyssey.model.game.elements.particles.Particle;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static timelessodyssey.model.game.elements.Spike.SPIKE_HEIGHT;
 
 public class Scene {
     public double getGravity() {
@@ -31,6 +33,7 @@ public class Scene {
     private Spike[][] spikes;
     private List<Particle> particles;
     private Vector transitionPosition;
+    private Vector startingPosition;
 
     public Scene(int width, int height, int sceneCode) {
         this.width = width;
@@ -99,6 +102,15 @@ public class Scene {
         return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
     }
 
+    public Vector getStartingPosition() {
+        return startingPosition;
+    }
+
+    public void setStartingPosition(Vector startingPosition) {
+        this.startingPosition = startingPosition;
+    }
+
+
     public boolean isColliding(Vector position, Direction direction) {
         double x = position.x(), y = position.y();
         double width = player.getWidth(), height = player.getHeight();
@@ -133,5 +145,14 @@ public class Scene {
 
         return tiles[tiley1][tilex1] != null || tiles[tiley1][tilex2] != null
                 || tiles[tiley2][tilex1] != null || tiles[tiley2][tilex2] != null;
+    }
+
+    public boolean isDying() {
+        double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();
+        double width = player.getWidth(), height = player.getHeight();
+        double x1 = x, x2 = x + width - 1, y1 = y + height - 1 - SPIKE_HEIGHT, y2 = y + height - 1 - SPIKE_HEIGHT;
+        int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
+
+        return spikes[tiley1][tilex1] != null || spikes[tiley2][tilex2] != null;
     }
 }
