@@ -128,7 +128,7 @@ public class SceneBuilder {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
                 if (line.charAt(x) == 'P'){
-                    player.resetVelocity();
+                    player.resetValues();
                     player.setPosition(new Vector(x * Tile.SIZE, y * Tile.SIZE));
                     return player;
                 }

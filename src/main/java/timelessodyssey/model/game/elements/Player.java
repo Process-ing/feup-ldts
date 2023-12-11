@@ -122,7 +122,7 @@ public class Player extends Element {
         System.out.println("starCounter = " + starCounter);
     }
 
-    public void resetVelocity() {
+    public void resetValues() {
         this.velocity = new Vector(0, 0);
         this.isJumping = false;
         this.isFalling = false;
