@@ -24,11 +24,11 @@ public class SceneBuilder {
     private final List<String> lines;
     private final int sceneCode;
 
-    public Scene createScene() {
+    public Scene createScene(Player player) {
         int numberParticles = 30;
         Scene scene = new Scene(getWidth(), getHeight(), sceneCode);
 
-        scene.setPlayer(createPlayer());
+        scene.setPlayer(createPlayer(player));
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
         scene.setStars(createStars());
@@ -123,11 +123,15 @@ public class SceneBuilder {
         return stars;
     }
 
-    private Player createPlayer() {
+    private Player createPlayer(Player player) {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'P') return new Player(x * Tile.SIZE, y * Tile.SIZE);
+                if (line.charAt(x) == 'P'){
+                    player.resetVelocity();
+                    player.setPosition(new Vector(x * Tile.SIZE, y * Tile.SIZE));
+                    return player;
+                }
         }
         return null;
     }
