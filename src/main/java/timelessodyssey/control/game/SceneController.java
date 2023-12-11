@@ -41,6 +41,7 @@ public class SceneController extends Controller<Scene> {
                     game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
                 }
             }
+            getModel().updateStars();
             particleController.step(game, action, time);
         }
     }
