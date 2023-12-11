@@ -7,7 +7,7 @@ import timelessodyssey.model.game.elements.Star;
 public class StarViewer implements ElementViewer<Star>{
 
     @Override
-    public void draw(Star model, GUI gui) {
+    public void draw(Star model, GUI gui, long frameCount) {
         for (double w = 2; w < 6; w++){
             for (double h = 2; h < 6; h++){
                 gui.drawPixel(model.getPosition().x() + w, model.getPosition().y() + h, new TextColor.RGB(255, 255, 255));
