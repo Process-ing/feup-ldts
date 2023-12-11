@@ -39,7 +39,7 @@ public interface GUI {
     void drawPixel(double x, double y, TextColor color);
     void drawRectangle(double x, double y, int width, int height, TextColor color);
     void clear();
-    Action getNextAction() throws IOException;
+    Action getNextAction();
     void refresh() throws IOException;
     void close() throws IOException;
 }

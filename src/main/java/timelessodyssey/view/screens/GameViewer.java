@@ -24,7 +24,7 @@ public class GameViewer extends ScreenViewer<Scene> {
     }
 
     @Override
-    public void draw(GUI gui) throws IOException {
+    public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
 
         // Background color
@@ -35,28 +35,28 @@ public class GameViewer extends ScreenViewer<Scene> {
             }
         }
 
-        drawElement(gui, getModel().getPlayer(), playerViewer);
-        drawElements(gui, getModel().getTiles(), tileViewer);
-        drawElements(gui, getModel().getSpikes(), spikeViewer);
-        drawElements(gui, getModel().getParticles(), particleViewer);
+        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
+        drawElements(gui, getModel().getTiles(), tileViewer, frameCount);
+        drawElements(gui, getModel().getSpikes(), spikeViewer, frameCount);
+        drawElements(gui, getModel().getParticles(), particleViewer, frameCount);
 
         gui.refresh();
     }
 
-    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) {
-        viewer.draw(element, gui);
+    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer, long frameCount) {
+        viewer.draw(element, gui, frameCount);
     }
 
-    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
+    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer, long frameCount) {
         for (T element: elements)
-            drawElement(gui, element, viewer);
+            drawElement(gui, element, viewer, frameCount);
     }
 
-    private <T extends Element> void drawElements(GUI gui, T[][] elements, ElementViewer<T> viewer) {
+    private <T extends Element> void drawElements(GUI gui, T[][] elements, ElementViewer<T> viewer, long frameCount) {
         for (T[] elementLine : elements) {
             for (T element : elementLine) {
                 if (element != null)
-                    drawElement(gui, element, viewer);
+                    drawElement(gui, element, viewer, frameCount);
             }
         }
     }

@@ -28,6 +28,10 @@ public class Player extends Element {
         this.acceleration = 0.5;
         this.jumpBoost = 4;
         this.dashBoost = 5;
+        this.isJumping = false;
+        this.isFalling = false;
+        this.hasLanded = true;
+        this.isFacingRight = true;
     }
 
     public Vector getVelocity() {

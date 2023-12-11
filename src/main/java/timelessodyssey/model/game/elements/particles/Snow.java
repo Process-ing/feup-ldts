@@ -11,8 +11,8 @@ public class Snow extends Particle {
     }
 
     @Override
-    public Vector move(double time, Scene scene) {
-        double newX = floorMod(getPosition().x() + getVelocity() * time, scene.getWidth() * Tile.SIZE);
+    public Vector move(Scene scene) {
+        double newX = floorMod(getPosition().x() + getVelocity(), scene.getWidth() * Tile.SIZE);
         double newY = floorMod(getPosition().y() + Math.sin(newX / 20),scene.getHeight() * Tile.SIZE);
         return new Vector(newX, newY);
     }
