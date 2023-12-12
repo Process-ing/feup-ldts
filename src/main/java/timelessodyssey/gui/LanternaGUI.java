@@ -25,6 +25,7 @@ public class LanternaGUI implements GUI {
     private Screen screen;
     private final int width;
     private final int height;
+    private boolean arrowSpam;
     private Resolution resolution;
     private KeyEvent arrowKeyPressed;
     private KeyEvent specialKeyPressed;
@@ -33,6 +34,7 @@ public class LanternaGUI implements GUI {
         this.screen = screen;
         this.width = screen.getTerminalSize().getColumns();
         this.height = screen.getTerminalSize().getRows();
+        this.arrowSpam = false;
         this.arrowKeyPressed = null;
         this.specialKeyPressed = null;
     }
@@ -57,17 +59,17 @@ public class LanternaGUI implements GUI {
         ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
-                    switch (e.getKeyCode()) {
-                        case VK_LEFT, VK_RIGHT -> arrowKeyPressed = e;
-                        default -> specialKeyPressed = e;
-                    }
+                    if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
+                        arrowKeyPressed = e;
+                    else
+                        specialKeyPressed = e;
                 }
                 @Override
                 public void keyReleased(KeyEvent e) {
-                    switch (e.getKeyCode()) {
-                        case VK_LEFT, VK_RIGHT -> arrowKeyPressed = null;
-                        default -> specialKeyPressed = null;
-                    }
+                    if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
+                        arrowKeyPressed = null;
+                    else
+                        specialKeyPressed = null;
                 }
         });
         ((AWTTerminalFrame)terminal).setTitle("Timeless Odyssey");
@@ -157,6 +159,8 @@ public class LanternaGUI implements GUI {
             specialKeyPressed = null;
 
             return switch (keyCode) {
+                case VK_LEFT -> Action.LEFT;
+                case VK_RIGHT -> Action.RIGHT;
                 case VK_UP -> Action.UP;
                 case VK_DOWN -> Action.DOWN;
                 case VK_ESCAPE -> Action.QUIT;
@@ -184,5 +188,13 @@ public class LanternaGUI implements GUI {
     @Override
     public void close() throws IOException {
         screen.close();
+    }
+
+    public boolean isArrowSpam() {
+        return arrowSpam;
+    }
+
+    public void setArrowSpam(boolean arrowSpam) {
+        this.arrowSpam = arrowSpam;
     }
 }
