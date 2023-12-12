@@ -12,16 +12,6 @@ import java.util.List;
 import static timelessodyssey.model.game.elements.Spike.SPIKE_HEIGHT;
 
 public class Scene {
-    public double getGravity() {
-        return gravity;
-    }
-
-    public double getFriction() {
-        return friction;
-    }
-
-    public enum Direction { UP, DOWN, LEFT, RIGHT }
-
     private final int width;
     private final int height;
     private final int sceneCode;
@@ -52,6 +42,14 @@ public class Scene {
 
     public int getHeight() {
         return height;
+    }
+
+    public double getGravity() {
+        return gravity;
+    }
+
+    public double getFriction() {
+        return friction;
     }
 
     public int getSceneCode() {
@@ -110,41 +108,32 @@ public class Scene {
         this.startingPosition = startingPosition;
     }
 
-
-    public boolean isColliding(Vector position, Direction direction) {
-        double x = position.x(), y = position.y();
-        double width = player.getWidth(), height = player.getHeight();
-        double x1 = 0, x2 = 0, y1 = 0, y2 = 0;  // Hitbox corners
-        switch (direction) {
-            case LEFT:
-                x1 = x;
-                x2 = x;
-                y1 = y;
-                y2 = y + height - 1;
-                break;
-            case RIGHT:
-                x1 = x + width - 1;
-                x2 = x + width - 1;
-                y1 = y;
-                y2 = y + height - 1;
-                break;
-            case UP:
-                x1 = x;
-                x2 = x + width - 1;
-                y1 = y;
-                y2 = y;
-                break;
-            case DOWN:
-                x1 = x;
-                x2 = x + width - 1;
-                y1 = y + height - 1;
-                y2 = y + height - 1;
-        }
-
-        int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
-
-        return tiles[tiley1][tilex1] != null || tiles[tiley1][tilex2] != null
+    private boolean checkCollision(double x1, double x2, double y1, double y2) {
+        int tilex1 = (int)x1 / Tile.SIZE, tilex2 = (int)x2 / Tile.SIZE;
+        int tiley1 = (int)y1 / Tile.SIZE, tiley2 = (int)y2 / Tile.SIZE;
+        return x1 < 0 || tilex2 >= width  || y1 < 0 || tiley2 >= height
+                || tiles[tiley1][tilex1] != null || tiles[tiley1][tilex2] != null
                 || tiles[tiley2][tilex1] != null || tiles[tiley2][tilex2] != null;
+    }
+
+    public boolean collidesLeft(Vector position, Vector size) {
+        double x = position.x(), y = position.y();
+        return checkCollision(x, x, y, y + size.y() - 1);
+    }
+
+    public boolean collidesRight(Vector position, Vector size) {
+        double x = position.x(), y = position.y();
+        return checkCollision(x + size.x() - 1, x + size.x() - 1, y, y + size.y() - 1);
+    }
+
+    public boolean collidesUp(Vector position, Vector size) {
+        double x = position.x(), y = position.y();
+        return checkCollision(x, x + size.x() - 1, y, y);
+    }
+
+    public boolean collidesDown(Vector position, Vector size) {
+        double x = position.x(), y = position.y();
+        return checkCollision(x, x + size.x() - 1, y + size.y() - 1, y + size.y() - 1);
     }
 
     public boolean isDying() {

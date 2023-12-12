@@ -1,7 +1,6 @@
 package timelessodyssey.model.game.elements.player;
 
 import timelessodyssey.model.Vector;
-import timelessodyssey.model.game.scene.Scene;
 
 import static java.lang.Math.max;
 
@@ -35,17 +34,18 @@ public abstract class PlayerState {
     protected Vector applyCollisions(Vector velocity) {
         double x = player.getPosition().x(), y = player.getPosition().y();
         double vx = velocity.x(), vy = velocity.y();
+        Vector playerSize = new Vector(player.getWidth(), player.getHeight());
 
-        while (vy > 0 && player.getScene().isColliding(new Vector(x, y + vy), Scene.Direction.DOWN))
+        while (vy > 0 && player.getScene().collidesDown(new Vector(x, y + vy), playerSize))
             vy = Math.max(vy - 1, 0);
 
-        while (vy < 0 && player.getScene().isColliding(new Vector(x, y + vy), Scene.Direction.UP))
+        while (vy < 0 && player.getScene().collidesUp(new Vector(x, y + vy), playerSize))
             vy = Math.min(vy + 1, 0);
 
-        while (vx < 0 && player.getScene().isColliding(new Vector(x + vx, y + vy), Scene.Direction.LEFT))
+        while (vx < 0 && player.getScene().collidesLeft(new Vector(x + vx, y + vy), playerSize))
             vx = Math.min(vx + 1, 0);
 
-        while (vx > 0 && player.getScene().isColliding(new Vector(x + vx, y + vy), Scene.Direction.RIGHT))
+        while (vx > 0 && player.getScene().collidesRight(new Vector(x + vx, y + vy), playerSize))
             vx = max(vx - 1, 0);
 
         return new Vector(vx, vy);

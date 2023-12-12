@@ -21,8 +21,8 @@ public class Player extends Element {
         super(x, y);
         this.velocity = new Vector(0, 0);
         this.maxVelocity = new Vector(2.0, 3.0);
-        this.acceleration = 0.65;
-        this.jumpBoost = 4;
+        this.acceleration = 0.75;
+        this.jumpBoost = 3.6;
         this.dashBoost = 6.5;
         this.isFacingRight = true;
         this.scene = scene;
@@ -115,7 +115,8 @@ public class Player extends Element {
             getPosition().x(),
             getPosition().y() + 1
         );
-        return scene.isColliding(positionBelow, Scene.Direction.DOWN);
+        Vector playerSize = new Vector(WIDTH, HEIGHT);
+        return scene.collidesDown(positionBelow, playerSize);
     }
 
     public boolean isOverMaxXVelocity() {
