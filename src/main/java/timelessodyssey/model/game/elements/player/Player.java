@@ -131,7 +131,6 @@ public class Player extends Element {
 
     public void increaseStars() {
         this.stars++;
-        System.out.println("stars = " + stars);
     }
 
     public int getStarCounter() {
