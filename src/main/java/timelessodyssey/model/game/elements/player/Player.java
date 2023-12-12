@@ -17,6 +17,8 @@ public class Player extends Element {
     private boolean isFacingRight;
     private Scene scene;
     private int stars;
+    private int deaths;
+    private long birthTime;
 
     public Player(double x, double y, Scene scene) {
         super(x, y);
@@ -28,6 +30,8 @@ public class Player extends Element {
         this.isFacingRight = true;
         this.scene = scene;
         this.stars = 0;
+        this.deaths = 0;
+        this.birthTime = System.currentTimeMillis();
         this.state = new IdleState(this);
     }
 
@@ -135,6 +139,17 @@ public class Player extends Element {
 
     public int getStarCounter() {
         return this.stars;
+    }
+
+    public void increaseDeaths() {
+        this.deaths++;
+    }
+    public int getNumberOfDeaths() {
+        return deaths;
+    }
+
+    public long getBirthTime() {
+        return birthTime;
     }
 
     public void resetValues(){
