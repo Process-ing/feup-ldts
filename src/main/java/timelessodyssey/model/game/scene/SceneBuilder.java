@@ -1,8 +1,8 @@
 package timelessodyssey.model.game.scene;
 
-import com.googlecode.lanterna.TextColor;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Spike;
+import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.particles.Snow;
@@ -23,13 +23,14 @@ public class SceneBuilder {
     private final List<String> lines;
     private final int sceneCode;
 
-    public Scene createScene() {
+    public Scene createScene(Player player) {
         int numberParticles = 30;
         Scene scene = new Scene(getWidth(), getHeight(), sceneCode);
 
-        scene.setPlayer(createPlayer(scene));
+        scene.setPlayer(createPlayer(scene, player));
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
+        scene.setStars(createStars());
         scene.setTransitionPosition(createTransitionPosition());
         scene.setStartingPosition(createStartingPosition());
         scene.setParticles(createParticles(numberParticles, scene));
@@ -102,11 +103,36 @@ public class SceneBuilder {
         return spikes;
     }
 
-    private Player createPlayer(Scene scene) {
+    private Star[][] createStars() {
+        Star[][] stars = new Star[lines.size()-4][lines.get(0).length()+1];
+
+        for (int y = 0; y < lines.size() - 4; y++) {
+            String line = lines.get(y);
+            Star[] lineStars = new Star[21];
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == '*')
+                    lineStars[x] = new Star(x * 8, y * 8);
+                else {
+                    lineStars[x] = null;
+                }
+            }
+            lineStars[20] = null;
+            stars[y] = lineStars;
+        }
+        return stars;
+    }
+
+    private Player createPlayer(Scene scene, Player player) {
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
-            for (int x = 0; x < line.length(); x++)
-                if (line.charAt(x) == 'P') return new Player(x * Tile.SIZE, y * Tile.SIZE, scene);
+            for (int x = 0; x < line.length(); x++){
+                if (line.charAt(x) == 'P'){
+                    player.setPosition(new Vector(x * Tile.SIZE, y * Tile.SIZE));
+                    player.setScene(scene);
+                    player.resetValues();
+                    return player;
+                }
+            }
         }
         return null;
     }
@@ -128,7 +154,6 @@ public class SceneBuilder {
                     random.nextInt(scene.getWidth() * Tile.SIZE),
                     random.nextInt(scene.getHeight() * Tile.SIZE),
                     random.nextInt(2, 5) / 2,
-                    TextColor.ANSI.WHITE_BRIGHT,
                     random.nextDouble(.5, 2)
             );
             particles.add(particle);

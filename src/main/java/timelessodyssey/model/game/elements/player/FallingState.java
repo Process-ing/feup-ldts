@@ -29,6 +29,8 @@ public class FallingState extends PlayerState {
 
     @Override
     public PlayerState getNextState() {
+        if (getPlayer().getScene().isDying())
+            return new DeadState(getPlayer(), 50);
         if (getPlayer().isOverMaxXVelocity())
             return new DashingState(getPlayer());
         if (getPlayer().isOnGround())

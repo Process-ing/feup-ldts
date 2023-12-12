@@ -3,6 +3,7 @@ package timelessodyssey.control.menu;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.model.menu.Menu;
@@ -27,7 +28,7 @@ public class EntryController extends Controller<Menu> {
         switch (getModel().getCurrentEntry().getType()) {
             case START_GAME:
                 if (action == GUI.Action.SELECT)
-                    game.setState(new GameState(new SceneBuilder(0).createScene()));
+                    game.setState(new GameState(new SceneBuilder(0).createScene(new Player(0,0, null))));
                 break;
             case SETTINGS:
                 if (action == GUI.Action.SELECT)

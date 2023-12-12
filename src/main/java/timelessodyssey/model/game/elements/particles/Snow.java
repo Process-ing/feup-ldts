@@ -6,13 +6,13 @@ import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.scene.Scene;
 
 public class Snow extends Particle {
-    public Snow(double x, double y, int size, TextColor color, double velocity) {
-        super(x, y, size, color, velocity);
+    public Snow(double x, double y, int size, double velocity) {
+        super(x, y, size, TextColor.ANSI.WHITE_BRIGHT, new Vector(velocity, 0));
     }
 
     @Override
     public Vector move(Scene scene) {
-        double newX = floorMod(getPosition().x() + getVelocity(), scene.getWidth() * Tile.SIZE);
+        double newX = floorMod(getPosition().x() + getVelocity().x(), scene.getWidth() * Tile.SIZE);
         double newY = floorMod(getPosition().y() + Math.sin(newX / 20),scene.getHeight() * Tile.SIZE);
         return new Vector(newX, newY);
     }

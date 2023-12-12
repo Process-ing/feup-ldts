@@ -3,6 +3,7 @@ package timelessodyssey.view.screens;
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Element;
+import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.elements.*;
 
@@ -13,6 +14,7 @@ public class GameViewer extends ScreenViewer<Scene> {
     private final PlayerViewer playerViewer;
     private final TileViewer tileViewer;
     private final SpikeViewer spikeViewer;
+    private final StarViewer starViewer;
     private final ParticleViewer particleViewer;
 
     public GameViewer(Scene model) throws IOException {
@@ -20,6 +22,7 @@ public class GameViewer extends ScreenViewer<Scene> {
         this.playerViewer = new PlayerViewer();
         this.tileViewer = new TileViewer();
         this.spikeViewer = new SpikeViewer();
+        this.starViewer = new StarViewer();
         this.particleViewer = new ParticleViewer();
     }
 
@@ -35,9 +38,10 @@ public class GameViewer extends ScreenViewer<Scene> {
             }
         }
 
-        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
         drawElements(gui, getModel().getTiles(), tileViewer, frameCount);
         drawElements(gui, getModel().getSpikes(), spikeViewer, frameCount);
+        drawElements(gui, getModel().getStars(), starViewer, frameCount);
+        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
         drawElements(gui, getModel().getParticles(), particleViewer, frameCount);
 
         gui.refresh();
