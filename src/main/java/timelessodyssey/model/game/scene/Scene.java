@@ -1,11 +1,11 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Vector;
+import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;
+import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.player.Player;
-import timelessodyssey.model.game.elements.Spike;
-import timelessodyssey.model.game.elements.Tile;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,6 @@ package timelessodyssey.view.screens;
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Element;
-import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.elements.*;
 
