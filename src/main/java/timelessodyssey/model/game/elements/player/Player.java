@@ -23,7 +23,7 @@ public class Player extends Element {
         this.maxVelocity = new Vector(2.0, 3.0);
         this.acceleration = 0.75;
         this.jumpBoost = 3.6;
-        this.dashBoost = 6.5;
+        this.dashBoost = 5;
         this.isFacingRight = true;
         this.scene = scene;
         this.state = new IdleState(this);
