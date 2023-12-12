@@ -5,10 +5,8 @@ import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.scene.Scene;
 
 public class DeathParticle extends Particle {
-    private static final double VELOCITY_MOD = 4.0;
-
     public DeathParticle(double x, double y, double velocity, double angle) {
-        super(x, y, 1, TextColor.ANSI.RED, new Vector(velocity * Math.cos(angle), velocity * Math.sin(angle)));
+        super(x, y, 1, TextColor.ANSI.RED_BRIGHT, new Vector(velocity * Math.cos(angle), velocity * Math.sin(angle)));
     }
 
     @Override

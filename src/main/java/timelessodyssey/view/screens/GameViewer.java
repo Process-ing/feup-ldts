@@ -35,9 +35,9 @@ public class GameViewer extends ScreenViewer<Scene> {
             }
         }
 
-        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
         drawElements(gui, getModel().getTiles(), tileViewer, frameCount);
         drawElements(gui, getModel().getSpikes(), spikeViewer, frameCount);
+        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
         drawElements(gui, getModel().getParticles(), particleViewer, frameCount);
 
         gui.refresh();

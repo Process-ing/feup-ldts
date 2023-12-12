@@ -3,6 +3,9 @@ package timelessodyssey.control.game;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.game.elements.particles.Particle;
+import timelessodyssey.model.game.elements.player.DeadState;
+import timelessodyssey.model.game.elements.player.IdleState;
 import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.scene.Scene;
 
@@ -35,5 +38,14 @@ public class PlayerController extends Controller<Scene> {
         }
         player.setPosition(player.updatePosition());
         player.setState(player.getNextState());
+
+        if (player.getState() instanceof DeadState deadState) {
+            for (Particle particle: deadState.getDeathParticles())
+                particle.setPosition(particle.move(player.getScene()));
+            if (deadState.getDuration() <= 0) {
+                player.setPosition(player.getScene().getStartingPosition());
+                player.setState(new IdleState(player));
+            }
+        }
     }
 }
