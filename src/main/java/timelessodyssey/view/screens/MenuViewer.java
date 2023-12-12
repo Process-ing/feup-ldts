@@ -30,12 +30,12 @@ public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
         gui.clear();
         drawBackgroundAndFrame(gui);
         drawEntries(gui, getModel().getEntries());
-        logoSprite.draw(gui, 10, 10);
+        logoSprite.draw(gui, 44, 15);
         gui.refresh();
     }
 
     public Sprite loadLogo() throws IOException {
-        return new Sprite("sprites/player/player-left-1.png");
+        return new Sprite("menu/logo.png");
     }
 
     private void drawBackgroundAndFrame(GUI gui) {
