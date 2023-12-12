@@ -28,7 +28,7 @@ public class EntryController extends Controller<Menu> {
         switch (getModel().getCurrentEntry().getType()) {
             case START_GAME:
                 if (action == GUI.Action.SELECT)
-                    game.setState(new GameState(new SceneBuilder(10).createScene(new Player(0,0, null))));
+                    game.setState(new GameState(new SceneBuilder(9).createScene(new Player(0,0, null))));
                 break;
             case SETTINGS:
                 if (action == GUI.Action.SELECT)

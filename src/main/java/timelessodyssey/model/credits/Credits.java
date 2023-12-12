@@ -3,9 +3,11 @@ package timelessodyssey.model.credits;
 public class Credits {
 
     private int score;
+    private int deaths;
 
-    public Credits(int starCounter) {
+    public Credits(int starCounter, int numberOfDeaths) {
         this.score = starCounter;
+        this.deaths = numberOfDeaths;
     }
 
     public void setScore(int score) {
@@ -29,5 +31,9 @@ public class Credits {
         strings[1] = "Joao Mendes";
         strings[2] = "Rodrigo Coelho";
         return strings;
+    }
+
+    public int getDeaths() {
+        return deaths;
     }
 }

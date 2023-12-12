@@ -28,7 +28,8 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
     private static final TextColor messageColor = new TextColor.RGB(234, 234, 234);
     private static final TextColor nameColor = new TextColor.RGB(155,173,183);
-    private static final TextColor scoreColor = new TextColor.RGB(99,155,255);
+    private static final TextColor scoreColor = new TextColor.RGB(91,110,225);
+    private static final TextColor deathColor = new TextColor.RGB(99,155,255);
 
     private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
 
@@ -39,6 +40,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
         drawMessages(gui);
         drawNames(gui);
         drawScore(gui);
+        drawDeaths(gui);
         logoSprite.draw(gui, 44, 16);
         gui.refresh();
     }
@@ -82,11 +84,21 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     private void drawScore(GUI gui) {
         int xAlignment = 15;
         int yAlignment = 65;
-        textViewer.draw("Score: " + String.format("%1$" + 2 + "s", getModel().getScore()).replace(' ', '0'),
+        textViewer.draw("Score:  " + String.format("%1$" + 2 + "s", getModel().getScore()).replace(' ', '0'),
                     xAlignment,
                     yAlignment,
                     scoreColor, gui);
     }
+
+    private void drawDeaths(GUI gui) {
+        int xAlignment = 15;
+        int yAlignment = 75;
+        textViewer.draw("Deaths: " + String.format("%1$" + 2 + "s", getModel().getDeaths()).replace(' ', '0'),
+                xAlignment,
+                yAlignment,
+                deathColor, gui);
+    }
+
 
 }
 

@@ -34,7 +34,7 @@ public class SceneController extends Controller<Scene> {
                 getModel().getPlayer().setPosition(getModel().getStartingPosition());
             if (getModel().isAtTransitionPosition()) {
                 if (getModel().getSceneCode() + 1 >= getNumberOfLevels())
-                    game.setState(new CreditsState(new Credits(getModel().getPlayer().getStarCounter())));
+                    game.setState(new CreditsState(new Credits(getModel().getPlayer().getStarCounter(), getModel().getPlayer().getNumberOfDeaths())));
                 else
                     game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1)).createScene(getModel().getPlayer())));
             }

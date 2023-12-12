@@ -43,6 +43,7 @@ public class PlayerController extends Controller<Scene> {
             for (Particle particle: deadState.getDeathParticles())
                 particle.setPosition(particle.move(player.getScene()));
             if (deadState.getDuration() <= 0) {
+                player.increaseDeaths();
                 player.setPosition(player.getScene().getStartingPosition());
                 player.setState(new IdleState(player));
             }
