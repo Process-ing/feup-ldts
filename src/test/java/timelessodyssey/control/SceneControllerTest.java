@@ -8,6 +8,7 @@ import timelessodyssey.control.game.ParticleController;
 import timelessodyssey.control.game.PlayerController;
 import timelessodyssey.control.game.SceneController;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.scene.Scene;
 
 import java.awt.*;
@@ -16,6 +17,7 @@ import java.net.URISyntaxException;
 
 public class SceneControllerTest {
     private Game game;
+    private Player player;
     private SceneController sceneController;
     private Scene scene;
     private PlayerController playerController;
@@ -25,6 +27,9 @@ public class SceneControllerTest {
     public void setup() {
         this.game = Mockito.mock(Game.class);
         this.scene = Mockito.mock(Scene.class);
+
+        this.player = Mockito.mock(Player.class);
+        Mockito.when(scene.getPlayer()).thenReturn(player);
         this.playerController = Mockito.mock(PlayerController.class);
         this.particleController = Mockito.mock(ParticleController.class);
 
