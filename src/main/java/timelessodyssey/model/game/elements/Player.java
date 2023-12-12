@@ -117,6 +117,10 @@ public class Player extends Element {
         return maxVelocity;
     }
 
+    public int getStarCounter() {
+        return starCounter;
+    }
+
     public void increaseStars() {
         starCounter++;
         System.out.println("starCounter = " + starCounter);
