@@ -111,7 +111,7 @@ public class SceneBuilder {
             String line = lines.get(y);
             Star[] lineStars = new Star[21];
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == 'x')
+                if (line.charAt(x) == '*')
                     lineStars[x] = new Star(x * 8, y * 8);
                 else {
                     lineStars[x] = null;

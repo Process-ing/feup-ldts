@@ -71,7 +71,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     private void drawScore(GUI gui) {
         int xAlignment = 15;
         int yAlignment = 50;
-        textViewer.draw("Score: " + getModel().getScore(),
+        textViewer.draw(String.format("Score:%1$" + 2 + "s", getModel().getScore()).replace(' ', '0'),
                     xAlignment,
                     yAlignment,
                     nameColor, gui);
