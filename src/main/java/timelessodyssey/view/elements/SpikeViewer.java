@@ -17,7 +17,7 @@ public class SpikeViewer implements ElementViewer<Spike> {
         spikeMap.put('-', "sprites/spikes/cave/Bottom_Spike2.png");
     }
     @Override
-    public void draw(Spike model, GUI gui) throws IOException {
+    public void draw(Spike model, GUI gui, long frameCount) throws IOException {
         Sprite sprite = new Sprite(spikeMap.get(model.getCharacter()));
         sprite.draw(gui, model.getPosition().x(), model.getPosition().y());
     }

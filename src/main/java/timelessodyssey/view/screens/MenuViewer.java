@@ -2,7 +2,6 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Vector;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.menu.EntryViewer;
@@ -24,7 +23,7 @@ public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
     }
 
     @Override
-    public void draw(GUI gui) throws IOException {
+    public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
         drawBackgroundAndFrame(gui);
         drawEntries(gui, getModel().getEntries());

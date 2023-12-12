@@ -11,7 +11,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static timelessodyssey.gui.GUI.Action.*;
+import static timelessodyssey.gui.GUI.Action.QUIT;
 
 public class CreditsController extends Controller<Credits> {
     public CreditsController(Credits model) {
@@ -19,7 +19,7 @@ public class CreditsController extends Controller<Credits> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, double time) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Game game, GUI.Action action, long frameCount) throws IOException, URISyntaxException, FontFormatException {
         if (action == QUIT) {
             game.setState(new MainMenuState(new MainMenu()));
         }

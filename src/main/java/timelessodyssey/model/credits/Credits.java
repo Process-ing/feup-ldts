@@ -1,7 +1,5 @@
 package timelessodyssey.model.credits;
 
-import com.googlecode.lanterna.TextColor;
-
 public class Credits {
 
 

@@ -23,7 +23,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
 
     @Override
-    public void draw(GUI gui) throws IOException {
+    public void draw(GUI gui, long frameCount) throws IOException {
         gui.clear();
         drawBackgroundAndFrame(gui);
         drawMessages(gui);

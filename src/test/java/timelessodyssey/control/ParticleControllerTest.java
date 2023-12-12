@@ -2,7 +2,7 @@ package timelessodyssey.control;
 
 import com.googlecode.lanterna.TextColor;
 import net.jqwik.api.*;
-import net.jqwik.api.constraints.DoubleRange;
+import net.jqwik.api.constraints.Positive;
 import timelessodyssey.Game;
 import timelessodyssey.control.game.ParticleController;
 import timelessodyssey.gui.GUI;
@@ -25,7 +25,7 @@ public class ParticleControllerTest {
     @Property
     public void snowInBounds(
             @ForAll List<@From("snow") Particle> particles,
-            @ForAll @DoubleRange(max = 16) double time,
+            @ForAll @Positive long frameCount,
             @ForAll @From("action") GUI.Action action
     ) throws IOException {
         Game game = mock(Game.class);
@@ -34,7 +34,7 @@ public class ParticleControllerTest {
         scene.setParticles(particles);
         ParticleController particleController = new ParticleController(scene);
 
-        particleController.step(game, action, time);
+        particleController.step(game, action, frameCount);
 
         for (Particle particle: particles) {
             Vector position = particle.getPosition();

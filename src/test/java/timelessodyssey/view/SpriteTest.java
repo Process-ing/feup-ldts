@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Vector;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

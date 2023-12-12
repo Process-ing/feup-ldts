@@ -59,7 +59,7 @@ public class TileViewer implements ElementViewer<Tile>  {
     }
 
     @Override
-    public void draw(Tile model, GUI gui) throws IOException {
+    public void draw(Tile model, GUI gui, long frameCount) throws IOException {
         Sprite sprite = new Sprite(tileMap.get(model.getCharacter()));
         sprite.draw(gui, model.getPosition().x(), model.getPosition().y());
     }

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public interface GUI {
-    enum Action { UP, RIGHT, DOWN, LEFT, NONE, QUIT, SELECT, JUMP }
+    enum Action { UP, RIGHT, DOWN, LEFT, NONE, QUIT, SELECT, JUMP, DASH }
 
     enum Resolution {
         WXGA(1280, 720),
@@ -39,7 +39,7 @@ public interface GUI {
     void drawPixel(double x, double y, TextColor color);
     void drawRectangle(double x, double y, int width, int height, TextColor color);
     void clear();
-    Action getNextAction() throws IOException;
+    Action getNextAction();
     void refresh() throws IOException;
     void close() throws IOException;
 }
