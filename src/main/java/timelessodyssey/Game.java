@@ -19,7 +19,7 @@ public class Game {
     private final GUI gui;
     private State state;
     private BackgroundSoundPlayer backgroundSoundPlayer;
-    private static final int NUMBER_OF_LEVELS = 3;
+    private static final int NUMBER_OF_LEVELS = 11;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);

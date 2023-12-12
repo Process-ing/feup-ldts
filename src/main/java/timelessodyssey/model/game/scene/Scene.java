@@ -23,8 +23,11 @@ public class Scene {
     private Tile[][] tiles;
     private Spike[][] spikes;
     private Star[][] stars;
+    private Tile[][] goals;
     private List<Particle> particles;
-    private Vector transitionPosition;
+    private Vector transitionPositionBegin;
+    private Vector transitionPositionEnd;
+
     private Vector startingPosition;
 
     public Scene(int width, int height, int sceneCode) {
@@ -34,6 +37,7 @@ public class Scene {
         this.gravity = 0.25;
         this.friction = 0.75;
         this.tiles = new Tile[height][width];
+        this.goals = new Tile[height][width];
         this.spikes = new Spike[height][width];
         this.stars = new Star[height][width];
         this.particles = new ArrayList<>();
@@ -59,7 +63,7 @@ public class Scene {
         return sceneCode;
     }
 
-    public timelessodyssey.model.game.elements.player.Player getPlayer() {
+    public Player getPlayer() {
         return player;
     }
 
@@ -91,6 +95,14 @@ public class Scene {
         this.stars = stars;
     }
 
+    public Tile[][] getGoals() {
+        return goals;
+    }
+
+    public void setGoals(Tile[][] goals) {
+        this.goals = goals;
+    }
+
     public List<Particle> getParticles() {
         return particles;
     }
@@ -99,16 +111,28 @@ public class Scene {
         this.particles = particles;
     }
 
-    public Vector getTransitionPosition() {
-        return transitionPosition;
+    public Vector getTransitionPositionBegin() {
+        return transitionPositionBegin;
     }
 
-    public void setTransitionPosition(Vector transitionPosition) {
-        this.transitionPosition = transitionPosition;
+    public void setTransitionPositionBegin(Vector transitionPositionBegin) {
+        this.transitionPositionBegin = transitionPositionBegin;
+    }
+
+    public Vector getTransitionPositionEnd() {
+        return transitionPositionEnd;
+    }
+
+    public void setTransitionPositionEnd(Vector transitionPositionEnd) {
+        this.transitionPositionEnd = transitionPositionEnd;
     }
 
     public boolean isAtTransitionPosition() {
-        return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
+        boolean topLeft =   player.getPosition().x() >= transitionPositionBegin.x() && player.getPosition().x() <= transitionPositionEnd.x() &&
+                            player.getPosition().y() >= transitionPositionBegin.y() && player.getPosition().y() <= transitionPositionEnd.y();
+        boolean bottomRight =   player.getPosition().x() + player.getWidth() >= transitionPositionBegin.x() && player.getPosition().x() + player.getWidth() <= transitionPositionEnd.x() &&
+                                player.getPosition().y() - player.getHeight() >= transitionPositionBegin.y() && player.getPosition().y() - player.getHeight() <= transitionPositionEnd.y();
+        return topLeft || bottomRight;
     }
 
     public Vector getStartingPosition() {
