@@ -28,6 +28,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
         drawBackgroundAndFrame(gui);
         drawMessages(gui);
         drawNames(gui);
+        drawScore(gui);
         gui.refresh();
     }
 
@@ -41,8 +42,8 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     }
 
     private void drawMessages(GUI gui) {
-        int yAlignment = 20;
-        int spacing = 20;
+        int yAlignment = 15;
+        int spacing = 15;
         for (int idx = 0; idx < getModel().getMessages().length ; idx++){
             String message = getModel().getMessages()[idx];
             // This method should access the charWidth and Spacing (can't be done through the interface)
@@ -65,6 +66,15 @@ public class CreditsViewer extends ScreenViewer<Credits> {
                     yAlignment + spacing * idx,
                     nameColor, gui);
         }
+    }
+
+    private void drawScore(GUI gui) {
+        int xAlignment = 15;
+        int yAlignment = 50;
+        textViewer.draw("Score: " + String.format("%1$" + 2 + "s", getModel().getScore()).replace(' ', '0'),
+                    xAlignment,
+                    yAlignment,
+                    nameColor, gui);
     }
 }
 

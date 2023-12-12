@@ -1,10 +1,11 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Vector;
-import timelessodyssey.model.game.elements.Spike;
-import timelessodyssey.model.game.elements.Tile;
+import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.player.Player;
+import timelessodyssey.model.game.elements.Spike;
+import timelessodyssey.model.game.elements.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Scene {
     private Player player;
     private Tile[][] tiles;
     private Spike[][] spikes;
+    private Star[][] stars;
     private List<Particle> particles;
     private Vector transitionPosition;
     private Vector startingPosition;
@@ -33,6 +35,7 @@ public class Scene {
         this.friction = 0.75;
         this.tiles = new Tile[height][width];
         this.spikes = new Spike[height][width];
+        this.stars = new Star[height][width];
         this.particles = new ArrayList<>();
     }
 
@@ -56,7 +59,7 @@ public class Scene {
         return sceneCode;
     }
 
-    public Player getPlayer() {
+    public timelessodyssey.model.game.elements.player.Player getPlayer() {
         return player;
     }
 
@@ -78,6 +81,14 @@ public class Scene {
 
     public void setSpikes(Spike[][] spikes) {
         this.spikes = spikes;
+    }
+
+    public Star[][] getStars() {
+        return stars;
+    }
+
+    public void setStars(Star[][] stars) {
+        this.stars = stars;
     }
 
     public List<Particle> getParticles() {
@@ -144,4 +155,23 @@ public class Scene {
 
         return spikes[tiley1][tilex1] != null || spikes[tiley2][tilex2] != null;
     }
+
+    public boolean updateStars() {
+        double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();
+        double width = player.getWidth(), height = player.getHeight();
+        double x1 = x, x2 = x + width - 1, y1 = y, y2 = y + height - 1;
+        int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
+        if (stars[tiley1][tilex1] != null){
+            stars[tiley1][tilex1] = null;
+            getPlayer().increaseStars();
+            return true;
+        }
+        if (stars[tiley2][tilex2] != null){
+            stars[tiley2][tilex2] = null;
+            getPlayer().increaseStars();
+            return true;
+        }
+        return false;
+    }
+
 }
