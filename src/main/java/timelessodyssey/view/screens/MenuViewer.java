@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.model.menu.Menu;
+import timelessodyssey.view.Sprite;
 import timelessodyssey.view.menu.EntryViewer;
 
 import java.io.IOException;
@@ -12,14 +13,16 @@ import java.util.List;
 public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
     private static final TextColor unselectedColor = new TextColor.RGB(234,234,234);
     private static final TextColor selectedColor = new TextColor.RGB(255,234,69);
-    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 70);
+    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
     private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
-
     private final EntryViewer entryViewer;
+
+    private final Sprite logoSprite;
 
     public MenuViewer(T model) throws IOException {
         super(model);
         this.entryViewer = new EntryViewer();
+        this.logoSprite = loadLogo();
     }
 
     @Override
@@ -27,7 +30,12 @@ public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
         gui.clear();
         drawBackgroundAndFrame(gui);
         drawEntries(gui, getModel().getEntries());
+        logoSprite.draw(gui, 44, 15);
         gui.refresh();
+    }
+
+    public Sprite loadLogo() throws IOException {
+        return new Sprite("menu/logo.png");
     }
 
     private void drawBackgroundAndFrame(GUI gui) {
