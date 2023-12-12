@@ -36,7 +36,7 @@ public class SceneController extends Controller<Scene> {
                 if (getModel().getSceneCode() + 1 >= getNumberOfLevels())
                     game.setState(new CreditsState(new Credits()));
                 else
-                    game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1) % 3).createScene()));
+                    game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1)).createScene()));
             }
             particleController.step(game, action, frameCount);
         }
