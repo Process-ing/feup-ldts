@@ -22,7 +22,9 @@ public class Scene {
     private Tile[][] tiles;
     private Spike[][] spikes;
     private List<Particle> particles;
-    private Vector transitionPosition;
+    private Vector transitionPositionBegin;
+    private Vector transitionPositionEnd;
+
     private Vector startingPosition;
 
     public Scene(int width, int height, int sceneCode) {
@@ -88,16 +90,25 @@ public class Scene {
         this.particles = particles;
     }
 
-    public Vector getTransitionPosition() {
-        return transitionPosition;
+    public Vector getTransitionPositionBegin() {
+        return transitionPositionBegin;
     }
 
-    public void setTransitionPosition(Vector transitionPosition) {
-        this.transitionPosition = transitionPosition;
+    public void setTransitionPositionBegin(Vector transitionPositionBegin) {
+        this.transitionPositionBegin = transitionPositionBegin;
+    }
+
+    public Vector getTransitionPositionEnd() {
+        return transitionPositionEnd;
+    }
+
+    public void setTransitionPositionEnd(Vector transitionPositionEnd) {
+        this.transitionPositionEnd = transitionPositionEnd;
     }
 
     public boolean isAtTransitionPosition() {
-        return  player.getPosition().x() >= transitionPosition.x() && player.getPosition().y() >= transitionPosition.y();
+        return  player.getPosition().x() >= transitionPositionBegin.x() && player.getPosition().x() <= transitionPositionEnd.x() &&
+                player.getPosition().y() >= transitionPositionBegin.y() && player.getPosition().y() <= transitionPositionEnd.y();
     }
 
     public Vector getStartingPosition() {

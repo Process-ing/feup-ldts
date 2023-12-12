@@ -32,16 +32,16 @@ public class SceneBuilder {
         scene.setPlayer(createPlayer(scene));
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
-        scene.setTransitionPosition(createTransitionPosition());
-        scene.setStartingPosition(createStartingPosition());
+        scene.setTransitionPositionBegin(createTransitionPositionBegin());
+        scene.setTransitionPositionEnd(createTransitionPositionEnd());
+        scene.setStartingPosition(scene.getPlayer().getPosition());
         scene.setParticles(createParticles(numberParticles, scene));
-
         return scene;
     }
 
     public SceneBuilder(int n) throws IOException {
         this.sceneCode = n;
-        URL resource = getClass().getClassLoader().getResource("levels/scene" + n + ".lvl");
+        URL resource = getClass().getClassLoader().getResource("levels/scene10.lvl");
         assert resource != null;
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
@@ -113,11 +113,11 @@ public class SceneBuilder {
         return null;
     }
 
-    private Vector createTransitionPosition() {
-        return new Vector(Integer.parseInt(lines.get(lines.size()-4)) * 8,
-                Integer.parseInt(lines.get(lines.size()-3)) * 8);
+    private Vector createTransitionPositionBegin() {
+        return new Vector(Integer.parseInt(lines.get(lines.size()-4)) * Tile.SIZE,
+                Integer.parseInt(lines.get(lines.size()-3)) * Tile.SIZE);
     }
-    private Vector createStartingPosition() {
+    private Vector createTransitionPositionEnd() {
         return new Vector(Integer.parseInt(lines.get(lines.size()-2)) * Tile.SIZE,
                             Integer.parseInt(lines.get(lines.size()-1)) * Tile.SIZE);
     }
