@@ -25,10 +25,10 @@ public class ParticleViewerTest {
     @Test
     public void draw() {
         int size = 4;
-        double x = 72.0, y = 88.0, velocity = 0.2;
+        double x = 72.0, y = 88.0, vx = 0.2, vy = 0.5;
         long frameCount = 0;
         TextColor color = TextColor.ANSI.BLUE;
-        Particle particle = new Particle(x, y, size, color, velocity) {
+        Particle particle = new Particle(x, y, size, color, new Vector(vx, vy)) {
             @Override
             public Vector move(Scene scene) {
                 return null;
