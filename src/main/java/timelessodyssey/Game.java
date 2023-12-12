@@ -24,7 +24,7 @@ public class Game {
     public Game() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);
         this.state = new MainMenuState(new MainMenu());
-        this.backgroundSoundPlayer = new BackgroundSoundPlayer("endScreenSound.wav");
+        this.backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");
     }
 
     public static void main(String[] args) {
