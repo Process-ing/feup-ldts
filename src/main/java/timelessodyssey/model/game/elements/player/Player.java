@@ -16,6 +16,7 @@ public class Player extends Element {
     private PlayerState state;
     private boolean isFacingRight;
     private Scene scene;
+    private int stars;
 
     public Player(double x, double y, Scene scene) {
         super(x, y);
@@ -26,6 +27,7 @@ public class Player extends Element {
         this.dashBoost = 5;
         this.isFacingRight = true;
         this.scene = scene;
+        this.stars = 0;
         this.state = new IdleState(this);
     }
 
@@ -125,5 +127,19 @@ public class Player extends Element {
 
     public double getDashBoost() {
         return dashBoost;
+    }
+
+    public void increaseStars() {
+        this.stars++;
+        System.out.println("stars = " + stars);
+    }
+
+    public int getStarCounter() {
+        return this.stars;
+    }
+
+    public void resetValues(){
+        this.isFacingRight = true;
+        this.state = new IdleState(this);
     }
 }

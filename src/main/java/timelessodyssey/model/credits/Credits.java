@@ -2,6 +2,19 @@ package timelessodyssey.model.credits;
 
 public class Credits {
 
+    private int score;
+
+    public Credits(int starCounter) {
+        this.score = starCounter;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore() {
+        return score;
+    }
 
     public String[] getMessages() {
         String[] strings = new String[2];

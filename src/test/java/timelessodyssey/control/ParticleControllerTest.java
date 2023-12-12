@@ -1,6 +1,5 @@
 package timelessodyssey.control;
 
-import com.googlecode.lanterna.TextColor;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Positive;
 import timelessodyssey.Game;
@@ -55,7 +54,7 @@ public class ParticleControllerTest {
                 Arbitraries.integers().between(0, 255),
                 Arbitraries.integers().between(0, 255),
                 Arbitraries.doubles().between(0, 1000)
-        ).as((x, y, size, r, g, b, velocity) -> new Snow(x, y, size, new TextColor.RGB(r, g, b), velocity));
+        ).as((x, y, size, r, g, b, velocity) -> new Snow(x, y, size, velocity));
     }
 
     @Provide
