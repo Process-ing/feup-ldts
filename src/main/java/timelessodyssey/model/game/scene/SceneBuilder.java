@@ -1,6 +1,5 @@
 package timelessodyssey.model.game.scene;
 
-import com.googlecode.lanterna.TextColor;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;
@@ -155,7 +154,6 @@ public class SceneBuilder {
                     random.nextInt(scene.getWidth() * Tile.SIZE),
                     random.nextInt(scene.getHeight() * Tile.SIZE),
                     random.nextInt(2, 5) / 2,
-                    TextColor.ANSI.WHITE_BRIGHT,
                     random.nextDouble(.5, 2)
             );
             particles.add(particle);

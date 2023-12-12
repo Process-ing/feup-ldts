@@ -8,9 +8,9 @@ import timelessodyssey.model.game.scene.Scene;
 public abstract class Particle extends Element {
     private final int size;
     private final TextColor color;
-    private final double velocity;
+    private final Vector velocity;
 
-    public Particle(double x, double y, int size, TextColor color, double velocity) {
+    public Particle(double x, double y, int size, TextColor color, Vector velocity) {
         super(x, y);
         this.size = size;
         this.color = color;
@@ -25,7 +25,7 @@ public abstract class Particle extends Element {
         return color;
     }
 
-    public double getVelocity() {
+    public Vector getVelocity() {
         return velocity;
     }
 
