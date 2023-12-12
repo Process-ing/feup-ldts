@@ -38,8 +38,10 @@ public class GameViewer extends ScreenViewer<Scene> {
             }
         }
 
-        drawElements(gui, getModel().getTiles(), tileViewer, frameCount);
+        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
         drawElements(gui, getModel().getSpikes(), spikeViewer, frameCount);
+        drawElements(gui, getModel().getTiles(), tileViewer, frameCount);
+        drawElements(gui, getModel().getGoals(), tileViewer, frameCount);
         drawElements(gui, getModel().getStars(), starViewer, frameCount);
         drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
         drawElements(gui, getModel().getParticles(), particleViewer, frameCount);
@@ -47,16 +49,16 @@ public class GameViewer extends ScreenViewer<Scene> {
         gui.refresh();
     }
 
-    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer, long frameCount) {
+    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer, long frameCount) throws IOException {
         viewer.draw(element, gui, frameCount);
     }
 
-    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer, long frameCount) {
+    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer, long frameCount) throws IOException {
         for (T element: elements)
             drawElement(gui, element, viewer, frameCount);
     }
 
-    private <T extends Element> void drawElements(GUI gui, T[][] elements, ElementViewer<T> viewer, long frameCount) {
+    private <T extends Element> void drawElements(GUI gui, T[][] elements, ElementViewer<T> viewer, long frameCount) throws IOException {
         for (T[] elementLine : elements) {
             for (T element : elementLine) {
                 if (element != null)

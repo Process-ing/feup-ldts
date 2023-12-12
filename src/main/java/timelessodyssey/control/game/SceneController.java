@@ -30,6 +30,8 @@ public class SceneController extends Controller<Scene> {
             game.setState(null);
         } else {
             playerController.step(game, action, frameCount);
+            if (getModel().isDying())
+                getModel().getPlayer().setPosition(getModel().getStartingPosition());
             if (getModel().isAtTransitionPosition()) {
                 if (getModel().getSceneCode() + 1 >= getNumberOfLevels())
                     game.setState(new CreditsState(new Credits(getModel().getPlayer().getStarCounter())));

@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static java.lang.Character.isLetterOrDigit;
+import static java.lang.Character.isSpaceChar;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class SceneBuilder {
@@ -30,11 +32,12 @@ public class SceneBuilder {
         scene.setPlayer(createPlayer(scene, player));
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
+        scene.setGoals(createGoals());
+        scene.setTransitionPositionBegin(createTransitionPositionBegin());
+        scene.setTransitionPositionEnd(createTransitionPositionEnd());
+        scene.setStartingPosition(scene.getPlayer().getPosition());
         scene.setStars(createStars());
-        scene.setTransitionPosition(createTransitionPosition());
-        scene.setStartingPosition(createStartingPosition());
         scene.setParticles(createParticles(numberParticles, scene));
-
         return scene;
     }
 
@@ -72,8 +75,8 @@ public class SceneBuilder {
             String line = lines.get(y);
             Tile[] lineTiles = new Tile[21];
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == '#') {
-                    lineTiles[x] = new Tile(x * 8, y * 8);
+                if (line.charAt(x) != 'P' && isLetterOrDigit(line.charAt(x)) && line.charAt(x) != 'W') {
+                    lineTiles[x] = new Tile(x * 8, y * 8, line.charAt(x));
                 } else {
                     lineTiles[x] = null;
                 }
@@ -91,8 +94,8 @@ public class SceneBuilder {
             String line = lines.get(y);
             Spike[] lineSpikes = new Spike[21];
             for (int x = 0; x < line.length(); x++) {
-                if (line.charAt(x) == '^')
-                    lineSpikes[x] = new Spike(x * 8, y * 8);
+                if (!isLetterOrDigit(line.charAt(x)) && !isSpaceChar(line.charAt(x)) && line.charAt(x) != '*')
+                    lineSpikes[x] = new Spike(x * 8, y * 8, line.charAt(x));
                 else {
                     lineSpikes[x] = null;
                 }
@@ -137,11 +140,30 @@ public class SceneBuilder {
         return null;
     }
 
-    private Vector createTransitionPosition() {
-        return new Vector(Integer.parseInt(lines.get(lines.size()-4)) * 8,
-                Integer.parseInt(lines.get(lines.size()-3)) * 8);
+    private Tile[][] createGoals() {
+        Tile[][] goals = new Tile[lines.size()-4][lines.get(0).length()+1];
+
+        for (int y = 0; y < lines.size() - 4; y++) {
+            String line = lines.get(y);
+            Tile[] lineGoals = new Tile[21];
+            for (int x = 0; x < line.length(); x++) {
+                if (line.charAt(x) == 'W') {
+                    lineGoals[x] = new Tile(x * 8, y * 8, line.charAt(x));
+                } else {
+                    lineGoals[x] = null;
+                }
+            }
+            lineGoals[20] = null;
+            goals[y] = lineGoals;
+        }
+        return goals;
     }
-    private Vector createStartingPosition() {
+
+    private Vector createTransitionPositionBegin() {
+        return new Vector(Integer.parseInt(lines.get(lines.size()-4)) * Tile.SIZE,
+                Integer.parseInt(lines.get(lines.size()-3)) * Tile.SIZE);
+    }
+    private Vector createTransitionPositionEnd() {
         return new Vector(Integer.parseInt(lines.get(lines.size()-2)) * Tile.SIZE,
                             Integer.parseInt(lines.get(lines.size()-1)) * Tile.SIZE);
     }
