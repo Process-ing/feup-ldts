@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.game.PlayerController;
-import timelessodyssey.model.game.elements.Player;
+import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.scene.Scene;
 
 public class PlayerControllerTest {
@@ -20,6 +20,5 @@ public class PlayerControllerTest {
         Mockito.when(scene.getPlayer()).thenReturn(player);
         this.game = Mockito.mock(Game.class);
         this.playerController = new PlayerController(scene);
-        Mockito.when(scene.isColliding(Mockito.any(), Mockito.any())).thenReturn(true);
     }
 }
