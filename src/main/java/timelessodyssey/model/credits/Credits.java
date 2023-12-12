@@ -5,9 +5,17 @@ public class Credits {
     private int score;
     private int deaths;
 
-    public Credits(int starCounter, int numberOfDeaths) {
+    private int seconds;
+    private int minutes;
+
+    public Credits(int starCounter, int numberOfDeaths, long duration) {
         this.score = starCounter;
         this.deaths = numberOfDeaths;
+        this.seconds = (int) ((duration / 1000) % 60);
+        this.minutes = (int) ((duration / 1000) / 60);
+        System.out.println(duration);
+        System.out.println(seconds);
+        System.out.println(minutes);
     }
 
     public void setScore(int score) {
@@ -28,12 +36,20 @@ public class Credits {
     public String[] getNames() {
         String[] strings = new String[3];
         strings[0] = "Bruno Oliveira";
-        strings[1] = "Joao Mendes";
+        strings[1] = "   Joao Mendes";
         strings[2] = "Rodrigo Coelho";
         return strings;
     }
 
     public int getDeaths() {
         return deaths;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public int getMinutes() {
+        return minutes;
     }
 }

@@ -29,8 +29,8 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     private static final TextColor messageColor = new TextColor.RGB(234, 234, 234);
     private static final TextColor nameColor = new TextColor.RGB(155,173,183);
     private static final TextColor scoreColor = new TextColor.RGB(91,110,225);
-    private static final TextColor deathColor = new TextColor.RGB(99,155,255);
-
+    private static final TextColor deathColor = new TextColor.RGB(95,133,240);
+    private static final TextColor timeColor = new TextColor.RGB(99,155,255);
     private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
 
     @Override
@@ -41,9 +41,11 @@ public class CreditsViewer extends ScreenViewer<Credits> {
         drawNames(gui);
         drawScore(gui);
         drawDeaths(gui);
+        drawDuration(gui);
         logoSprite.draw(gui, 44, 16);
         gui.refresh();
     }
+
 
 
     private void drawBackgroundAndFrame(GUI gui) {
@@ -70,7 +72,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     }
 
     private void drawNames(GUI gui) {
-        int xAlignment = 100;
+        int xAlignment = 95;
         int yAlignment = 60;
         int spacing = 10;
         for (int idx = 0; idx < getModel().getNames().length ; idx++){
@@ -82,8 +84,8 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     }
 
     private void drawScore(GUI gui) {
-        int xAlignment = 15;
-        int yAlignment = 65;
+        int xAlignment = 10;
+        int yAlignment = 60;
         textViewer.draw("Score:  " + String.format("%1$" + 2 + "s", getModel().getScore()).replace(' ', '0'),
                     xAlignment,
                     yAlignment,
@@ -91,12 +93,23 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     }
 
     private void drawDeaths(GUI gui) {
-        int xAlignment = 15;
-        int yAlignment = 75;
+        int xAlignment = 10;
+        int yAlignment = 70;
         textViewer.draw("Deaths: " + String.format("%1$" + 2 + "s", getModel().getDeaths()).replace(' ', '0'),
                 xAlignment,
                 yAlignment,
                 deathColor, gui);
+    }
+
+
+    private void drawDuration(GUI gui) {
+        int xAlignment = 10;
+        int yAlignment = 80;
+        textViewer.draw("Time:   " + String.format("%1$" + 2 + "s", getModel().getMinutes()).replace(' ', '0')
+                + ":" + String.format("%1$" + 2 + "s", getModel().getSeconds()).replace(' ', '0'),
+                xAlignment,
+                yAlignment,
+                timeColor, gui);
     }
 
 
