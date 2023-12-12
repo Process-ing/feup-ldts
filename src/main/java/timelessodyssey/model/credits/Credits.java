@@ -13,9 +13,6 @@ public class Credits {
         this.deaths = numberOfDeaths;
         this.seconds = (int) ((duration / 1000) % 60);
         this.minutes = (int) ((duration / 1000) / 60);
-        System.out.println(duration);
-        System.out.println(seconds);
-        System.out.println(minutes);
     }
 
     public void setScore(int score) {
