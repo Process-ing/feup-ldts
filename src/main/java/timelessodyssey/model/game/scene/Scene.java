@@ -21,6 +21,7 @@ public class Scene {
     private Player player;
     private Tile[][] tiles;
     private Spike[][] spikes;
+    private Tile[][] goals;
     private List<Particle> particles;
     private Vector transitionPositionBegin;
     private Vector transitionPositionEnd;
@@ -34,6 +35,7 @@ public class Scene {
         this.gravity = 0.25;
         this.friction = 0.75;
         this.tiles = new Tile[height][width];
+        this.goals = new Tile[height][width];
         this.spikes = new Spike[height][width];
         this.particles = new ArrayList<>();
     }
@@ -82,6 +84,14 @@ public class Scene {
         this.spikes = spikes;
     }
 
+    public Tile[][] getGoals() {
+        return goals;
+    }
+
+    public void setGoals(Tile[][] goals) {
+        this.goals = goals;
+    }
+
     public List<Particle> getParticles() {
         return particles;
     }
@@ -107,8 +117,11 @@ public class Scene {
     }
 
     public boolean isAtTransitionPosition() {
-        return  player.getPosition().x() >= transitionPositionBegin.x() && player.getPosition().x() <= transitionPositionEnd.x() &&
-                player.getPosition().y() >= transitionPositionBegin.y() && player.getPosition().y() <= transitionPositionEnd.y();
+        boolean topLeft =   player.getPosition().x() >= transitionPositionBegin.x() && player.getPosition().x() <= transitionPositionEnd.x() &&
+                            player.getPosition().y() >= transitionPositionBegin.y() && player.getPosition().y() <= transitionPositionEnd.y();
+        boolean bottomRight =   player.getPosition().x() + player.getWidth() >= transitionPositionBegin.x() && player.getPosition().x() + player.getWidth() <= transitionPositionEnd.x() &&
+                                player.getPosition().y() - player.getHeight() >= transitionPositionBegin.y() && player.getPosition().y() - player.getHeight() <= transitionPositionEnd.y();
+        return topLeft || bottomRight;
     }
 
     public Vector getStartingPosition() {

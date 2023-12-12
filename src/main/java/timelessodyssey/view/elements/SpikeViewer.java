@@ -9,16 +9,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SpikeViewer implements ElementViewer<Spike> {
-    private final Map<Character, String> spikeMap;
+    private final Map<Character, Sprite> spikeMap;
     {
         spikeMap = new HashMap<>();
-        spikeMap.put('^', "sprites/spikes/futuristic/Bottom_Spike.png");
-        spikeMap.put('+', "sprites/spikes/cave/Bottom_Spike1.png");
-        spikeMap.put('-', "sprites/spikes/cave/Bottom_Spike2.png");
+        try {
+            spikeMap.put('^', new Sprite("sprites/spikes/futuristic/Bottom_Spike.png"));
+            spikeMap.put('+', new Sprite("sprites/spikes/cave/Bottom_Spike1.png"));
+            spikeMap.put('-', new Sprite("sprites/spikes/cave/Bottom_Spike2.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     @Override
     public void draw(Spike model, GUI gui, long frameCount) throws IOException {
-        Sprite sprite = new Sprite(spikeMap.get(model.getCharacter()));
+        Sprite sprite = spikeMap.get(model.getCharacter());
         sprite.draw(gui, model.getPosition().x(), model.getPosition().y());
     }
 }
