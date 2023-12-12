@@ -3,6 +3,7 @@ package timelessodyssey;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.LanternaGUI;
 import timelessodyssey.model.menu.MainMenu;
+import timelessodyssey.sound.JavaSoundPlayer;
 import timelessodyssey.states.MainMenuState;
 import timelessodyssey.states.State;
 
