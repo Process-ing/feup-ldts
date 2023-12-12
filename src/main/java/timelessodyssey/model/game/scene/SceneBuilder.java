@@ -2,12 +2,12 @@ package timelessodyssey.model.game.scene;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.model.Vector;
-import timelessodyssey.model.game.elements.Player;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.particles.Snow;
+import timelessodyssey.model.game.elements.player.Player;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,11 +24,11 @@ public class SceneBuilder {
     private final List<String> lines;
     private final int sceneCode;
 
-    public Scene createScene(Player player) {
+    public Scene createScene() {
         int numberParticles = 30;
         Scene scene = new Scene(getWidth(), getHeight(), sceneCode);
 
-        scene.setPlayer(createPlayer(player));
+        scene.setPlayer(createPlayer(scene));
         scene.setTiles(createWalls());
         scene.setSpikes(createSpikes());
         scene.setStars(createStars());
@@ -123,12 +123,12 @@ public class SceneBuilder {
         return stars;
     }
 
-    private Player createPlayer(Player player) {
+    private Player createPlayer(Scene scene) {
+        Player player = scene.getPlayer();
         for (int y = 0; y < lines.size(); y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
                 if (line.charAt(x) == 'P'){
-                    player.resetValues();
                     player.setPosition(new Vector(x * Tile.SIZE, y * Tile.SIZE));
                     return player;
                 }
