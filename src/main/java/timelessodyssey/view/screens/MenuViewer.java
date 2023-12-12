@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
     private static final TextColor unselectedColor = new TextColor.RGB(234,234,234);
-    private static final TextColor selectedColor = new TextColor.RGB(255,234,69);
+    private static final TextColor selectedColor = new TextColor.RGB(99,155,255);
     private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
     private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
     private final EntryViewer entryViewer;
@@ -30,7 +30,7 @@ public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
         gui.clear();
         drawBackgroundAndFrame(gui);
         drawEntries(gui, getModel().getEntries());
-        logoSprite.draw(gui, 44, 15);
+        logoSprite.draw(gui, 44, 16);
         gui.refresh();
     }
 

@@ -3,6 +3,7 @@ package timelessodyssey.view.screens;
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.credits.Credits;
+import timelessodyssey.view.Sprite;
 import timelessodyssey.view.text.GameTextViewer;
 import timelessodyssey.view.text.TextViewer;
 
@@ -11,14 +12,23 @@ import java.io.IOException;
 public class CreditsViewer extends ScreenViewer<Credits> {
 
     private final TextViewer textViewer;
+
+    private final Sprite logoSprite;
+
     public CreditsViewer(Credits model) throws IOException {
         super(model);
         this.textViewer = new GameTextViewer();
+        this.logoSprite = loadLogo();
     }
 
-    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 28);
-    private static final TextColor messageColor = new TextColor.RGB(255, 255, 255);
-    private static final TextColor nameColor = new TextColor.RGB(200, 200, 200);
+    public Sprite loadLogo() throws IOException {
+        return new Sprite("menu/logo.png");
+    }
+
+    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
+    private static final TextColor messageColor = new TextColor.RGB(234, 234, 234);
+    private static final TextColor nameColor = new TextColor.RGB(155,173,183);
+    private static final TextColor scoreColor = new TextColor.RGB(99,155,255);
 
     private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
 
@@ -29,6 +39,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
         drawMessages(gui);
         drawNames(gui);
         drawScore(gui);
+        logoSprite.draw(gui, 44, 16);
         gui.refresh();
     }
 
@@ -42,8 +53,8 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     }
 
     private void drawMessages(GUI gui) {
-        int yAlignment = 15;
-        int spacing = 15;
+        int yAlignment = 6;
+        int spacing = 40;
         for (int idx = 0; idx < getModel().getMessages().length ; idx++){
             String message = getModel().getMessages()[idx];
             // This method should access the charWidth and Spacing (can't be done through the interface)
@@ -70,11 +81,12 @@ public class CreditsViewer extends ScreenViewer<Credits> {
 
     private void drawScore(GUI gui) {
         int xAlignment = 15;
-        int yAlignment = 50;
+        int yAlignment = 65;
         textViewer.draw("Score: " + String.format("%1$" + 2 + "s", getModel().getScore()).replace(' ', '0'),
                     xAlignment,
                     yAlignment,
-                    nameColor, gui);
+                    scoreColor, gui);
     }
+
 }
 
