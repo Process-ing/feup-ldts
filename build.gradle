@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'net.ltgt.errorprone' version '3.1.0'
     id 'jacoco'
+    id 'info.solidsoft.pitest' version '1.15.0'
 }
 
 group = 'timelessodyssey'
@@ -39,6 +40,11 @@ test {
         includeEngines ('junit-jupiter', 'jqwik')
     }
     finalizedBy jacocoTestReport
+}
+
+pitest {
+    junit5PluginVersion = '1.2.0'
+    pitestVersion = '1.15.0'
 }
 
 jacocoTestReport {
