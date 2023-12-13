@@ -1,7 +1,10 @@
 package timelessodyssey;
 
-import timelessodyssey.gui.GUI;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import timelessodyssey.gui.LanternaGUI;
+import timelessodyssey.gui.LanternaScreenCreator;
+import timelessodyssey.gui.ScreenCreator;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.sound.BackgroundSoundPlayer;
 import timelessodyssey.states.MainMenuState;
@@ -16,13 +19,15 @@ import java.util.logging.Logger;
 public class Game {
     public static final int PIXEL_WIDTH = 160;
     public static final int PIXEL_HEIGHT = 90;
-    private final GUI gui;
+    private final LanternaGUI gui;
     private State state;
     private BackgroundSoundPlayer backgroundSoundPlayer;
     private static final int NUMBER_OF_LEVELS = 11;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
-        this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);
+        ScreenCreator screenCreator = new LanternaScreenCreator(
+            new DefaultTerminalFactory(), new TerminalSize(PIXEL_WIDTH, PIXEL_HEIGHT));
+        this.gui = new LanternaGUI(screenCreator);
         this.state = new MainMenuState(new MainMenu());
         this.backgroundSoundPlayer = new BackgroundSoundPlayer("endScreenSound.wav");
     }
@@ -40,11 +45,12 @@ public class Game {
         this.state = state;
     }
 
-    public GUI.Resolution getResolution() {
+    public ScreenCreator.Resolution getResolution() {
         return gui.getResolution();
     }
 
-    public void setResolution(GUI.Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
+    public void setResolution(ScreenCreator.Resolution resolution)
+        throws IOException, URISyntaxException, FontFormatException {
         gui.setResolution(resolution);
     }
 

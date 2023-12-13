@@ -2,6 +2,8 @@ package timelessodyssey.view.menu;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.LanternaGUI;
+import timelessodyssey.gui.ScreenCreator;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.view.text.GameTextViewer;
 import timelessodyssey.view.text.TextViewer;
@@ -27,15 +29,18 @@ public class EntryViewer {
     }
 
     private String getResolutionLabel(GUI gui) {
-        final GUI.Resolution[] resolutions = GUI.Resolution.values();
-        if (gui.getResolution() == null)
-            return "Resolution:   Automatic >";
+        if (gui instanceof LanternaGUI lanternaGUI) {
+            final ScreenCreator.Resolution[] resolutions = ScreenCreator.Resolution.values();
+            if (lanternaGUI.getResolution() == null)
+                return "Resolution:   Automatic >";
 
-        return String.format(
-                "Resolution: < %dX%d %c ",
-                gui.getResolution().getWidth(),
-                gui.getResolution().getHeight(),
-                resolutions[resolutions.length - 1] == gui.getResolution() ? ' ' : '>'
-        );
+            return String.format(
+                    "Resolution: < %dX%d %c ",
+                    lanternaGUI.getResolution().getWidth(),
+                    lanternaGUI.getResolution().getHeight(),
+                    resolutions[resolutions.length - 1] == lanternaGUI.getResolution() ? ' ' : '>'
+            );
+        }
+        return "Resolution:   Unknown";
     }
 }

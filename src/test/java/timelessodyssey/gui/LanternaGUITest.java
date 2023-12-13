@@ -8,24 +8,37 @@ import net.jqwik.api.*;
 import net.jqwik.api.lifecycle.BeforeTry;
 import org.mockito.Mockito;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 public class LanternaGUITest {
     private static final int SCREEN_WIDTH = 160;
     private static final int SCREEN_HEIGHT = 160;
 
+    private ScreenCreator screenCreator;
     private Screen screen;
     private TextGraphics tg;
 
     @BeforeTry
-    public void setup() {
-        screen = Mockito.mock(Screen.class);
-        tg = Mockito.mock(TextGraphics.class);
-        Mockito.when(screen.newTextGraphics()).thenReturn(tg);
-        Mockito.when(screen.getTerminalSize()).thenReturn(new TerminalSize(SCREEN_WIDTH, SCREEN_HEIGHT));
+    public void setup() throws IOException, URISyntaxException, FontFormatException {
+        this.screenCreator = mock(ScreenCreator.class);
+        this.screen = mock(Screen.class);
+        this.tg = mock(TextGraphics.class);
+
+        when(screenCreator.createScreen(any(), any())).thenReturn(screen);
+
+        when(screen.newTextGraphics()).thenReturn(tg);
+        when(screen.getTerminalSize()).thenReturn(new TerminalSize(SCREEN_WIDTH, SCREEN_HEIGHT));
     }
 
     @Property
-    public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor color) {
-        GUI gui = new LanternaGUI(screen);
+    public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor color) throws IOException, URISyntaxException, FontFormatException {
+        GUI gui = new LanternaGUI(screenCreator);
         gui.drawPixel(x, y, color);
 
         Mockito.verify(tg, Mockito.times(1))
