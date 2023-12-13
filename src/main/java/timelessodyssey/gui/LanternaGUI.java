@@ -6,7 +6,6 @@ import com.googlecode.lanterna.screen.Screen;
 import timelessodyssey.gui.ScreenCreator.Resolution;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -35,22 +34,7 @@ public class LanternaGUI implements GUI {
     }
 
     private Screen createScreen(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
-        Screen screen = screenCreator.createScreen(resolution, new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
-                    arrowKeyPressed = e;
-                else
-                    specialKeyPressed = e;
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
-                    arrowKeyPressed = null;
-                else
-                    specialKeyPressed = null;
-            }
-        });
+        Screen screen = screenCreator.createScreen(resolution, new LanternaKeyAdapter(this));
 
         screen.setCursorPosition(null);
         screen.startScreen();
@@ -146,5 +130,19 @@ public class LanternaGUI implements GUI {
 
     public void setArrowSpam(boolean arrowSpam) {
         this.arrowSpam = arrowSpam;
+    }
+
+    protected void onKeyPressed(KeyEvent e) {
+        if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
+            arrowKeyPressed = e;
+        else
+            specialKeyPressed = e;
+    }
+
+    protected void onKeyReleased(KeyEvent e) {
+        if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
+            arrowKeyPressed = null;
+        else
+            specialKeyPressed = null;
     }
 }
