@@ -32,6 +32,8 @@ public class SceneTest {
         Vector playerPosition = new Vector(1,1);
         scene.getPlayer().setPosition(playerPosition);
 
+        assertEquals(6, player.getWidth());
+        assertEquals(8, player.getHeight());
         assertEquals(transitionBegin, scene.getTransitionPositionBegin());
         assertEquals(transitionEnd, scene.getTransitionPositionEnd());
         assertFalse(scene.isAtTransitionPosition());

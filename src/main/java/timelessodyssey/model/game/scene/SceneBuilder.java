@@ -44,7 +44,9 @@ public class SceneBuilder {
     public SceneBuilder(int n) throws IOException {
         this.sceneCode = n;
         URL resource = getClass().getClassLoader().getResource("levels/scene" + n + ".lvl");
-        assert resource != null;
+        if (resource == null){
+            throw new NullPointerException("Level file not found!");
+        }
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
         lines = readLines(bufferedReader);
@@ -126,7 +128,7 @@ public class SceneBuilder {
     }
 
     private Player createPlayer(Scene scene, Player player) {
-        for (int y = 0; y < lines.size(); y++) {
+        for (int y = 0; y < lines.size() - 4; y++) {
             String line = lines.get(y);
             for (int x = 0; x < line.length(); x++){
                 if (line.charAt(x) == 'P'){
@@ -137,7 +139,7 @@ public class SceneBuilder {
                 }
             }
         }
-        return null;
+        throw new NullPointerException("Player not found within the level file!");
     }
 
     private Tile[][] createGoals() {
