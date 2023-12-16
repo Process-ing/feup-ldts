@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Spike;
+import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.player.Player;
 
@@ -229,4 +230,61 @@ public class SceneTest {
         }
     }
 
+    @Nested
+    class SceneTestStars {
+
+        @BeforeEach
+        public void setup(){
+            scene = new Scene(3, 3, 0);
+            Star[][] starSet = {{null, null, null},
+                    {null, new Star(8, 8), null},
+                    {null, null, null}};
+            scene.setStars(starSet);
+            player = new Player(0,0, null);
+            scene.setPlayer(player);
+        }
+
+        @Test
+        public void CheckUpdateStarsTopLeft() {
+            assertEquals(0, player.getStarCounter());
+            for (double x = 0; x < 3; x++){
+                for (double y = 0; y < 17; y++){
+                    player.setPosition(new Vector(x,y));
+                    assertFalse(scene.updateStars());
+                    player.setPosition(new Vector(24-8+x, y));
+                    assertFalse(scene.updateStars());
+                }
+            }
+            assertEquals(0, player.getStarCounter());
+
+            player.setPosition(new Vector(12,12));
+            assertTrue(scene.updateStars());
+            assertEquals(1, player.getStarCounter());
+        }
+
+        @Test
+        public void CheckUpdateStarsBottomRight() {
+            assertEquals(0, player.getStarCounter());
+            for (double x = 0; x < 17; x++){
+                player.setPosition(new Vector(x,0));
+                assertFalse(scene.updateStars());
+                player.setPosition(new Vector(x, 16));
+                assertFalse(scene.updateStars());
+            }
+            assertEquals(0, player.getStarCounter());
+
+            player.setPosition(new Vector(4,4));
+            assertTrue(scene.updateStars());
+            assertEquals(1, player.getStarCounter());
+        }
+
+        @Test
+        public void CheckUpdateStarsInside() {
+            assertEquals(0, player.getStarCounter());
+
+            player.setPosition(new Vector(8,8));
+            assertTrue(scene.updateStars());
+            assertEquals(1, player.getStarCounter());
+        }
+    }
 }
