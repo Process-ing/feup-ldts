@@ -27,7 +27,7 @@ public class SceneBuilderTest {
     }
 
     @Test
-    public void levelLoaderTest() throws IOException {
+    public void LevelLoaderTest() throws IOException {
         Scene scene =  new SceneBuilder(0).createScene(player);
 
         Assertions.assertNotEquals(null, scene.getPlayer());
@@ -43,7 +43,7 @@ public class SceneBuilderTest {
     }
 
     @Test
-    public void levelLoaderNoPlayer() {
+    public void LevelLoaderNoPlayer() {
         NullPointerException thrown = Assertions.assertThrows(NullPointerException.class,
                                 () -> {new SceneBuilder(100).createScene(player);},
                         "CreatePlayer was supposed to throw NullPointerException");
@@ -52,7 +52,7 @@ public class SceneBuilderTest {
     }
 
     @Test
-    public void levelLoaderNoLevel() {
+    public void LevelLoaderNoLevel() {
         NullPointerException thrown = Assertions.assertThrows(NullPointerException.class,
                 () -> {new SceneBuilder(-1).createScene(player);},
                 "SceneBuilder was supposed to throw NullPointerException");
