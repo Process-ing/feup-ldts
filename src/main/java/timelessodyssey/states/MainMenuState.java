@@ -4,17 +4,19 @@ import timelessodyssey.control.Controller;
 import timelessodyssey.control.menu.EntryController;
 import timelessodyssey.control.menu.MainMenuController;
 import timelessodyssey.model.menu.MainMenu;
+import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.io.IOException;
 
 public class MainMenuState extends State<MainMenu> {
-
-    public MainMenuState(MainMenu model) throws IOException { super(model); }
+    public MainMenuState(MainMenu model, SpriteLoader spriteLoader) throws IOException {
+        super(model, spriteLoader);
+    }
 
     @Override
-    protected ScreenViewer<MainMenu> createScreenViewer() throws IOException {
+    protected ScreenViewer<MainMenu> createScreenViewer(SpriteLoader spriteLoader) throws IOException {
         return new MenuViewer<>(getModel());
     }
 

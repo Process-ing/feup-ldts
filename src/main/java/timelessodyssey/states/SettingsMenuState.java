@@ -7,6 +7,7 @@ import timelessodyssey.control.menu.SettingsMenuController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.LanternaGUI;
 import timelessodyssey.model.menu.SettingsMenu;
+import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
@@ -15,8 +16,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class SettingsMenuState extends State<SettingsMenu> {
-    public SettingsMenuState(SettingsMenu menu) throws IOException {
-        super(menu);
+    public SettingsMenuState(SettingsMenu menu, SpriteLoader spriteLoader) throws IOException {
+        super(menu, spriteLoader);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class SettingsMenuState extends State<SettingsMenu> {
     }
 
     @Override
-    protected ScreenViewer<SettingsMenu> createScreenViewer() throws IOException {
+    protected ScreenViewer<SettingsMenu> createScreenViewer(SpriteLoader spriteLoader) throws IOException {
         return new MenuViewer<>(getModel());
     }
 }

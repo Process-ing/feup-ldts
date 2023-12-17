@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.elements.*;
 
 import java.io.IOException;
@@ -16,11 +17,11 @@ public class GameViewer extends ScreenViewer<Scene> {
     private final StarViewer starViewer;
     private final ParticleViewer particleViewer;
 
-    public GameViewer(Scene model) throws IOException {
+    public GameViewer(Scene model, SpriteLoader spriteLoader) throws IOException {
         super(model);
         this.playerViewer = new PlayerViewer();
         this.tileViewer = new TileViewer();
-        this.spikeViewer = new SpikeViewer();
+        this.spikeViewer = new SpikeViewer(spriteLoader);
         this.starViewer = new StarViewer();
         this.particleViewer = new ParticleViewer();
     }

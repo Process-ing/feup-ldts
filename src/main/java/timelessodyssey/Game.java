@@ -6,6 +6,8 @@ import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.sound.BackgroundSoundPlayer;
 import timelessodyssey.states.MainMenuState;
 import timelessodyssey.states.State;
+import timelessodyssey.view.GameSpriteLoader;
+import timelessodyssey.view.SpriteLoader;
 
 import java.awt.*;
 import java.io.IOException;
@@ -16,14 +18,16 @@ import java.util.logging.Logger;
 public class Game {
     public static final int PIXEL_WIDTH = 160;
     public static final int PIXEL_HEIGHT = 90;
+    private final SpriteLoader spriteLoader;
     private final GUI gui;
     private State state;
-    private BackgroundSoundPlayer backgroundSoundPlayer;
+    private final BackgroundSoundPlayer backgroundSoundPlayer;
     private static final int NUMBER_OF_LEVELS = 11;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
+        this.spriteLoader = new GameSpriteLoader();
         this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);
-        this.state = new MainMenuState(new MainMenu());
+        this.state = new MainMenuState(new MainMenu(), spriteLoader);
         this.backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");
     }
 
@@ -46,6 +50,10 @@ public class Game {
 
     public void setResolution(GUI.Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
         gui.setResolution(resolution);
+    }
+
+    public SpriteLoader getSpriteLoader() {
+        return spriteLoader;
     }
 
     public BackgroundSoundPlayer getBackgroundSoundPlayer() {

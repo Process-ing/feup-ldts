@@ -7,6 +7,7 @@ import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ import java.net.URISyntaxException;
 
 public class GameStateTest {
     Scene model;
+    SpriteLoader spriteLoader;
     Game game;
     GUI gui;
     Controller<Scene> stateController;
@@ -25,6 +27,7 @@ public class GameStateTest {
     private void mockControllerAndViewer() {
         this.stateController = Mockito.mock(Controller.class);
         this.stateScreenViewer = Mockito.mock(ScreenViewer.class);
+        this.spriteLoader = Mockito.mock(SpriteLoader.class);
     }
 
     @BeforeEach
@@ -39,9 +42,9 @@ public class GameStateTest {
     public void step() throws IOException, URISyntaxException, FontFormatException {
         long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
-        this.state = new GameState(model){
+        this.state = new GameState(model, spriteLoader){
             @Override
-            protected ScreenViewer<Scene> createScreenViewer() {
+            protected ScreenViewer<Scene> createScreenViewer(SpriteLoader spriteLoader) {
                 return stateScreenViewer;
             }
             @Override
