@@ -27,7 +27,10 @@ public class Game {
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         ScreenCreator screenCreator = new LanternaScreenCreator(
-            new DefaultTerminalFactory(), new TerminalSize(PIXEL_WIDTH, PIXEL_HEIGHT));
+            new DefaultTerminalFactory(),
+            new TerminalSize(PIXEL_WIDTH, PIXEL_HEIGHT),
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds()
+        );
         this.gui = new LanternaGUI(screenCreator, "Timeless Odyssey");
         this.state = new MainMenuState(new MainMenu());
         this.backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");

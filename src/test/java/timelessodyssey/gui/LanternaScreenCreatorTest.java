@@ -21,6 +21,7 @@ public class LanternaScreenCreatorTest {
     private TerminalScreen screen;
     private AWTTerminalFrame terminal;
     private TerminalSize terminalSize;
+    private Rectangle defaultBounds;
     private Component component;
     private KeyAdapter keyAdapter;
 
@@ -28,6 +29,7 @@ public class LanternaScreenCreatorTest {
     public void setup() throws IOException {
         this.terminalFactory = mock(DefaultTerminalFactory.class);
         this.terminalSize = new TerminalSize(80, 50);
+        this.defaultBounds = new Rectangle(40, 80);
         this.screen = mock(TerminalScreen.class);
         this.terminal = mock(AWTTerminalFrame.class);
         this.component = mock(Component.class);
@@ -40,7 +42,7 @@ public class LanternaScreenCreatorTest {
 
     @Test
     public void constructor() {
-        LanternaScreenCreator screenCreator = new LanternaScreenCreator(terminalFactory, terminalSize);
+        LanternaScreenCreator screenCreator = new LanternaScreenCreator(terminalFactory, terminalSize, defaultBounds);
         int width = screenCreator.getWidth();
         int height = screenCreator.getHeight();
 
@@ -52,16 +54,15 @@ public class LanternaScreenCreatorTest {
 
     @Test
     public void createScreenWithoutResolution() throws IOException, URISyntaxException, FontFormatException {
-        Rectangle terminalBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         String terminalTitle = "testWithoutRes";
-        LanternaScreenCreator screenCreator = new LanternaScreenCreator(terminalFactory, terminalSize);
+        LanternaScreenCreator screenCreator = new LanternaScreenCreator(terminalFactory, terminalSize, defaultBounds);
 
         TerminalScreen screen = (TerminalScreen) screenCreator.createScreen(null, terminalTitle, keyAdapter);
 
         assertSame(this.screen, screen);
         verify(terminalFactory, atLeastOnce()).setTerminalEmulatorFontConfiguration(argThat(fontConfig ->
-            fontConfig.getFontWidth() * terminalSize.getColumns() <= terminalBounds.getWidth()
-                && fontConfig.getFontHeight() * terminalSize.getRows() <= terminalBounds.getHeight()
+            fontConfig.getFontWidth() * terminalSize.getColumns() <= defaultBounds.getWidth()
+                && fontConfig.getFontHeight() * terminalSize.getRows() <= defaultBounds.getHeight()
         ));
         verify(component, times(1)).addKeyListener(keyAdapter);
         verify(terminal, atLeastOnce()).setTitle(terminalTitle);
@@ -71,7 +72,7 @@ public class LanternaScreenCreatorTest {
     public void createScreenWithResolution() throws IOException, URISyntaxException, FontFormatException {
         ResizableGUI.Resolution resolution = ResizableGUI.Resolution.FHD;
         String terminalTitle = "testWithRes";
-        LanternaScreenCreator screenCreator = new LanternaScreenCreator(terminalFactory, terminalSize);
+        LanternaScreenCreator screenCreator = new LanternaScreenCreator(terminalFactory, terminalSize, defaultBounds);
 
         TerminalScreen screen = (TerminalScreen) screenCreator.createScreen(resolution, terminalTitle, keyAdapter);
 

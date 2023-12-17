@@ -17,10 +17,12 @@ import java.net.URL;
 public class LanternaScreenCreator implements ScreenCreator {
     private final DefaultTerminalFactory terminalFactory;
     private final TerminalSize terminalSize;
+    private final Rectangle defaultBounds;
 
-    public LanternaScreenCreator(DefaultTerminalFactory terminalFactory, TerminalSize terminalSize) {
+    public LanternaScreenCreator(DefaultTerminalFactory terminalFactory, TerminalSize terminalSize, Rectangle defaultBounds) {
         this.terminalFactory = terminalFactory;
         this.terminalSize = terminalSize;
+        this.defaultBounds = defaultBounds;
         terminalFactory.setInitialTerminalSize(terminalSize);
         terminalFactory.setForceAWTOverSwing(true);
     }
@@ -54,7 +56,7 @@ public class LanternaScreenCreator implements ScreenCreator {
 
     private Rectangle getTerminalBounds(ResizableGUI.Resolution resolution) {
         if (resolution == null)
-            return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+            return defaultBounds;
         return new Rectangle(resolution.getWidth(), resolution.getHeight());
     }
 
