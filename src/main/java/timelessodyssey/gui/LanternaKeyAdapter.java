@@ -4,7 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class LanternaKeyAdapter extends KeyAdapter {
-    LanternaGUI gui;
+    private final LanternaGUI gui;
 
     public LanternaKeyAdapter(LanternaGUI gui) {
         this.gui = gui;

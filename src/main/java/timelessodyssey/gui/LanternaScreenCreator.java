@@ -4,20 +4,19 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
 public class LanternaScreenCreator implements ScreenCreator {
-    private DefaultTerminalFactory terminalFactory;
-    private TerminalSize terminalSize;
+    private final DefaultTerminalFactory terminalFactory;
+    private final TerminalSize terminalSize;
 
     public LanternaScreenCreator(DefaultTerminalFactory terminalFactory, TerminalSize terminalSize) {
         this.terminalFactory = terminalFactory;
@@ -27,21 +26,17 @@ public class LanternaScreenCreator implements ScreenCreator {
     }
 
     @Override
-    public Screen createScreen(Resolution resolution, KeyAdapter keyAdapter)
+    public Screen createScreen(Resolution resolution, String title, KeyListener keyListener)
         throws IOException, URISyntaxException, FontFormatException {
-        return new TerminalScreen(createTerminal(resolution, keyAdapter));
-    }
-
-    private Terminal createTerminal(Resolution resolution, KeyAdapter keyAdapter)
-        throws IOException, URISyntaxException, FontFormatException {
-        Rectangle terminalBounds = getTerminalBounds(resolution);
-        int fontSize = getBestFontSize(terminalBounds);
-        AWTTerminalFontConfiguration fontConfig = loadFont(fontSize);
-        terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
-        Terminal terminal = terminalFactory.createTerminal();
-        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(keyAdapter);
-        ((AWTTerminalFrame)terminal).setTitle("Timeless Odyssey");
-        return terminal;
+            Rectangle terminalBounds = getTerminalBounds(resolution);
+            int fontSize = getBestFontSize(terminalBounds);
+            AWTTerminalFontConfiguration fontConfig = loadFont(fontSize);
+            terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
+            TerminalScreen screen = terminalFactory.createScreen();
+            AWTTerminalFrame terminal = (AWTTerminalFrame) screen.getTerminal();
+            terminal.getComponent(0).addKeyListener(keyListener);
+            terminal.setTitle(title);
+            return screen;
     }
 
     private AWTTerminalFontConfiguration loadFont(int fontSize) throws URISyntaxException, IOException, FontFormatException {

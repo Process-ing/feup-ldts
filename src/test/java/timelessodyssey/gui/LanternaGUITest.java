@@ -30,7 +30,7 @@ public class LanternaGUITest {
         this.screen = mock(Screen.class);
         this.tg = mock(TextGraphics.class);
 
-        when(screenCreator.createScreen(any(), any())).thenReturn(screen);
+        when(screenCreator.createScreen(any(), any(), any())).thenReturn(screen);
 
         when(screen.newTextGraphics()).thenReturn(tg);
         when(screen.getTerminalSize()).thenReturn(new TerminalSize(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -38,7 +38,7 @@ public class LanternaGUITest {
 
     @Property
     public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor color) throws IOException, URISyntaxException, FontFormatException {
-        GUI gui = new LanternaGUI(screenCreator);
+        GUI gui = new LanternaGUI(screenCreator, "test");
         gui.drawPixel(x, y, color);
 
         Mockito.verify(tg, Mockito.times(1))

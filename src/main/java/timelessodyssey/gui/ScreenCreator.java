@@ -3,7 +3,7 @@ package timelessodyssey.gui;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -31,7 +31,9 @@ public interface ScreenCreator {
         }
     }
 
-    Screen createScreen(Resolution resolution, KeyAdapter keyAdapter) throws IOException, URISyntaxException, FontFormatException;
+    Screen createScreen(Resolution resolution, String title, KeyListener keyListener)
+            throws IOException, URISyntaxException, FontFormatException;
+
     int getWidth();
     int getHeight();
 }

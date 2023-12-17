@@ -14,7 +14,8 @@ import static java.awt.event.KeyEvent.*;
 
 
 public class LanternaGUI implements GUI {
-    private ScreenCreator screenCreator;
+    private final ScreenCreator screenCreator;
+    private final String title;
     private Screen screen;
     private final int width;
     private final int height;
@@ -23,8 +24,9 @@ public class LanternaGUI implements GUI {
     private KeyEvent arrowKeyPressed;
     private KeyEvent specialKeyPressed;
 
-    public LanternaGUI(ScreenCreator screenCreator) throws IOException, URISyntaxException, FontFormatException {
+    public LanternaGUI(ScreenCreator screenCreator, String title) throws IOException, URISyntaxException, FontFormatException {
         this.screenCreator = screenCreator;
+        this.title = title;
         this.width = screenCreator.getWidth();
         this.height = screenCreator.getHeight();
         setResolution(null);
@@ -34,7 +36,7 @@ public class LanternaGUI implements GUI {
     }
 
     private Screen createScreen(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
-        Screen screen = screenCreator.createScreen(resolution, new LanternaKeyAdapter(this));
+        Screen screen = screenCreator.createScreen(resolution, title, new LanternaKeyAdapter(this));
 
         screen.setCursorPosition(null);
         screen.startScreen();
@@ -50,6 +52,10 @@ public class LanternaGUI implements GUI {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public Resolution getResolution() {
@@ -124,7 +130,7 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 
-    public boolean isArrowSpam() {
+    public boolean arrowSpam() {
         return arrowSpam;
     }
 
