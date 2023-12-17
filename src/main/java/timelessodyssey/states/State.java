@@ -30,7 +30,7 @@ public abstract class State<T> {
     }
 
     public void step(Game game, ResizableGUI gui, long frameCount) throws IOException, URISyntaxException, FontFormatException {
-        game.setArrowSpam(allowArrowSpam());
+        game.setKeySpam(allowArrowSpam());
         GUI.Action action = gui.getNextAction();
         controller.step(game, action, frameCount);
         screenViewer.draw(gui, frameCount);

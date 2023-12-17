@@ -55,8 +55,8 @@ public class Game {
         gui.setResolution(resolution);
     }
 
-    public void setArrowSpam(boolean arrowSpam) {
-        gui.setArrowSpam(arrowSpam);
+    public void setKeySpam(boolean keySpam) {
+        gui.setKeySpam(keySpam);
     }
 
     public BackgroundSoundPlayer getBackgroundSoundPlayer() {
