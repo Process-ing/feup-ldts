@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class CreditsViewer extends ScreenViewer<Credits> {
 
-    private final TextViewer textViewer;
+    private TextViewer textViewer;
 
     private final Sprite logoSprite;
 
@@ -25,13 +25,13 @@ public class CreditsViewer extends ScreenViewer<Credits> {
         return new Sprite("menu/logo.png");
     }
 
-    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
-    private static final TextColor messageColor = new TextColor.RGB(234, 234, 234);
-    private static final TextColor nameColor = new TextColor.RGB(155,173,183);
-    private static final TextColor scoreColor = new TextColor.RGB(91,110,225);
-    private static final TextColor deathColor = new TextColor.RGB(95,133,240);
-    private static final TextColor timeColor = new TextColor.RGB(99,155,255);
-    private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
+    public static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
+    public static final TextColor messageColor = new TextColor.RGB(234, 234, 234);
+    public static final TextColor nameColor = new TextColor.RGB(155,173,183);
+    public static final TextColor scoreColor = new TextColor.RGB(91,110,225);
+    public static final TextColor deathColor = new TextColor.RGB(95,133,240);
+    public static final TextColor timeColor = new TextColor.RGB(99,155,255);
+    public static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
 
     @Override
     public void draw(GUI gui, long frameCount) throws IOException {
@@ -46,14 +46,17 @@ public class CreditsViewer extends ScreenViewer<Credits> {
         gui.refresh();
     }
 
+    public void setTextViewer(TextViewer textViewer){
+        this.textViewer = textViewer;
+    }
 
 
     private void drawBackgroundAndFrame(GUI gui) {
+        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
         gui.drawRectangle(0, 0, gui.getWidth(), 1, frameColor);
         gui.drawRectangle(0, gui.getHeight() - 1, gui.getWidth(), 1, frameColor);
         gui.drawRectangle(0, 1, 1, gui.getHeight() - 2, frameColor);
         gui.drawRectangle(gui.getWidth() - 1, 1, 1, gui.getHeight() - 2, frameColor);
-        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
     }
 
     private void drawMessages(GUI gui) {
