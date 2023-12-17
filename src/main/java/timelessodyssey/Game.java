@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import timelessodyssey.gui.LanternaGUI;
 import timelessodyssey.gui.LanternaScreenCreator;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.gui.ScreenCreator;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.sound.BackgroundSoundPlayer;
@@ -45,13 +46,17 @@ public class Game {
         this.state = state;
     }
 
-    public ScreenCreator.Resolution getResolution() {
+    public ResizableGUI.Resolution getResolution() {
         return gui.getResolution();
     }
 
-    public void setResolution(ScreenCreator.Resolution resolution)
+    public void setResolution(ResizableGUI.Resolution resolution)
         throws IOException, URISyntaxException, FontFormatException {
         gui.setResolution(resolution);
+    }
+
+    public void setArrowSpam(boolean arrowSpam) {
+        gui.setArrowSpam(arrowSpam);
     }
 
     public BackgroundSoundPlayer getBackgroundSoundPlayer() {

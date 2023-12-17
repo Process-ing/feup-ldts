@@ -26,7 +26,7 @@ public class LanternaScreenCreator implements ScreenCreator {
     }
 
     @Override
-    public Screen createScreen(Resolution resolution, String title, KeyListener keyListener)
+    public Screen createScreen(ResizableGUI.Resolution resolution, String title, KeyListener keyListener)
         throws IOException, URISyntaxException, FontFormatException {
             Rectangle terminalBounds = getTerminalBounds(resolution);
             int fontSize = getBestFontSize(terminalBounds);
@@ -52,7 +52,7 @@ public class LanternaScreenCreator implements ScreenCreator {
         return (int) Math.min(maxFontWidth, maxFontHeight);
     }
 
-    private Rectangle getTerminalBounds(Resolution resolution) {
+    private Rectangle getTerminalBounds(ResizableGUI.Resolution resolution) {
         if (resolution == null)
             return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         return new Rectangle(resolution.getWidth(), resolution.getHeight());

@@ -2,6 +2,7 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.credits.Credits;
 import timelessodyssey.view.Sprite;
 import timelessodyssey.view.text.GameTextViewer;
@@ -34,7 +35,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
 
     @Override
-    public void draw(GUI gui, long frameCount) throws IOException {
+    public void draw(ResizableGUI gui, long frameCount) throws IOException {
         gui.clear();
         drawBackgroundAndFrame(gui);
         drawMessages(gui);

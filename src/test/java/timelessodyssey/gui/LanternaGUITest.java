@@ -6,9 +6,12 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import net.jqwik.api.*;
 import net.jqwik.api.lifecycle.BeforeTry;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -25,6 +28,7 @@ public class LanternaGUITest {
     private TextGraphics tg;
 
     @BeforeTry
+    @BeforeEach
     public void setup() throws IOException, URISyntaxException, FontFormatException {
         this.screenCreator = mock(ScreenCreator.class);
         this.screen = mock(Screen.class);

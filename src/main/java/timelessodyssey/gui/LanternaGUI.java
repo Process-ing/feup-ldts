@@ -3,9 +3,9 @@ package timelessodyssey.gui;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import timelessodyssey.gui.ScreenCreator.Resolution;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 import static java.awt.event.KeyEvent.*;
 
 
-public class LanternaGUI implements GUI {
+public class LanternaGUI implements ResizableGUI {
     private final ScreenCreator screenCreator;
     private final String title;
     private Screen screen;
@@ -36,7 +36,7 @@ public class LanternaGUI implements GUI {
     }
 
     private Screen createScreen(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
-        Screen screen = screenCreator.createScreen(resolution, title, new LanternaKeyAdapter(this));
+        Screen screen = screenCreator.createScreen(resolution, title, getKeyAdapter());
 
         screen.setCursorPosition(null);
         screen.startScreen();
@@ -54,14 +54,12 @@ public class LanternaGUI implements GUI {
         return height;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
+    @Override
     public Resolution getResolution() {
         return resolution;
     }
 
+    @Override
     public void setResolution(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
         if (screen != null)
             screen.close();
@@ -130,25 +128,27 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 
-    public boolean arrowSpam() {
-        return arrowSpam;
-    }
-
     public void setArrowSpam(boolean arrowSpam) {
         this.arrowSpam = arrowSpam;
     }
 
-    protected void onKeyPressed(KeyEvent e) {
-        if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
-            arrowKeyPressed = e;
-        else
-            specialKeyPressed = e;
-    }
+    public KeyAdapter getKeyAdapter() {
+        return new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
+                    arrowKeyPressed = e;
+                else
+                    specialKeyPressed = e;
+            }
 
-    protected void onKeyReleased(KeyEvent e) {
-        if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
-            arrowKeyPressed = null;
-        else
-            specialKeyPressed = null;
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
+                    arrowKeyPressed = null;
+                else
+                    specialKeyPressed = null;
+            }
+        };
     }
 }

@@ -69,7 +69,7 @@ public class LanternaScreenCreatorTest {
 
     @Test
     public void createScreenWithResolution() throws IOException, URISyntaxException, FontFormatException {
-        ScreenCreator.Resolution resolution = ScreenCreator.Resolution.FHD;
+        ResizableGUI.Resolution resolution = ResizableGUI.Resolution.FHD;
         String terminalTitle = "testWithRes";
         LanternaScreenCreator screenCreator = new LanternaScreenCreator(terminalFactory, terminalSize);
 
