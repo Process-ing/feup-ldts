@@ -20,7 +20,7 @@ public class GameViewer extends ScreenViewer<Scene> {
     public GameViewer(Scene model, SpriteLoader spriteLoader) throws IOException {
         super(model);
         this.playerViewer = new PlayerViewer();
-        this.tileViewer = new TileViewer();
+        this.tileViewer = new TileViewer(spriteLoader);
         this.spikeViewer = new SpikeViewer(spriteLoader);
         this.starViewer = new StarViewer();
         this.particleViewer = new ParticleViewer();
