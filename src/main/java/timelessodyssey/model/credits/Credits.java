@@ -3,16 +3,30 @@ package timelessodyssey.model.credits;
 public class Credits {
 
     private int score;
-    private int deaths;
+    private final int deaths;
 
-    private int seconds;
-    private int minutes;
+    private String[] messages;
+    private String[] names;
+
+    private final int seconds;
+    private final int minutes;
 
     public Credits(int starCounter, int numberOfDeaths, long duration) {
         this.score = starCounter;
         this.deaths = numberOfDeaths;
         this.seconds = (int) ((duration / 1000) % 60);
         this.minutes = (int) ((duration / 1000) / 60);
+
+        String[] messages = new String[2];
+        messages[0] = "Game Over!";
+        messages[1] = "Thank you for playing :)";
+        this.messages = messages;
+
+        String[] names = new String[3];
+        names[0] = "Bruno Oliveira";
+        names[1] = "   Joao Mendes";
+        names[2] = "Rodrigo Coelho";
+        this.names = names;
     }
 
     public void setScore(int score) {
@@ -23,19 +37,20 @@ public class Credits {
         return score;
     }
 
+    public void setMessages(String[] messages) {
+        this.messages = messages;
+    }
+
     public String[] getMessages() {
-        String[] strings = new String[2];
-        strings[0] = "Game Over!";
-        strings[1] = "Thank you for playing :)";
-        return strings;
+        return messages;
+    }
+
+    public void setNames(String[] names) {
+        this.names = names;
     }
 
     public String[] getNames() {
-        String[] strings = new String[3];
-        strings[0] = "Bruno Oliveira";
-        strings[1] = "   Joao Mendes";
-        strings[2] = "Rodrigo Coelho";
-        return strings;
+        return names;
     }
 
     public int getDeaths() {
