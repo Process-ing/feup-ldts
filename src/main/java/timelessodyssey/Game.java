@@ -30,7 +30,7 @@ public class Game {
             new DefaultTerminalFactory(), new TerminalSize(PIXEL_WIDTH, PIXEL_HEIGHT));
         this.gui = new LanternaGUI(screenCreator, "Timeless Odyssey");
         this.state = new MainMenuState(new MainMenu());
-        this.backgroundSoundPlayer = new BackgroundSoundPlayer("endScreenSound.wav");
+        this.backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");
     }
 
     public static void main(String[] args) {
