@@ -12,8 +12,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
+import static timelessodyssey.view.text.GameTextViewer.*;
 
 record RectangleSize(int width, int height) {}
 
@@ -63,6 +65,13 @@ public class GameTextViewerTest {
             height++;
         } while (y + height < image.getHeight() && image.getRGB(x, y + height) == PLACEHOLDER_COLOR.getRGB());
         return new RectangleSize(width, height);
+    }
+
+    @Test
+    public void checkValues() {
+        assertEquals(3, getCharWidth());
+        assertEquals(5, getCharHeight());
+        assertEquals(1, getSpacing());
     }
 
     @Test
