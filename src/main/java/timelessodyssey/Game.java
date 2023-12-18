@@ -10,6 +10,8 @@ import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.sound.BackgroundSoundPlayer;
 import timelessodyssey.states.MainMenuState;
 import timelessodyssey.states.State;
+import timelessodyssey.view.GameSpriteLoader;
+import timelessodyssey.view.SpriteLoader;
 
 import java.awt.*;
 import java.io.IOException;
@@ -21,8 +23,9 @@ public class Game {
     public static final int PIXEL_WIDTH = 160;
     public static final int PIXEL_HEIGHT = 90;
     private final LanternaGUI gui;
+    private final SpriteLoader spriteLoader;
     private State state;
-    private BackgroundSoundPlayer backgroundSoundPlayer;
+    private final BackgroundSoundPlayer backgroundSoundPlayer;
     private static final int NUMBER_OF_LEVELS = 11;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
@@ -32,7 +35,8 @@ public class Game {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds()
         );
         this.gui = new LanternaGUI(screenCreator, "Timeless Odyssey");
-        this.state = new MainMenuState(new MainMenu());
+        this.spriteLoader = new GameSpriteLoader();
+        this.state = new MainMenuState(new MainMenu(), spriteLoader);
         this.backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");
     }
 
@@ -60,6 +64,10 @@ public class Game {
 
     public void setKeySpam(boolean keySpam) {
         gui.setKeySpam(keySpam);
+    }
+
+    public SpriteLoader getSpriteLoader() {
+        return spriteLoader;
     }
 
     public BackgroundSoundPlayer getBackgroundSoundPlayer() {
