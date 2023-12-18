@@ -25,7 +25,7 @@ public class ParticleControllerTest {
             @ForAll List<@From("snow") Particle> particles,
             @ForAll @Positive long frameCount,
             @ForAll @From("action") GUI.Action action
-    ) throws IOException {
+    ) {
         Game game = mock(Game.class);
 
         Scene scene = new Scene(WIDTH, HEIGHT, 0);
@@ -46,11 +46,11 @@ public class ParticleControllerTest {
     @Provide
     public Arbitrary<Snow> snow() {
         return Combinators.combine(
-                Arbitraries.doubles().greaterOrEqual(0).lessThan(WIDTH * Tile.SIZE),
-                Arbitraries.doubles().greaterOrEqual(0).lessThan(HEIGHT * Tile.SIZE),
+                Arbitraries.doubles().greaterOrEqual(0).lessThan(WIDTH),
+                Arbitraries.doubles().greaterOrEqual(0).lessThan(HEIGHT),
                 Arbitraries.integers().between(1, 10),
                 Arbitraries.doubles().between(0, 1000),
-                Arbitraries.doubles().greaterOrEqual(0).lessThan(WIDTH * Tile.SIZE)
+                Arbitraries.doubles().greaterOrEqual(0).lessThan(WIDTH)
         ).as(Snow::new);
     }
 
