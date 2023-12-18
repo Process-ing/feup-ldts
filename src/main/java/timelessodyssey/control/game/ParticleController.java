@@ -13,7 +13,9 @@ public class ParticleController extends Controller<Scene> {
 
     @Override
     public void step(Game game, GUI.Action action, long frameCount) {
-        for (Particle particle: getModel().getParticles())
+        for (Particle particle: getModel().getSnow())
+            particle.setPosition(particle.move(getModel()));
+        for (Particle particle: getModel().getDeathParticles())
             particle.setPosition(particle.move(getModel()));
     }
 }

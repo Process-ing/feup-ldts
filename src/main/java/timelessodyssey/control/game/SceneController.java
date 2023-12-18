@@ -32,8 +32,6 @@ public class SceneController extends Controller<Scene> {
             game.setState(null);
         } else {
             playerController.step(game, action, frameCount);
-            if (getModel().isDying())
-                player.setPosition(getModel().getStartingPosition());
             if (getModel().isAtTransitionPosition()) {
                 if (getModel().getSceneCode() + 1 >= getNumberOfLevels()) {
                     Credits credits = new Credits(player.getStarCounter(), player.getNumberOfDeaths(),

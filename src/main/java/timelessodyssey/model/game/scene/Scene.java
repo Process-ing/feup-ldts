@@ -24,7 +24,8 @@ public class Scene {
     private Spike[][] spikes;
     private Star[][] stars;
     private Tile[][] goals;
-    private List<Particle> particles;
+    private List<Particle> snow;
+    private List<Particle> deathParticles;
     private Vector transitionPositionBegin;
     private Vector transitionPositionEnd;
 
@@ -40,7 +41,8 @@ public class Scene {
         this.goals = new Tile[height][width];
         this.spikes = new Spike[height][width];
         this.stars = new Star[height][width];
-        this.particles = new ArrayList<>();
+        this.snow = new ArrayList<>();
+        this.deathParticles = new ArrayList<>();
     }
 
     public int getWidth() {
@@ -103,12 +105,12 @@ public class Scene {
         this.goals = goals;
     }
 
-    public List<Particle> getParticles() {
-        return particles;
+    public List<Particle> getSnow() {
+        return snow;
     }
 
-    public void setParticles(List<Particle> particles) {
-        this.particles = particles;
+    public void setSnow(List<Particle> snow) {
+        this.snow = snow;
     }
 
     public Vector getTransitionPositionBegin() {
@@ -198,4 +200,11 @@ public class Scene {
         return false;
     }
 
+    public List<Particle> getDeathParticles() {
+        return deathParticles;
+    }
+
+    public void setDeathParticles(List<Particle> deathParticles) {
+        this.deathParticles = deathParticles;
+    }
 }

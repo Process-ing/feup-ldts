@@ -19,7 +19,7 @@ public class GameViewer extends ScreenViewer<Scene> {
 
     public GameViewer(Scene model, SpriteLoader spriteLoader) throws IOException {
         super(model);
-        this.playerViewer = new PlayerViewer();
+        this.playerViewer = new PlayerViewer(spriteLoader);
         this.tileViewer = new TileViewer(spriteLoader);
         this.spikeViewer = new SpikeViewer(spriteLoader);
         this.starViewer = new StarViewer(spriteLoader);
@@ -44,7 +44,8 @@ public class GameViewer extends ScreenViewer<Scene> {
         drawElements(gui, getModel().getGoals(), tileViewer, frameCount);
         drawElements(gui, getModel().getStars(), starViewer, frameCount);
         drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
-        drawElements(gui, getModel().getParticles(), particleViewer, frameCount);
+        drawElements(gui, getModel().getSnow(), particleViewer, frameCount);
+        drawElements(gui, getModel().getDeathParticles(), particleViewer, frameCount);
 
         gui.refresh();
     }

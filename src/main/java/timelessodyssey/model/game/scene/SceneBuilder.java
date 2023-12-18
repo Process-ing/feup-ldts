@@ -16,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.MissingResourceException;
 import java.util.Random;
 
 import static java.lang.Character.isLetterOrDigit;
@@ -39,7 +38,7 @@ public class SceneBuilder {
         scene.setTransitionPositionEnd(createTransitionPositionEnd());
         scene.setStartingPosition(scene.getPlayer().getPosition());
         scene.setStars(createStars());
-        scene.setParticles(createParticles(numberParticles, scene));
+        scene.setSnow(createParticles(numberParticles, scene));
         return scene;
     }
 

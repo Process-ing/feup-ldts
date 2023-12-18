@@ -10,23 +10,18 @@ import java.util.Random;
 
 public class DeadState extends PlayerState {
     private long duration;
-    private final List<Particle> deathParticles;
 
     public DeadState(Player player, long duration) {
         super(player);
         this.duration = duration;
-        this.deathParticles = createParticles();
+        player.getScene().setDeathParticles(createDeathParticles());
     }
 
     public long getDuration() {
         return duration;
     }
 
-    public List<Particle> getDeathParticles() {
-        return deathParticles;
-    }
-
-    private List<Particle> createParticles() {
+    private List<Particle> createDeathParticles() {
         List<Particle> particles = new ArrayList<>();
         int numParticles = 20;
         Random random = new Random();
@@ -57,6 +52,8 @@ public class DeadState extends PlayerState {
 
     @Override
     public PlayerState getNextState() {
+        if (duration <= 0)
+            return null;  // Null state means the player should be reset
         return this;
     }
 }
