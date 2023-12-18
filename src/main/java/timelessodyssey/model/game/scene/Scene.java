@@ -130,8 +130,8 @@ public class Scene {
     public boolean isAtTransitionPosition() {
         boolean topLeft =   player.getPosition().x() >= transitionPositionBegin.x() && player.getPosition().x() <= transitionPositionEnd.x() &&
                             player.getPosition().y() >= transitionPositionBegin.y() && player.getPosition().y() <= transitionPositionEnd.y();
-        boolean bottomRight =   player.getPosition().x() + player.getWidth() >= transitionPositionBegin.x() && player.getPosition().x() + player.getWidth() <= transitionPositionEnd.x() &&
-                                player.getPosition().y() - player.getHeight() >= transitionPositionBegin.y() && player.getPosition().y() - player.getHeight() <= transitionPositionEnd.y();
+        boolean bottomRight =   (player.getPosition().x() + player.getWidth()) >= transitionPositionBegin.x() && (player.getPosition().x() + player.getWidth()) <= transitionPositionEnd.x() &&
+                (player.getPosition().y() + player.getHeight()) >= transitionPositionBegin.y() && (player.getPosition().y() + player.getHeight()) <= transitionPositionEnd.y();
         return topLeft || bottomRight;
     }
 
