@@ -5,46 +5,40 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
-import timelessodyssey.view.SpriteLoader;
+import timelessodyssey.view.ViewerProvider;
 import timelessodyssey.view.elements.*;
 
 import java.io.IOException;
 import java.util.List;
 
 public class GameViewer extends ScreenViewer<Scene> {
+    public static final TextColor backgroundColor = new TextColor.RGB(28, 28, 28);
+
     private final PlayerViewer playerViewer;
     private final TileViewer tileViewer;
     private final SpikeViewer spikeViewer;
     private final StarViewer starViewer;
     private final ParticleViewer particleViewer;
 
-    public GameViewer(Scene model, SpriteLoader spriteLoader) throws IOException {
+    public GameViewer(Scene model, ViewerProvider viewerProvider) {
         super(model);
-        this.playerViewer = new PlayerViewer(spriteLoader);
-        this.tileViewer = new TileViewer(spriteLoader);
-        this.spikeViewer = new SpikeViewer(spriteLoader);
-        this.starViewer = new StarViewer(spriteLoader);
-        this.particleViewer = new ParticleViewer();
+        this.playerViewer = viewerProvider.getPlayerViewer();
+        this.tileViewer = viewerProvider.getTileViewer();
+        this.spikeViewer = viewerProvider.getSpikeViewer();
+        this.starViewer = viewerProvider.getStarViewer();
+        this.particleViewer = viewerProvider.getParticleViewer();
     }
 
     @Override
     public void draw(ResizableGUI gui, long frameCount) throws IOException {
         gui.clear();
-
-        // Background color
-        TextColor background = new TextColor.RGB(28, 28, 28);
-        for (int w = 0; w < 160; w++) {
-            for (int h = 0; h < 90; h++) {
-                gui.drawPixel(w, h, background);
-            }
-        }
+        gui.drawRectangle(0, 0, gui.getWidth(), gui.getHeight(), backgroundColor);
 
         drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
         drawElements(gui, getModel().getSpikes(), spikeViewer, frameCount);
         drawElements(gui, getModel().getTiles(), tileViewer, frameCount);
         drawElements(gui, getModel().getGoals(), tileViewer, frameCount);
         drawElements(gui, getModel().getStars(), starViewer, frameCount);
-        drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
         drawElements(gui, getModel().getSnow(), particleViewer, frameCount);
         drawElements(gui, getModel().getDeathParticles(), particleViewer, frameCount);
 

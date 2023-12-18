@@ -5,6 +5,7 @@ import timelessodyssey.control.menu.EntryController;
 import timelessodyssey.control.menu.SettingsMenuController;
 import timelessodyssey.model.menu.SettingsMenu;
 import timelessodyssey.view.SpriteLoader;
+import timelessodyssey.view.ViewerProvider;
 import timelessodyssey.view.screens.MenuViewer;
 import timelessodyssey.view.screens.ScreenViewer;
 
@@ -21,7 +22,7 @@ public class SettingsMenuState extends State<SettingsMenu> {
     }
 
     @Override
-    protected ScreenViewer<SettingsMenu> createScreenViewer(SpriteLoader spriteLoader) throws IOException {
+    protected ScreenViewer<SettingsMenu> createScreenViewer(ViewerProvider viewerProvider) throws IOException {
         return new MenuViewer<>(getModel());
     }
 

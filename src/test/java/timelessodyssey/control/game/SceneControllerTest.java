@@ -39,7 +39,7 @@ public class SceneControllerTest {
     }
 
     @Test
-    public void stepWithoutQuit() throws IOException, URISyntaxException, FontFormatException {
+    public void stepWithoutQuit() throws IOException {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
         Mockito.when(scene.isAtTransitionPosition()).thenReturn(false);
