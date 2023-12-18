@@ -1,4 +1,4 @@
-package timelessodyssey.control;
+package timelessodyssey.control.game;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
