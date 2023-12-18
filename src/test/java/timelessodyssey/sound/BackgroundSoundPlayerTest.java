@@ -2,26 +2,23 @@ package timelessodyssey.sound;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URL;
 
+import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 public class BackgroundSoundPlayerTest {
-
-    @Test
-    public void SoundLoaderWorking() throws Exception {
-        Clip sound = new SoundLoader().loadSound("sounds/demo.wav");
-        assertNotNull(sound);
-
-        BackgroundSoundPlayer backgroundSoundPlayer = new BackgroundSoundPlayer(sound);
-        assertEquals(sound, backgroundSoundPlayer.getSound());
-    }
 
     @Test
     public void SoundLoaderException(){

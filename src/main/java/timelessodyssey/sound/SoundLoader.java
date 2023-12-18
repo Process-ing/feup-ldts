@@ -4,13 +4,11 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-import java.io.File;
 import java.net.URL;
 
 public class SoundLoader {
 
     public Clip loadSound(String filepath) throws Exception {
-        System.out.println("filepath = " + filepath);
         try {
             URL resource = getClass().getClassLoader().getResource(filepath);
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(resource);
