@@ -6,6 +6,7 @@ import timelessodyssey.model.menu.Entry;
 import timelessodyssey.model.menu.Menu;
 import timelessodyssey.view.Sprite;
 import timelessodyssey.view.menu.EntryViewer;
+import timelessodyssey.view.text.GameTextViewer;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +22,7 @@ public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
 
     public MenuViewer(T model) throws IOException {
         super(model);
-        this.entryViewer = new EntryViewer();
+        this.entryViewer = new EntryViewer(new GameTextViewer());
         this.logoSprite = loadLogo();
     }
 

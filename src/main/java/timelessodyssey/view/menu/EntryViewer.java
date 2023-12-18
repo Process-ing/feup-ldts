@@ -11,8 +11,8 @@ import java.io.IOException;
 public class EntryViewer {
     private final TextViewer textViewer;
 
-    public EntryViewer() throws IOException {
-        this.textViewer = new GameTextViewer();
+    public EntryViewer(TextViewer textViewer) {
+        this.textViewer = textViewer;
     }
 
     public void draw(Entry model, GUI gui, TextColor color) {
