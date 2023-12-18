@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
-import timelessodyssey.control.game.PlayerController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.player.Player;

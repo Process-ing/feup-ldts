@@ -176,10 +176,11 @@ public class SceneBuilder {
         Random random = new Random();
         for (int i = 0; i < number; i++) {
             Particle particle = new Snow(
-                    random.nextInt(scene.getWidth() * Tile.SIZE),
-                    random.nextInt(scene.getHeight() * Tile.SIZE),
+                    random.nextDouble(scene.getWidth() * Tile.SIZE),
+                    random.nextDouble(scene.getHeight() * Tile.SIZE),
                     random.nextInt(2, 5) / 2,
-                    random.nextDouble(.5, 2)
+                    random.nextDouble(.5, 2),
+                    random.nextDouble(scene.getWidth() * Tile.SIZE)
             );
             particles.add(particle);
         }
