@@ -14,8 +14,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class EntryControllerTest {
 
@@ -27,6 +26,7 @@ public class EntryControllerTest {
     public void setup(){
         this.game = Mockito.mock(Game.class);
         this.menu = Mockito.mock(Menu.class);
+        doNothing().when(game).setState(Mockito.any());
 
         this.entryController = new EntryController(menu);
     }
