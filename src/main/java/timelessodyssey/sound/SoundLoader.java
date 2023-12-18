@@ -10,8 +10,7 @@ public class SoundLoader {
 
     public Clip loadSound(String filename) throws Exception{
         try {
-            String rootPath = new File(System.getProperty("user.dir")).getPath();
-            String musicPath = rootPath + "/src/main/resources/sounds/" + filename;
+            String musicPath = "./src/main/resources/sounds/" + filename;
             File musicFile = new File(musicPath);
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
             Clip musicClip = AudioSystem.getClip();
