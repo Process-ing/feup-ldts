@@ -8,6 +8,7 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.model.menu.Menu;
+import timelessodyssey.states.State;
 
 import java.awt.*;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class EntryControllerTest {
     public void setup(){
         this.game = Mockito.mock(Game.class);
         this.menu = Mockito.mock(Menu.class);
-        doNothing().when(game).setState(Mockito.any());
+        doNothing().when(game).setState(isA(State.class));
 
         this.entryController = new EntryController(menu);
     }
