@@ -8,14 +8,18 @@ import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.gui.ScreenCreator;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.sound.BackgroundSoundPlayer;
+import timelessodyssey.sound.SoundLoader;
 import timelessodyssey.states.MainMenuState;
 import timelessodyssey.states.State;
 import timelessodyssey.view.GameSpriteLoader;
 import timelessodyssey.view.SpriteLoader;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.FloatControl;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +32,7 @@ public class Game {
     private final BackgroundSoundPlayer backgroundSoundPlayer;
     private static final int NUMBER_OF_LEVELS = 11;
 
-    public Game() throws FontFormatException, IOException, URISyntaxException {
+    public Game() throws Exception {
         ScreenCreator screenCreator = new LanternaScreenCreator(
             new DefaultTerminalFactory(),
             new TerminalSize(PIXEL_WIDTH, PIXEL_HEIGHT),
@@ -37,7 +41,10 @@ public class Game {
         this.gui = new LanternaGUI(screenCreator, "Timeless Odyssey");
         this.spriteLoader = new GameSpriteLoader();
         this.state = new MainMenuState(new MainMenu(), spriteLoader);
-        this.backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");
+        this.backgroundSoundPlayer = new BackgroundSoundPlayer(new SoundLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("sounds/demo.wav"))), AudioSystem.getClip()));
+
+        FloatControl gainControl = (FloatControl) backgroundSoundPlayer.getSound().getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-15f);
     }
 
     public static void main(String[] args) {
