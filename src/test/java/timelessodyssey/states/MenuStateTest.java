@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.screens.ScreenViewer;
@@ -18,7 +19,7 @@ public class MenuStateTest {
     MainMenu model;
     SpriteLoader spriteLoader;
     Game game;
-    GUI gui;
+    ResizableGUI gui;
     Controller<MainMenu> stateController;
     ScreenViewer<MainMenu> stateScreenViewer;
     MainMenuState state;
@@ -34,7 +35,7 @@ public class MenuStateTest {
         this.model = Mockito.mock(MainMenu.class);
         this.spriteLoader = Mockito.mock(SpriteLoader.class);
         this.game = Mockito.mock(Game.class);
-        this.gui = Mockito.mock(GUI.class);
+        this.gui = Mockito.mock(ResizableGUI.class);
         mockControllerAndViewer();
     }
 

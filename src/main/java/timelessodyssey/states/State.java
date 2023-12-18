@@ -4,6 +4,7 @@ import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.view.SpriteLoader;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
@@ -23,12 +24,14 @@ public abstract class State<T> {
 
     protected abstract ScreenViewer<T> createScreenViewer(SpriteLoader spriteLoader) throws IOException;
     protected abstract Controller<T> createController();
+    protected abstract boolean allowArrowSpam();
 
     public T getModel() {
         return model;
     }
 
-    public void step(Game game, GUI gui, long frameCount) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Game game, ResizableGUI gui, long frameCount) throws IOException, URISyntaxException, FontFormatException {
+        game.setKeySpam(allowArrowSpam());
         GUI.Action action = gui.getNextAction();
         controller.step(game, action, frameCount);
         screenViewer.draw(gui, frameCount);

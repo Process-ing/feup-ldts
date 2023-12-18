@@ -2,6 +2,7 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.SpriteLoader;
@@ -27,7 +28,7 @@ public class GameViewer extends ScreenViewer<Scene> {
     }
 
     @Override
-    public void draw(GUI gui, long frameCount) throws IOException {
+    public void draw(ResizableGUI gui, long frameCount) throws IOException {
         gui.clear();
 
         // Background color

@@ -1,4 +1,4 @@
-package timelessodyssey.control;
+package timelessodyssey.control.game;
 
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Positive;

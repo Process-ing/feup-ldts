@@ -1,6 +1,6 @@
 package timelessodyssey.view.screens;
 
-import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 
 import java.io.IOException;
 
@@ -15,5 +15,5 @@ public abstract class ScreenViewer<T> {
         return model;
     }
 
-    public abstract void draw(GUI gui, long frameCount) throws IOException;
+    public abstract void draw(ResizableGUI gui, long frameCount) throws IOException;
 }

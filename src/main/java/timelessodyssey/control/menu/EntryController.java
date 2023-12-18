@@ -3,6 +3,7 @@ package timelessodyssey.control.menu;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.model.menu.MainMenu;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class EntryController extends Controller<Menu> {
-    private static final GUI.Resolution[] resolutions = GUI.Resolution.values();
+    private static final ResizableGUI.Resolution[] resolutions = ResizableGUI.Resolution.values();
 
     public EntryController(Menu menu) {
         super(menu);
@@ -45,13 +46,13 @@ public class EntryController extends Controller<Menu> {
                 if (action == GUI.Action.RIGHT) {
                     int index = getResolutionIndex(game.getResolution());
                     if (index < resolutions.length - 1) {
-                        GUI.Resolution newResolution = resolutions[index + 1];
+                        ResizableGUI.Resolution newResolution = resolutions[index + 1];
                         game.setResolution(newResolution);
                     }
                 } else if (action == GUI.Action.LEFT) {
                     int index = getResolutionIndex(game.getResolution());
                     if (index > -1) {
-                        GUI.Resolution newResolution = index != 0 ? resolutions[index - 1] : null;
+                        ResizableGUI.Resolution newResolution = index != 0 ? resolutions[index - 1] : null;
                         game.setResolution(newResolution);
                     }
                 }
@@ -62,7 +63,7 @@ public class EntryController extends Controller<Menu> {
         }
     }
 
-    private Integer getResolutionIndex(GUI.Resolution resolution) {
+    private Integer getResolutionIndex(ResizableGUI.Resolution resolution) {
         for (int i = 0; i < resolutions.length; i++) {
             if (resolutions[i] == resolution)
                 return i;

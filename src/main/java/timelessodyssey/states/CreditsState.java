@@ -23,4 +23,9 @@ public class CreditsState extends State<Credits> {
     protected Controller<Credits> createController() {
         return new CreditsController(getModel());
     }
+
+    @Override
+    protected boolean allowArrowSpam() {
+        return false;
+    }
 }
