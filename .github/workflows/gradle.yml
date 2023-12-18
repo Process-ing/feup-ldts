@@ -22,5 +22,5 @@ jobs:
         distribution: 'temurin'
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
-    - run: gradle build --warning-mode=fail --rerun-tasks --scan
+    - run: gradle build --warning-mode=fail --rerun-tasks
   
