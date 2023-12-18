@@ -1,4 +1,4 @@
-package timelessodyssey.control;
+package timelessodyssey.control.game;
 
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Positive;
@@ -30,7 +30,7 @@ public class ParticleControllerTest {
         Game game = mock(Game.class);
 
         Scene scene = new Scene(WIDTH, HEIGHT, 0);
-        scene.setParticles(particles);
+        scene.setSnow(particles);
         ParticleController particleController = new ParticleController(scene);
 
         particleController.step(game, action, frameCount);
