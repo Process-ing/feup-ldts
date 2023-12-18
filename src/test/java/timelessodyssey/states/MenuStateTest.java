@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.view.screens.ScreenViewer;
 
@@ -16,7 +17,7 @@ import java.net.URISyntaxException;
 public class MenuStateTest {
     MainMenu model;
     Game game;
-    GUI gui;
+    ResizableGUI gui;
     Controller<MainMenu> stateController;
     ScreenViewer<MainMenu> stateScreenViewer;
     MainMenuState state;
@@ -31,7 +32,7 @@ public class MenuStateTest {
     public void setup() {
         this.model = Mockito.mock(MainMenu.class);
         this.game = Mockito.mock(Game.class);
-        this.gui = Mockito.mock(GUI.class);
+        this.gui = Mockito.mock(ResizableGUI.class);
         mockControllerAndViewer();
     }
 
