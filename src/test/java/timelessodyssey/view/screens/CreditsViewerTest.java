@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.credits.Credits;
 import timelessodyssey.view.text.TextViewer;
 
@@ -14,13 +15,13 @@ import static timelessodyssey.view.screens.CreditsViewer.*;
 
 public class CreditsViewerTest {
     private CreditsViewer creditsViewer;
-    private GUI gui;
+    private ResizableGUI gui;
     private TextViewer textViewer;
     private Credits credits;
 
     @BeforeEach
     public void setup() throws IOException {
-        this.gui = mock(GUI.class);
+        this.gui = mock(ResizableGUI.class);
 
         this.credits = mock(Credits.class);
         when(credits.getDeaths()).thenReturn(0);
