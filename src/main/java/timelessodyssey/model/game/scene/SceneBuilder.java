@@ -38,7 +38,7 @@ public class SceneBuilder {
         scene.setTransitionPositionEnd(createTransitionPositionEnd());
         scene.setStartingPosition(scene.getPlayer().getPosition());
         scene.setStars(createStars());
-        scene.setParticles(createParticles(numberParticles, scene));
+        scene.setSnow(createParticles(numberParticles, scene));
         return scene;
     }
 

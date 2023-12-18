@@ -4,6 +4,7 @@ import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.credits.Credits;
+import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.model.game.scene.SceneBuilder;
 import timelessodyssey.states.CreditsState;
@@ -26,19 +27,21 @@ public class SceneController extends Controller<Scene> {
 
     @Override
     public void step(Game game, GUI.Action action, long frameCount) throws IOException {
+        Player player = getModel().getPlayer();
         if (action == QUIT) {
             game.setState(null);
         } else {
             playerController.step(game, action, frameCount);
-            if (getModel().isDying())
-                getModel().getPlayer().setPosition(getModel().getStartingPosition());
             if (getModel().isAtTransitionPosition()) {
-                if (getModel().getSceneCode() + 1 >= getNumberOfLevels())
-                    game.setState(new CreditsState(new Credits(getModel().getPlayer().getStarCounter(),
-                                                    getModel().getPlayer().getNumberOfDeaths(),
-                                                    System.currentTimeMillis() - getModel().getPlayer().getBirthTime())));
-                else
-                    game.setState(new GameState(new SceneBuilder((getModel().getSceneCode() + 1)).createScene(getModel().getPlayer())));
+                if (getModel().getSceneCode() + 1 >= getNumberOfLevels()) {
+                    Credits credits = new Credits(player.getStarCounter(), player.getNumberOfDeaths(),
+                            System.currentTimeMillis() - getModel().getPlayer().getBirthTime());  // TODO: Make credits constructor nicer
+                    game.setState(new CreditsState(credits, game.getSpriteLoader()));
+                } else {
+                    SceneBuilder sceneBuilder = new SceneBuilder((getModel().getSceneCode() + 1));
+                    Scene newScene = sceneBuilder.createScene(player);
+                    game.setState(new GameState(newScene, game.getSpriteLoader()));
+                }
             }
             getModel().updateStars();
             particleController.step(game, action, frameCount);

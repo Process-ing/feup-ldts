@@ -29,11 +29,14 @@ public class EntryController extends Controller<Menu> {
         switch (getModel().getCurrentEntry().getType()) {
             case START_GAME:
                 if (action == GUI.Action.SELECT)
-                    game.setState(new GameState(new SceneBuilder(0).createScene(new Player(0,0, null))));
+                    game.setState(new GameState(
+                        new SceneBuilder(0).createScene(new Player(0,0, null)),
+                        game.getSpriteLoader()
+                    ));
                 break;
             case SETTINGS:
                 if (action == GUI.Action.SELECT)
-                    game.setState(new SettingsMenuState(new SettingsMenu()));
+                    game.setState(new SettingsMenuState(new SettingsMenu(), game.getSpriteLoader()));
                 break;
             case EXIT:
                 if (action == GUI.Action.SELECT)
@@ -56,7 +59,7 @@ public class EntryController extends Controller<Menu> {
                 break;
             case TO_MAIN_MENU:
                 if (action == GUI.Action.SELECT)
-                    game.setState(new MainMenuState(new MainMenu()));
+                    game.setState(new MainMenuState(new MainMenu(), game.getSpriteLoader()));
         }
     }
 

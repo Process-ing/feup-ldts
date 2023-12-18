@@ -14,6 +14,6 @@ public class SettingsMenuController extends MenuController<SettingsMenu> {
 
     @Override
     protected void onQuit(Game game) throws IOException {
-        game.setState(new MainMenuState(new MainMenu()));
+        game.setState(new MainMenuState(new MainMenu(), game.getSpriteLoader()));
     }
 }
