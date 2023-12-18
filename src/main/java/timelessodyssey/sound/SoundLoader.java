@@ -8,14 +8,9 @@ import java.net.URL;
 
 public class SoundLoader {
 
-    public Clip loadSound(String filepath) throws Exception {
+    public Clip loadSound(AudioInputStream audioInput, Clip musicClip) throws Exception {
         try {
-            URL resource = getClass().getClassLoader().getResource(filepath);
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(resource);
-            Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
-            FloatControl gainControl = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-15f);
             return musicClip;
         } catch (Exception e) {
             throw new Exception("Unable to load sound file!");

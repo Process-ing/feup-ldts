@@ -12,6 +12,7 @@ import javax.sound.sampled.Clip;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Objects;
 
 import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,11 +20,24 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 public class BackgroundSoundPlayerTest {
+    @Test
+    public void SoundLoaderWorking() throws Exception {
+        Clip sound = new SoundLoader().loadSound(AudioSystem.getAudioInputStream(Objects
+                        .requireNonNull(getClass().getClassLoader().getResource("sounds/demo.wav"))),
+                            AudioSystem.getClip());
+        assertNotNull(sound);
+
+        BackgroundSoundPlayer backgroundSoundPlayer = new BackgroundSoundPlayer(sound);
+        assertEquals(sound, backgroundSoundPlayer.getSound());
+    }
 
     @Test
     public void SoundLoaderException(){
         Exception thrown = Assertions.assertThrows(Exception.class,
-                () -> {new BackgroundSoundPlayer(new SoundLoader().loadSound("sounds/invalid.wav"));},
+                () -> {new BackgroundSoundPlayer(new SoundLoader()
+                        .loadSound(AudioSystem.getAudioInputStream(Objects
+                                .requireNonNull(getClass().getClassLoader().getResource("sounds/invalid.wav"))),
+                                null));},
                 "BackgroundSoundPlayer was supposed to throw Exception");
 
         Assertions.assertEquals("Unable to load sound file!", thrown.getMessage());

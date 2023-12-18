@@ -14,9 +14,12 @@ import timelessodyssey.states.State;
 import timelessodyssey.view.GameSpriteLoader;
 import timelessodyssey.view.SpriteLoader;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.FloatControl;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +41,10 @@ public class Game {
         this.gui = new LanternaGUI(screenCreator, "Timeless Odyssey");
         this.spriteLoader = new GameSpriteLoader();
         this.state = new MainMenuState(new MainMenu(), spriteLoader);
-        this.backgroundSoundPlayer = new BackgroundSoundPlayer(new SoundLoader().loadSound("sounds/demo.wav"));
+        this.backgroundSoundPlayer = new BackgroundSoundPlayer(new SoundLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("sounds/demo.wav"))), AudioSystem.getClip()));
+
+        FloatControl gainControl = (FloatControl) backgroundSoundPlayer.getSound().getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-15f);
     }
 
     public static void main(String[] args) {
