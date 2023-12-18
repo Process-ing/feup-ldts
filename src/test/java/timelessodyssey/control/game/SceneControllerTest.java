@@ -7,11 +7,10 @@ import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.states.CreditsState;
 import timelessodyssey.view.SpriteLoader;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class SceneControllerTest {
     private Game game;
@@ -39,7 +38,7 @@ public class SceneControllerTest {
     }
 
     @Test
-    public void stepWithoutQuit() throws IOException, URISyntaxException, FontFormatException {
+    public void stepWithoutQuit() throws IOException {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
         Mockito.when(scene.isAtTransitionPosition()).thenReturn(false);
@@ -52,7 +51,7 @@ public class SceneControllerTest {
     }
 
     @Test
-    public void stepWithQuit() throws IOException, URISyntaxException, FontFormatException {
+    public void stepWithQuit() throws IOException {
         GUI.Action action = GUI.Action.QUIT;
         long frameCount = 0;
 
@@ -61,15 +60,31 @@ public class SceneControllerTest {
     }
 
     @Test
-    public void stepWithSceneChange() throws IOException, URISyntaxException, FontFormatException {
+    public void stepWithSceneChangeNextLevel() throws IOException {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
         Mockito.when(scene.isAtTransitionPosition()).thenReturn(true);
+        Mockito.when(game.getNumberOfLevels()).thenReturn(2147483647);
+
 
         sceneController.step(game, action, frameCount);
         Mockito.verify(playerController, Mockito.times(1))
                 .step(game, action, frameCount);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any());
+    }
+
+    @Test
+    public void stepWithSceneChangeCredits() throws IOException {
+        GUI.Action action = GUI.Action.NONE;
+        long frameCount = 0;
+        Mockito.when(scene.isAtTransitionPosition()).thenReturn(true);
+        Mockito.when(game.getNumberOfLevels()).thenReturn(0);
+
+        sceneController.step(game, action, frameCount);
+        Mockito.verify(playerController, Mockito.times(1))
+                .step(game, action, frameCount);
+        Mockito.verify(game, Mockito.times(1))
+                .setState(Mockito.any(CreditsState.class));
     }
 }

@@ -26,7 +26,7 @@ public class Game {
     private final SpriteLoader spriteLoader;
     private State state;
     private final BackgroundSoundPlayer backgroundSoundPlayer;
-    private static final int NUMBER_OF_LEVELS = 11;
+    private final int NUMBER_OF_LEVELS = 11;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
         ScreenCreator screenCreator = new LanternaScreenCreator(
@@ -74,7 +74,7 @@ public class Game {
         return backgroundSoundPlayer;
     }
 
-    public static int getNumberOfLevels() {
+    public int getNumberOfLevels() {
         return NUMBER_OF_LEVELS;
     }
 
