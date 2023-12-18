@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.view.text.GameTextViewer;
 import timelessodyssey.view.text.TextViewer;
@@ -14,13 +15,13 @@ import static org.mockito.Mockito.*;
 
 public class EntryViewerTest {
 
-    private GUI gui;
+    private ResizableGUI gui;
     private TextViewer textViewer;
     private EntryViewer entryViewer;
 
     @BeforeEach
     public void setup() throws IOException {
-        this.gui = mock(GUI.class);
+        this.gui = mock(ResizableGUI.class);
         this.textViewer = mock(GameTextViewer.class);
 
         this.entryViewer = new EntryViewer(textViewer);
@@ -42,7 +43,7 @@ public class EntryViewerTest {
     @Test
     public void resolutionLabels(){
         Entry entry = new Entry(0,0, Entry.Type.RESOLUTION);
-        for (GUI.Resolution gr : GUI.Resolution.values()){
+        for (ResizableGUI.Resolution gr : ResizableGUI.Resolution.values()){
             when(gui.getResolution()).thenReturn(gr);
             entryViewer.draw(entry, gui, TextColor.ANSI.BLACK);
         }
