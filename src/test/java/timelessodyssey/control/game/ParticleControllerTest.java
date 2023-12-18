@@ -3,7 +3,6 @@ package timelessodyssey.control.game;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Positive;
 import timelessodyssey.Game;
-import timelessodyssey.control.game.ParticleController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Tile;

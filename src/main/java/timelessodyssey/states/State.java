@@ -3,8 +3,8 @@ package timelessodyssey.states;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.gui.ResizableGUI;
+import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
