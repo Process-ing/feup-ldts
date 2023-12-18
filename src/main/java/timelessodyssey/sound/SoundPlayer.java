@@ -7,7 +7,9 @@ import java.io.IOException;
 
 public interface SoundPlayer {
 
-    Clip loadSound(String filename) throws UnsupportedAudioFileException, IOException, LineUnavailableException;
     void start();
     void stop();
+
+    void setSound(Clip sound);
+    Clip getSound();
 }

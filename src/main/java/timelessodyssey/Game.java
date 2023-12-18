@@ -4,6 +4,7 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.LanternaGUI;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.sound.BackgroundSoundPlayer;
+import timelessodyssey.sound.SoundLoader;
 import timelessodyssey.states.MainMenuState;
 import timelessodyssey.states.State;
 
@@ -24,7 +25,7 @@ public class Game {
     public Game() throws Exception {
         this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);
         this.state = new MainMenuState(new MainMenu());
-        this.backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");
+        this.backgroundSoundPlayer = new BackgroundSoundPlayer(new SoundLoader().loadSound("demo.wav"));
     }
 
     public static void main(String[] args) {
