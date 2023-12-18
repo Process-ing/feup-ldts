@@ -3,7 +3,6 @@ package timelessodyssey.view.menu;
 import com.googlecode.lanterna.TextColor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.view.text.GameTextViewer;

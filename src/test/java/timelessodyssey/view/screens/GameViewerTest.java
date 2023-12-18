@@ -39,7 +39,7 @@ public class GameViewerTest {
         scene.setSpikes(new Spike[][] { { null, null },
                 { null, new Spike(8, 8, '^') }});
         scene.setStars(new Star[][] { { null, new Star(8, 0) }, { null, null }});
-        scene.setSnow(List.of(new Snow(0, 0, 2, 2)));
+        scene.setSnow(List.of(new Snow(0, 0, 2, 2, 0)));
         scene.setDeathParticles(List.of(new DeathParticle(0, 8, 2, 0)));
 
         this.viewerProvider = mock(ViewerProvider.class);

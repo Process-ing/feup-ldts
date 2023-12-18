@@ -39,7 +39,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     @Override
     public void draw(ResizableGUI gui, long frameCount) throws IOException {
         gui.clear();
-        drawBackgroundAndFrame(gui);
+        drawBackgroundAndFrame(gui, frameColor, backgroundColor);
         drawMessages(gui);
         drawNames(gui);
         drawScore(gui);
@@ -51,15 +51,6 @@ public class CreditsViewer extends ScreenViewer<Credits> {
 
     public void setTextViewer(TextViewer textViewer){
         this.textViewer = textViewer;
-    }
-
-
-    private void drawBackgroundAndFrame(GUI gui) {
-        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
-        gui.drawRectangle(0, 0, gui.getWidth(), 1, frameColor);
-        gui.drawRectangle(0, gui.getHeight() - 1, gui.getWidth(), 1, frameColor);
-        gui.drawRectangle(0, 1, 1, gui.getHeight() - 2, frameColor);
-        gui.drawRectangle(gui.getWidth() - 1, 1, 1, gui.getHeight() - 2, frameColor);
     }
 
     private void drawMessages(GUI gui) {

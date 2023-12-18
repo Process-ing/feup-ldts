@@ -23,7 +23,7 @@ public class SettingsMenuState extends State<SettingsMenu> {
 
     @Override
     protected ScreenViewer<SettingsMenu> createScreenViewer(ViewerProvider viewerProvider) throws IOException {
-        return new MenuViewer<>(getModel());
+        return new MenuViewer<>(getModel(), viewerProvider);
     }
 
     @Override
