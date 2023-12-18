@@ -9,12 +9,14 @@ import timelessodyssey.model.game.elements.particles.Snow;
 import timelessodyssey.model.game.elements.player.Player;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
 import java.util.Random;
 
 import static java.lang.Character.isLetterOrDigit;
@@ -45,7 +47,7 @@ public class SceneBuilder {
         this.sceneCode = n;
         URL resource = getClass().getClassLoader().getResource("levels/scene" + n + ".lvl");
         if (resource == null){
-            throw new NullPointerException("Level file not found!");
+            throw new FileNotFoundException("Level file not found!");
         }
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
 
@@ -139,7 +141,7 @@ public class SceneBuilder {
                 }
             }
         }
-        throw new NullPointerException("Player not found within the level file!");
+        throw new IllegalStateException("Player not found within the level file!");
     }
 
     private Tile[][] createGoals() {

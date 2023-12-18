@@ -11,6 +11,7 @@ import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.Tile;
 import timelessodyssey.model.game.elements.player.Player;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -44,18 +45,18 @@ public class SceneBuilderTest {
 
     @Test
     public void LevelLoaderNoPlayer() {
-        NullPointerException thrown = Assertions.assertThrows(NullPointerException.class,
+        IllegalStateException thrown = Assertions.assertThrows(IllegalStateException.class,
                                 () -> {new SceneBuilder(100).createScene(player);},
-                        "CreatePlayer was supposed to throw NullPointerException");
+                        "CreatePlayer was supposed to throw IllegalStateException");
 
         Assertions.assertEquals("Player not found within the level file!", thrown.getMessage());
     }
 
     @Test
     public void LevelLoaderNoLevel() {
-        NullPointerException thrown = Assertions.assertThrows(NullPointerException.class,
+        FileNotFoundException thrown = Assertions.assertThrows(FileNotFoundException.class,
                 () -> {new SceneBuilder(-1).createScene(player);},
-                "SceneBuilder was supposed to throw NullPointerException");
+                "SceneBuilder was supposed to throw FileNotFoundException");
 
         Assertions.assertEquals("Level file not found!", thrown.getMessage());
     }
