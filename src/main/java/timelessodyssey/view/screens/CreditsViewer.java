@@ -2,6 +2,7 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.credits.Credits;
 import timelessodyssey.view.Sprite;
 import timelessodyssey.view.text.GameTextViewer;
@@ -9,9 +10,11 @@ import timelessodyssey.view.text.TextViewer;
 
 import java.io.IOException;
 
+import static timelessodyssey.view.text.GameTextViewer.*;
+
 public class CreditsViewer extends ScreenViewer<Credits> {
 
-    private final TextViewer textViewer;
+    private TextViewer textViewer;
 
     private final Sprite logoSprite;
 
@@ -25,16 +28,16 @@ public class CreditsViewer extends ScreenViewer<Credits> {
         return new Sprite("menu/logo.png");
     }
 
-    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
-    private static final TextColor messageColor = new TextColor.RGB(234, 234, 234);
-    private static final TextColor nameColor = new TextColor.RGB(155,173,183);
-    private static final TextColor scoreColor = new TextColor.RGB(91,110,225);
-    private static final TextColor deathColor = new TextColor.RGB(95,133,240);
-    private static final TextColor timeColor = new TextColor.RGB(99,155,255);
-    private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
+    public static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
+    public static final TextColor messageColor = new TextColor.RGB(234, 234, 234);
+    public static final TextColor nameColor = new TextColor.RGB(155,173,183);
+    public static final TextColor scoreColor = new TextColor.RGB(91,110,225);
+    public static final TextColor deathColor = new TextColor.RGB(95,133,240);
+    public static final TextColor timeColor = new TextColor.RGB(99,155,255);
+    public static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
 
     @Override
-    public void draw(GUI gui, long frameCount) throws IOException {
+    public void draw(ResizableGUI gui, long frameCount) throws IOException {
         gui.clear();
         drawBackgroundAndFrame(gui);
         drawMessages(gui);
@@ -46,23 +49,25 @@ public class CreditsViewer extends ScreenViewer<Credits> {
         gui.refresh();
     }
 
+    public void setTextViewer(TextViewer textViewer){
+        this.textViewer = textViewer;
+    }
 
 
     private void drawBackgroundAndFrame(GUI gui) {
+        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
         gui.drawRectangle(0, 0, gui.getWidth(), 1, frameColor);
         gui.drawRectangle(0, gui.getHeight() - 1, gui.getWidth(), 1, frameColor);
         gui.drawRectangle(0, 1, 1, gui.getHeight() - 2, frameColor);
         gui.drawRectangle(gui.getWidth() - 1, 1, 1, gui.getHeight() - 2, frameColor);
-        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
     }
 
     private void drawMessages(GUI gui) {
         int yAlignment = 6;
-        int spacing = 40;
+        int spacing = getCharHeight() * 8;
         for (int idx = 0; idx < getModel().getMessages().length ; idx++){
             String message = getModel().getMessages()[idx];
-            // This method should access the charWidth and Spacing (can't be done through the interface)
-            int messageLength = message.length() * 3 + message.length() - 1;
+            int messageLength = message.length() * getCharWidth() + (message.length() - 1) * getSpacing();
             textViewer.draw(message,
                     (gui.getWidth() / 2) - (messageLength / 2),
                     yAlignment + spacing * idx,
@@ -74,7 +79,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     private void drawNames(GUI gui) {
         int xAlignment = 95;
         int yAlignment = 60;
-        int spacing = 10;
+        int spacing = getCharHeight() * 2;
         for (int idx = 0; idx < getModel().getNames().length ; idx++){
             textViewer.draw(getModel().getNames()[idx],
                     xAlignment,

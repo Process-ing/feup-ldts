@@ -1,90 +1,45 @@
 package timelessodyssey.gui;
 
+import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
+import java.util.List;
 
 import static java.awt.event.KeyEvent.*;
 
 
-public class LanternaGUI implements GUI {
+public class LanternaGUI implements ResizableGUI {
+    private static final List<Integer> SPAM_KEYS = List.of(VK_LEFT, VK_RIGHT);
+
+    private final ScreenCreator screenCreator;
+    private final String title;
     private Screen screen;
-    private final int width;
-    private final int height;
-    private boolean arrowSpam;
+    private boolean keySpam;
     private Resolution resolution;
-    private KeyEvent arrowKeyPressed;
-    private KeyEvent specialKeyPressed;
+    private KeyEvent priorityKeyPressed;
+    private final KeyAdapter keyAdapter;
+    private KeyEvent keyPressed;
 
-    public LanternaGUI(Screen screen) {
-        this.screen = screen;
-        this.width = screen.getTerminalSize().getColumns();
-        this.height = screen.getTerminalSize().getRows();
-        this.arrowSpam = false;
-        this.arrowKeyPressed = null;
-        this.specialKeyPressed = null;
-    }
-
-    public LanternaGUI(int width, int height)
-        throws IOException, URISyntaxException, FontFormatException {
-        this.width = width;
-        this.height = height;
+    public LanternaGUI(ScreenCreator screenCreator, String title) throws IOException, URISyntaxException, FontFormatException {
+        this.screenCreator = screenCreator;
+        this.title = title;
+        this.keySpam = false;
+        this.priorityKeyPressed = null;
+        this.keyAdapter = createKeyAdapter();
+        this.keyPressed = null;
         setResolution(null);
     }
 
-
-    private Terminal createTerminal(int width, int height, int fontSize) throws IOException, URISyntaxException, FontFormatException {
-        TerminalSize size = new TerminalSize(width, height);
-        DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory()
-                .setInitialTerminalSize(size);
-
-        AWTTerminalFontConfiguration fontConfig = loadFont(fontSize);
-        terminalFactory.setForceAWTOverSwing(true);
-        terminalFactory.setTerminalEmulatorFontConfiguration(fontConfig);
-        Terminal terminal = terminalFactory.createTerminal();
-        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
-                        arrowKeyPressed = e;
-                    else
-                        specialKeyPressed = e;
-                }
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    if (arrowSpam && (e.getKeyCode() == VK_LEFT || e.getKeyCode() == VK_RIGHT))
-                        arrowKeyPressed = null;
-                    else
-                        specialKeyPressed = null;
-                }
-        });
-        ((AWTTerminalFrame)terminal).setTitle("Timeless Odyssey");
-        return terminal;
-    }
-
-    private AWTTerminalFontConfiguration loadFont(int fontSize) throws URISyntaxException, IOException, FontFormatException {
-        URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
-        File fontFile = new File(resource.toURI());
-        Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
-        return AWTTerminalFontConfiguration.newInstance(font);
-    }
-
-    private Screen createScreen(Terminal terminal) throws IOException {
-        final Screen screen = new TerminalScreen(terminal);
+    private Screen createScreen(Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
+        Screen screen = screenCreator.createScreen(resolution, title, getKeyAdapter());
 
         screen.setCursorPosition(null);
         screen.startScreen();
@@ -92,20 +47,34 @@ public class LanternaGUI implements GUI {
         return screen;
     }
 
-    private int getBestFontSize(int width, int height, Rectangle terminalBounds) {
-        double maxFontWidth = terminalBounds.getWidth() / width;
-        double maxFontHeight = terminalBounds.getHeight() / height;
-        return (int) Math.min(maxFontWidth, maxFontHeight);
+    private KeyAdapter createKeyAdapter() {
+        return new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (keySpam && SPAM_KEYS.contains(e.getKeyCode()))
+                    keyPressed = priorityKeyPressed = e;
+                else
+                    keyPressed = e;
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (keySpam && SPAM_KEYS.contains(e.getKeyCode()))
+                    keyPressed = priorityKeyPressed = null;
+                else
+                    keyPressed = priorityKeyPressed;
+            }
+        };
     }
 
     @Override
     public int getWidth() {
-        return width;
+        return screenCreator.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return height;
+        return screenCreator.getHeight();
     }
 
     @Override
@@ -118,66 +87,50 @@ public class LanternaGUI implements GUI {
         if (screen != null)
             screen.close();
         this.resolution = resolution;
-
-        Rectangle terminalBounds;
-        if (resolution == null)
-            terminalBounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        else
-            terminalBounds = new Rectangle(resolution.getWidth(), resolution.getHeight());
-        int fontSize = getBestFontSize(width, height, terminalBounds);
-        Terminal terminal = createTerminal(width, height, fontSize);
-        this.screen = createScreen(terminal);
-    }
-
-    @Override
-    public void clear() {
-        screen.clear();
+        this.screen = createScreen(resolution);
     }
 
     @Override
     public void drawPixel(double x, double y, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
-        tg.putString((int) x, (int) y, " ");
+        tg.setCharacter((int) x, (int) y, ' ');
     }
 
     @Override
     public void drawRectangle(double x, double y, int width, int height, TextColor color) {
+        if (width < 0 || height < 0)
+            return;
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
-        for (int dy = 0; dy < height; dy++) {
-            for (int dx = 0; dx < width; dx++) {
-                tg.putString((int) (x + dx), (int) (y + dy), " ");
-            }
-        }
+        tg.fillRectangle(new TerminalPosition((int)x, (int)y), new TerminalSize(width, height), ' ');
     }
 
     @Override
     public Action getNextAction() {
-        if (specialKeyPressed != null) {
-            int keyCode = specialKeyPressed.getKeyCode();
-            specialKeyPressed = null;
-
-            return switch (keyCode) {
-                case VK_LEFT -> Action.LEFT;
-                case VK_RIGHT -> Action.RIGHT;
-                case VK_UP -> Action.UP;
-                case VK_DOWN -> Action.DOWN;
-                case VK_ESCAPE -> Action.QUIT;
-                case VK_ENTER -> Action.SELECT;
-                case VK_SPACE -> Action.JUMP;
-                case VK_X -> Action.DASH;
-                default -> Action.NONE;
-            };
-        }
-
-        if (arrowKeyPressed == null)
+        if (keyPressed == null)
             return Action.NONE;
-        return switch (arrowKeyPressed.getKeyCode()) {
+
+        int keyCode = keyPressed.getKeyCode();
+        keyPressed = priorityKeyPressed;
+
+        return switch (keyCode) {
             case VK_LEFT -> Action.LEFT;
             case VK_RIGHT -> Action.RIGHT;
+            case VK_UP -> Action.UP;
+            case VK_DOWN -> Action.DOWN;
+            case VK_ESCAPE -> Action.QUIT;
+            case VK_ENTER -> Action.SELECT;
+            case VK_SPACE -> Action.JUMP;
+            case VK_X -> Action.DASH;
             default -> Action.NONE;
         };
+    }
+
+
+    @Override
+    public void clear() {
+        screen.clear();
     }
 
     @Override
@@ -190,11 +143,11 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 
-    public boolean isArrowSpam() {
-        return arrowSpam;
+    public void setKeySpam(boolean keySpam) {
+        this.keySpam = keySpam;
     }
 
-    public void setArrowSpam(boolean arrowSpam) {
-        this.arrowSpam = arrowSpam;
+    public KeyAdapter getKeyAdapter() {
+        return keyAdapter;
     }
 }

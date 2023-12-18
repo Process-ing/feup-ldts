@@ -1,11 +1,17 @@
 package timelessodyssey;
 
-import timelessodyssey.gui.GUI;
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import timelessodyssey.gui.LanternaGUI;
+import timelessodyssey.gui.LanternaScreenCreator;
+import timelessodyssey.gui.ResizableGUI;
+import timelessodyssey.gui.ScreenCreator;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.sound.BackgroundSoundPlayer;
 import timelessodyssey.states.MainMenuState;
 import timelessodyssey.states.State;
+import timelessodyssey.view.GameSpriteLoader;
+import timelessodyssey.view.SpriteLoader;
 
 import java.awt.*;
 import java.io.IOException;
@@ -16,14 +22,21 @@ import java.util.logging.Logger;
 public class Game {
     public static final int PIXEL_WIDTH = 160;
     public static final int PIXEL_HEIGHT = 90;
-    private final GUI gui;
+    private final LanternaGUI gui;
+    private final SpriteLoader spriteLoader;
     private State state;
-    private BackgroundSoundPlayer backgroundSoundPlayer;
+    private final BackgroundSoundPlayer backgroundSoundPlayer;
     private static final int NUMBER_OF_LEVELS = 11;
 
     public Game() throws FontFormatException, IOException, URISyntaxException {
-        this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);
-        this.state = new MainMenuState(new MainMenu());
+        ScreenCreator screenCreator = new LanternaScreenCreator(
+            new DefaultTerminalFactory(),
+            new TerminalSize(PIXEL_WIDTH, PIXEL_HEIGHT),
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds()
+        );
+        this.gui = new LanternaGUI(screenCreator, "Timeless Odyssey");
+        this.spriteLoader = new GameSpriteLoader();
+        this.state = new MainMenuState(new MainMenu(), spriteLoader);
         this.backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");
     }
 
@@ -40,12 +53,21 @@ public class Game {
         this.state = state;
     }
 
-    public GUI.Resolution getResolution() {
+    public ResizableGUI.Resolution getResolution() {
         return gui.getResolution();
     }
 
-    public void setResolution(GUI.Resolution resolution) throws IOException, URISyntaxException, FontFormatException {
+    public void setResolution(ResizableGUI.Resolution resolution)
+        throws IOException, URISyntaxException, FontFormatException {
         gui.setResolution(resolution);
+    }
+
+    public void setKeySpam(boolean keySpam) {
+        gui.setKeySpam(keySpam);
+    }
+
+    public SpriteLoader getSpriteLoader() {
+        return spriteLoader;
     }
 
     public BackgroundSoundPlayer getBackgroundSoundPlayer() {

@@ -1,9 +1,8 @@
-package timelessodyssey.control;
+package timelessodyssey.control.game;
 
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Positive;
 import timelessodyssey.Game;
-import timelessodyssey.control.game.ParticleController;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Tile;
@@ -26,11 +25,11 @@ public class ParticleControllerTest {
             @ForAll List<@From("snow") Particle> particles,
             @ForAll @Positive long frameCount,
             @ForAll @From("action") GUI.Action action
-    ) throws IOException {
+    ) {
         Game game = mock(Game.class);
 
         Scene scene = new Scene(WIDTH, HEIGHT, 0);
-        scene.setParticles(particles);
+        scene.setSnow(particles);
         ParticleController particleController = new ParticleController(scene);
 
         particleController.step(game, action, frameCount);
@@ -47,14 +46,12 @@ public class ParticleControllerTest {
     @Provide
     public Arbitrary<Snow> snow() {
         return Combinators.combine(
-                Arbitraries.doubles().greaterOrEqual(0).lessThan(WIDTH * Tile.SIZE),
-                Arbitraries.doubles().greaterOrEqual(0).lessThan(HEIGHT * Tile.SIZE),
+                Arbitraries.doubles().greaterOrEqual(0).lessThan(WIDTH),
+                Arbitraries.doubles().greaterOrEqual(0).lessThan(HEIGHT),
                 Arbitraries.integers().between(1, 10),
-                Arbitraries.integers().between(0, 255),
-                Arbitraries.integers().between(0, 255),
-                Arbitraries.integers().between(0, 255),
-                Arbitraries.doubles().between(0, 1000)
-        ).as((x, y, size, r, g, b, velocity) -> new Snow(x, y, size, velocity));
+                Arbitraries.doubles().between(0, 1000),
+                Arbitraries.doubles().greaterOrEqual(0).lessThan(WIDTH)
+        ).as(Snow::new);
     }
 
     @Provide

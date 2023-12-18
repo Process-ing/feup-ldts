@@ -6,7 +6,9 @@ import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.MainMenu;
+import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
@@ -15,8 +17,9 @@ import java.net.URISyntaxException;
 
 public class MenuStateTest {
     MainMenu model;
+    SpriteLoader spriteLoader;
     Game game;
-    GUI gui;
+    ResizableGUI gui;
     Controller<MainMenu> stateController;
     ScreenViewer<MainMenu> stateScreenViewer;
     MainMenuState state;
@@ -30,8 +33,9 @@ public class MenuStateTest {
     @BeforeEach
     public void setup() {
         this.model = Mockito.mock(MainMenu.class);
+        this.spriteLoader = Mockito.mock(SpriteLoader.class);
         this.game = Mockito.mock(Game.class);
-        this.gui = Mockito.mock(GUI.class);
+        this.gui = Mockito.mock(ResizableGUI.class);
         mockControllerAndViewer();
     }
 
@@ -39,9 +43,9 @@ public class MenuStateTest {
     public void MainMenuStep() throws IOException, URISyntaxException, FontFormatException {
         long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
-        this.state = new MainMenuState(model){
+        this.state = new MainMenuState(model, spriteLoader){
             @Override
-            protected ScreenViewer<MainMenu> createScreenViewer() {
+            protected ScreenViewer<MainMenu> createScreenViewer(SpriteLoader spriteLoader) {
                 return stateScreenViewer;
             }
             @Override

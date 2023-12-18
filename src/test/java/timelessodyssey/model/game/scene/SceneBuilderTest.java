@@ -40,7 +40,7 @@ public class SceneBuilderTest {
         Assertions.assertNotEquals(new Spike[12][21], scene.getSpikes());
         Assertions.assertNotEquals(new Tile[12][21], scene.getGoals());
         Assertions.assertNotEquals(new Star[12][21], scene.getStars());
-        Assertions.assertNotEquals(new ArrayList<>(), scene.getParticles());
+        Assertions.assertNotEquals(new ArrayList<>(), scene.getSnow());
     }
 
     @Test

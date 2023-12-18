@@ -2,8 +2,10 @@ package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.scene.Scene;
+import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.elements.*;
 
 import java.io.IOException;
@@ -16,17 +18,17 @@ public class GameViewer extends ScreenViewer<Scene> {
     private final StarViewer starViewer;
     private final ParticleViewer particleViewer;
 
-    public GameViewer(Scene model) throws IOException {
+    public GameViewer(Scene model, SpriteLoader spriteLoader) throws IOException {
         super(model);
-        this.playerViewer = new PlayerViewer();
-        this.tileViewer = new TileViewer();
-        this.spikeViewer = new SpikeViewer();
-        this.starViewer = new StarViewer();
+        this.playerViewer = new PlayerViewer(spriteLoader);
+        this.tileViewer = new TileViewer(spriteLoader);
+        this.spikeViewer = new SpikeViewer(spriteLoader);
+        this.starViewer = new StarViewer(spriteLoader);
         this.particleViewer = new ParticleViewer();
     }
 
     @Override
-    public void draw(GUI gui, long frameCount) throws IOException {
+    public void draw(ResizableGUI gui, long frameCount) throws IOException {
         gui.clear();
 
         // Background color
@@ -43,7 +45,8 @@ public class GameViewer extends ScreenViewer<Scene> {
         drawElements(gui, getModel().getGoals(), tileViewer, frameCount);
         drawElements(gui, getModel().getStars(), starViewer, frameCount);
         drawElement(gui, getModel().getPlayer(), playerViewer, frameCount);
-        drawElements(gui, getModel().getParticles(), particleViewer, frameCount);
+        drawElements(gui, getModel().getSnow(), particleViewer, frameCount);
+        drawElements(gui, getModel().getDeathParticles(), particleViewer, frameCount);
 
         gui.refresh();
     }
