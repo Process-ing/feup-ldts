@@ -16,7 +16,7 @@ import static org.mockito.Mockito.times;
 public class BackgroundSoundPlayerTest {
 
     @Test
-    public void SoundTesting(){
+    public void SoundTesting() throws Exception {
         BackgroundSoundPlayer backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");
         Clip sound=mock(Clip.class);
         backgroundSoundPlayer.setSound(sound);
@@ -32,8 +32,11 @@ public class BackgroundSoundPlayerTest {
     }
 
     @Test
-    public void SoundException(){
-        BackgroundSoundPlayer backgroundSoundPlayer = new BackgroundSoundPlayer("invalid.wav");
-        assertNull(backgroundSoundPlayer.getSound());
+    public void SoundException() throws Exception {
+        Exception thrown = Assertions.assertThrows(Exception.class,
+                () -> {new BackgroundSoundPlayer("invalid.wav");},
+                "BackgroundSoundPlayer was supposed to throw Exception");
+
+        Assertions.assertEquals("Unable to load sound file!", thrown.getMessage());
     }
 }

@@ -21,7 +21,7 @@ public class Game {
     private BackgroundSoundPlayer backgroundSoundPlayer;
     private static final int NUMBER_OF_LEVELS = 11;
 
-    public Game() throws FontFormatException, IOException, URISyntaxException {
+    public Game() throws Exception {
         this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);
         this.state = new MainMenuState(new MainMenu());
         this.backgroundSoundPlayer = new BackgroundSoundPlayer("demo.wav");
