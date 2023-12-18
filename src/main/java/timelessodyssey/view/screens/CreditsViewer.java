@@ -9,6 +9,8 @@ import timelessodyssey.view.text.TextViewer;
 
 import java.io.IOException;
 
+import static timelessodyssey.view.text.GameTextViewer.*;
+
 public class CreditsViewer extends ScreenViewer<Credits> {
 
     private TextViewer textViewer;
@@ -61,11 +63,10 @@ public class CreditsViewer extends ScreenViewer<Credits> {
 
     private void drawMessages(GUI gui) {
         int yAlignment = 6;
-        int spacing = 40;
+        int spacing = getCharHeight() * 8;
         for (int idx = 0; idx < getModel().getMessages().length ; idx++){
             String message = getModel().getMessages()[idx];
-            // This method should access the charWidth and Spacing (can't be done through the interface)
-            int messageLength = message.length() * 3 + message.length() - 1;
+            int messageLength = message.length() * getCharWidth() + (message.length() - 1) * getSpacing();
             textViewer.draw(message,
                     (gui.getWidth() / 2) - (messageLength / 2),
                     yAlignment + spacing * idx,
@@ -77,7 +78,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     private void drawNames(GUI gui) {
         int xAlignment = 95;
         int yAlignment = 60;
-        int spacing = 10;
+        int spacing = getCharHeight() * 2;
         for (int idx = 0; idx < getModel().getNames().length ; idx++){
             textViewer.draw(getModel().getNames()[idx],
                     xAlignment,
