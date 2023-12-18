@@ -12,7 +12,6 @@ import timelessodyssey.states.GameState;
 
 import java.io.IOException;
 
-import static timelessodyssey.Game.getNumberOfLevels;
 import static timelessodyssey.gui.GUI.Action.QUIT;
 
 public class SceneController extends Controller<Scene> {
@@ -33,7 +32,7 @@ public class SceneController extends Controller<Scene> {
         } else {
             playerController.step(game, action, frameCount);
             if (getModel().isAtTransitionPosition()) {
-                if (getModel().getSceneCode() + 1 >= getNumberOfLevels()) {
+                if (getModel().getSceneCode() + 1 >= game.getNumberOfLevels()) {
                     Credits credits = new Credits(player.getStarCounter(), player.getNumberOfDeaths(),
                             System.currentTimeMillis() - getModel().getPlayer().getBirthTime());  // TODO: Make credits constructor nicer
                     game.setState(new CreditsState(credits, game.getSpriteLoader()));
