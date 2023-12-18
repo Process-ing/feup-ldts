@@ -60,7 +60,7 @@ public class SceneTest {
             Vector transitionEnd = new Vector(120,40);
             scene.setTransitionPositionBegin(transitionBegin);
             scene.setTransitionPositionEnd(transitionEnd);
-            Vector playerPosition = new Vector(119,39);
+            Vector playerPosition = new Vector(119,19);
             scene.getPlayer().setPosition(playerPosition);
 
             assertEquals(transitionBegin, scene.getTransitionPositionBegin());
@@ -74,7 +74,7 @@ public class SceneTest {
             Vector transitionEnd = new Vector(120,40);
             scene.setTransitionPositionBegin(transitionBegin);
             scene.setTransitionPositionEnd(transitionEnd);
-            Vector playerPosition = new Vector(39,7);
+            Vector playerPosition = new Vector(39,19);
             scene.getPlayer().setPosition(playerPosition);
 
             assertEquals(transitionBegin, scene.getTransitionPositionBegin());
