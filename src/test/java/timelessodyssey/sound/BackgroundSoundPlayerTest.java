@@ -16,7 +16,7 @@ public class BackgroundSoundPlayerTest {
 
     @Test
     public void SoundLoaderWorking() throws Exception {
-        Clip sound = new SoundLoader().loadSound("demo.wav");
+        Clip sound = new SoundLoader().loadSound("sounds/demo.wav");
         assertNotNull(sound);
 
         BackgroundSoundPlayer backgroundSoundPlayer = new BackgroundSoundPlayer(sound);
@@ -26,7 +26,7 @@ public class BackgroundSoundPlayerTest {
     @Test
     public void SoundLoaderException(){
         Exception thrown = Assertions.assertThrows(Exception.class,
-                () -> {new BackgroundSoundPlayer(new SoundLoader().loadSound("invalid.wav"));},
+                () -> {new BackgroundSoundPlayer(new SoundLoader().loadSound("sounds/invalid.wav"));},
                 "BackgroundSoundPlayer was supposed to throw Exception");
 
         Assertions.assertEquals("Unable to load sound file!", thrown.getMessage());

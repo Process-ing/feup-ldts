@@ -5,14 +5,15 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import java.io.File;
+import java.net.URL;
 
 public class SoundLoader {
 
-    public Clip loadSound(String filename) throws Exception{
+    public Clip loadSound(String filepath) throws Exception {
+        System.out.println("filepath = " + filepath);
         try {
-            String musicPath = "./src/main/resources/sounds/" + filename;
-            File musicFile = new File(musicPath);
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicFile);
+            URL resource = getClass().getClassLoader().getResource(filepath);
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(resource);
             Clip musicClip = AudioSystem.getClip();
             musicClip.open(audioInput);
             FloatControl gainControl = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);

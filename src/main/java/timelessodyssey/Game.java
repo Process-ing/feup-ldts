@@ -25,7 +25,7 @@ public class Game {
     public Game() throws Exception {
         this.gui = new LanternaGUI(PIXEL_WIDTH, PIXEL_HEIGHT);
         this.state = new MainMenuState(new MainMenu());
-        this.backgroundSoundPlayer = new BackgroundSoundPlayer(new SoundLoader().loadSound("demo.wav"));
+        this.backgroundSoundPlayer = new BackgroundSoundPlayer(new SoundLoader().loadSound("sounds/demo.wav"));
     }
 
     public static void main(String[] args) {
