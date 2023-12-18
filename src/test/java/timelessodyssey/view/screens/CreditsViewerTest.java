@@ -3,7 +3,6 @@ package timelessodyssey.view.screens;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.credits.Credits;
 import timelessodyssey.view.text.TextViewer;
