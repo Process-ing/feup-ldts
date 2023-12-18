@@ -60,7 +60,7 @@ public class EntryController extends Controller<Menu> {
         }
     }
 
-    public Integer getResolutionIndex(ResizableGUI.Resolution resolution) {
+    private Integer getResolutionIndex(ResizableGUI.Resolution resolution) {
         for (int i = 0; i < resolutions.length; i++) {
             if (resolutions[i] == resolution)
                 return i;

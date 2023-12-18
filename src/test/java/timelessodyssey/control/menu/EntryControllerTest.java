@@ -166,13 +166,4 @@ public class EntryControllerTest {
         verify(game, Mockito.times(1))
                 .setResolution(null);
     }
-
-    @Test
-    public void ResolutionIndexes(){
-        for (int idx = 0; idx < ResizableGUI.Resolution.values().length; idx++){
-            ResizableGUI.Resolution res =  ResizableGUI.Resolution.values()[idx];
-            assertEquals(idx, entryController.getResolutionIndex(res));
-        }
-        assertEquals(-1, entryController.getResolutionIndex(null));
-    }
 }
