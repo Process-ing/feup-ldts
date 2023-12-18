@@ -8,13 +8,15 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.model.menu.Menu;
+import timelessodyssey.states.GameState;
+import timelessodyssey.states.MainMenuState;
+import timelessodyssey.states.SettingsMenuState;
 import timelessodyssey.states.State;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class EntryControllerTest {
@@ -39,11 +41,11 @@ public class EntryControllerTest {
 
         entryController.step(game, GUI.Action.NONE, 0);
         verify(game, Mockito.times(0))
-                .setState(Mockito.any());
+                .setState(Mockito.any(State.class));
 
         entryController.step(game, GUI.Action.SELECT, 0);
         verify(game, Mockito.times(1))
-                .setState(Mockito.any());
+                .setState(Mockito.any(GameState.class));
     }
 
     @Test
@@ -53,11 +55,11 @@ public class EntryControllerTest {
 
         entryController.step(game, GUI.Action.NONE, 0);
         verify(game, Mockito.times(0))
-                .setState(Mockito.any());
+                .setState(Mockito.any(State.class));
 
         entryController.step(game, GUI.Action.SELECT, 0);
         verify(game, Mockito.times(1))
-                .setState(Mockito.any());
+                .setState(Mockito.any(SettingsMenuState.class));
     }
 
     @Test
@@ -67,7 +69,7 @@ public class EntryControllerTest {
 
         entryController.step(game, GUI.Action.NONE, 0);
         verify(game, Mockito.times(0))
-                .setState(Mockito.any());
+                .setState(Mockito.any(State.class));
 
         entryController.step(game, GUI.Action.SELECT, 0);
         verify(game, Mockito.times(1))
@@ -81,11 +83,11 @@ public class EntryControllerTest {
 
         entryController.step(game, GUI.Action.NONE, 0);
         verify(game, Mockito.times(0))
-                .setState(Mockito.any());
+                .setState(Mockito.any(State.class));
 
         entryController.step(game, GUI.Action.SELECT, 0);
         verify(game, Mockito.times(1))
-                .setState(Mockito.any());
+                .setState(Mockito.any(MainMenuState.class));
     }
 
     @Test
