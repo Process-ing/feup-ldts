@@ -77,10 +77,6 @@ public class Game {
         return spriteLoader;
     }
 
-    public BackgroundSoundPlayer getBackgroundSoundPlayer() {
-        return backgroundSoundPlayer;
-    }
-
     public int getNumberOfLevels() {
         return NUMBER_OF_LEVELS;
     }

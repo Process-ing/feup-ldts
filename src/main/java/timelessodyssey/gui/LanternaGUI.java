@@ -99,11 +99,11 @@ public class LanternaGUI implements ResizableGUI {
 
     @Override
     public void drawRectangle(double x, double y, int width, int height, TextColor color) {
-        if (width < 0 || height < 0)
-            return;
-        TextGraphics tg = screen.newTextGraphics();
-        tg.setBackgroundColor(color);
-        tg.fillRectangle(new TerminalPosition((int)x, (int)y), new TerminalSize(width, height), ' ');
+        if (width > 0 && height > 0) {
+            TextGraphics tg = screen.newTextGraphics();
+            tg.setBackgroundColor(color);
+            tg.fillRectangle(new TerminalPosition((int) x, (int) y), new TerminalSize(width, height), ' ');
+        }
     }
 
     @Override

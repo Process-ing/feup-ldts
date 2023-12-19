@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
+import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.player.IdleState;
 import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.elements.player.PlayerState;
@@ -44,6 +45,16 @@ public class PlayerControllerTest {
         @Test
         public void step() {
             playerController.step(game, GUI.Action.NONE, 0);
+            verify(player, times(1))
+                    .setVelocity(Mockito.any());
+            verify(player, times(1))
+                    .updateVelocity();
+            verify(player, times(1))
+                    .setPosition(Mockito.any());
+            verify(player, times(1))
+                    .getNextState();
+            verify(player, times(1))
+                    .setState(Mockito.any());
         }
 
         @Test
