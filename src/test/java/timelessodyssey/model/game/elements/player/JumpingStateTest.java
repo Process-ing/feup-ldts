@@ -11,11 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class JumpingStateTest {
-
     private Player player;
-
     private JumpingState jumpingState;
-
     private Scene mockedScene;
 
     @BeforeEach

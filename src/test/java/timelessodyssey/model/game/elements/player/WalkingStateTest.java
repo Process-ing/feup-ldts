@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class WalkingStateTest {
-
     private Player player;
     private Scene mockedScene;
 

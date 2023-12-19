@@ -15,8 +15,7 @@ import java.util.ArrayList;
 
 
 public class SceneBuilderTest {
-
-    Player player;
+    private Player player;
 
     @BeforeEach
     public void setup() {

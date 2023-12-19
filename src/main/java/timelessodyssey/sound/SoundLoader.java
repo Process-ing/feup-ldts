@@ -4,7 +4,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.Clip;
 
 public class SoundLoader {
-
     public Clip loadSound(AudioInputStream audioInput, Clip musicClip) throws Exception {
         try {
             musicClip.open(audioInput);
@@ -13,5 +12,4 @@ public class SoundLoader {
             throw new Exception("Unable to load sound file!");
         }
     }
-
 }

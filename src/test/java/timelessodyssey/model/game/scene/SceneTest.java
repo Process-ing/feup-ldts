@@ -12,9 +12,9 @@ import timelessodyssey.model.game.elements.player.Player;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SceneTest {
-    Scene scene;
-    Player player;
-    Vector playerSize;
+    private Scene scene;
+    private Player player;
+    private Vector playerSize;
 
     @BeforeEach
     public void setup() {

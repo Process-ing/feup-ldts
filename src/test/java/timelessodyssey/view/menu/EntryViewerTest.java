@@ -11,7 +11,6 @@ import timelessodyssey.view.text.TextViewer;
 import static org.mockito.Mockito.*;
 
 public class EntryViewerTest {
-
     private ResizableGUI gui;
     private TextViewer textViewer;
     private EntryViewer entryViewer;

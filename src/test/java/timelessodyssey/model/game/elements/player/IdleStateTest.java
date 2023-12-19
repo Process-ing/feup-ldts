@@ -11,11 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class IdleStateTest {
-
     private Player player;
-
     private IdleState idleState;
-
     private Scene mockedScene;
 
     @BeforeEach

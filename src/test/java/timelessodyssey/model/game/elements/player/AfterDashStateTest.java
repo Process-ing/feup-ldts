@@ -12,9 +12,7 @@ import static org.mockito.Mockito.*;
 
 class AfterDashStateTest {
     private Player player;
-
     private AfterDashState afterDashState;
-
     private Scene mockedScene;
 
     @BeforeEach

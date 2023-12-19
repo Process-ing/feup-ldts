@@ -13,7 +13,6 @@ import java.io.IOException;
 import static timelessodyssey.view.text.GameTextViewer.*;
 
 public class CreditsViewer extends ScreenViewer<Credits> {
-
     private final TextViewer textViewer;
     private final LogoViewer logoViewer;
 

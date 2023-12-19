@@ -16,7 +16,6 @@ import java.net.URISyntaxException;
 import static org.mockito.ArgumentMatchers.eq;
 
 public class SettingsMenuControllerTest {
-
     private Game game;
     private SettingsMenu settingsMenu;
     private EntryController entryController;

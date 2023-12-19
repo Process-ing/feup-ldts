@@ -21,7 +21,6 @@ import java.net.URISyntaxException;
 import static org.mockito.Mockito.*;
 
 public class EntryControllerTest {
-
     private Game game;
     private Menu menu;
     private EntryController entryController;

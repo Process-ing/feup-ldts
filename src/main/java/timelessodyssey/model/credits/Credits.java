@@ -3,7 +3,6 @@ package timelessodyssey.model.credits;
 import timelessodyssey.model.game.elements.player.Player;
 
 public class Credits {
-
     private int score;
     private final int deaths;
 

@@ -9,9 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 class DeadStateTest {
-
     private Player player;
-
     private DeadState deadState;
 
     @BeforeEach
