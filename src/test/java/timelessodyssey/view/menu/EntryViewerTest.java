@@ -37,6 +37,8 @@ public class EntryViewerTest {
         }
         verify(textViewer, times(5))
                 .draw(anyString(), anyDouble(), anyDouble(), eq(TextColor.ANSI.BLACK), any());
+        verify(textViewer, times(0))
+                .draw(eq(""), anyDouble(), anyDouble(), eq(TextColor.ANSI.BLACK), any());
     }
 
     @Test
@@ -48,6 +50,8 @@ public class EntryViewerTest {
         }
         verify(textViewer, times(4))
                 .draw(anyString(), anyDouble(), anyDouble(), eq(TextColor.ANSI.BLACK), any());
+        verify(textViewer, times(0))
+                .draw(eq(""), anyDouble(), anyDouble(), eq(TextColor.ANSI.BLACK), any());
     }
 
 
