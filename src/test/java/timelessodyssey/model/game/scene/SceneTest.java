@@ -36,7 +36,6 @@ public class SceneTest {
 
     @Nested
     class SceneTestTransitions {
-
         @Test
         public void TransitionPositionOutside() {
             Vector transitionBegin = new Vector(160,8);
@@ -54,7 +53,7 @@ public class SceneTest {
         }
 
         @Test
-        public void TransitionPositionOnlyTopLeft() {
+        public void atTransitionPositionTopLeft() {
             Vector transitionBegin = new Vector(40,8);
             Vector transitionEnd = new Vector(120,40);
             scene.setTransitionPositionBegin(transitionBegin);
@@ -68,7 +67,7 @@ public class SceneTest {
         }
 
         @Test
-        public void TransitionPositionOnlyBottomRight() {
+        public void atTransitionPositionBottomRight() {
             Vector transitionBegin = new Vector(40,8);
             Vector transitionEnd = new Vector(120,40);
             scene.setTransitionPositionBegin(transitionBegin);
@@ -94,99 +93,189 @@ public class SceneTest {
             assertEquals(transitionEnd, scene.getTransitionPositionEnd());
             assertTrue(scene.isAtTransitionPosition());
         }
+
+
+
+        @Test
+        public void notAtTransitionPositionLeft() {
+            Vector transitionBegin = new Vector(40,8);
+            Vector transitionEnd = new Vector(120,40);
+            scene.setTransitionPositionBegin(transitionBegin);
+            scene.setTransitionPositionEnd(transitionEnd);
+            Vector playerPosition1 = new Vector(31,16);
+            scene.getPlayer().setPosition(playerPosition1);
+        }
+
+        @Test
+        public void notAtTransitionPositionRight() {
+            Vector transitionBegin = new Vector(40,8);
+            Vector transitionEnd = new Vector(120,40);
+            scene.setTransitionPositionBegin(transitionBegin);
+            scene.setTransitionPositionEnd(transitionEnd);
+            Vector playerPosition = new Vector(121,16);
+            scene.getPlayer().setPosition(playerPosition);
+
+            assertEquals(transitionBegin, scene.getTransitionPositionBegin());
+            assertEquals(transitionEnd, scene.getTransitionPositionEnd());
+            assertFalse(scene.isAtTransitionPosition());
+        }
+
+        @Test
+        public void notAtTransitionPositionUp() {
+            Vector transitionBegin = new Vector(40,16);
+            Vector transitionEnd = new Vector(120,40);
+            scene.setTransitionPositionBegin(transitionBegin);
+            scene.setTransitionPositionEnd(transitionEnd);
+            Vector playerPosition = new Vector(110,0);
+            scene.getPlayer().setPosition(playerPosition);
+
+            assertEquals(transitionBegin, scene.getTransitionPositionBegin());
+            assertEquals(transitionEnd, scene.getTransitionPositionEnd());
+            assertFalse(scene.isAtTransitionPosition());
+        }
+
+        @Test
+        public void notAtTransitionPositionDown() {
+            Vector transitionBegin = new Vector(40,8);
+            Vector transitionEnd = new Vector(120,40);
+            scene.setTransitionPositionBegin(transitionBegin);
+            scene.setTransitionPositionEnd(transitionEnd);
+            Vector playerPosition = new Vector(110,41);
+            scene.getPlayer().setPosition(playerPosition);
+
+            assertEquals(transitionBegin, scene.getTransitionPositionBegin());
+            assertEquals(transitionEnd, scene.getTransitionPositionEnd());
+            assertFalse(scene.isAtTransitionPosition());
+        }
     }
 
     @Nested
     class SceneTestCollisions {
         @BeforeEach
         public void setup() {
-            scene = new Scene(3, 3, 0);
-            Tile[][] tileSet = {{null, null, null},
-                    {null, new Tile(8,8, 'G'), null},
-                    {null, null, null}};
+            scene = new Scene(5, 5, 0);
+            Tile[][] tileSet = {{null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, new Tile(16,16, 'G'), null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null}};
             scene.setTiles(tileSet);
             player = new Player(0,0, null);
             scene.setPlayer(player);
         }
 
         @Test
-        public void CheckCollisionRight() {
-            for (double x = 0; x < 17; x += 0.25){
-                Vector playerPosition = new Vector(x,0);
-                assertFalse(scene.collidesRight(playerPosition, playerSize));
-                playerPosition = new Vector(x, 16);
-                assertFalse(scene.collidesRight(playerPosition, playerSize));
-            }
+        public void checkCollisionLeft() {
+            Vector playerPosition1 = new Vector(31, 20);
+            Vector playerPosition2 = new Vector(24, 20);
+            Vector playerPosition3 = new Vector(23, 20);
+            Vector playerPosition4 = new Vector(19, 20);
 
-            for (double x = 0; x < 17; x += 0.25){
-                Vector playerPosition = new Vector(x,8);
-                if (x < 3 || x >= 11) {
-                    assertFalse(scene.collidesRight(playerPosition, playerSize));
-                }
-                else {
-                    assertTrue(scene.collidesRight(playerPosition, playerSize));
-                }
-            }
+            assertFalse(scene.collidesLeft(playerPosition1, playerSize));
+            assertFalse(scene.collidesLeft(playerPosition2, playerSize));
+            assertTrue(scene.collidesLeft(playerPosition3, playerSize));
+            assertTrue(scene.collidesLeft(playerPosition4, playerSize));
         }
 
         @Test
-        public void CheckCollisionLeft() {
-            for (double x = 23.75; x >= 0; x -= 0.25){
-                Vector playerPosition = new Vector(x,0);
-                assertFalse(scene.collidesLeft(playerPosition, playerSize));
-                playerPosition = new Vector(x, 16);
-                assertFalse(scene.collidesLeft(playerPosition, playerSize));
-            }
+        public void checkCollisionRight() {
+            Vector playerPosition1 = new Vector(1, 12);
+            Vector playerPosition2 = new Vector(10, 12);
+            Vector playerPosition3 = new Vector(11, 12);
+            Vector playerPosition4 = new Vector(15, 12);
 
-            for (double x = 23.75; x >= 0; x -= 0.25){
-                Vector playerPosition = new Vector(x,8);
-                if (x < 8 || x >= 16) {
-                    assertFalse(scene.collidesLeft(playerPosition, playerSize));
-                }
-                else {
-                    assertTrue(scene.collidesLeft(playerPosition, playerSize));
-                }
-            }
+            assertFalse(scene.collidesRight(playerPosition1, playerSize));
+            assertFalse(scene.collidesRight(playerPosition2, playerSize));
+            assertTrue(scene.collidesRight(playerPosition3, playerSize));
+            assertTrue(scene.collidesRight(playerPosition4, playerSize));
         }
 
         @Test
-        public void CheckCollisionDown() {
-            for (double y = 0; y <= 16; y += 0.25){
-                Vector playerPosition = new Vector(0,y);
-                assertFalse(scene.collidesRight(playerPosition, playerSize));
-                playerPosition = new Vector(0, y);
-                assertFalse(scene.collidesRight(playerPosition, playerSize));
-            }
+        public void checkCollisionUp() {
+            Vector playerPosition1 = new Vector(20, 31);
+            Vector playerPosition2 = new Vector(20, 24);
+            Vector playerPosition3 = new Vector(20, 23);
+            Vector playerPosition4 = new Vector(20, 18);
 
-            for (double y = 0; y < 17; y += 0.25){
-                Vector playerPosition = new Vector(8,y);
-                if (y < 1 || y >= 9) {
-                    assertFalse(scene.collidesDown(playerPosition, playerSize));
-                }
-                else {
-                    assertTrue(scene.collidesDown(playerPosition, playerSize));
-                }
-            }
+            assertFalse(scene.collidesUp(playerPosition1, playerSize));
+            assertFalse(scene.collidesUp(playerPosition2, playerSize));
+            assertTrue(scene.collidesUp(playerPosition3, playerSize));
+            assertTrue(scene.collidesUp(playerPosition4, playerSize));
         }
 
         @Test
-        public void CheckCollisionUp() {
-            for (double y = 23.75; y >= 0; y -= 0.25){
-                Vector playerPosition = new Vector(0,y);
-                assertFalse(scene.collidesUp(playerPosition, playerSize));
-                playerPosition = new Vector(16, y);
-                assertFalse(scene.collidesUp(playerPosition, playerSize));
-            }
+        public void checkCollisionDown() {
+            Vector playerPosition1 = new Vector(12, 1);
+            Vector playerPosition2 = new Vector(12, 8);
+            Vector playerPosition3 = new Vector(12, 9);
+            Vector playerPosition4 = new Vector(12, 14);
 
-            for (double y = 23.75; y >= 0; y -= 0.25){
-                Vector playerPosition = new Vector(8,y);
-                if (y < 8 || y >= 16) {
-                    assertFalse(scene.collidesUp(playerPosition, playerSize));
-                }
-                else {
-                    assertTrue(scene.collidesUp(playerPosition, playerSize));
-                }
-            }
+            assertFalse(scene.collidesDown(playerPosition1, playerSize));
+            assertFalse(scene.collidesDown(playerPosition2, playerSize));
+            assertTrue(scene.collidesDown(playerPosition3, playerSize));
+            assertTrue(scene.collidesDown(playerPosition4, playerSize));
+        }
+    }
+
+    @Nested
+    class SceneBoundCollisions {
+        @BeforeEach
+        public void setup() {
+            scene = new Scene(3, 3, 0);
+            player = new Player(0,0, null);
+            scene.setPlayer(player);
+        }
+
+        @Test
+        public void checkCollisionLeftSceneBound() {
+            Vector playerPosition1 = new Vector(10, 1);
+            Vector playerPosition2 = new Vector(0, 1);
+            Vector playerPosition3 = new Vector(-1, 1);
+            Vector playerPosition4 = new Vector(-12, 1);
+
+            assertFalse(scene.collidesLeft(playerPosition1, playerSize));
+            assertFalse(scene.collidesLeft(playerPosition2, playerSize));
+            assertTrue(scene.collidesLeft(playerPosition3, playerSize));
+            assertTrue(scene.collidesLeft(playerPosition4, playerSize));
+        }
+
+        @Test
+        public void checkCollisionRightSceneBound() {
+            Vector playerPosition1 = new Vector(10, 1);
+            Vector playerPosition2 = new Vector(18, 1);
+            Vector playerPosition3 = new Vector(19, 1);
+            Vector playerPosition4 = new Vector(28, 1);
+
+            assertFalse(scene.collidesRight(playerPosition1, playerSize));
+            assertFalse(scene.collidesRight(playerPosition2, playerSize));
+            assertTrue(scene.collidesRight(playerPosition3, playerSize));
+            assertTrue(scene.collidesRight(playerPosition4, playerSize));
+        }
+
+        @Test
+        public void checkCollisionUpSceneBound() {
+            Vector playerPosition1 = new Vector(1, 8);
+            Vector playerPosition2 = new Vector(1, 0);
+            Vector playerPosition3 = new Vector(1, -1);
+            Vector playerPosition4 = new Vector(1, -7);
+
+            assertFalse(scene.collidesUp(playerPosition1, playerSize));
+            assertFalse(scene.collidesUp(playerPosition2, playerSize));
+            assertTrue(scene.collidesUp(playerPosition3, playerSize));
+            assertTrue(scene.collidesUp(playerPosition4, playerSize));
+        }
+
+        @Test
+        public void checkCollisionDownSceneBound() {
+            Vector playerPosition1 = new Vector(1, 8);
+            Vector playerPosition2 = new Vector(1, 16);
+            Vector playerPosition3 = new Vector(1, 17);
+            Vector playerPosition4 = new Vector(1, 32);
+
+            assertFalse(scene.collidesDown(playerPosition1, playerSize));
+            assertFalse(scene.collidesDown(playerPosition2, playerSize));
+            assertTrue(scene.collidesDown(playerPosition3, playerSize));
+            assertTrue(scene.collidesDown(playerPosition4, playerSize));
         }
     }
 

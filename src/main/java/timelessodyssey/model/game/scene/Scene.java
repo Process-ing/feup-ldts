@@ -130,10 +130,14 @@ public class Scene {
     }
 
     public boolean isAtTransitionPosition() {
-        boolean topLeft =   player.getPosition().x() >= transitionPositionBegin.x() && player.getPosition().x() <= transitionPositionEnd.x() &&
-                            player.getPosition().y() >= transitionPositionBegin.y() && player.getPosition().y() <= transitionPositionEnd.y();
-        boolean bottomRight =   (player.getPosition().x() + player.getWidth()) >= transitionPositionBegin.x() && (player.getPosition().x() + player.getWidth()) <= transitionPositionEnd.x() &&
-                (player.getPosition().y() + player.getHeight()) >= transitionPositionBegin.y() && (player.getPosition().y() + player.getHeight()) <= transitionPositionEnd.y();
+        boolean topLeft = player.getPosition().x() >= transitionPositionBegin.x()
+                && player.getPosition().x() <= transitionPositionEnd.x()
+                && player.getPosition().y() >= transitionPositionBegin.y()
+                && player.getPosition().y() <= transitionPositionEnd.y();
+        boolean bottomRight = (player.getPosition().x() + player.getWidth()) >= transitionPositionBegin.x()
+                && (player.getPosition().x() + player.getWidth()) <= transitionPositionEnd.x()
+                && (player.getPosition().y() + player.getHeight()) >= transitionPositionBegin.y()
+                && (player.getPosition().y() + player.getHeight()) <= transitionPositionEnd.y();
         return topLeft || bottomRight;
     }
 
@@ -155,22 +159,22 @@ public class Scene {
 
     public boolean collidesLeft(Vector position, Vector size) {
         double x = position.x(), y = position.y();
-        return checkCollision(x, x, y, y + size.y() - 1);
+        return checkCollision(x, x + 1, y, y + size.y() - 1);
     }
 
     public boolean collidesRight(Vector position, Vector size) {
         double x = position.x(), y = position.y();
-        return checkCollision(x + size.x() - 1, x + size.x() - 1, y, y + size.y() - 1);
+        return checkCollision(x + size.x() - 2, x + size.x() - 1, y, y + size.y() - 1);
     }
 
     public boolean collidesUp(Vector position, Vector size) {
         double x = position.x(), y = position.y();
-        return checkCollision(x, x + size.x() - 1, y, y);
+        return checkCollision(x, x + size.x() - 1, y, y + 1);
     }
 
     public boolean collidesDown(Vector position, Vector size) {
         double x = position.x(), y = position.y();
-        return checkCollision(x, x + size.x() - 1, y + size.y() - 1, y + size.y() - 1);
+        return checkCollision(x, x + size.x() - 1, y + size.y() - 2, y + size.y() - 1);
     }
 
     public boolean isDying() {
