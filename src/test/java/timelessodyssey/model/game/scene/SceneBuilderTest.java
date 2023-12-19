@@ -28,7 +28,7 @@ public class SceneBuilderTest {
     }
 
     @Test
-    public void LevelLoaderTest() throws IOException {
+    public void levelLoaderConstructor() throws IOException {
         int sceneCode = 5;
         Scene scene =  new SceneBuilder(sceneCode).createScene(player);
 
@@ -45,7 +45,7 @@ public class SceneBuilderTest {
     }
 
     @Test
-    public void LevelLoaderNoPlayer() {
+    public void levelLoaderNoPlayer() {
         IllegalStateException thrown = Assertions.assertThrows(IllegalStateException.class,
                                 () -> {new SceneBuilder(100).createScene(player);},
                         "CreatePlayer was supposed to throw IllegalStateException");
@@ -54,7 +54,7 @@ public class SceneBuilderTest {
     }
 
     @Test
-    public void LevelLoaderNoLevel() {
+    public void levelLoaderNoLevel() {
         FileNotFoundException thrown = Assertions.assertThrows(FileNotFoundException.class,
                 () -> {new SceneBuilder(-1).createScene(player);},
                 "SceneBuilder was supposed to throw FileNotFoundException");

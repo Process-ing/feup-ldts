@@ -13,7 +13,6 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 class AfterDashStateTest {
-
     private Player player;
 
     private AfterDashState afterDashState;
@@ -60,7 +59,7 @@ class AfterDashStateTest {
 
     @Test
     void getNextStateDead() {
-        when(mockedScene.isDying()).thenReturn(true);
+        when(mockedScene.isPlayerDying()).thenReturn(true);
 
         PlayerState nextState = afterDashState.getNextState();
 

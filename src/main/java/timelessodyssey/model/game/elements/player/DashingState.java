@@ -30,7 +30,7 @@ public class DashingState extends PlayerState {
 
     @Override
     public PlayerState getNextState() {
-        if (getPlayer().getScene().isDying())
+        if (getPlayer().getScene().isPlayerDying())
             return new DeadState(getPlayer(), 50);
         if (Math.abs(getPlayer().getVelocity().x()) < MIN_VELOCITY)
             return new AfterDashState(getPlayer());

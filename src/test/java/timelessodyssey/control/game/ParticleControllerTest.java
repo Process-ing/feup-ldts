@@ -63,7 +63,7 @@ public class ParticleControllerTest {
     }
 
     @Test
-    public void ParticlePositionCalls(){
+    public void particlePositionCalls(){
         Game game = Mockito.mock(Game.class);
         Scene scene = Mockito.mock(Scene.class);
         ParticleController particleController = new ParticleController(scene);

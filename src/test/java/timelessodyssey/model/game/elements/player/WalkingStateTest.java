@@ -13,9 +13,7 @@ import static org.mockito.Mockito.*;
 class WalkingStateTest {
 
     private Player player;
-
     private WalkingState walkingState;
-
     private Scene mockedScene;
 
     @BeforeEach
@@ -70,7 +68,7 @@ class WalkingStateTest {
     @Test
     void getNextStateDead() {
         player.setVelocity(new Vector(1, 0));
-        when(mockedScene.isDying()).thenReturn(true);
+        when(mockedScene.isPlayerDying()).thenReturn(true);
 
         PlayerState nextState = player.getNextState();
 

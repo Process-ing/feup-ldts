@@ -19,8 +19,6 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 public class GameViewerTest {
-
-
     private Scene scene;
     private ViewerProvider viewerProvider;
     private ParticleViewer particleViewer;
