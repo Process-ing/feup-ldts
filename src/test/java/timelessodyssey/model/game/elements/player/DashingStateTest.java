@@ -8,16 +8,11 @@ import timelessodyssey.model.game.scene.Scene;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 class DashingStateTest {
-
     private Player player;
-
     private DashingState dashingState;
-
     private Scene mockedScene;
 
     @BeforeEach

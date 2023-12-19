@@ -17,13 +17,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MainMenuStateTest {
-    MainMenu model;
-    SpriteLoader spriteLoader;
-    Game game;
-    ResizableGUI gui;
-    Controller<MainMenu> stateController;
-    ScreenViewer<MainMenu> stateScreenViewer;
-    MainMenuState state;
+    private MainMenu model;
+    private SpriteLoader spriteLoader;
+    private Game game;
+    private ResizableGUI gui;
+    private Controller<MainMenu> stateController;
+    private ScreenViewer<MainMenu> stateScreenViewer;
+    private MainMenuState state;
 
     @SuppressWarnings("unchecked")
     private void mockControllerAndViewer() {

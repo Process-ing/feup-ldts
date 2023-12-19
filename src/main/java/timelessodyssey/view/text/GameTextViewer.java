@@ -6,13 +6,13 @@ import timelessodyssey.gui.GUI;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -28,14 +28,14 @@ public class GameTextViewer implements TextViewer {
 
     public GameTextViewer() throws IOException {
         URL resource = getClass().getClassLoader().getResource("gamefont/font.png");
-        this.fontImage = ImageIO.read(new File(resource.getFile()));
+        this.fontImage = ImageIO.read(Objects.requireNonNull(resource));
         this.charMap = parseCharMap();
     }
 
     private Map<Character, CharPosition> parseCharMap() throws IOException {
         Map<Character, CharPosition> charMap = new HashMap<>();
         URL resource = getClass().getClassLoader().getResource("gamefont/font-map.txt");
-        BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
+        BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(Objects.requireNonNull(resource).getFile()), UTF_8);
 
         int y = 0;
         for (String line; (line = bufferedReader.readLine()) != null; y++) {

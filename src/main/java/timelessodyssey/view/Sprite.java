@@ -5,16 +5,16 @@ import timelessodyssey.gui.GUI;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 public class Sprite {
     private final BufferedImage image;
 
     public Sprite(String filepath) throws IOException {
         URL resource = getClass().getClassLoader().getResource(filepath);
-        this.image = ImageIO.read(new File(resource.getFile()));
+        this.image = ImageIO.read(Objects.requireNonNull(resource));
     }
     public BufferedImage getImage() {
         return image;

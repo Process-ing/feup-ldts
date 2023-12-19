@@ -21,7 +21,7 @@ public class PlayerViewerTest {
     private GUI gui;
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         this.spriteLoader = mock(SpriteLoader.class);
         this.scene = mock(Scene.class);
         this.gui = mock(GUI.class);

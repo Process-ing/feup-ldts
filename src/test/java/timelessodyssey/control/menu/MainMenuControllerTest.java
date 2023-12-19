@@ -14,11 +14,11 @@ import java.net.URISyntaxException;
 import static org.mockito.ArgumentMatchers.eq;
 
 public class MainMenuControllerTest {
-
     private Game game;
     private MainMenu mainMenu;
     private EntryController entryController;
     private MainMenuController mainMenuController;
+
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);

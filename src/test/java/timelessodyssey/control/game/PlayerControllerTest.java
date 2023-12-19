@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.player.IdleState;
 import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.elements.player.PlayerState;
@@ -34,11 +33,9 @@ public class PlayerControllerTest {
     @Nested
     class playerTestsNotDead {
 
-        private PlayerState playerState;
-
         @BeforeEach
         public void setup() {
-            this.playerState = Mockito.mock(PlayerState.class);
+            PlayerState playerState = Mockito.mock(PlayerState.class);
             Mockito.when(player.getState()).thenReturn(playerState);
         }
 

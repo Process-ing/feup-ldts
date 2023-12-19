@@ -12,7 +12,6 @@ import java.net.URISyntaxException;
 public abstract class MenuController<T extends Menu> extends Controller<T> {
     private final EntryController entryController;
 
-
     public MenuController(T menu, EntryController entryController) {
         super(menu);
         this.entryController = entryController;

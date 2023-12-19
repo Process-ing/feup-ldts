@@ -3,8 +3,6 @@ package timelessodyssey.model.game.scene;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import timelessodyssey.Game;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;
@@ -14,14 +12,12 @@ import timelessodyssey.model.game.elements.player.Player;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SceneTest {
-    Game game;
-    Scene scene;
-    Player player;
-    Vector playerSize;
+    private Scene scene;
+    private Player player;
+    private Vector playerSize;
 
     @BeforeEach
     public void setup() {
-        this.game = Mockito.mock(Game.class);
         this.scene = new Scene(20, 16, 0);
         this.player = new Player(0,0, null);
         this.scene.setPlayer(player);

@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class PlayerTest {
-
     private Player player;
     private PlayerState mockedState;
     private Scene mockedScene;

@@ -3,17 +3,15 @@ package timelessodyssey.model.credits;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.model.game.elements.player.Player;
-import timelessodyssey.model.game.scene.Scene;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreditsTest {
+    private Credits credits;
+    private Player player;
 
-    Credits credits;
-
-    Player player;
     @BeforeEach
-    public void setup() throws InterruptedException {
+    public void setup() {
         player = new Player(0, 0, null);
         while (player.getStarCounter() != 14)
             player.increaseStars();

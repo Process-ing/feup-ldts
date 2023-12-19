@@ -17,13 +17,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class CreditsStateTest {
-    Credits model;
-    SpriteLoader spriteLoader;
-    Game game;
-    ResizableGUI gui;
-    Controller<Credits> stateController;
-    ScreenViewer<Credits> stateScreenViewer;
-    CreditsState state;
+    private Credits model;
+    private SpriteLoader spriteLoader;
+    private Game game;
+    private ResizableGUI gui;
+    private Controller<Credits> stateController;
+    private ScreenViewer<Credits> stateScreenViewer;
+    private CreditsState state;
 
     @SuppressWarnings("unchecked")
     private void mockControllerAndViewer() {

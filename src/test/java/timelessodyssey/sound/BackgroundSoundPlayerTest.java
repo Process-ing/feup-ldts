@@ -31,7 +31,7 @@ public class BackgroundSoundPlayerTest {
         doThrow(new FileNotFoundException()).when(musicClip).open(Mockito.any());
 
         Exception thrown = Assertions.assertThrows(Exception.class,
-                () -> {new BackgroundSoundPlayer(new SoundLoader().loadSound(audioInput, musicClip));},
+                () -> new BackgroundSoundPlayer(new SoundLoader().loadSound(audioInput, musicClip)),
                 "BackgroundSoundPlayer was supposed to throw Exception");
 
         Assertions.assertEquals("Unable to load sound file!", thrown.getMessage());

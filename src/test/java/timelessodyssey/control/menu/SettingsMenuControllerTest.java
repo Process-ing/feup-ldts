@@ -16,12 +16,10 @@ import java.net.URISyntaxException;
 import static org.mockito.ArgumentMatchers.eq;
 
 public class SettingsMenuControllerTest {
-
     private Game game;
     private SettingsMenu settingsMenu;
     private EntryController entryController;
     private SettingsMenuController settingsMenuController;
-    private SpriteLoader spriteLoader;
 
     @BeforeEach
     public void setup() {
@@ -29,7 +27,7 @@ public class SettingsMenuControllerTest {
         this.settingsMenu = Mockito.mock(SettingsMenu.class);
         this.entryController = Mockito.mock(EntryController.class);
         this.settingsMenuController = new SettingsMenuController(settingsMenu, entryController);
-        this.spriteLoader = Mockito.mock(SpriteLoader.class);
+        SpriteLoader spriteLoader = Mockito.mock(SpriteLoader.class);
         Mockito.when(game.getSpriteLoader()).thenReturn(spriteLoader);
     }
 

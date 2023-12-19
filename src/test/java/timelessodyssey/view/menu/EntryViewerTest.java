@@ -8,18 +8,15 @@ import timelessodyssey.model.menu.Entry;
 import timelessodyssey.view.text.GameTextViewer;
 import timelessodyssey.view.text.TextViewer;
 
-import java.io.IOException;
-
 import static org.mockito.Mockito.*;
 
 public class EntryViewerTest {
-
     private ResizableGUI gui;
     private TextViewer textViewer;
     private EntryViewer entryViewer;
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         this.gui = mock(ResizableGUI.class);
         this.textViewer = mock(GameTextViewer.class);
 
@@ -28,7 +25,7 @@ public class EntryViewerTest {
 
     @Test
     public void drawTesting(){
-        Entry entries[] = new Entry[5];
+        Entry[] entries = new Entry[5];
         for (int idx = 0; idx < Entry.Type.values().length; idx++){
             entries[idx] = new Entry(0, 10*idx, Entry.Type.values()[idx]);
         }
