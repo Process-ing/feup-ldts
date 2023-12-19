@@ -58,6 +58,8 @@ public class LanternaGUITest {
         assertNull(resolution);
         assertEquals(SCREEN_WIDTH, width);
         assertEquals(SCREEN_HEIGHT, height);
+        verify(screen, times(1)).setCursorPosition(null);
+        verify(screen, times(1)).startScreen();
         verify(screenCreator, times(1)).createScreen(null, title, gui.getKeyAdapter());
     }
 
