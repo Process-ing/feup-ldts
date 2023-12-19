@@ -74,7 +74,7 @@ class JumpingStateTest {
 
     @Test
     void getNextStateDead() {
-        when(mockedScene.isDying()).thenReturn(true);
+        when(mockedScene.isPlayerDying()).thenReturn(true);
 
         PlayerState nextState = jumpingState.getNextState();
 

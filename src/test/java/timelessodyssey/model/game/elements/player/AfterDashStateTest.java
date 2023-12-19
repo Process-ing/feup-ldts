@@ -56,7 +56,7 @@ class AfterDashStateTest {
 
     @Test
     void getNextStateDead() {
-        when(mockedScene.isDying()).thenReturn(true);
+        when(mockedScene.isPlayerDying()).thenReturn(true);
 
         PlayerState nextState = afterDashState.getNextState();
 

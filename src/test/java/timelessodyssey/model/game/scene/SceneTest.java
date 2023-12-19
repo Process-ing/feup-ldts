@@ -53,34 +53,6 @@ public class SceneTest {
         }
 
         @Test
-        public void atTransitionPositionTopLeft() {
-            Vector transitionBegin = new Vector(40,8);
-            Vector transitionEnd = new Vector(120,40);
-            scene.setTransitionPositionBegin(transitionBegin);
-            scene.setTransitionPositionEnd(transitionEnd);
-            Vector playerPosition = new Vector(119,39);
-            scene.getPlayer().setPosition(playerPosition);
-
-            assertEquals(transitionBegin, scene.getTransitionPositionBegin());
-            assertEquals(transitionEnd, scene.getTransitionPositionEnd());
-            assertTrue(scene.isAtTransitionPosition());
-        }
-
-        @Test
-        public void atTransitionPositionBottomRight() {
-            Vector transitionBegin = new Vector(40,8);
-            Vector transitionEnd = new Vector(120,40);
-            scene.setTransitionPositionBegin(transitionBegin);
-            scene.setTransitionPositionEnd(transitionEnd);
-            Vector playerPosition = new Vector(39,7);
-            scene.getPlayer().setPosition(playerPosition);
-
-            assertEquals(transitionBegin, scene.getTransitionPositionBegin());
-            assertEquals(transitionEnd, scene.getTransitionPositionEnd());
-            assertTrue(scene.isAtTransitionPosition());
-        }
-
-        @Test
         public void TransitionPositionInside() {
             Vector transitionBegin = new Vector(40,8);
             Vector transitionEnd = new Vector(120,40);
@@ -298,21 +270,21 @@ public class SceneTest {
             for (double x = 0; x < 3; x++){
                 for (double y = 0; y < 17; y++){
                     player.setPosition(new Vector(x,y));
-                    assertFalse(scene.isDying());
+                    assertFalse(scene.isPlayerDying());
                     player.setPosition(new Vector(24-8+x, y));
-                    assertFalse(scene.isDying());
+                    assertFalse(scene.isPlayerDying());
                 }
             }
             for (double x = 0; x < 17; x++){
                 player.setPosition(new Vector(x,0));
-                assertFalse(scene.isDying());
+                assertFalse(scene.isPlayerDying());
                 player.setPosition(new Vector(x, 16));
-                assertFalse(scene.isDying());
+                assertFalse(scene.isPlayerDying());
             }
             for (double x = 3; x < 16; x++){
                 for (double y = 5; y < 13; y++){
                     player.setPosition(new Vector(x,y));
-                    assertTrue(scene.isDying());
+                    assertTrue(scene.isPlayerDying());
                 }
             }
         }
@@ -322,57 +294,92 @@ public class SceneTest {
     class SceneTestStars {
 
         @BeforeEach
-        public void setup(){
-            scene = new Scene(3, 3, 0);
-            Star[][] starSet = {{null, null, null},
-                    {null, new Star(8, 8), null},
-                    {null, null, null}};
-            scene.setStars(starSet);
+        public void setup() {
+            scene = new Scene(5, 5, 0);
+            Star[][] stars = {{null, null, null, null, null},
+                    {null, null, null, null, null},
+                    {null, null, new Star(16,16), null, null},
+                    {null, null, null, null, null},
+                    {null, null, null, null, null}};
+            scene.setStars(stars);
             player = new Player(0,0, null);
             scene.setPlayer(player);
         }
 
         @Test
-        public void checkUpdateStarsTopLeft() {
-            assertEquals(0, player.getStarCounter());
-            for (double x = 0; x < 3; x++){
-                for (double y = 0; y < 17; y++){
-                    player.setPosition(new Vector(x,y));
-                    assertFalse(scene.updateStars());
-                    player.setPosition(new Vector(24-8+x, y));
-                    assertFalse(scene.updateStars());
-                }
-            }
-            assertEquals(0, player.getStarCounter());
+        public void checkUpdateStarsLeft() {
+            player.setPosition(new Vector(31, 16));
+            boolean result1 = scene.updateStars();
+            player.setPosition(new Vector(24, 16));
+            boolean result2 = scene.updateStars();
+            int stars1 = player.getStarCounter();
+            player.setPosition(new Vector(23, 16));
+            boolean result3 = scene.updateStars();
+            int stars2 = player.getStarCounter();
 
-            player.setPosition(new Vector(12,12));
-            assertTrue(scene.updateStars());
-            assertEquals(1, player.getStarCounter());
+            assertFalse(result1);
+            assertFalse(result2);
+            assertEquals(0, stars1);
+            assertTrue(result3);
+            assertEquals(1, stars2);
+            assertNull(scene.getStars()[2][2]);
         }
 
         @Test
-        public void checkUpdateStarsBottomRight() {
-            assertEquals(0, player.getStarCounter());
-            for (double x = 0; x < 17; x++){
-                player.setPosition(new Vector(x,0));
-                assertFalse(scene.updateStars());
-                player.setPosition(new Vector(x, 16));
-                assertFalse(scene.updateStars());
-            }
-            assertEquals(0, player.getStarCounter());
+        public void checkUpdateStarsRight() {
+            player.setPosition(new Vector(1, 16));
+            boolean result1 = scene.updateStars();
+            player.setPosition(new Vector(10, 16));
+            boolean result2 = scene.updateStars();
+            int stars1 = player.getStarCounter();
+            player.setPosition(new Vector(11, 16));
+            boolean result3 = scene.updateStars();
+            int stars2 = player.getStarCounter();
 
-            player.setPosition(new Vector(4,4));
-            assertTrue(scene.updateStars());
-            assertEquals(1, player.getStarCounter());
+            assertFalse(result1);
+            assertFalse(result2);
+            assertEquals(0, stars1);
+            assertTrue(result3);
+            assertEquals(1, stars2);
+            assertNull(scene.getStars()[2][2]);
         }
 
         @Test
-        public void checkUpdateStarsInside() {
-            assertEquals(0, player.getStarCounter());
+        public void checkUpdateStarsUp() {
+            player.setPosition(new Vector(16, 31));
+            boolean result1 = scene.updateStars();
+            player.setPosition(new Vector(16, 24));
+            boolean result2 = scene.updateStars();
+            int stars1 = player.getStarCounter();
+            player.setPosition(new Vector(16, 23));
+            boolean result3 = scene.updateStars();
+            int stars2 = player.getStarCounter();
 
-            player.setPosition(new Vector(8,8));
-            assertTrue(scene.updateStars());
-            assertEquals(1, player.getStarCounter());
+            assertFalse(result1);
+            assertFalse(result2);
+            assertEquals(0, stars1);
+            assertTrue(result3);
+            assertEquals(1, stars2);
+            assertNull(scene.getStars()[2][2]);
+        }
+
+        @Test
+        public void checkUpdateStarsDown() {
+            player.setPosition(new Vector(16, 1));
+            boolean result1 = scene.updateStars();
+            player.setPosition(new Vector(16, 8));
+            boolean result2 = scene.updateStars();
+            int stars1 = player.getStarCounter();
+            player.setPosition(new Vector(16, 9));
+            boolean result3 = scene.updateStars();
+            int stars2 = player.getStarCounter();
+
+            assertFalse(result1);
+            assertFalse(result2);
+            assertEquals(0, stars1);
+            assertTrue(result3);
+            assertEquals(1, stars2);
+            assertNull(scene.getStars()[2][2]);
         }
     }
 }

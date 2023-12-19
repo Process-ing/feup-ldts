@@ -1,6 +1,7 @@
 package timelessodyssey.model.game.scene;
 
 import timelessodyssey.model.Vector;
+import timelessodyssey.model.game.elements.Element;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;
 import timelessodyssey.model.game.elements.Tile;
@@ -9,8 +10,6 @@ import timelessodyssey.model.game.elements.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static timelessodyssey.model.game.elements.Spike.SPIKE_HEIGHT;
 
 public class Scene {
     private final int width;
@@ -130,15 +129,10 @@ public class Scene {
     }
 
     public boolean isAtTransitionPosition() {
-        boolean topLeft = player.getPosition().x() >= transitionPositionBegin.x()
-                && player.getPosition().x() <= transitionPositionEnd.x()
-                && player.getPosition().y() >= transitionPositionBegin.y()
-                && player.getPosition().y() <= transitionPositionEnd.y();
-        boolean bottomRight = (player.getPosition().x() + player.getWidth()) >= transitionPositionBegin.x()
-                && (player.getPosition().x() + player.getWidth()) <= transitionPositionEnd.x()
-                && (player.getPosition().y() + player.getHeight()) >= transitionPositionBegin.y()
-                && (player.getPosition().y() + player.getHeight()) <= transitionPositionEnd.y();
-        return topLeft || bottomRight;
+        double x1 = player.getPosition().x(), x2 = player.getPosition().x() + player.getWidth();
+        double y1 = player.getPosition().y(), y2 = player.getPosition().y() + player.getHeight();
+        return x1 <= transitionPositionEnd.x() && x2 >= transitionPositionBegin.x()
+                && y1 <= transitionPositionEnd.y() && y2 >= transitionPositionBegin.y();
     }
 
     public Vector getStartingPosition() {
@@ -149,59 +143,63 @@ public class Scene {
         this.startingPosition = startingPosition;
     }
 
-    private boolean checkCollision(double x1, double x2, double y1, double y2) {
-        int tilex1 = (int)x1 / Tile.SIZE, tilex2 = (int)x2 / Tile.SIZE;
-        int tiley1 = (int)y1 / Tile.SIZE, tiley2 = (int)y2 / Tile.SIZE;
-        return x1 < 0 || tilex2 >= width  || y1 < 0 || tiley2 >= height
-                || tiles[tiley1][tilex1] != null || tiles[tiley1][tilex2] != null
-                || tiles[tiley2][tilex1] != null || tiles[tiley2][tilex2] != null;
+    private boolean checkOutsideScene(double x1, double x2, double y1, double y2) {
+        return x1 < 0 || x2 >= width * Tile.SIZE || y1 < 0 || y2 >= height * Tile.SIZE;
+    }
+
+    private boolean checkCollision(double x1, double x2, double y1, double y2, Element[][] layer) {
+        if (checkOutsideScene(x1, x2, y1, y2))
+            return true;
+        for (int tileY: List.of((int)y1 / Tile.SIZE, (int)y2 / Tile.SIZE)) {
+            for (int tileX: List.of((int)x1 / Tile.SIZE, (int)x2 / Tile.SIZE)) {
+                if (layer[tileY][tileX] != null)
+                    return true;
+            }
+        }
+        return false;
     }
 
     public boolean collidesLeft(Vector position, Vector size) {
         double x = position.x(), y = position.y();
-        return checkCollision(x, x + 1, y, y + size.y() - 1);
+        return checkCollision(x, x + 1, y, y + size.y() - 1, tiles);
     }
 
     public boolean collidesRight(Vector position, Vector size) {
         double x = position.x(), y = position.y();
-        return checkCollision(x + size.x() - 2, x + size.x() - 1, y, y + size.y() - 1);
+        return checkCollision(x + size.x() - 1, x + size.x() - 1, y, y + size.y() - 1, tiles);
     }
 
     public boolean collidesUp(Vector position, Vector size) {
         double x = position.x(), y = position.y();
-        return checkCollision(x, x + size.x() - 1, y, y + 1);
+        return checkCollision(x, x + size.x() - 1, y, y + 1, tiles);
     }
 
     public boolean collidesDown(Vector position, Vector size) {
         double x = position.x(), y = position.y();
-        return checkCollision(x, x + size.x() - 1, y + size.y() - 2, y + size.y() - 1);
+        return checkCollision(x, x + size.x() - 1, y + size.y() - 2, y + size.y() - 1, tiles);
     }
 
-    public boolean isDying() {
-        double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();
-        double width = player.getWidth(), height = player.getHeight();
-        double x1 = x, x2 = x + width - 1, y1 = y + height - 1 - SPIKE_HEIGHT, y2 = y + height - 1 - SPIKE_HEIGHT;
-        int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
-
-        return spikes[tiley1][tilex1] != null || spikes[tiley2][tilex2] != null;
+    public boolean isPlayerDying() {
+        final int spikeHeightDiff = Tile.SIZE - Spike.SPIKE_HEIGHT;
+        double x = player.getPosition().x(), y = player.getPosition().y();
+        return checkCollision(x, x + player.getWidth() - 1, y, y + player.getHeight() - 1 - spikeHeightDiff, spikes);
     }
 
     public boolean updateStars() {
         double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();
         double width = player.getWidth(), height = player.getHeight();
-        double x1 = x, x2 = x + width - 1, y1 = y, y2 = y + height - 1;
-        int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
-        if (stars[tiley1][tilex1] != null){
-            stars[tiley1][tilex1] = null;
-            getPlayer().increaseStars();
-            return true;
+
+        boolean caughtStars = false;
+        for (int tileY: List.of((int)y / Tile.SIZE, (int)(y + height - 1) / Tile.SIZE)) {
+            for (int tileX: List.of((int)x / Tile.SIZE, (int)(x + width - 1) / Tile.SIZE)) {
+                if (stars[tileY][tileX] != null) {
+                    caughtStars = true;
+                    player.increaseStars();
+                    stars[tileY][tileX] = null;
+                }
+            }
         }
-        if (stars[tiley2][tilex2] != null){
-            stars[tiley2][tilex2] = null;
-            getPlayer().increaseStars();
-            return true;
-        }
-        return false;
+        return caughtStars;
     }
 
     public List<Particle> getDeathParticles() {
