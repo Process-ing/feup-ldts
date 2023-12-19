@@ -2,15 +2,25 @@ package timelessodyssey.model.credits;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import timelessodyssey.model.game.elements.player.Player;
+import timelessodyssey.model.game.scene.Scene;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreditsTest {
 
     Credits credits;
+
+    Player player;
     @BeforeEach
-    public void setup(){
-        this.credits = new Credits(14, 15,333000);
+    public void setup() throws InterruptedException {
+        player = new Player(0, 0, null);
+        while (player.getStarCounter() != 14)
+            player.increaseStars();
+        while (player.getNumberOfDeaths() != 15)
+            player.increaseDeaths();
+        player.setBirthTime(System.currentTimeMillis() - 333000);
+        this.credits = new Credits(player);
     }
 
     @Test

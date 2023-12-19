@@ -151,6 +151,7 @@ public class Player extends Element {
     public long getBirthTime() {
         return birthTime;
     }
+    public void setBirthTime(long birthTime) {this.birthTime = birthTime; }
 
     public void resetValues(){
         this.isFacingRight = true;
