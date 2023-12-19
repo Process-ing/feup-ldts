@@ -9,6 +9,7 @@ import net.jqwik.api.*;
 import net.jqwik.api.lifecycle.BeforeTry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.awt.*;
@@ -190,10 +191,15 @@ public class LanternaGUITest {
 
         gui.drawRectangle(x, y, width, height, color);
 
-        if (width >= 0 && height >= 0) {
+        if (width > 0 && height > 0) {
             verify(tg, Mockito.times(1)).setBackgroundColor(color);
             verify(tg, Mockito.times(1))
                 .fillRectangle(new TerminalPosition(x, y), new TerminalSize(width, height), ' ');
+        }
+        else {
+            verify(tg, Mockito.times(0)).setBackgroundColor(any(TextColor.class));
+            verify(tg, Mockito.times(0))
+                    .fillRectangle(any(TerminalPosition.class), any(TerminalSize.class), anyChar());
         }
         verifyNoMoreInteractions(tg);
     }
