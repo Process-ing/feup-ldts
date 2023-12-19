@@ -10,7 +10,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class AfterDashStateTest {
-
     private Player player;
 
     private AfterDashState afterDashState;

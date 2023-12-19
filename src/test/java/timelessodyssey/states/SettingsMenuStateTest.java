@@ -41,7 +41,7 @@ public class SettingsMenuStateTest {
     }
 
     @Test
-    public void SettingsMenuStep() throws IOException, URISyntaxException, FontFormatException {
+    public void settingsMenuStep() throws IOException, URISyntaxException, FontFormatException {
         long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new SettingsMenuState(model, spriteLoader){

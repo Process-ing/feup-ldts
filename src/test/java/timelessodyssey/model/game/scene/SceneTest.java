@@ -294,7 +294,7 @@ public class SceneTest {
         }
 
         @Test
-        public void CheckPlayerIsDying() {
+        public void checkPlayerIsDying() {
             for (double x = 0; x < 3; x++){
                 for (double y = 0; y < 17; y++){
                     player.setPosition(new Vector(x,y));
@@ -333,7 +333,7 @@ public class SceneTest {
         }
 
         @Test
-        public void CheckUpdateStarsTopLeft() {
+        public void checkUpdateStarsTopLeft() {
             assertEquals(0, player.getStarCounter());
             for (double x = 0; x < 3; x++){
                 for (double y = 0; y < 17; y++){
@@ -351,7 +351,7 @@ public class SceneTest {
         }
 
         @Test
-        public void CheckUpdateStarsBottomRight() {
+        public void checkUpdateStarsBottomRight() {
             assertEquals(0, player.getStarCounter());
             for (double x = 0; x < 17; x++){
                 player.setPosition(new Vector(x,0));
@@ -367,7 +367,7 @@ public class SceneTest {
         }
 
         @Test
-        public void CheckUpdateStarsInside() {
+        public void checkUpdateStarsInside() {
             assertEquals(0, player.getStarCounter());
 
             player.setPosition(new Vector(8,8));

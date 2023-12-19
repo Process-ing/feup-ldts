@@ -41,7 +41,7 @@ public class CreditsStateTest {
     }
 
     @Test
-    public void CreditsStep() throws IOException, URISyntaxException, FontFormatException {
+    public void creditsStep() throws IOException, URISyntaxException, FontFormatException {
         long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new CreditsState(model, spriteLoader){

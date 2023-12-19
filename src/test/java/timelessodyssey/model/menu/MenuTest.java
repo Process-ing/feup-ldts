@@ -29,7 +29,7 @@ public class MenuTest {
     }
 
     @Test
-    public void MenuTestEntries(){
+    public void menuTestEntries(){
         assertEquals(3, menu.getNumberEntries());
         assertEquals(entryList, menu.getEntries());
 

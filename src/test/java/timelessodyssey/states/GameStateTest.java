@@ -41,7 +41,7 @@ public class GameStateTest {
     }
 
     @Test
-    public void GameStateStep() throws IOException, URISyntaxException, FontFormatException {
+    public void gameStateStep() throws IOException, URISyntaxException, FontFormatException {
         long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new GameState(model, spriteLoader){

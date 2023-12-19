@@ -41,7 +41,7 @@ public class MainMenuStateTest {
     }
 
     @Test
-    public void MainMenuStep() throws IOException, URISyntaxException, FontFormatException {
+    public void mainMenuStep() throws IOException, URISyntaxException, FontFormatException {
         long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new MainMenuState(model, spriteLoader){
