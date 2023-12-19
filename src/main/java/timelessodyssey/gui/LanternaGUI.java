@@ -144,6 +144,8 @@ public class LanternaGUI implements ResizableGUI {
     }
 
     public void setKeySpam(boolean keySpam) {
+        if (!keySpam)
+            priorityKeyPressed = null;
         this.keySpam = keySpam;
     }
 

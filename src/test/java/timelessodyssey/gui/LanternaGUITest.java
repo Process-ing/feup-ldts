@@ -64,7 +64,6 @@ public class LanternaGUITest {
     @Test
     public void getNextActionWithoutKeySpam() throws IOException, URISyntaxException, FontFormatException {
         LanternaGUI gui = new LanternaGUI(screenCreator, "getNextAction without key spam test");
-        gui.setKeySpam(false);
         KeyAdapter keyAdapter = gui.getKeyAdapter();
 
         Map<Integer, GUI.Action> keyToAction = new HashMap<>();
@@ -78,21 +77,26 @@ public class LanternaGUITest {
         keyToAction.put(VK_X, GUI.Action.DASH);
         keyToAction.put(VK_T, GUI.Action.NONE);
 
+        gui.setKeySpam(false);
+        gui.getNextAction();
+        GUI.Action action1 = gui.getNextAction();
+        assertEquals(GUI.Action.NONE, action1);
+
         for (Map.Entry<Integer, GUI.Action> entry: keyToAction.entrySet()) {
             KeyEvent event = mock(KeyEvent.class);
             when(event.getKeyCode()).thenReturn(entry.getKey());
 
             keyAdapter.keyPressed(event);
-            GUI.Action action1 = gui.getNextAction();
             GUI.Action action2 = gui.getNextAction();
+            GUI.Action action3 = gui.getNextAction();
             keyAdapter.keyReleased(event);
             keyAdapter.keyPressed(event);
             keyAdapter.keyReleased(event);
-            GUI.Action action3 = gui.getNextAction();
+            GUI.Action action4 = gui.getNextAction();
 
-            assertEquals(entry.getValue(), action1);
-            assertEquals(GUI.Action.NONE, action2);
+            assertEquals(entry.getValue(), action2);
             assertEquals(GUI.Action.NONE, action3);
+            assertEquals(GUI.Action.NONE, action4);
         }
     }
 
