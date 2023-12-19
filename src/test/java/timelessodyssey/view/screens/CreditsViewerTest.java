@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.credits.Credits;
+import timelessodyssey.view.ViewerProvider;
+import timelessodyssey.view.menu.LogoViewer;
 import timelessodyssey.view.text.TextViewer;
 
 import java.io.IOException;
@@ -15,6 +17,8 @@ import static timelessodyssey.view.screens.CreditsViewer.*;
 public class CreditsViewerTest {
     private CreditsViewer creditsViewer;
     private ResizableGUI gui;
+    private ViewerProvider viewerProvider;
+    private LogoViewer logoViewer;
     private TextViewer textViewer;
     private Credits credits;
 
@@ -34,10 +38,13 @@ public class CreditsViewerTest {
         messages[0] = "message test 1";
         when(credits.getMessages()).thenReturn(messages);
 
-        this.creditsViewer = new CreditsViewer(credits);
-
+        this.viewerProvider = mock(ViewerProvider.class);
         this.textViewer = mock(TextViewer.class);
-        creditsViewer.setTextViewer(textViewer);
+        this.logoViewer = mock(LogoViewer.class);
+        when(viewerProvider.getTextViewer()).thenReturn(textViewer);
+        when(viewerProvider.getLogoViewer()).thenReturn(logoViewer);
+
+        this.creditsViewer = new CreditsViewer(credits, viewerProvider);
     }
 
 
@@ -45,6 +52,7 @@ public class CreditsViewerTest {
     public void draw() throws IOException {
         creditsViewer.draw(gui,0);
 
+        verify(gui, times(1)).clear();
         // Drawing Background and Frame
         verify(gui, times(1))
                 .drawRectangle(Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyInt(), Mockito.anyInt(),
@@ -52,6 +60,9 @@ public class CreditsViewerTest {
         verify(gui, times(4))
                 .drawRectangle(Mockito.anyDouble(), Mockito.anyDouble(), Mockito.anyInt(), Mockito.anyInt(),
                         eq(frameColor));
+
+        // Drawing Logo
+        verify(logoViewer, times(1)).draw(same(gui), anyInt(), anyInt());
 
         // Drawing Messages
         verify(textViewer, times(1))
@@ -77,5 +88,6 @@ public class CreditsViewerTest {
         verify(textViewer, times(1))
                 .draw(Mockito.anyString(), Mockito.anyDouble(), Mockito.anyDouble(),
                         eq(timeColor), eq(gui));
+        verify(gui, times(1)).refresh();
     }
 }

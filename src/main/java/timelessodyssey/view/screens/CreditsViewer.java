@@ -4,8 +4,8 @@ import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.credits.Credits;
-import timelessodyssey.view.Sprite;
-import timelessodyssey.view.text.GameTextViewer;
+import timelessodyssey.view.ViewerProvider;
+import timelessodyssey.view.menu.LogoViewer;
 import timelessodyssey.view.text.TextViewer;
 
 import java.io.IOException;
@@ -14,18 +14,13 @@ import static timelessodyssey.view.text.GameTextViewer.*;
 
 public class CreditsViewer extends ScreenViewer<Credits> {
 
-    private TextViewer textViewer;
+    private final TextViewer textViewer;
+    private final LogoViewer logoViewer;
 
-    private final Sprite logoSprite;
-
-    public CreditsViewer(Credits model) throws IOException {
+    public CreditsViewer(Credits model, ViewerProvider viewerProvider) {
         super(model);
-        this.textViewer = new GameTextViewer();
-        this.logoSprite = loadLogo();
-    }
-
-    public Sprite loadLogo() throws IOException {
-        return new Sprite("menu/logo.png");
+        this.textViewer = viewerProvider.getTextViewer();
+        this.logoViewer = viewerProvider.getLogoViewer();
     }
 
     public static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
@@ -45,12 +40,8 @@ public class CreditsViewer extends ScreenViewer<Credits> {
         drawScore(gui);
         drawDeaths(gui);
         drawDuration(gui);
-        logoSprite.draw(gui, 44, 16);
+        logoViewer.draw(gui, 44, 16);
         gui.refresh();
-    }
-
-    public void setTextViewer(TextViewer textViewer){
-        this.textViewer = textViewer;
     }
 
     private void drawMessages(GUI gui) {
@@ -101,11 +92,14 @@ public class CreditsViewer extends ScreenViewer<Credits> {
     private void drawDuration(GUI gui) {
         int xAlignment = 10;
         int yAlignment = 80;
-        textViewer.draw("Time:   " + String.format("%1$" + 2 + "s", getModel().getMinutes()).replace(' ', '0')
+        textViewer.draw(
+            "Time:   "
+                + String.format("%1$" + 2 + "s", getModel().getMinutes()).replace(' ', '0')
                 + ":" + String.format("%1$" + 2 + "s", getModel().getSeconds()).replace(' ', '0'),
-                xAlignment,
-                yAlignment,
-                timeColor, gui);
+            xAlignment,
+            yAlignment,
+            timeColor, gui
+        );
     }
 
 

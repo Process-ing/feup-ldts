@@ -12,14 +12,14 @@ import java.io.IOException;
 import java.util.List;
 
 public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
-    private static final TextColor unselectedColor = new TextColor.RGB(234,234,234);
-    private static final TextColor selectedColor = new TextColor.RGB(99,155,255);
-    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
-    private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
+    public static final TextColor unselectedColor = new TextColor.RGB(234,234,234);
+    public static final TextColor selectedColor = new TextColor.RGB(99,155,255);
+    public static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
+    public static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
     private final EntryViewer entryViewer;
     private final LogoViewer logoViewer;
 
-    public MenuViewer(T model, ViewerProvider viewerProvider) throws IOException {
+    public MenuViewer(T model, ViewerProvider viewerProvider) {
         super(model);
         this.entryViewer = viewerProvider.getEntryViewer();
         this.logoViewer = viewerProvider.getLogoViewer();

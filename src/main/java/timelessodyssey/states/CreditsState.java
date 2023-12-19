@@ -17,7 +17,7 @@ public class CreditsState extends State<Credits> {
 
     @Override
     protected ScreenViewer<Credits> createScreenViewer(ViewerProvider viewerProvider) throws IOException {
-        return new CreditsViewer(getModel());
+        return new CreditsViewer(getModel(), viewerProvider);
     }
 
     @Override
