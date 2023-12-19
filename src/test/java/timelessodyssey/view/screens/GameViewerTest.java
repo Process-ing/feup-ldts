@@ -34,6 +34,8 @@ public class GameViewerTest {
         scene.setPlayer(new Player(0, 0, scene));
         scene.setTiles(new Tile[][] { { null, null },
                 { new Tile(0, 8, 'T') }});
+        scene.setGoals(new Tile[][] { { new Tile(0, 8, 'W'), null },
+                { null, null }});
         scene.setSpikes(new Spike[][] { { null, null },
                 { null, new Spike(8, 8, '^') }});
         scene.setStars(new Star[][] { { null, new Star(8, 0) }, { null, null }});
@@ -72,6 +74,7 @@ public class GameViewerTest {
         verify(particleViewer, times(1)).draw(scene.getSnow().get(0), gui, frameCount);
         verify(particleViewer, times(1)).draw(scene.getDeathParticles().get(0), gui, frameCount);
         verify(tileViewer, times(1)).draw(scene.getTiles()[1][0], gui, frameCount);
+        verify(tileViewer, times(1)).draw(scene.getGoals()[0][0], gui, frameCount);
         verify(spikeViewer, times(1)).draw(scene.getSpikes()[1][1], gui, frameCount);
         verify(starViewer, times(1)).draw(scene.getStars()[0][1], gui, frameCount);
         verify(gui, times(1)).refresh();

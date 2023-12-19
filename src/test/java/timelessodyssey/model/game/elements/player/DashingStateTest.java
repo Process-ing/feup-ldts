@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Test;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.scene.Scene;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 class DashingStateTest {
 
@@ -62,6 +65,8 @@ class DashingStateTest {
         PlayerState nextState = dashingState.getNextState();
 
         assertInstanceOf(DeadState.class, nextState);
+        verify(mockedScene, times(1)).setDeathParticles(anyList());
+        verify(mockedScene, times(0)).setDeathParticles(Collections.EMPTY_LIST);
     }
 
     @Test

@@ -33,8 +33,7 @@ public class SceneController extends Controller<Scene> {
             playerController.step(game, action, frameCount);
             if (getModel().isAtTransitionPosition()) {
                 if (getModel().getSceneCode() + 1 >= game.getNumberOfLevels()) {
-                    Credits credits = new Credits(player.getStarCounter(), player.getNumberOfDeaths(),
-                            System.currentTimeMillis() - getModel().getPlayer().getBirthTime());  // TODO: Make credits constructor nicer
+                    Credits credits = new Credits(player);
                     game.setState(new CreditsState(credits, game.getSpriteLoader()));
                 } else {
                     SceneBuilder sceneBuilder = new SceneBuilder((getModel().getSceneCode() + 1));
