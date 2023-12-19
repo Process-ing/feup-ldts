@@ -17,16 +17,14 @@ import static timelessodyssey.view.screens.CreditsViewer.*;
 public class CreditsViewerTest {
     private CreditsViewer creditsViewer;
     private ResizableGUI gui;
-    private ViewerProvider viewerProvider;
     private LogoViewer logoViewer;
     private TextViewer textViewer;
-    private Credits credits;
 
     @BeforeEach
     public void setup() throws IOException {
         this.gui = mock(ResizableGUI.class);
 
-        this.credits = mock(Credits.class);
+        Credits credits = mock(Credits.class);
         when(credits.getDeaths()).thenReturn(0);
         when(credits.getScore()).thenReturn(0);
         when(credits.getMinutes()).thenReturn(0);
@@ -38,7 +36,7 @@ public class CreditsViewerTest {
         messages[0] = "message test 1";
         when(credits.getMessages()).thenReturn(messages);
 
-        this.viewerProvider = mock(ViewerProvider.class);
+        ViewerProvider viewerProvider = mock(ViewerProvider.class);
         this.textViewer = mock(TextViewer.class);
         this.logoViewer = mock(LogoViewer.class);
         when(viewerProvider.getTextViewer()).thenReturn(textViewer);

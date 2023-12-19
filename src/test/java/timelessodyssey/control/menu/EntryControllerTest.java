@@ -25,14 +25,13 @@ public class EntryControllerTest {
     private Game game;
     private Menu menu;
     private EntryController entryController;
-    private SpriteLoader spriteLoader;
 
     @BeforeEach
     public void setup(){
         this.game = Mockito.mock(Game.class);
         this.menu = Mockito.mock(Menu.class);
         doNothing().when(game).setState(isA(State.class));
-        this.spriteLoader = Mockito.mock(SpriteLoader.class);
+        SpriteLoader spriteLoader = Mockito.mock(SpriteLoader.class);
         when(game.getSpriteLoader()).thenReturn(spriteLoader);
 
         this.entryController = new EntryController(menu);

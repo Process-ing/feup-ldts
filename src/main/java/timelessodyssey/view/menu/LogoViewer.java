@@ -7,7 +7,7 @@ import timelessodyssey.view.SpriteLoader;
 import java.io.IOException;
 
 public class LogoViewer {
-    private Sprite sprite;
+    private final Sprite sprite;
 
     public LogoViewer(SpriteLoader spriteLoader) throws IOException {
         this.sprite = spriteLoader.get("menu/logo.png");

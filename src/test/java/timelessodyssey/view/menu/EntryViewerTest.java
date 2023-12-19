@@ -28,7 +28,7 @@ public class EntryViewerTest {
 
     @Test
     public void drawTesting(){
-        Entry entries[] = new Entry[5];
+        Entry[] entries = new Entry[5];
         for (int idx = 0; idx < Entry.Type.values().length; idx++){
             entries[idx] = new Entry(0, 10*idx, Entry.Type.values()[idx]);
         }

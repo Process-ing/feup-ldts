@@ -17,15 +17,13 @@ import static org.mockito.Mockito.when;
 public class CreditsControllerTest {
 
     private Game game;
-    private Credits credits;
-    private SpriteLoader spriteLoader;
     private CreditsController creditsController;
 
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);
-        this.credits = Mockito.mock(Credits.class);
-        this.spriteLoader = Mockito.mock(SpriteLoader.class);
+        Credits credits = Mockito.mock(Credits.class);
+        SpriteLoader spriteLoader = Mockito.mock(SpriteLoader.class);
         when(game.getSpriteLoader()).thenReturn(spriteLoader);
 
         this.creditsController = new CreditsController(credits);

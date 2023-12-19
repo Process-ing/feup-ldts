@@ -176,8 +176,8 @@ public class Scene {
     public boolean isDying() {
         double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();
         double width = player.getWidth(), height = player.getHeight();
-        double x1 = x, x2 = x + width - 1, y1 = y + height - 1 - SPIKE_HEIGHT, y2 = y + height - 1 - SPIKE_HEIGHT;
-        int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
+        double x2 = x + width - 1, y1 = y + height - 1 - SPIKE_HEIGHT, y2 = y + height - 1 - SPIKE_HEIGHT;
+        int tilex1 = (int)x / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
 
         return spikes[tiley1][tilex1] != null || spikes[tiley2][tilex2] != null;
     }
@@ -185,8 +185,8 @@ public class Scene {
     public boolean updateStars() {
         double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();
         double width = player.getWidth(), height = player.getHeight();
-        double x1 = x, x2 = x + width - 1, y1 = y, y2 = y + height - 1;
-        int tilex1 = (int)x1 / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
+        double x2 = x + width - 1, y1 = y, y2 = y + height - 1;
+        int tilex1 = (int)x / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
         if (stars[tiley1][tilex1] != null){
             stars[tiley1][tilex1] = null;
             getPlayer().increaseStars();

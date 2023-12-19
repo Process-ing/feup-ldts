@@ -28,9 +28,8 @@ public class Game {
     public static final int PIXEL_HEIGHT = 90;
     private final LanternaGUI gui;
     private final SpriteLoader spriteLoader;
-    private State state;
+    private State<?> state;
     private final BackgroundSoundPlayer backgroundSoundPlayer;
-    private final int NUMBER_OF_LEVELS = 11;
 
     public Game() throws Exception {
         ScreenCreator screenCreator = new LanternaScreenCreator(
@@ -56,7 +55,7 @@ public class Game {
         }
     }
 
-    public void setState(State state) {
+    public void setState(State<?> state) {
         this.state = state;
     }
 
@@ -77,12 +76,8 @@ public class Game {
         return spriteLoader;
     }
 
-    public BackgroundSoundPlayer getBackgroundSoundPlayer() {
-        return backgroundSoundPlayer;
-    }
-
     public int getNumberOfLevels() {
-        return NUMBER_OF_LEVELS;
+        return 11;
     }
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {

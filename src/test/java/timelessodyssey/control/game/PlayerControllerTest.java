@@ -33,11 +33,9 @@ public class PlayerControllerTest {
     @Nested
     class playerTestsNotDead {
 
-        private PlayerState playerState;
-
         @BeforeEach
         public void setup() {
-            this.playerState = Mockito.mock(PlayerState.class);
+            PlayerState playerState = Mockito.mock(PlayerState.class);
             Mockito.when(player.getState()).thenReturn(playerState);
         }
 

@@ -3,7 +3,6 @@ package timelessodyssey.model.credits;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.model.game.elements.player.Player;
-import timelessodyssey.model.game.scene.Scene;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

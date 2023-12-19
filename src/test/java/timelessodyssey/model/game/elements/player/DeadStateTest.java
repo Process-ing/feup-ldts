@@ -14,11 +14,9 @@ class DeadStateTest {
 
     private DeadState deadState;
 
-    private Scene mockedScene;
-
     @BeforeEach
     void setup() {
-        mockedScene = mock(Scene.class);
+        Scene mockedScene = mock(Scene.class);
         player = new Player(0, 0, mockedScene);
         deadState = new DeadState(player, 50);
         player.setState(deadState);

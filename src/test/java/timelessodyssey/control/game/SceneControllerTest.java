@@ -14,25 +14,22 @@ import java.io.IOException;
 
 public class SceneControllerTest {
     private Game game;
-    private SpriteLoader spriteLoader;
-    private Player player;
     private SceneController sceneController;
     private Scene scene;
     private PlayerController playerController;
-    private ParticleController particleController;
 
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);
-        this.spriteLoader = Mockito.mock(SpriteLoader.class);
+        SpriteLoader spriteLoader = Mockito.mock(SpriteLoader.class);
         Mockito.when(game.getSpriteLoader()).thenReturn(spriteLoader);
 
         this.scene = Mockito.mock(Scene.class);
-        this.player = Mockito.mock(Player.class);
+        Player player = Mockito.mock(Player.class);
         Mockito.when(scene.getPlayer()).thenReturn(player);
 
         this.playerController = Mockito.mock(PlayerController.class);
-        this.particleController = Mockito.mock(ParticleController.class);
+        ParticleController particleController = Mockito.mock(ParticleController.class);
 
         this.sceneController = new SceneController(scene, playerController, particleController);
     }

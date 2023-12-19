@@ -51,7 +51,7 @@ public class CreditsViewer extends ScreenViewer<Credits> {
             String message = getModel().getMessages()[idx];
             int messageLength = message.length() * getCharWidth() + (message.length() - 1) * getSpacing();
             textViewer.draw(message,
-                    (gui.getWidth() / 2) - (messageLength / 2),
+                    ((double) gui.getWidth() / 2) - ((double) messageLength / 2),
                     yAlignment + spacing * idx,
                     messageColor, gui);
         }
