@@ -17,6 +17,7 @@ public class SceneControllerTest {
     private SceneController sceneController;
     private Scene scene;
     private PlayerController playerController;
+    private ParticleController particleController;
 
     @BeforeEach
     public void setup() {
@@ -29,7 +30,7 @@ public class SceneControllerTest {
         Mockito.when(scene.getPlayer()).thenReturn(player);
 
         this.playerController = Mockito.mock(PlayerController.class);
-        ParticleController particleController = Mockito.mock(ParticleController.class);
+        this.particleController = Mockito.mock(ParticleController.class);
 
         this.sceneController = new SceneController(scene, playerController, particleController);
     }
@@ -71,6 +72,8 @@ public class SceneControllerTest {
                 .step(game, action, frameCount);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any());
+        Mockito.verify(particleController, Mockito.times(1))
+                .step(game, action, frameCount);
     }
 
     @Test
@@ -85,5 +88,7 @@ public class SceneControllerTest {
                 .step(game, action, frameCount);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any(CreditsState.class));
+        Mockito.verify(particleController, Mockito.times(1))
+                .step(game, action, frameCount);
     }
 }
