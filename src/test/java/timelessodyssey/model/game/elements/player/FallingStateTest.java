@@ -68,8 +68,6 @@ class FallingStateTest {
 
         assertEquals(0.75, result.x());
         assertEquals(0, result.y());
-
-
     }
 
     @Test
