@@ -3,13 +3,10 @@ package timelessodyssey.model.game.elements.player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import timelessodyssey.model.Vector;
-import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.scene.Scene;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 class DeadStateTest {
 
@@ -58,7 +55,7 @@ class DeadStateTest {
 
     @Test
     void getNextStateAfterDuration() {
-        deadState.setDuration(0);
+        deadState = new DeadState(player, 0);
 
         PlayerState nextState = deadState.getNextState();
 

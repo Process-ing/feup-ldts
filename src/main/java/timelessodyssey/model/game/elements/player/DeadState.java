@@ -21,10 +21,6 @@ public class DeadState extends PlayerState {
         return duration;
     }
 
-    public void setDuration(long duration) {
-        this.duration = duration;
-    } // for test purposes
-
     private List<Particle> createDeathParticles() {
         List<Particle> particles = new ArrayList<>();
         int numParticles = 20;

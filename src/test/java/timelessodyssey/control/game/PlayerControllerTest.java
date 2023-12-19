@@ -11,7 +11,8 @@ import timelessodyssey.model.game.elements.player.Player;
 import timelessodyssey.model.game.elements.player.PlayerState;
 import timelessodyssey.model.game.scene.Scene;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 public class PlayerControllerTest {
     private Scene scene;

@@ -1,7 +1,6 @@
 package timelessodyssey.sound;
 
-import javax.sound.sampled.*;
-import java.io.File;
+import javax.sound.sampled.Clip;
 
 public class BackgroundSoundPlayer implements SoundPlayer{
 
