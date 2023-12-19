@@ -8,9 +8,7 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.model.credits.Credits;
 import timelessodyssey.view.SpriteLoader;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static org.mockito.Mockito.when;
 
