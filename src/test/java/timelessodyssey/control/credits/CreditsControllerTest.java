@@ -6,21 +6,27 @@ import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.credits.Credits;
+import timelessodyssey.view.SpriteLoader;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static org.mockito.Mockito.when;
+
 public class CreditsControllerTest {
 
-    Game game;
-    Credits credits;
-    CreditsController creditsController;
+    private Game game;
+    private Credits credits;
+    private SpriteLoader spriteLoader;
+    private CreditsController creditsController;
 
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);
         this.credits = Mockito.mock(Credits.class);
+        this.spriteLoader = Mockito.mock(SpriteLoader.class);
+        when(game.getSpriteLoader()).thenReturn(spriteLoader);
 
         this.creditsController = new CreditsController(credits);
     }

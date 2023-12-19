@@ -1,51 +1,37 @@
 package timelessodyssey.view.screens;
 
 import com.googlecode.lanterna.TextColor;
-import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.Entry;
 import timelessodyssey.model.menu.Menu;
-import timelessodyssey.view.Sprite;
+import timelessodyssey.view.ViewerProvider;
 import timelessodyssey.view.menu.EntryViewer;
-import timelessodyssey.view.text.GameTextViewer;
+import timelessodyssey.view.menu.LogoViewer;
 
 import java.io.IOException;
 import java.util.List;
 
 public class MenuViewer<T extends Menu> extends ScreenViewer<T> {
-    private static final TextColor unselectedColor = new TextColor.RGB(234,234,234);
-    private static final TextColor selectedColor = new TextColor.RGB(99,155,255);
-    private static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
-    private static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
+    public static final TextColor unselectedColor = new TextColor.RGB(234,234,234);
+    public static final TextColor selectedColor = new TextColor.RGB(99,155,255);
+    public static final TextColor backgroundColor = new TextColor.RGB(28, 28, 46);
+    public static final TextColor frameColor = new TextColor.RGB(255, 255, 255);
     private final EntryViewer entryViewer;
+    private final LogoViewer logoViewer;
 
-    private final Sprite logoSprite;
-
-    public MenuViewer(T model) throws IOException {
+    public MenuViewer(T model, ViewerProvider viewerProvider) {
         super(model);
-        this.entryViewer = new EntryViewer(new GameTextViewer());
-        this.logoSprite = loadLogo();
+        this.entryViewer = viewerProvider.getEntryViewer();
+        this.logoViewer = viewerProvider.getLogoViewer();
     }
 
     @Override
     public void draw(ResizableGUI gui, long frameCount) throws IOException {
         gui.clear();
-        drawBackgroundAndFrame(gui);
+        drawBackgroundAndFrame(gui, frameColor, backgroundColor);
         drawEntries(gui, getModel().getEntries());
-        logoSprite.draw(gui, 44, 16);
+        logoViewer.draw(gui, 44, 16);
         gui.refresh();
-    }
-
-    public Sprite loadLogo() throws IOException {
-        return new Sprite("menu/logo.png");
-    }
-
-    private void drawBackgroundAndFrame(GUI gui) {
-        gui.drawRectangle(0, 0, gui.getWidth(), 1, frameColor);
-        gui.drawRectangle(0, gui.getHeight() - 1, gui.getWidth(), 1, frameColor);
-        gui.drawRectangle(0, 1, 1, gui.getHeight() - 2, frameColor);
-        gui.drawRectangle(gui.getWidth() - 1, 1, 1, gui.getHeight() - 2, frameColor);
-        gui.drawRectangle(1, 1, gui.getWidth() - 2, gui.getHeight() - 2, backgroundColor);
     }
 
     private void drawEntries(ResizableGUI gui, List<Entry> entries) {

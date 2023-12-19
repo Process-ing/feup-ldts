@@ -9,6 +9,7 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.SpriteLoader;
+import timelessodyssey.view.ViewerProvider;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
@@ -45,7 +46,7 @@ public class GameStateTest {
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new GameState(model, spriteLoader){
             @Override
-            protected ScreenViewer<Scene> createScreenViewer(SpriteLoader spriteLoader) {
+            protected ScreenViewer<Scene> createScreenViewer(ViewerProvider viewerProvider) {
                 return stateScreenViewer;
             }
             @Override

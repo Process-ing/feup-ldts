@@ -3,8 +3,9 @@ package timelessodyssey.states;
 import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
-import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.gui.ResizableGUI;
+import timelessodyssey.view.SpriteLoader;
+import timelessodyssey.view.ViewerProvider;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
@@ -18,11 +19,11 @@ public abstract class State<T> {
 
     public State(T model, SpriteLoader spriteLoader) throws IOException {
         this.model = model;
-        this.screenViewer = createScreenViewer(spriteLoader);
+        this.screenViewer = createScreenViewer(new ViewerProvider(spriteLoader));
         this.controller = createController();
     }
 
-    protected abstract ScreenViewer<T> createScreenViewer(SpriteLoader spriteLoader) throws IOException;
+    protected abstract ScreenViewer<T> createScreenViewer(ViewerProvider viewerProvider) throws IOException;
     protected abstract Controller<T> createController();
     protected abstract boolean allowArrowSpam();
 
