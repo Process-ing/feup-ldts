@@ -19,7 +19,7 @@ public class CreditsController extends Controller<Credits> {
     }
 
     @Override
-    public void step(Game game, GUI.Action action, long frameCount) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Game game, GUI.Action action, long frameCount) throws IOException {
         if (action == QUIT) {
             game.setState(new MainMenuState(new MainMenu(), game.getSpriteLoader()));
         }

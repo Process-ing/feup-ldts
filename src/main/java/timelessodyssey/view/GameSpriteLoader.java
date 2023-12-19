@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameSpriteLoader implements SpriteLoader {
+public final class GameSpriteLoader implements SpriteLoader {
     Map<String, Sprite> spriteMap;
 
     public GameSpriteLoader() {

@@ -1,6 +1,6 @@
 package timelessodyssey.model.game.elements;
 
-public class Spike extends Element {
+public final class Spike extends Element {
     public static int SPIKE_HEIGHT = 4;
     private final char character;
 

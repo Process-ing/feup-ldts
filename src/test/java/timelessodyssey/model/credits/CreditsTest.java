@@ -12,7 +12,7 @@ public class CreditsTest {
 
     Player player;
     @BeforeEach
-    public void setup() throws InterruptedException {
+    public void setup() {
         player = new Player(0, 0, null);
         while (player.getStarCounter() != 14)
             player.increaseStars();

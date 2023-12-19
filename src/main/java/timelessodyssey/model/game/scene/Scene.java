@@ -185,8 +185,8 @@ public class Scene {
     public boolean updateStars() {
         double x = getPlayer().getPosition().x(), y = getPlayer().getPosition().y();
         double width = player.getWidth(), height = player.getHeight();
-        double x2 = x + width - 1, y1 = y, y2 = y + height - 1;
-        int tilex1 = (int)x / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y1 / 8, tiley2 = (int)y2 / 8;
+        double x2 = x + width - 1, y2 = y + height - 1;
+        int tilex1 = (int)x / 8, tilex2 = (int)x2 / 8, tiley1 = (int)y / 8, tiley2 = (int)y2 / 8;
         if (stars[tiley1][tilex1] != null){
             stars[tiley1][tilex1] = null;
             getPlayer().increaseStars();

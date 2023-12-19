@@ -14,14 +14,12 @@ import timelessodyssey.model.game.elements.player.Player;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SceneTest {
-    Game game;
     Scene scene;
     Player player;
     Vector playerSize;
 
     @BeforeEach
     public void setup() {
-        this.game = Mockito.mock(Game.class);
         this.scene = new Scene(20, 16, 0);
         this.player = new Player(0,0, null);
         this.scene.setPlayer(player);

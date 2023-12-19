@@ -17,7 +17,7 @@ public class MainMenuState extends State<MainMenu> {
     }
 
     @Override
-    protected ScreenViewer<MainMenu> createScreenViewer(ViewerProvider viewerProvider) throws IOException {
+    protected ScreenViewer<MainMenu> createScreenViewer(ViewerProvider viewerProvider) {
         return new MenuViewer<>(getModel(), viewerProvider);
     }
 

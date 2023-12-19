@@ -21,7 +21,7 @@ public class CreditsViewerTest {
     private TextViewer textViewer;
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         this.gui = mock(ResizableGUI.class);
 
         Credits credits = mock(Credits.class);

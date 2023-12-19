@@ -18,12 +18,10 @@ import java.util.ArrayList;
 
 public class SceneBuilderTest {
 
-    Game game;
     Player player;
 
     @BeforeEach
     public void setup() {
-        this.game = Mockito.mock(Game.class);
         this.player = new Player(0,0, null);
     }
 

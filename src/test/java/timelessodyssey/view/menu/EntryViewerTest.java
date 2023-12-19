@@ -19,7 +19,7 @@ public class EntryViewerTest {
     private EntryViewer entryViewer;
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         this.gui = mock(ResizableGUI.class);
         this.textViewer = mock(GameTextViewer.class);
 
