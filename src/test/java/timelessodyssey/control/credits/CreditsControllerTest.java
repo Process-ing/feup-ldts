@@ -15,7 +15,6 @@ import java.net.URISyntaxException;
 import static org.mockito.Mockito.when;
 
 public class CreditsControllerTest {
-
     private Game game;
     private CreditsController creditsController;
 

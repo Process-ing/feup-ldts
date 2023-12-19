@@ -167,7 +167,7 @@ public class LanternaGUITest {
         verify(screenCreator, times(1)).createScreen(resolution, title, gui.getKeyAdapter());
     }
 
-    @Property(tries = 100)
+    @Property
     public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor color) throws IOException, URISyntaxException, FontFormatException {
         GUI gui = new LanternaGUI(screenCreator, "drawPixel test");
 
@@ -178,7 +178,7 @@ public class LanternaGUITest {
         verifyNoMoreInteractions(tg);
     }
 
-    @Property(tries = 100)
+    @Property
     public void drawRectangle(
         @ForAll int x,
         @ForAll int y,

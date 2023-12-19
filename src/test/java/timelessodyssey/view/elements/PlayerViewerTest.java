@@ -47,18 +47,21 @@ public class PlayerViewerTest {
         player.setState(new FallingState(player));
         playerViewer.draw(player, gui, frameCount);
 
-        verify(sprite1, times(1)).draw(gui, player.getPosition().x(), player.getPosition().y());
+        verify(sprite1, times(1))
+                .draw(gui, player.getPosition().x(), player.getPosition().y());
 
         player.setFacingRight(true);
         player.setState(new RunningState(player));
         playerViewer.draw(player, gui, frameCount);
 
-        verify(sprite2, times(1)).draw(gui, player.getPosition().x(), player.getPosition().y());
+        verify(sprite2, times(1))
+                .draw(gui, player.getPosition().x() - 2, player.getPosition().y());
 
         frameCount++;
         playerViewer.draw(player, gui, frameCount);
 
-        verify(sprite3, times(1)).draw(gui, player.getPosition().x(), player.getPosition().y());
+        verify(sprite3, times(1))
+                .draw(gui, player.getPosition().x() - 2, player.getPosition().y());
 
         player.setState(new DeadState(player, deathDuration));
         playerViewer.draw(player, gui, frameCount);

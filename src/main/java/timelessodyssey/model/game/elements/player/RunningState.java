@@ -37,7 +37,7 @@ public class RunningState extends PlayerState {
 
     @Override
     public PlayerState getNextState() {
-        if (getPlayer().getScene().isDying())
+        if (getPlayer().getScene().isPlayerDying())
             return new DeadState(getPlayer(), 50);
         if (getPlayer().isOverMaxXVelocity())
             return new DashingState(getPlayer());
