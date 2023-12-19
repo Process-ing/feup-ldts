@@ -1,5 +1,7 @@
 package timelessodyssey.model.credits;
 
+import timelessodyssey.model.game.elements.player.Player;
+
 public class Credits {
 
     private int score;
@@ -11,9 +13,10 @@ public class Credits {
     private final int seconds;
     private final int minutes;
 
-    public Credits(int starCounter, int numberOfDeaths, long duration) {
-        this.score = starCounter;
-        this.deaths = numberOfDeaths;
+    public Credits(Player player) {
+        this.score = player.getStarCounter();
+        this.deaths = player.getNumberOfDeaths();
+        long duration = System.currentTimeMillis() - player.getBirthTime();
         this.seconds = (int) ((duration / 1000) % 60);
         this.minutes = (int) ((duration / 1000) / 60);
 
