@@ -64,58 +64,58 @@ class RunningStateTest {
     }
 
     @Test
-    void getNextState_Dead() {
+    void getNextStateDead() {
         when(mockedScene.isDying()).thenReturn(true);
 
         PlayerState nextState = runningState.getNextState();
 
-        assertTrue(nextState instanceof DeadState);
+        assertInstanceOf(DeadState.class, nextState);
     }
 
     @Test
-    void getNextState_Dashing() {
+    void getNextStateDashing() {
         player.setVelocity(new Vector(10, player.getVelocity().y()));
 
         PlayerState nextState = runningState.getNextState();
 
-        assertTrue(nextState instanceof DashingState);
+        assertInstanceOf(DashingState.class, nextState);
     }
 
     @Test
-    void getNextState_Jumping() {
+    void getNextStateJumping() {
         when(player.isOnGround()).thenReturn(false);
         player.setVelocity(new Vector(player.getVelocity().x(), -10));
 
         PlayerState nextState = runningState.getNextState();
 
-        assertTrue(nextState instanceof JumpingState);
+        assertInstanceOf(JumpingState.class, nextState);
     }
 
     @Test
-    void getNextState_Falling() {
+    void getNextStateFalling() {
         when(player.isOnGround()).thenReturn(false);
         player.setVelocity(new Vector(player.getVelocity().x(), 10));
 
         PlayerState nextState = runningState.getNextState();
 
-        assertTrue(nextState instanceof FallingState);
+        assertInstanceOf(FallingState.class, nextState);
     }
 
     @Test
-    void getNextState_Idle() {
+    void getNextStateIdle() {
         when(player.isOnGround()).thenReturn(true);
         player.setVelocity(new Vector(1.5, 0));
 
         PlayerState nextState = runningState.getNextState();
 
-        assertTrue(nextState instanceof IdleState);
+        assertInstanceOf(IdleState.class, nextState);
     }
 
     @Test
-    void getNextState_Stay() {
+    void getNextStateStay() {
         when(player.isOnGround()).thenReturn(true);
         PlayerState nextState = runningState.getNextState();
 
-        assertTrue(nextState instanceof RunningState);
+        assertInstanceOf(RunningState.class, nextState);
     }
 }

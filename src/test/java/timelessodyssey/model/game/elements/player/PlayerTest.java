@@ -47,7 +47,7 @@ class PlayerTest {
     }
 
     @Test
-    void isOnGround_True() {
+    void isOnGround() {
         when(mockedScene.collidesDown(any(Vector.class), any(Vector.class))).thenReturn(true);
 
         boolean onGround = player.isOnGround();
@@ -58,7 +58,7 @@ class PlayerTest {
     }
 
     @Test
-    void isOnGround_False() {
+    void isNotOnGround() {
         when(mockedScene.collidesDown(any(Vector.class), any(Vector.class))).thenReturn(false);
 
         boolean onGround = player.isOnGround();
@@ -74,7 +74,7 @@ class PlayerTest {
 
         assertTrue(player.isFacingRight());
 
-        assertTrue(player.getState() instanceof IdleState);
+        assertInstanceOf(IdleState.class, player.getState());
     }
 
     @Test

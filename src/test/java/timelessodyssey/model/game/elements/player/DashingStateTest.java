@@ -55,27 +55,27 @@ class DashingStateTest {
     }
 
     @Test
-    void getNextState_Dead() {
+    void getNextStateDead() {
         when(mockedScene.isDying()).thenReturn(true);
 
         PlayerState nextState = dashingState.getNextState();
 
-        assertTrue(nextState instanceof DeadState);
+        assertInstanceOf(DeadState.class, nextState);
     }
 
     @Test
-    void getNextState_AfterDash() {
+    void getNextStateAfterDash() {
         player.setVelocity(new Vector(1.8, player.getVelocity().y()));
 
         PlayerState nextState = dashingState.getNextState();
 
-        assertTrue(nextState instanceof AfterDashState);
+        assertInstanceOf(AfterDashState.class, nextState);
     }
 
     @Test
-    void getNextState_Stay() {
+    void getNextStateStay() {
         PlayerState nextState = dashingState.getNextState();
 
-        assertTrue(nextState instanceof DashingState);
+        assertSame(dashingState, nextState);
     }
 }

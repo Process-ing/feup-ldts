@@ -55,48 +55,48 @@ class AfterDashStateTest {
     }
 
     @Test
-    void getNextState_Dead() {
+    void getNextStateDead() {
         when(mockedScene.isDying()).thenReturn(true);
 
         PlayerState nextState = afterDashState.getNextState();
 
-        assertTrue(nextState instanceof DeadState);
+        assertInstanceOf(DeadState.class, nextState);
     }
 
     @Test
-    void getNextState_Idle() {
+    void getNextStateIdle() {
         when(player.isOnGround()).thenReturn(true);
         player.setVelocity(new Vector(0.0, 0.0));
 
         PlayerState nextState = afterDashState.getNextState();
 
-        assertTrue(nextState instanceof IdleState);
+        assertInstanceOf(IdleState.class, nextState);
     }
 
     @Test
-    void getNextState_Walking() {
+    void getNextStateWalking() {
         when(player.isOnGround()).thenReturn(true);
         player.setVelocity(new Vector(1.0, 0.0));
 
         PlayerState nextState = afterDashState.getNextState();
 
-        assertTrue(nextState instanceof WalkingState);
+        assertInstanceOf(WalkingState.class, nextState);
     }
 
     @Test
-    void getNextState_Running() {
+    void getNextStateRunning() {
         when(player.isOnGround()).thenReturn(true);
         player.setVelocity(new Vector(2.0, 0.0));
 
         PlayerState nextState = afterDashState.getNextState();
 
-        assertTrue(nextState instanceof RunningState);
+        assertInstanceOf(RunningState.class, nextState);
     }
 
     @Test
-    void getNextState_Stay() {
+    void getNextStateStay() {
         PlayerState nextState = afterDashState.getNextState();
 
-        assertTrue(nextState instanceof AfterDashState);
+        assertSame(afterDashState, nextState);
     }
 }

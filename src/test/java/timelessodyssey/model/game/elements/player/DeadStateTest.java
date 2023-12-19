@@ -57,7 +57,7 @@ class DeadStateTest {
     }
 
     @Test
-    void getNextState_GG() {
+    void getNextStateAfterDuration() {
         deadState.setDuration(0);
 
         PlayerState nextState = deadState.getNextState();
@@ -66,9 +66,9 @@ class DeadStateTest {
     }
 
     @Test
-    void getNextState_Stay() {
+    void getNextStateStay() {
         PlayerState nextState = deadState.getNextState();
 
-        assertTrue(nextState instanceof DeadState);
+        assertSame(deadState, nextState);
     }
 }
