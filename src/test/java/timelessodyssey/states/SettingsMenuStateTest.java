@@ -7,7 +7,7 @@ import timelessodyssey.Game;
 import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
-import timelessodyssey.model.menu.MainMenu;
+import timelessodyssey.model.menu.SettingsMenu;
 import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.screens.ScreenViewer;
 
@@ -15,14 +15,14 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class MenuStateTest {
-    MainMenu model;
+public class SettingsMenuStateTest {
+    SettingsMenu model;
     SpriteLoader spriteLoader;
     Game game;
     ResizableGUI gui;
-    Controller<MainMenu> stateController;
-    ScreenViewer<MainMenu> stateScreenViewer;
-    MainMenuState state;
+    Controller<SettingsMenu> stateController;
+    ScreenViewer<SettingsMenu> stateScreenViewer;
+    SettingsMenuState state;
 
     @SuppressWarnings("unchecked")
     private void mockControllerAndViewer() {
@@ -32,7 +32,7 @@ public class MenuStateTest {
 
     @BeforeEach
     public void setup() {
-        this.model = Mockito.mock(MainMenu.class);
+        this.model = Mockito.mock(SettingsMenu.class);
         this.spriteLoader = Mockito.mock(SpriteLoader.class);
         this.game = Mockito.mock(Game.class);
         this.gui = Mockito.mock(ResizableGUI.class);
@@ -40,16 +40,16 @@ public class MenuStateTest {
     }
 
     @Test
-    public void MainMenuStep() throws IOException, URISyntaxException, FontFormatException {
+    public void SettingsMenuStep() throws IOException, URISyntaxException, FontFormatException {
         long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
-        this.state = new MainMenuState(model, spriteLoader){
+        this.state = new SettingsMenuState(model, spriteLoader){
             @Override
-            protected ScreenViewer<MainMenu> createScreenViewer(SpriteLoader spriteLoader) {
+            protected ScreenViewer<SettingsMenu> createScreenViewer(SpriteLoader spriteLoader) {
                 return stateScreenViewer;
             }
             @Override
-            protected Controller<MainMenu> createController() {
+            protected Controller<SettingsMenu> createController() {
                 return stateController;
             }
 
@@ -58,6 +58,8 @@ public class MenuStateTest {
 
         state.step(game, gui, frameCount);
 
+        Mockito.verify(game, Mockito.times(1))
+                .setKeySpam(false);
         Mockito.verify(gui, Mockito.times(1)).getNextAction();
         Mockito.verify(stateController, Mockito.times(1))
                 .step(game, GUI.Action.NONE, frameCount);
