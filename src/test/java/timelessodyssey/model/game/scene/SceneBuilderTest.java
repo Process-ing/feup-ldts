@@ -3,8 +3,6 @@ package timelessodyssey.model.game.scene;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import timelessodyssey.Game;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;
@@ -27,13 +25,14 @@ public class SceneBuilderTest {
 
     @Test
     public void LevelLoaderTest() throws IOException {
-        Scene scene =  new SceneBuilder(0).createScene(player);
+        int sceneCode = 5;
+        Scene scene =  new SceneBuilder(sceneCode).createScene(player);
 
         Assertions.assertNotEquals(null, scene.getPlayer());
         Assertions.assertEquals(new Vector(0,7*Tile.SIZE), scene.getStartingPosition());
-        Assertions.assertEquals(new Vector(20*Tile.SIZE, Tile.SIZE), scene.getTransitionPositionBegin());
-        Assertions.assertEquals(new Vector(21*Tile.SIZE, 5*Tile.SIZE), scene.getTransitionPositionEnd());
-        Assertions.assertEquals(0, scene.getSceneCode());
+        Assertions.assertEquals(new Vector(15*Tile.SIZE, 10*Tile.SIZE), scene.getTransitionPositionBegin());
+        Assertions.assertEquals(new Vector(19*Tile.SIZE, 12*Tile.SIZE), scene.getTransitionPositionEnd());
+        Assertions.assertEquals(sceneCode, scene.getSceneCode());
         Assertions.assertNotEquals(new Tile[12][21], scene.getTiles());
         Assertions.assertNotEquals(new Spike[12][21], scene.getSpikes());
         Assertions.assertNotEquals(new Tile[12][21], scene.getGoals());

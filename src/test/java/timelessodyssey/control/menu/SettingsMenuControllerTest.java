@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.menu.SettingsMenu;
+import timelessodyssey.states.MainMenuState;
 import timelessodyssey.view.SpriteLoader;
 
 import java.awt.*;
@@ -50,7 +51,7 @@ public class SettingsMenuControllerTest {
     @Test
     public void ActionQuit() throws IOException, URISyntaxException, FontFormatException {
         settingsMenuController.step(game, GUI.Action.QUIT, 0);
-        Mockito.verify(game, Mockito.times(1)).setState(Mockito.any());
+        Mockito.verify(game, Mockito.times(1)).setState(Mockito.any(MainMenuState.class));
     }
 
     @Test

@@ -45,6 +45,8 @@ public class SceneControllerTest {
                 .step(game, action, frameCount);
         Mockito.verify(game, Mockito.times(0))
                 .setState(Mockito.any());
+        Mockito.verify(particleController, Mockito.times(1))
+                .step(game, action, frameCount);
     }
 
     @Test
