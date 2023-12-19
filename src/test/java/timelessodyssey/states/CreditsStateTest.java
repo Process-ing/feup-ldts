@@ -8,7 +8,6 @@ import timelessodyssey.control.Controller;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.credits.Credits;
-import timelessodyssey.model.game.scene.Scene;
 import timelessodyssey.view.SpriteLoader;
 import timelessodyssey.view.ViewerProvider;
 import timelessodyssey.view.screens.ScreenViewer;
