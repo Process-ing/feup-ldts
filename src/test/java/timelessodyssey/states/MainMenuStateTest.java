@@ -9,13 +9,14 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.view.SpriteLoader;
+import timelessodyssey.view.ViewerProvider;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class MenuStateTest {
+public class MainMenuStateTest {
     MainMenu model;
     SpriteLoader spriteLoader;
     Game game;
@@ -45,7 +46,7 @@ public class MenuStateTest {
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new MainMenuState(model, spriteLoader){
             @Override
-            protected ScreenViewer<MainMenu> createScreenViewer(SpriteLoader spriteLoader) {
+            protected ScreenViewer<MainMenu> createScreenViewer(ViewerProvider viewerProvider) {
                 return stateScreenViewer;
             }
             @Override
@@ -58,6 +59,8 @@ public class MenuStateTest {
 
         state.step(game, gui, frameCount);
 
+        Mockito.verify(game, Mockito.times(1))
+                .setKeySpam(false);
         Mockito.verify(gui, Mockito.times(1)).getNextAction();
         Mockito.verify(stateController, Mockito.times(1))
                 .step(game, GUI.Action.NONE, frameCount);

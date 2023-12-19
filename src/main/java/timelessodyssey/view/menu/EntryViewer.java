@@ -3,16 +3,13 @@ package timelessodyssey.view.menu;
 import com.googlecode.lanterna.TextColor;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.Entry;
-import timelessodyssey.view.text.GameTextViewer;
 import timelessodyssey.view.text.TextViewer;
-
-import java.io.IOException;
 
 public class EntryViewer {
     private final TextViewer textViewer;
 
-    public EntryViewer() throws IOException {
-        this.textViewer = new GameTextViewer();
+    public EntryViewer(TextViewer textViewer) {
+        this.textViewer = textViewer;
     }
 
     public void draw(Entry model, ResizableGUI gui, TextColor color) {

@@ -30,10 +30,6 @@ public abstract class Menu {
         currentEntry = currentEntry % getNumberEntries();
     }
 
-    public Entry getEntry(int i) {
-        return entries.get(i);
-    }
-
     public Entry getCurrentEntry() {
         return entries.get(currentEntry);
     }
