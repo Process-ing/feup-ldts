@@ -9,6 +9,7 @@ import timelessodyssey.gui.GUI;
 import timelessodyssey.gui.ResizableGUI;
 import timelessodyssey.model.menu.SettingsMenu;
 import timelessodyssey.view.SpriteLoader;
+import timelessodyssey.view.ViewerProvider;
 import timelessodyssey.view.screens.ScreenViewer;
 
 import java.awt.*;
@@ -45,7 +46,7 @@ public class SettingsMenuStateTest {
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new SettingsMenuState(model, spriteLoader){
             @Override
-            protected ScreenViewer<SettingsMenu> createScreenViewer(SpriteLoader spriteLoader) {
+            protected ScreenViewer<SettingsMenu> createScreenViewer(ViewerProvider viewerProvider) {
                 return stateScreenViewer;
             }
             @Override
