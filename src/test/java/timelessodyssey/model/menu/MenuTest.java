@@ -43,5 +43,4 @@ public class MenuTest {
 
         assertEquals(entryList.get(0), menu.getCurrentEntry());
     }
-
 }

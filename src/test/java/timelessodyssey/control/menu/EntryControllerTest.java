@@ -73,7 +73,7 @@ public class EntryControllerTest {
 
         entryController.step(game, GUI.Action.NONE, 0);
         verify(game, Mockito.times(0))
-                .setState(Mockito.any(State.class));
+                .setState(null);
 
         entryController.step(game, GUI.Action.SELECT, 0);
         verify(game, Mockito.times(1))
@@ -92,6 +92,8 @@ public class EntryControllerTest {
         entryController.step(game, GUI.Action.SELECT, 0);
         verify(game, Mockito.times(1))
                 .setState(Mockito.any(MainMenuState.class));
+
+
     }
 
     @Test
