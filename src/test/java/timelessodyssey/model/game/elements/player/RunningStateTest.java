@@ -22,7 +22,6 @@ class RunningStateTest {
         player = new Player(0, 0, mockedScene);
         runningState = new RunningState(player);
         player.setState(runningState);
-        player.setFacingRight(true);
         player.setVelocity(new Vector(1.8, 0));
         when(mockedScene.getFriction()).thenReturn(0.75);
     }
@@ -37,11 +36,22 @@ class RunningStateTest {
 
     @Test
     void dash() {
+        player.setFacingRight(true);
         Vector result = runningState.dash();
 
         assertEquals(5.0, result.x());
         assertEquals(0.0, result.y());
         assertTrue(player.isFacingRight());
+    }
+
+    @Test
+    void dashLeft() {
+        player.setFacingRight(false);
+        Vector result = runningState.dash();
+
+        assertEquals(-5.0, result.x());
+        assertEquals(0.0, result.y());
+        assertFalse(player.isFacingRight());
     }
 
     @Test
@@ -99,5 +109,13 @@ class RunningStateTest {
         PlayerState nextState = runningState.getNextState();
 
         assertTrue(nextState instanceof IdleState);
+    }
+
+    @Test
+    void getNextState_Stay() {
+        when(player.isOnGround()).thenReturn(true);
+        PlayerState nextState = runningState.getNextState();
+
+        assertTrue(nextState instanceof RunningState);
     }
 }

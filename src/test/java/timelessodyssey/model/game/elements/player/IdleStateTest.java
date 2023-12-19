@@ -22,7 +22,6 @@ class IdleStateTest {
         player = new Player(0, 0, mockedScene);
         idleState = new IdleState(player);
         player.setState(idleState);
-        player.setFacingRight(true);
         player.setVelocity(new Vector(0, 0));
         when(mockedScene.getFriction()).thenReturn(0.75);
     }
@@ -36,12 +35,23 @@ class IdleStateTest {
     }
 
     @Test
-    void dash() {
+    void dashRight() {
+        player.setFacingRight(true);
         Vector result = idleState.dash();
 
         assertEquals(5.0, result.x());
         assertEquals(0.0, result.y());
         assertTrue(player.isFacingRight());
+    }
+
+    @Test
+    void dashLeft() {
+        player.setFacingRight(false);
+        Vector result = idleState.dash();
+
+        assertEquals(-5.0, result.x());
+        assertEquals(0.0, result.y());
+        assertFalse(player.isFacingRight());
     }
 
     @Test
@@ -99,5 +109,13 @@ class IdleStateTest {
         PlayerState nextState = idleState.getNextState();
 
         assertTrue(nextState instanceof WalkingState);
+    }
+
+    @Test
+    void getNextState_Stay() {
+        when(player.isOnGround()).thenReturn(true);
+        PlayerState nextState = idleState.getNextState();
+
+        assertTrue(nextState instanceof IdleState);
     }
 }

@@ -22,7 +22,6 @@ class FallingStateTest {
         player = new Player(0, 0, mockedScene);
         fallingState = new FallingState(player);
         player.setState(fallingState);
-        player.setFacingRight(true);
         player.setVelocity(new Vector(1, 2.0));
         when(mockedScene.getFriction()).thenReturn(0.75);
         when(mockedScene.getGravity()).thenReturn(0.25);
@@ -37,7 +36,8 @@ class FallingStateTest {
     }
 
     @Test
-    void dash() {
+    void dashRight() {
+        player.setFacingRight(true);
         Vector result = fallingState.dash();
 
         assertEquals(5.0, result.x());
@@ -46,11 +46,29 @@ class FallingStateTest {
     }
 
     @Test
+    void dashLeft() {
+        player.setFacingRight(false);
+        Vector result = fallingState.dash();
+
+        assertEquals(-5.0, result.x());
+        assertEquals(0.0, result.y());
+        assertFalse(player.isFacingRight());
+    }
+
+    @Test
     void updateVelocity() {
+        when(mockedScene.collidesDown(any(), any())).thenReturn(false);
         Vector result = fallingState.updateVelocity(player.getVelocity());
 
         assertEquals(0.75, result.x());
         assertEquals(2.25, result.y());
+
+        when(mockedScene.collidesDown(any(), any())).thenReturn(true);
+        result = fallingState.updateVelocity(player.getVelocity());
+
+        assertEquals(0.75, result.x());
+        assertEquals(0, result.y());
+
 
     }
 
@@ -100,5 +118,12 @@ class FallingStateTest {
         PlayerState nextState = fallingState.getNextState();
 
         assertTrue(nextState instanceof RunningState);
+    }
+
+    @Test
+    void getNextState_Stay() {
+        PlayerState nextState = fallingState.getNextState();
+
+        assertTrue(nextState instanceof FallingState);
     }
 }

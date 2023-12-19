@@ -64,4 +64,11 @@ class DeadStateTest {
 
         assertNull(nextState);
     }
+
+    @Test
+    void getNextState_Stay() {
+        PlayerState nextState = deadState.getNextState();
+
+        assertTrue(nextState instanceof DeadState);
+    }
 }

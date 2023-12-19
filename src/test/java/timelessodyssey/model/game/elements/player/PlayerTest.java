@@ -76,4 +76,16 @@ class PlayerTest {
 
         assertTrue(player.getState() instanceof IdleState);
     }
+
+    @Test
+    void increaseDeaths() {
+        player.increaseDeaths();
+        assertEquals(1, player.getNumberOfDeaths());
+    }
+
+    @Test
+    void increaseStars() {
+        player.increaseStars();
+        assertEquals(1, player.getStarCounter());
+    }
 }

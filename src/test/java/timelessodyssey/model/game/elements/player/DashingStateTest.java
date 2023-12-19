@@ -71,4 +71,11 @@ class DashingStateTest {
 
         assertTrue(nextState instanceof AfterDashState);
     }
+
+    @Test
+    void getNextState_Stay() {
+        PlayerState nextState = dashingState.getNextState();
+
+        assertTrue(nextState instanceof DashingState);
+    }
 }

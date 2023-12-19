@@ -22,22 +22,23 @@ class WalkingStateTest {
         player = new Player(0, 0, mockedScene);
         walkingState = new WalkingState(player);
         player.setState(walkingState);
-        player.setFacingRight(true);
-        player.setVelocity(new Vector(1, 0));
         when(mockedScene.getFriction()).thenReturn(0.75);
     }
 
     @Test
     void jump() {
-        Vector result = walkingState.jump();
+        player.setVelocity(new Vector(1, 0));
+        Vector result = player.jump();
 
         assertEquals(0.75, result.x());
         assertEquals(-3.6, result.y());
     }
 
     @Test
-    void dash() {
-        Vector result = walkingState.dash();
+    void dashRight() {
+        player.setFacingRight(true);
+        player.setVelocity(new Vector(1, 0));
+        Vector result = player.dash();
 
         assertEquals(5.0, result.x());
         assertEquals(0.0, result.y());
@@ -45,68 +46,122 @@ class WalkingStateTest {
     }
 
     @Test
+    void dashLeft() {
+        player.setFacingRight(false);
+        player.setVelocity(new Vector(-1, 0));
+        Vector result = player.dash();
+
+        assertEquals(-5.0, result.x());
+        assertEquals(0.0, result.y());
+        assertFalse(player.isFacingRight());
+    }
+
+    @Test
     void updateVelocity() {
-        Vector result = walkingState.updateVelocity(player.getVelocity());
+        player.setVelocity(new Vector(1, 0));
+        Vector result = player.updateVelocity();
 
         assertEquals(0.75, result.x());
         assertEquals(0.0, result.y());
-
     }
 
     @Test
-    void getNextState_Dead() {
+    void getNextStateDead() {
+        player.setVelocity(new Vector(1, 0));
         when(mockedScene.isDying()).thenReturn(true);
 
-        PlayerState nextState = walkingState.getNextState();
+        PlayerState nextState = player.getNextState();
 
-        assertTrue(nextState instanceof DeadState);
+        assertInstanceOf(DeadState.class, nextState);
     }
 
     @Test
-    void getNextState_Dashing() {
+    void getNextStateDashing() {
+        player.setVelocity(new Vector(1, 0));
         player.setVelocity(new Vector(10, player.getVelocity().y()));
 
-        PlayerState nextState = walkingState.getNextState();
+        PlayerState nextState = player.getNextState();
 
-        assertTrue(nextState instanceof DashingState);
+        assertInstanceOf(DashingState.class, nextState);
     }
 
     @Test
-    void getNextState_Jumping() {
+    void getNextStateJumping() {
         when(player.isOnGround()).thenReturn(false);
-        player.setVelocity(new Vector(player.getVelocity().x(), -10));
+        player.setVelocity(new Vector(1, -10));
 
-        PlayerState nextState = walkingState.getNextState();
+        PlayerState nextState = player.getNextState();
 
-        assertTrue(nextState instanceof JumpingState);
+        assertInstanceOf(JumpingState.class, nextState);
     }
 
     @Test
-    void getNextState_Falling() {
-        player.setVelocity(new Vector(0, 10));
+    void getNextStateFalling() {
+        player.setVelocity(new Vector(1, 10));
 
-        PlayerState nextState = walkingState.getNextState();
+        PlayerState nextState = player.getNextState();
 
-        assertTrue(nextState instanceof FallingState);
+        assertInstanceOf(FallingState.class, nextState);
     }
 
     @Test
-    void getNextState_Running() {
+    void getNextStateRunning() {
         when(player.isOnGround()).thenReturn(true);
         player.setVelocity(new Vector(1.8, 0));
 
-        PlayerState nextState = walkingState.getNextState();
+        PlayerState nextState = player.getNextState();
 
-        assertTrue(nextState instanceof RunningState);
+        assertInstanceOf(RunningState.class, nextState);
     }
 
     @Test
-    void getNextState_Idle() {
+    void getNextStateIdle() {
         when(player.isOnGround()).thenReturn(true);
         player.setVelocity(new Vector(0.5, 0));
 
-        PlayerState nextState = walkingState.getNextState();
+        PlayerState nextState = player.getNextState();
 
-        assertTrue(nextState instanceof IdleState);
+        assertInstanceOf(IdleState.class, nextState);
+    }
+
+    @Test
+    void getNextStateStay() {
+        when(player.isOnGround()).thenReturn(true);
+        player.setVelocity(new Vector(1, 0));
+        PlayerState nextState = player.getNextState();
+
+        assertInstanceOf(WalkingState.class, nextState);
+    }
+
+    @Test
+    void movePlayerLeft() {
+        player.setVelocity(new Vector(-1, 0));
+        when(mockedScene.collidesLeft(any(), any())).thenReturn(false);
+        Vector result = player.moveLeft();
+
+        assertEquals(-1.3125, result.x());
+        assertEquals(0, result.y());
+
+        when(mockedScene.collidesLeft(any(), any())).thenReturn(true);
+        result = player.moveLeft();
+
+        assertEquals(0, result.x());
+        assertEquals(0, result.y());
+    }
+
+    @Test
+    void movePlayerRight() {
+        player.setVelocity(new Vector(1, 0));
+        when(mockedScene.collidesRight(any(), any())).thenReturn(false);
+        Vector result = player.moveRight();
+
+        assertEquals(1.3125, result.x());
+        assertEquals(0, result.y());
+
+        when(mockedScene.collidesRight(any(), any())).thenReturn(true);
+        result = player.moveRight();
+
+        assertEquals(0, result.x());
+        assertEquals(0, result.y());
     }
 }

@@ -92,4 +92,11 @@ class AfterDashStateTest {
 
         assertTrue(nextState instanceof RunningState);
     }
+
+    @Test
+    void getNextState_Stay() {
+        PlayerState nextState = afterDashState.getNextState();
+
+        assertTrue(nextState instanceof AfterDashState);
+    }
 }
