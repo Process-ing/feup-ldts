@@ -13,8 +13,6 @@ import timelessodyssey.model.game.elements.particles.Particle;
 import timelessodyssey.model.game.elements.particles.Snow;
 import timelessodyssey.model.game.scene.Scene;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

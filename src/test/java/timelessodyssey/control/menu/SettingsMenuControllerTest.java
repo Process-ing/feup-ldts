@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import timelessodyssey.Game;
 import timelessodyssey.gui.GUI;
 import timelessodyssey.model.menu.SettingsMenu;
+import timelessodyssey.view.SpriteLoader;
 
 import java.awt.*;
 import java.io.IOException;
@@ -19,14 +20,16 @@ public class SettingsMenuControllerTest {
     private SettingsMenu settingsMenu;
     private EntryController entryController;
     private SettingsMenuController settingsMenuController;
+    private SpriteLoader spriteLoader;
+
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);
         this.settingsMenu = Mockito.mock(SettingsMenu.class);
-
         this.entryController = Mockito.mock(EntryController.class);
-
         this.settingsMenuController = new SettingsMenuController(settingsMenu, entryController);
+        this.spriteLoader = Mockito.mock(SpriteLoader.class);
+        Mockito.when(game.getSpriteLoader()).thenReturn(spriteLoader);
     }
 
     @Test
