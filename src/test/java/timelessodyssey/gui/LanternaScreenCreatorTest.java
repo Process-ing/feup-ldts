@@ -12,8 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class LanternaScreenCreatorTest {
@@ -44,7 +43,9 @@ public class LanternaScreenCreatorTest {
     public void constructor() {
         LanternaScreenCreator screenCreator = new LanternaScreenCreator(terminalFactory, terminalSize, defaultBounds);
         int width = screenCreator.getWidth();
+        assertNotEquals(0, width);
         int height = screenCreator.getHeight();
+        assertNotEquals(0, height);
 
         verify(terminalFactory, atLeastOnce()).setInitialTerminalSize(terminalSize);
         verify(terminalFactory, atLeastOnce()).setForceAWTOverSwing(true);
@@ -71,6 +72,8 @@ public class LanternaScreenCreatorTest {
     @Test
     public void createScreenWithResolution() throws IOException, URISyntaxException, FontFormatException {
         ResizableGUI.Resolution resolution = ResizableGUI.Resolution.FHD;
+        assertNotEquals(0, resolution.getHeight());
+        assertNotEquals(0, resolution.getWidth());
         String terminalTitle = "testWithRes";
         LanternaScreenCreator screenCreator = new LanternaScreenCreator(terminalFactory, terminalSize, defaultBounds);
 
