@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class GameSpriteLoader implements SpriteLoader {
-    Map<String, Sprite> spriteMap;
+    final Map<String, Sprite> spriteMap;
 
     public GameSpriteLoader() {
         spriteMap = new HashMap<>();

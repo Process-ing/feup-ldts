@@ -9,7 +9,6 @@ import net.jqwik.api.*;
 import net.jqwik.api.lifecycle.BeforeTry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.awt.*;

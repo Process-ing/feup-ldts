@@ -3,8 +3,6 @@ package timelessodyssey.model.game.scene;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import timelessodyssey.Game;
 import timelessodyssey.model.Vector;
 import timelessodyssey.model.game.elements.Spike;
 import timelessodyssey.model.game.elements.Star;

@@ -13,14 +13,13 @@ import static org.mockito.Mockito.*;
 class WalkingStateTest {
 
     private Player player;
-    private WalkingState walkingState;
     private Scene mockedScene;
 
     @BeforeEach
     void setup() {
         mockedScene = mock(Scene.class);
         player = new Player(0, 0, mockedScene);
-        walkingState = new WalkingState(player);
+        WalkingState walkingState = new WalkingState(player);
         player.setState(walkingState);
         when(mockedScene.getFriction()).thenReturn(0.75);
     }

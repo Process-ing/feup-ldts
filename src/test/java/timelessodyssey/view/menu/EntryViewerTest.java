@@ -8,8 +8,6 @@ import timelessodyssey.model.menu.Entry;
 import timelessodyssey.view.text.GameTextViewer;
 import timelessodyssey.view.text.TextViewer;
 
-import java.io.IOException;
-
 import static org.mockito.Mockito.*;
 
 public class EntryViewerTest {

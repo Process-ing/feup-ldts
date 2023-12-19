@@ -7,9 +7,7 @@ import timelessodyssey.model.credits.Credits;
 import timelessodyssey.model.menu.MainMenu;
 import timelessodyssey.states.MainMenuState;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static timelessodyssey.gui.GUI.Action.QUIT;
 

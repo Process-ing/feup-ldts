@@ -29,7 +29,7 @@ public class CreditsControllerTest {
     }
 
     @Test
-    public void stepWithoutQuit() throws IOException, URISyntaxException, FontFormatException {
+    public void stepWithoutQuit() throws IOException {
         GUI.Action action = GUI.Action.NONE;
         long frameCount = 0;
 
@@ -39,7 +39,7 @@ public class CreditsControllerTest {
     }
 
     @Test
-    public void stepWithQuit() throws IOException, URISyntaxException, FontFormatException {
+    public void stepWithQuit() throws IOException {
         GUI.Action action = GUI.Action.QUIT;
         long frameCount = 0;
 

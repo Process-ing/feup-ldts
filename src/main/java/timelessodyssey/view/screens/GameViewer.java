@@ -45,7 +45,7 @@ public class GameViewer extends ScreenViewer<Scene> {
         gui.refresh();
     }
 
-    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer, long frameCount) throws IOException {
+    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer, long frameCount) {
         viewer.draw(element, gui, frameCount);
     }
 
