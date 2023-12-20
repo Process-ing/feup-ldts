@@ -5,6 +5,7 @@
 ><p align="center">
 >This project was developed by Bruno Oliveira (up202208700@fe.up.pt), João Mendes (up202208783@fe.up.pt) and Rodrigo Coelho (up202205188@fe.up.pt) for LDTS 2023/24
 ></p>
+
 ## IMPLEMENTED FEATURES
 
 - **Main Menu screen** - simple menu screen when launching the game, allowing for start, exit and a future settings option.

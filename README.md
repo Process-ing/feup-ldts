@@ -1,7 +1,10 @@
 # LDTS_L01G07 - Timeless Odyssey
 
 2D platformer game where the main character tries to explore a futuristic world full of obstacles. There are multiple consecutive "levels" that blend through progressive scenery changes.
->This project was developed by **Bruno Oliveira** (up202208700@fe.up.pt), **João Mendes** (up202208783@fe.up.pt) and **Rodrigo Coelho** (up202205188@fe.up.pt) for LDTS 2023/24.
+
+><p align="center">
+>This project was developed by Bruno Oliveira (up202208700@fe.up.pt), João Mendes (up202208783@fe.up.pt) and Rodrigo Coelho (up202205188@fe.up.pt) for LDTS 2023/24
+></p>
 
 ### IMPLEMENTED FEATURES
 
@@ -21,18 +24,40 @@
 
 ### GAME SCREENSHOTS AND MOCKUPS
 
-##### Initial main character design (Elene):
+[comment]: <> (Character Design)
 
-<img src="docs/mockups/run.gif">
+<h4 style="text-align: center;">
+  Initial main character design (Elene)
+</h4>
 
-##### Initial Menu Design
+<p align="center">
+<img src="docs/resources/mockups/run.gif">
+</p>
 
-<img src="docs/mockups/menu.png"/>
+[comment]: <> (Menu Design)
 
-##### Level Mockup
+<h4 style="text-align: center;">
+  Initial Menu Design
+</h4>
 
-<img src="docs/mockups/map.png">
+<p align="center">
+  <img src="docs/resources/screenshots/menu.png"/>
+</p>
 
-### GENERAL STRUCTURE
+[comment]: <> (Level Mockup)
 
-<img src="docs/resources/uml/structure.png"/>
+<h4 style="text-align: center;">
+  Level Mockup
+</h4>
+
+<p align="center">
+  <img src="docs/resources/screenshots/map.png">
+</p>
+
+<h3 style="text-align: center;">
+  General Structure
+</h3>
+
+<p align="center">
+  <img src="docs/resources/uml/class/structure.png"/>
+</p>
