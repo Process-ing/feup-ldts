@@ -2,8 +2,9 @@
 
 2D platformer game where the main character tries to explore a futuristic world full of obstacles. There are multiple consecutive "levels" that blend through progressive scenery changes.
 
->This project was developed by Bruno Oliveira (up202208700@fe.up.pt), João Mendes (up202208783@fe.up.pt) and Rodrigo Coelho (up202205188@fe.up.pt) for LDTS 2023/24.
-
+><p align="center">
+>This project was developed by Bruno Oliveira (up202208700@fe.up.pt), João Mendes (up202208783@fe.up.pt) and Rodrigo Coelho (up202205188@fe.up.pt) for LDTS 2023/24
+></p>
 ## IMPLEMENTED FEATURES
 
 - **Main Menu screen** - simple menu screen when launching the game, allowing for start, exit and a future settings option.
@@ -21,8 +22,9 @@
     - **Wall Crawl** - the ability to hang on and slowly fall from walls.
 
 ## GENERAL STRUCTURE
-
-<img src="resources/uml/structure.png"/>
+<p align="center">
+  <img src="resources/uml/class/structure.png"/>
+</p>
 
 ## DESIGN
 
@@ -53,8 +55,9 @@ The implementation of this model can be seen by checking the folders inside the 
 
 An explanation is also provided in the following diagram:
 
-<img src="resources/uml/mvc.png"/>
-
+<p align="center">
+  <img src="resources/uml/class/mvc.png"/>
+</p>
 
 #### Consequences
 
@@ -85,7 +88,9 @@ On the other hand, some linters may flag the command to make the main thread sle
 
 An explanation is also provided in the following diagram:
 
-<img src="resources/uml/game-loop.png"/>
+<p align="center">
+  <img src="resources/uml/class/game-loop.png"/>
+</p>
 
 ### Multiple Game States
 
@@ -109,7 +114,9 @@ On the source code, this pattern can be found mainly associated with the [Game](
 
 Here is also a diagram representation of the pattern:
 
-<img src="resources/uml/state.png">
+<p align="center">
+  <img src="resources/uml/class/state.png">
+</p>
 
 #### Consequences
 
@@ -137,7 +144,9 @@ In our specific case, this translates to having an [abstract State class](/src/m
 
 Here is a diagram representation of the pattern:
 
-<img src="resources/uml/abstract-factory.png">
+<p align="center">
+  <img src="resources/uml/class/abstract-factory.png">
+</p>
 
 #### Consequences
 
@@ -167,8 +176,9 @@ The use of the Adapter Pattern allows our classes to not worry about the executi
 
 An explanation is also provided in the following diagram:
 
-<img src="resources/uml/adapter.png"/>
-
+<p align="center">
+  <img src="resources/uml/class/adapter.png"/>
+</p>
 
 ## KNOWN CODE SMELLS
 
@@ -179,17 +189,20 @@ Although we hope this continues, the number of code smells may change as we scru
 
 ## TESTING
 
-- [Unit Testing](/src/test/java/timelessodyssey/model/PositionTest.java) for the main section of our code (Model, View, Controller, States) 
-- [Mocks](/src/test/java/timelessodyssey/states/StateTest.java) have been used in conjunction with Unit Tests
-- [Coverage Testing](/docs/resources/testing/coverage.png) ≈ 23% (for now)  
-
-  <img src="resources/testing/coverage.png"/>
-
-#### Future Testing
-      
-  - Test the sections more extensively
-  - Test the remaining sections of our code and their interactions    
-  - Provide the mutation testing results
+- **[Unit Testing](/src/test/java/timelessodyssey/model/PositionTest.java)** for the testable sections of our code (Model, View, Controller, States, GUI, Sound) 
+- **[Mocks](/src/test/java/timelessodyssey/states/StateTest.java)** have been used in conjunction with Unit Tests
+- **[Coverage Testing](/docs/resources/tests/coverage.png)** using JaCoCo 
+  - Instruction Coverage ≈ 97%
+  - Branch Coverage ≈ 98%
+  <p align="center">
+    <img src="resources/tests/coverage.png"/>
+  </p>
+- **[Mutation Testing](/docs/resources/tests/mutation.png)** using Pitest
+  - Line Coverage ≈ 97%
+  - Test Strength ≈ 81%
+  <p align="center">
+    <img src="resources/tests/mutation.png"/>
+  </p>
 
 ## SELF-EVALUATION
 
