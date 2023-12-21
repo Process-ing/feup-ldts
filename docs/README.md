@@ -1,7 +1,9 @@
-# LDTS_L01G07 - Timeless Odyssey
+<h1 align="center">
+  LDTS_L01G07 - Timeless Odyssey
+</h1>
 
 <p align="center">
-  <img src="resources/mockups/logo.png" alt="drawing" width="400"/>
+<img src="resources/mockups/logo.png" width="480"/>
 </p>
 
 2D platformer game where the main character tries to explore a futuristic world full of obstacles. There are multiple consecutive "levels" that blend through progressive scenery changes.
@@ -10,12 +12,19 @@
 >This project was developed by Bruno Oliveira (up202208700@fe.up.pt), João Mendes (up202208783@fe.up.pt) and Rodrigo Coelho (up202205188@fe.up.pt) for LDTS 2023/24
 ></p>
 
+## Table of Contents
+
+- [Implemented Features](#implemented-features)
+- [Planned Features](#planned-features)
+- [General Structure](#general-structure)
+
 ## IMPLEMENTED FEATURES
 
 - **Main Menu screen** - simple menu screen when launching the game, allowing for start, exit and a future settings option.
-- **Screen Resizer** - at the start of the game, the code reads the user's screen size and extends the game to that resolution.
+- **Screen Resizer** - at the start of the game, the code reads the user's screen size and extends the game to that resolution. The resolution can also be manually adjusted in the settings.
 - **Basic Level Loader** - class to load levels of written text files with specific characters. This will be used to generate the different scenes/levels and allows for simple layout editions.
 - **Sprite Image Loader** - a class that loads PNG images into the game and can then represent them pixel by pixel. This will be used for the player, tiles and possibly other things in the program.
+- 
 
 ## PLANNED FEATURES
 
