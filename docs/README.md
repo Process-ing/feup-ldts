@@ -17,6 +17,8 @@
 - [Implemented Features](#implemented-features)
 - [Planned Features](#planned-features)
 - [General Structure](#general-structure)
+- [Code Design](#design)
+- [Code Testing](#testing)
 
 ## IMPLEMENTED FEATURES
 
@@ -24,7 +26,10 @@
 - **Screen Resizer** - at the start of the game, the code reads the user's screen size and extends the game to that resolution. The resolution can also be manually adjusted in the settings.
 - **Basic Level Loader** - class to load levels of written text files with specific characters. This will be used to generate the different scenes/levels and allows for simple layout editions.
 - **Sprite Image Loader** - a class that loads PNG images into the game and can then represent them pixel by pixel. This will be used for the player, tiles and possibly other things in the program.
-- 
+- **Player movement**
+    - **Better walking** - The player can move at variable speeds, and its movement is 
+    - **Dashing** - ability to use a speed to the sides (and possibly other directions).
+    - **Jump** - better jump
 
 ## PLANNED FEATURES
 
