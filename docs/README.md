@@ -1,5 +1,9 @@
 # LDTS_L01G07 - Timeless Odyssey
 
+<p align="center">
+  <img src="resources/mockups/logo.png" alt="drawing" width="400"/>
+</p>
+
 2D platformer game where the main character tries to explore a futuristic world full of obstacles. There are multiple consecutive "levels" that blend through progressive scenery changes.
 
 ><p align="center">
@@ -200,6 +204,7 @@ Although we hope this continues, the number of code smells may change as we scru
   </p>
 - **[Mutation Testing](/docs/resources/tests/mutation.png)** using Pitest
   - Line Coverage ≈ 97%
+  - Mutation Coverage ≈ 79%
   - Test Strength ≈ 81%
   <p align="center">
     <img src="resources/tests/mutation.png"/>
