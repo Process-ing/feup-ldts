@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-<img src="resources/mockups/logo.png" width="480"/>
+<img src="resources/mockups/logo.png"/>
 </p>
 
 2D platformer game where the main character tries to explore a futuristic world full of obstacles. There are multiple consecutive "levels" that blend through progressive scenery changes.
