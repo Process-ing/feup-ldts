@@ -40,9 +40,7 @@ public class IdleState extends PlayerState {
         if (getPlayer().isOverMaxXVelocity())
             return new DashingState(getPlayer());
         if (!getPlayer().isOnGround()) {
-            if (getPlayer().getVelocity().y() < 0)
-                return new JumpingState(getPlayer());
-            return new FallingState(getPlayer());
+            return getNextOnAirState();
         }
         if (Math.abs(getPlayer().getVelocity().x()) > WalkingState.MIN_VELOCITY)
             return new WalkingState(getPlayer());

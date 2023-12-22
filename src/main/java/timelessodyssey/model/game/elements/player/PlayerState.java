@@ -67,6 +67,12 @@ public abstract class PlayerState {
         return new IdleState(getPlayer());
     }
 
+    protected PlayerState getNextOnAirState() {
+        if (getPlayer().getVelocity().y() < 0)
+            return new JumpingState(getPlayer());
+        return new FallingState(getPlayer());
+    }
+
     public abstract Vector jump();
     public abstract Vector dash();
     public abstract Vector updateVelocity(Vector velocity);

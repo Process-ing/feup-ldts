@@ -42,9 +42,7 @@ public class RunningState extends PlayerState {
         if (getPlayer().isOverMaxXVelocity())
             return new DashingState(getPlayer());
         if (!getPlayer().isOnGround()) {
-            if (getPlayer().getVelocity().y() < 0)
-                return new JumpingState(getPlayer());
-            return new FallingState(getPlayer());
+            return getNextOnAirState();
         }
         if (Math.abs(getPlayer().getVelocity().x()) < RunningState.MIN_VELOCITY)
             return new IdleState(getPlayer());
