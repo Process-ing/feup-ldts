@@ -101,6 +101,15 @@ class JumpingStateTest {
     }
 
     @Test
+    void getNextStateFallingOnZeroVelocity() {
+        player.setVelocity(new Vector(player.getVelocity().x(), 0));
+
+        PlayerState nextState = jumpingState.getNextState();
+
+        assertInstanceOf(FallingState.class, nextState);
+    }
+
+    @Test
     void getNextStateStay() {
         PlayerState nextState = jumpingState.getNextState();
 

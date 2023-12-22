@@ -36,7 +36,7 @@ public class JumpingState extends PlayerState {
         if (getPlayer().isOverMaxXVelocity())
             return new DashingState(getPlayer());
 
-        if (getPlayer().getVelocity().y() > 0)
+        if (getPlayer().getVelocity().y() >= 0)
             return new FallingState(getPlayer());
         return this;
     }
