@@ -42,7 +42,7 @@ public class IdleState extends PlayerState {
         if (!getPlayer().isOnGround())
             return getNextOnAirState();
 
-        if (Math.abs(getPlayer().getVelocity().x()) > WalkingState.MIN_VELOCITY)
+        if (Math.abs(getPlayer().getVelocity().x()) >= WalkingState.MIN_VELOCITY)
             return new WalkingState(getPlayer());
         return this;
     }
