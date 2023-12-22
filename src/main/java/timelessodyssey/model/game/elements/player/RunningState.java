@@ -45,7 +45,7 @@ public class RunningState extends PlayerState {
             return getNextOnAirState();
 
         if (Math.abs(getPlayer().getVelocity().x()) < RunningState.MIN_VELOCITY)
-            return new IdleState(getPlayer());
+            return new WalkingState(getPlayer());
         return this;
     }
 }
