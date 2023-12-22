@@ -55,6 +55,7 @@ Timeless Odyssey is a 2D platformer game where the main character explores a fut
 <p align="center">
   <img src="docs/resources/screenshots/level_showcase_1.gif">
   <img src="docs/resources/screenshots/level_showcase_2.gif">
+  <img src="docs/resources/screenshots/level_showcase_3.gif">
 </p>
 
 [comment]: <> (Credits Screen)
