@@ -103,13 +103,13 @@ class RunningStateTest {
     }
 
     @Test
-    void getNextStateIdle() {
+    void getNextStateWalking() {
         when(player.isOnGround()).thenReturn(true);
         player.setVelocity(new Vector(1.5, 0));
 
         PlayerState nextState = runningState.getNextState();
 
-        assertInstanceOf(IdleState.class, nextState);
+        assertInstanceOf(WalkingState.class, nextState);
     }
 
     @Test

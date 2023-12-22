@@ -33,6 +33,7 @@ public class FallingState extends PlayerState {
             return new DeadState(getPlayer(), 50);
         if (getPlayer().isOverMaxXVelocity())
             return new DashingState(getPlayer());
+
         if (getPlayer().isOnGround())
             return getNextGroundState();
         return this;
