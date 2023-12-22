@@ -29,7 +29,7 @@ Timeless Odyssey is a 2D platformer game where the main character tries to explo
 
 [comment]: <> (Character Design)
 
-<h4 style="text-align: center;">
+<h4 align="center">
   Initial main character design (Elene)
 </h4>
 
@@ -39,7 +39,7 @@ Timeless Odyssey is a 2D platformer game where the main character tries to explo
 
 [comment]: <> (Menu Design)
 
-<h4 style="text-align: center;">
+<h4 align="center">
   Menu Design
 </h4>
 
@@ -49,7 +49,7 @@ Timeless Odyssey is a 2D platformer game where the main character tries to explo
 
 [comment]: <> (Level Showcase)
 
-<h4 style="text-align: center;">
+<h4 align="center">
   Level and Gameplay Showcase
 </h4>
 
@@ -60,7 +60,7 @@ Timeless Odyssey is a 2D platformer game where the main character tries to explo
 
 [comment]: <> (Credits Screen)
 
-<h3 style="text-align: center;">
+<h3 align="center">
   Closing Credits
 </h3>
 
@@ -70,7 +70,7 @@ Timeless Odyssey is a 2D platformer game where the main character tries to explo
 
 [comment]: <> (General UML Structure)
 
-<h3 style="text-align: center;">
+<h3 align="center">
   UML Class Structure Overview
 </h3>
 

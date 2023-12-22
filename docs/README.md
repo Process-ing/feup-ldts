@@ -77,7 +77,7 @@ Due to this, we must implement a way to deal separately with different component
 
 #### The Pattern
 
-Due to this, we decided to use the **Model/View/Controller** Pattern which is very common in Graphical User Interfaces (GUI). The idea behind this pattern is to use three different sections:
+Due to this, we decided to use the **Model/View/Controller** Pattern, which is very common in Graphical User Interfaces (GUI). The idea behind this pattern is to use three different sections:
 - **Model** - used to represent the data, rules and game logic.
 - **View**  - displays the model and sends actions to the controller.
 - **Controller** - provides a model to view and interpret user actions.
@@ -265,7 +265,7 @@ The unification of the access to sprite objects would also be beneficial for moc
 
 #### The Pattern
 
-For the Sprite Loader, we used the **Flyweight** Pattern. This pattern lets us use more objects with the available amount of RAM by sharing parts of the object between multiple objects instead of having them keep the same data.
+For this problem, we used the **Flyweight** Pattern. This pattern lets us use more objects with the available amount of RAM by sharing parts of an object between multiple objects instead of having them keep the same data.
 
 #### Implementation
 
