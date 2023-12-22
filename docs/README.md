@@ -254,7 +254,7 @@ A state diagram highlighting how the state transitions proceed during gameplay c
 
 #### Consequences
 
-With this pattern, all the phases of the player's movement became well segregated and intuitively identified, as well as more securely defined than with the flag fields. Also, the transitions between each state become much clearer and, if we were to add more states in the future, it would be as easy as to add another subclass, removing the necessity to potentially alter the behavior of other states to add another. It also allows for more flexible player movement, by allowing to make specific conditions for specific states.
+With this pattern, all the phases of the player's movement became well segregated and intuitively identified, as well as more securely defined than with the flag fields. Also, the transitions between each state become much clearer and, if we were to add more states in the future, it would be as easy as to add another subclass, removing the necessity to potentially alter the behavior of other states to add another. It also allows for more flexible player movement, by allowing to make specific operations for specific states.
 
 ### Sprite Loading
 
