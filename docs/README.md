@@ -6,7 +6,7 @@
 <img src="resources/mockups/logo.png"/>
 </p>
 
-2D platformer game where the main character tries to explore a futuristic world full of obstacles. There are multiple consecutive "levels" that blend through progressive scenery changes.
+Timeless Odyssey is a 2D platformer game where the main character tries to explore a futuristic world full of obstacles through the use of jumping and dashing mechanics, while also collecting stars to increase the score in search for a potential treasure. There are multiple consecutive "levels" with varying difficulty that blend through progressive scenery changes.
 
 ><p align="center">
 >This project was developed by Bruno Oliveira (up202208700@fe.up.pt), João Mendes (up202208783@fe.up.pt) and Rodrigo Coelho (up202205188@fe.up.pt) for LDTS 2023/24
@@ -14,31 +14,52 @@
 
 ## Table of Contents
 
+- [Controls](#controls)
 - [Implemented Features](#implemented-features)
-- [Planned Features](#planned-features)
+- [Notes About Features](#notes-about-features)
 - [General Structure](#general-structure)
 - [Code Design](#design)
+  - [Model-View-Controller](#code-structure)
+  - [Game Loop](#game-loop)
+  - [(Game) State Pattern](#multiple-game-states)
+  - [Abstract Factory Pattern](#the-behavior-of-the-game-states)
+  - [Adapter Pattern](#simplification-of-lanternas-interface)
+  - [(Player) State Pattern](#player-states)
+  - [Flyweight Pattern](#sprite-loading)
+- [Code Smells](#known-code-smells)
 - [Code Testing](#testing)
+
+## CONTROLS
+
+`>`: Moves the player to the right.
+
+`<`: Moves the player to the left.
+
+`SPACE`: Makes the player jump.
+
+`X`: Makes the player dash.
+
+`ESC`: Press ESC to quit or return to the main menu.
+
+`ENTER`: Press ENTER to select the desired options in the menu.
 
 ## IMPLEMENTED FEATURES
 
-- **Main Menu screen** - simple menu screen when launching the game, allowing for start, exit and a future settings option.
+- **Main Menu Screen** - simple menu screen when launching the game, which allows the user to choose between starting the game, accessing the settings or exiting the application.
 - **Screen Resizer** - at the start of the game, the code reads the user's screen size and extends the game to that resolution. The resolution can also be manually adjusted in the settings.
-- **Basic Level Loader** - class to load levels of written text files with specific characters. This will be used to generate the different scenes/levels and allows for simple layout editions.
-- **Sprite Image Loader** - a class that loads PNG images into the game and can then represent them pixel by pixel. This will be used for the player, tiles and possibly other things in the program.
-- **Player movement**
-    - **Better walking** - The player can move at variable speeds, and its movement is 
-    - **Dashing** - ability to use a speed to the sides (and possibly other directions).
-    - **Jump** - better jump
+- **Basic Level Loader** - class to load levels of written text files with specific characters, allowing to generate tiles and other elements for the different scenes/levels and allows for simple layout editions.
+- **Sprite Image Loader** - a class that loads PNG images into the game and can then represent them pixel by pixel on the screen, using Lanterna. This will be used for the player, tiles and possibly other things in the program.
+- **Player Movement** - the player can move (using the arrow keys) at variable speeds, jump (Space bar) and even use a dash (X button) once to the side it's currently facing, gaining an impressive speed boost, but it can only successfully dash once before hitting the ground. Also, the player's movement animations change according to the player's current action and speed.
+- **Collectible System** - throughout the levels, the player can find stars, which it should collect to get a better score at the end of the game.
+- **Death Condition** - when the player touches one of the spikes, it dies and, after a short animation, returns to the beginning of the current level.
+- **Particle System** - the particles give a nice aesthetic experience and movement to the gameplay. Currently, we have snow particles that appear in the foreground of all levels, as well as particles that make the player's death animation.
+- **Credits** - when finishing the game, the user receives a nice screen, where it can visualize the number of stars collected, the number of deaths and the total time of gameplay. Once done, the user can return to the main menu using the Escape button.
 
-## PLANNED FEATURES
+## NOTES ABOUT FEATURES
 
-- **Multiple Levels/Scenes** - consecutive scenes that will blend, similar to different levels but connected.
-- **Smoother Movement**    
-    - **Better walking** - better walking movement with animation, walking at variable speeds.
-    - **Dashing** - ability to use a speed to the sides (and possibly other directions).
-    - **Jump** - better jump control with variable heights, coyote time (jump timer at the end of platforms) and ledge adjustments (allows jumping around a ledge when only a few pixels are left).
-    - **Wall Crawl** - the ability to hang on and slowly fall from walls.
+Initially, we aimed to improve the player's movement even further with the addition of other mechanics and gimmicks to make the gameplay feel smoother, namely, variable height jumping, coyote time (ability to jump a few pixels after leaving the platform), ledge adjustments (jumping around ledge when only some adjustments are needed) and even wall crawling.  
+
+However, as we progressed through the development of the game and as time passed, we ended up abandoning those ideas in favor of others. As a result, some of the initial "planned features" ended up being discarded and we have no plans of implementing them in the future as we're very satisfied with the result of our efforts.
 
 ## GENERAL STRUCTURE
 <p align="center">
@@ -66,11 +87,11 @@ We have made some changes and tweaks after that initial plan, but since we appli
 
 #### Implementation
 
-The implementation of this model can be seen by checking the folders inside the source code of our game (the links refer to the items regarding the main menu): 
+The implementation of this model can be seen by checking the folders inside the source code of our game (the links refer to the items regarding the main menu):
 
-- [Model](/src/main/java/timelessodyssey/model/menu/Menu.java)
+- [Model](/src/main/java/timelessodyssey/model/menu/MainMenu.java)
 - [View](/src/main/java/timelessodyssey/view/screens/MenuViewer.java)
-- [Controller](/src/main/java/timelessodyssey/control/menu/MenuController.java)
+- [Controller](/src/main/java/timelessodyssey/control/menu/MainMenuController.java)
 
 An explanation is also provided in the following diagram:
 
@@ -98,18 +119,18 @@ This way, our game will run continuously and smoothly across users of different 
 
 #### Implementation
 
-The correspondent implementation of this pattern in our project can be found in the start method of our [main class and application entry point (Game)](/src/main/java/timelessodyssey/Game.java)
-
-#### Consequences
-
-Using the game loop pattern we have all the consequences that we mentioned before such as a smooth and similar gaming experience across a variety of user systems and the ability to easily control the speed of execution of our code.  
-On the other hand, some linters may flag the command to make the main thread sleep as a bad practice since it is used inside a loop and relies on busy waiting. However, this is considered normal and is expected to happen when running a game.
+The correspondent implementation of this pattern in our project can be found in the start method of our [main class and application entry point (Game)](/src/main/java/timelessodyssey/Game.java).
 
 An explanation is also provided in the following diagram:
 
 <p align="center">
   <img src="resources/uml/class/game-loop.png"/>
 </p>
+
+#### Consequences
+
+Using the game loop pattern we have all the consequences that we mentioned before such as a smooth and similar gaming experience across a variety of user systems and the ability to easily control the speed of execution of our code.  
+On the other hand, some linters may flag the command to make the main thread sleep as a bad practice since it is used inside a loop and relies on busy waiting. However, this is considered normal and is expected to happen when running a game.
 
 ### Multiple Game States
 
@@ -129,12 +150,18 @@ This way, it's easy to isolate each of the applications's screens and later add 
 
 #### Implementation
 
-On the source code, this pattern can be found mainly associated with the [Game](/src/main/java/timelessodyssey/Game.java) Class, but its implementation is on the whole states directory containing the [State](/src/main/java/timelessodyssey/states/State.java), [MenuState](/src/main/java/timelessodyssey/states/MenuState.java) and [GameState](/src/main/java/timelessodyssey/states/GameState.java) classes.
+On the source code, this pattern can be found mainly associated with the [Game](/src/main/java/timelessodyssey/Game.java) Class, but its implementation is on the whole timelessodyssey.states directory which contains the general [State](/src/main/java/timelessodyssey/states/State.java), [MainMenuState](/src/main/java/timelessodyssey/states/MainMenuState.java), [SettingsMenuState](/src/main/java/timelessodyssey/states/SettingsMenuState.java),  [GameState](/src/main/java/timelessodyssey/states/GameState.java) and [CreditsState](/src/main/java/timelessodyssey/states/CreditsState.java) classes.
 
 Here is also a diagram representation of the pattern:
 
 <p align="center">
-  <img src="resources/uml/class/state.png">
+  <img src="resources/uml/class/gstate.png">
+</p>
+
+As well as the state diagram depicting how the state transitions proceed during the game:
+
+<p align="center">
+  <img src="resources/uml/state/game.png">
 </p>
 
 #### Consequences
@@ -159,7 +186,7 @@ The **Abstract Factory** allows creating families of related objects, without sp
 
 #### Implementation
 
-In our specific case, this translates to having an [abstract State class](/src/main/java/timelessodyssey/states/State.java) using a generic model and different concrete classes ([MenuState](/src/main/java/timelessodyssey/states/MenuState.java) or [GameState](/src/main/java/timelessodyssey/states/MenuState.java)) that extend it and specify a model (Menu in the first case and Scene in the second).
+In our specific case, this translates to having an [abstract State class](/src/main/java/timelessodyssey/states/State.java) using a generic model and different concrete classes [MainMenuState](/src/main/java/timelessodyssey/states/MainMenuState.java), [SettingsMenuState](/src/main/java/timelessodyssey/states/SettingsMenuState.java),  [GameState](/src/main/java/timelessodyssey/states/GameState.java) and [CreditsState](/src/main/java/timelessodyssey/states/CreditsState.java) that extend it and specify a model ([MainMenu](/src/main/java/timelessodyssey/model/menu/MainMenu.java), [SettingsMenu](/src/main/java/timelessodyssey/model/menu/SettingsMenu.java), [Scene](/src/main/java/timelessodyssey/model/game/scene/Scene.java) and [Credits](/src/main/java/timelessodyssey/model/credits/Credits.java) respectively).
 
 Here is a diagram representation of the pattern:
 
@@ -184,14 +211,7 @@ We decided to use the pattern **Adapter** pattern. This pattern consists of crea
 
 #### Implementation  
 
-The example implementation mentioned can be found in the following classes inside the GUI directory: the general [GUI class](/src/test/java/timelessodyssey/gui/GUI.java) and the specific [Lanterna class](/src/test/java/timelessodyssey/gui/LanternaGUI.java).  
-
-A diagram depicting the idea behind this pattern can also be found here:
-
-
-#### Consequences
-
-The use of the Adapter Pattern allows our classes to not worry about the execution of certain operations with Lanterna, respecting the Single Responsibility Principle. It also increases the modularity of the code, allowing for easier changes down the line.
+The example implementation mentioned can be found in the following classes inside the GUI directory: the general [GUI class](/src/main/java/timelessodyssey/gui/GUI.java) and the specific [Lanterna class](/src/main/java/timelessodyssey/gui/LanternaGUI.java).  
 
 An explanation is also provided in the following diagram:
 
@@ -199,17 +219,92 @@ An explanation is also provided in the following diagram:
   <img src="resources/uml/class/adapter.png"/>
 </p>
 
+#### Consequences
+
+The use of the Adapter Pattern allows our classes to not worry about the execution of certain operations with Lanterna, respecting the Single Responsibility Principle. It also increases the modularity of the code, allowing for easier changes down the line.
+
+### Player States
+
+#### Problem in Context
+
+While implementing the player's movement, we wanted to restrict its movement while it's performing certain actions. For example, the player should not be able to jump right after jumping, it should not dash right after dashing, etc. Also, determining in what state the player is is useful for its respective animations.
+Initially, we had the player's state stored in a lot of **flags** inside of the Player class, which not only was confusing to understand from those flags what exactly the player was doing but also made the code that updated the player's movement very long and messy. It also didn't favor the Open/Closed Principle very well, as we faced that slight alterations to one part of the movement impacted others in unpredictable ways.
+
+#### The Pattern
+
+For this problem, we recurred to the **State** Pattern once again. As stated before, this pattern suggests creating an abstract class for the player state and implementing each one of the concrete states as their own subclass, with their own implementation of the needed player's actions and state transitions.
+
+#### Implementation
+
+The implementation of this pattern can be found in the [abstract class PlayerState](/src/main/java/timelessodyssey/model/game/elements/player/PlayerState.java), as well as its subclasses: [IdleState](/src/main/java/timelessodyssey/model/game/elements/player/IdleState.java), [WalkingState](/src/main/java/timelessodyssey/model/game/elements/player/WalkingState.java), [RunningState](/src/main/java/timelessodyssey/model/game/elements/player/RunningState.java), [JumpingState](/src/main/java/timelessodyssey/model/game/elements/player/JumpingState.java), [FallingState](/src/main/java/timelessodyssey/model/game/elements/player/FallingState.java), [DashingState](/src/main/java/timelessodyssey/model/game/elements/player/DashingState.java), [AfterDashState](/src/main/java/timelessodyssey/model/game/elements/player/AfterDashState.java) and [DeadState](/src/main/java/timelessodyssey/model/game/elements/player/DeadState.java). 
+
+This way, the player redirects the logic of movement to the state, and the state deals with the movement's actualization, with methods such as `movePlayerLeft()` and `jump()`.
+
+A UML diagram describing the pattern implementation can be found below:
+
+<p align="center">
+  <img src="resources/uml/class/pstate.png"/>
+</p>
+
+A state diagram highlighting how the state transitions proceed during gameplay can also be found here:
+
+<p align="center">
+  <img src="resources/uml/state/player.png"/>
+</p>
+
+#### Consequences
+
+With this pattern, all the phases of the player's movement became well segregated and intuitively identified, as well as more securely defined than with the flag fields. Also, the transitions between each state become much clearer and, if we were to add more states in the future, it would be as easy as to add another subclass, removing the necessity to potentially alter the behavior of other states to add another. It also allows for more flexible player movement, by allowing to make specific conditions for specific states.
+
+### Sprite Loading
+
+#### Problem in Context
+
+Each Sprite object holds a bitmap image. Although the images used throughout the game are very light, using a sprite for each element, like the tiles, can lead to unnecessary memory overhead.
+The unification of the access to sprite objects would also be beneficial for mocking in unit testing.
+
+#### The Pattern
+
+For the Sprite Loader, we used the **Flyweight** Pattern. This pattern lets us use more objects with the available amount of RAM by sharing parts of the object between multiple objects instead of having them keep the same data.
+
+#### Implementation
+
+The implementation of this pattern can be seen in the [SpriteLoader class](/src/main/java/timelessodyssey/view/SpriteLoader.java), as well as [LogoViewer](/src/main/java/timelessodyssey/view/menu/LogoViewer.java) and all subclasses of [ElementViewer](/src/main/java/timelessodyssey/view/elements/ElementViewer.java). The SpriteLoader has a map with all the [Sprite](/src/main/java/timelessodyssey/view/Sprite.java) objects needed by the application, and each viewer can access the wanted sprite using the sprite's filepath. 
+
+A UML diagram with the structure of the implementation can be found here:
+
+<p align="center">
+  <img src="resources/uml/class/flyweight.png"/>
+</p>
+
+#### Consequences
+
+This pattern allowed us to save some memory space and uniformize the sprite loading throughout the application, as well as facilitate unit testing, as the SpriteLoader can be used as a conduit for dependency injection.
+
 ## KNOWN CODE SMELLS
 
-Since we have been using Google's Error Prone plugin and good code practices, we don't have any known code smells to note.  
-Although we hope this continues, the number of code smells may change as we scrutinize our code further or as we keep implementing more features.
+### Switch Statements
 
-[Entry](/src/main/java/timelessodyssey/model/menu/Entry.java), [EntryViewer](/src/main/java/timelessodyssey/view/menu/EntryViewer.java), [EntryController](/src/main/java/timelessodyssey/control/menu/EntryController.java) => Switch statements
+As of now, the menu entries ([Entry](/src/main/java/timelessodyssey/model/menu/Entry.java)) are each one of many entry types, defined in a enum, which the [EntryViewer](/src/main/java/timelessodyssey/view/menu/EntryViewer.java) and the [EntryController](/src/main/java/timelessodyssey/control/menu/EntryController.java) check to determine their visualization and behavior, respectively, through somewhat long **switch statements**. We tried to solve this problem with a **Command** Pattern, where each type of entry would implement how it should be visualized and how it would react. However, because the entry types are stored in the Model, this would violate the **Model-View-Controller** Pattern, so the switch statements were our best option.
+
+We also used switch statements for handling the commands in our Controller, however each case did only basic calls, so it is not a big issue.
+
+### Refused bequest
+
+In our player states, some states (especially [DeadState](/src/main/java/timelessodyssey/model/game/elements/player/DeadState.java)) do not exactly implement the movement functions requested by the base class ([PlayerState](/src/main/java/timelessodyssey/model/game/elements/player/PlayerState.java)). For example, [JumpingState](/src/main/java/timelessodyssey/model/game/elements/player/JumpingState.java) does not alter the player movement with the `jump()` method, as the player should not jump right after the jump. This can be seen as a violation of the Liskov Substitution Principle, as the player cannot jump after jumping, but the way we think the methods should be seen is how the player should have their movement updated after the user tries to do certain actions (in this case, if the player is not on the ground, all jumping tries should fail). This could be fixed by getting rid of the **State** Pattern applied, but we would end up with all the problems [mentioned before](#player-states), so we though this would be the better choice.
+
+### Duplicate code
+
+In the player states, the code for the state transitions (in the `getNextState()` method) looks very similar for most of the states. We tried to extract the identical code to methods as much as possible, but extracting more would lead to less legible and intuitive code. We could fix by creating additional base state classes which implement some of the methods, but this would not exactly solve the problem, as each state transition function is different from the other, and it would clutter the State Pattern implementation. 
+
+### Data class
+
+Outside of some minor functions of the model, like the [Vector](/src/main/java/timelessodyssey/model/Vector.java) class, we created the class [ViewerProvider](/src/main/java/timelessodyssey/view/ViewerProvider.java) to ease mocking the Viewer classes in our unit testing, while avoiding the Long Parameter List code smell int respective constructors. However, the ViewerProvider does not use any of its field, it only providing to the other classes.
 
 ## TESTING
 
-- **[Unit Testing](/src/test/java/timelessodyssey/model/PositionTest.java)** for the testable sections of our code (Model, View, Controller, States, GUI, Sound) 
-- **[Mocks](/src/test/java/timelessodyssey/states/StateTest.java)** have been used in conjunction with Unit Tests
+- **[Unit Testing](/src/test/java/timelessodyssey/model/game/scene/SceneTest.java)** for the testable sections of our code (Model, View, Controller, States, GUI, Sound) 
+- **[Mocks](/src/test/java/timelessodyssey/states/MainMenuStateTest.java)** have been used in conjunction with Unit Tests
 - **[Coverage Testing](/docs/resources/tests/coverage.png)** using JaCoCo 
   - Instruction Coverage ≈ 97%
   - Branch Coverage ≈ 98%
@@ -224,8 +319,9 @@ Although we hope this continues, the number of code smells may change as we scru
     <img src="resources/tests/mutation.png"/>
   </p>
 
-## SELF-EVALUATION
+Note: we couldn't achieve more instruction and branch coverage using JaCoCo because our switch-statements based on enums don't have a default option. Due to this, JaCoCo considers that some branches or instructions are not tested, therefore the result shown in the report is not 100%
 
+## SELF-EVALUATION
     - Bruno Oliveira: 33.33%
     - João Mendes: 33.33%
     - Rodrigo Coelho: 33.33%
