@@ -17,13 +17,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class SettingsMenuStateTest {
-    SettingsMenu model;
-    SpriteLoader spriteLoader;
-    Game game;
-    ResizableGUI gui;
-    Controller<SettingsMenu> stateController;
-    ScreenViewer<SettingsMenu> stateScreenViewer;
-    SettingsMenuState state;
+    private SettingsMenu model;
+    private SpriteLoader spriteLoader;
+    private Game game;
+    private ResizableGUI gui;
+    private Controller<SettingsMenu> stateController;
+    private ScreenViewer<SettingsMenu> stateScreenViewer;
+    private SettingsMenuState state;
 
     @SuppressWarnings("unchecked")
     private void mockControllerAndViewer() {
@@ -41,7 +41,7 @@ public class SettingsMenuStateTest {
     }
 
     @Test
-    public void SettingsMenuStep() throws IOException, URISyntaxException, FontFormatException {
+    public void settingsMenuStep() throws IOException, URISyntaxException, FontFormatException {
         long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new SettingsMenuState(model, spriteLoader){

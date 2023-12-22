@@ -61,7 +61,7 @@ public class PlayerViewer implements ElementViewer<Player> {
     public void draw(Player model, GUI gui, long frameCount) {
         Sprite sprite = getSprite(model, frameCount);
         if (sprite != null)
-            sprite.draw(gui, model.getPosition().x(), model.getPosition().y());
+            sprite.draw(gui, model.getPosition().x() + (model.isFacingRight() ? -2 : 0), model.getPosition().y());
     }
 
     private Sprite getSprite(Player model, long frameCount) {

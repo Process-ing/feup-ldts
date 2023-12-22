@@ -14,11 +14,11 @@ import java.net.URISyntaxException;
 import static org.mockito.ArgumentMatchers.eq;
 
 public class MainMenuControllerTest {
-
     private Game game;
     private MainMenu mainMenu;
     private EntryController entryController;
     private MainMenuController mainMenuController;
+
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);
@@ -30,7 +30,7 @@ public class MainMenuControllerTest {
     }
 
     @Test
-    public void ActionDownEntry() throws IOException, URISyntaxException, FontFormatException {
+    public void actionDownEntry() throws IOException, URISyntaxException, FontFormatException {
         for (int counter = 1; counter < 20; counter++){
             mainMenuController.step(game, GUI.Action.DOWN, 0);
             Mockito.verify(mainMenu, Mockito.times(counter)).moveDown();
@@ -38,7 +38,7 @@ public class MainMenuControllerTest {
     }
 
     @Test
-    public void ActionUpEntry() throws IOException, URISyntaxException, FontFormatException {
+    public void actionUpEntry() throws IOException, URISyntaxException, FontFormatException {
         for (int counter = 1; counter < 20; counter++){
             mainMenuController.step(game, GUI.Action.UP, 0);
             Mockito.verify(mainMenu, Mockito.times(counter)).moveUp();
@@ -46,13 +46,13 @@ public class MainMenuControllerTest {
     }
 
     @Test
-    public void ActionQuit() throws IOException, URISyntaxException, FontFormatException {
+    public void actionQuit() throws IOException, URISyntaxException, FontFormatException {
         mainMenuController.step(game, GUI.Action.QUIT, 0);
         Mockito.verify(game, Mockito.times(1)).setState(null);
     }
 
     @Test
-    public void ActionOthers() throws IOException, URISyntaxException, FontFormatException {
+    public void actionOthers() throws IOException, URISyntaxException, FontFormatException {
         mainMenuController.step(game, GUI.Action.NONE, 0);
         Mockito.verify(entryController, Mockito.times(1))
                 .step(eq(game), eq(GUI.Action.NONE), Mockito.anyLong());

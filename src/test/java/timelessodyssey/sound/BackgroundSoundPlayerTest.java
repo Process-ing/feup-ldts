@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 
 public class BackgroundSoundPlayerTest {
     @Test
-    public void SoundLoaderWorking() throws Exception {
+    public void soundLoaderWorking() throws Exception {
         AudioInputStream audioInput = Mockito.mock(AudioInputStream.class);
         Clip musicClip = Mockito.mock(Clip.class);
 
@@ -25,19 +25,19 @@ public class BackgroundSoundPlayerTest {
     }
 
     @Test
-    public void SoundLoaderException() throws Exception {
+    public void soundLoaderException() throws Exception {
         AudioInputStream audioInput = Mockito.mock(AudioInputStream.class);
         Clip musicClip = Mockito.mock(Clip.class);
         doThrow(new FileNotFoundException()).when(musicClip).open(Mockito.any());
 
         Exception thrown = Assertions.assertThrows(Exception.class,
-                () -> {new BackgroundSoundPlayer(new SoundLoader().loadSound(audioInput, musicClip));},
+                () -> new BackgroundSoundPlayer(new SoundLoader().loadSound(audioInput, musicClip)),
                 "BackgroundSoundPlayer was supposed to throw Exception");
 
         Assertions.assertEquals("Unable to load sound file!", thrown.getMessage());
     }
     @Test
-    public void SoundTesting() {
+    public void soundTesting() {
         Clip sound=mock(Clip.class);
         BackgroundSoundPlayer backgroundSoundPlayer = new BackgroundSoundPlayer(sound);
         backgroundSoundPlayer.setSound(sound);

@@ -8,16 +8,11 @@ import timelessodyssey.model.game.scene.Scene;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 class DashingStateTest {
-
     private Player player;
-
     private DashingState dashingState;
-
     private Scene mockedScene;
 
     @BeforeEach
@@ -60,7 +55,7 @@ class DashingStateTest {
 
     @Test
     void getNextStateDead() {
-        when(mockedScene.isDying()).thenReturn(true);
+        when(mockedScene.isPlayerDying()).thenReturn(true);
 
         PlayerState nextState = dashingState.getNextState();
 

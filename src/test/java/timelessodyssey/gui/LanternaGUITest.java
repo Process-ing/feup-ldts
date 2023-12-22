@@ -9,7 +9,6 @@ import net.jqwik.api.*;
 import net.jqwik.api.lifecycle.BeforeTry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.awt.*;
@@ -23,7 +22,6 @@ import java.util.Map;
 import static java.awt.event.KeyEvent.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 public class LanternaGUITest {
@@ -168,7 +166,7 @@ public class LanternaGUITest {
         verify(screenCreator, times(1)).createScreen(resolution, title, gui.getKeyAdapter());
     }
 
-    @Property(tries = 100)
+    @Property
     public void drawPixel(@ForAll int x, @ForAll int y, @ForAll @From("color") TextColor color) throws IOException, URISyntaxException, FontFormatException {
         GUI gui = new LanternaGUI(screenCreator, "drawPixel test");
 
@@ -179,7 +177,7 @@ public class LanternaGUITest {
         verifyNoMoreInteractions(tg);
     }
 
-    @Property(tries = 100)
+    @Property
     public void drawRectangle(
         @ForAll int x,
         @ForAll int y,

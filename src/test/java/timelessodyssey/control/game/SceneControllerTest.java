@@ -14,8 +14,6 @@ import java.io.IOException;
 
 public class SceneControllerTest {
     private Game game;
-    private SpriteLoader spriteLoader;
-    private Player player;
     private SceneController sceneController;
     private Scene scene;
     private PlayerController playerController;
@@ -24,11 +22,11 @@ public class SceneControllerTest {
     @BeforeEach
     public void setup() {
         this.game = Mockito.mock(Game.class);
-        this.spriteLoader = Mockito.mock(SpriteLoader.class);
+        SpriteLoader spriteLoader = Mockito.mock(SpriteLoader.class);
         Mockito.when(game.getSpriteLoader()).thenReturn(spriteLoader);
 
         this.scene = Mockito.mock(Scene.class);
-        this.player = Mockito.mock(Player.class);
+        Player player = Mockito.mock(Player.class);
         Mockito.when(scene.getPlayer()).thenReturn(player);
 
         this.playerController = Mockito.mock(PlayerController.class);
@@ -74,6 +72,8 @@ public class SceneControllerTest {
                 .step(game, action, frameCount);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any());
+        Mockito.verify(particleController, Mockito.times(1))
+                .step(game, action, frameCount);
     }
 
     @Test
@@ -88,5 +88,7 @@ public class SceneControllerTest {
                 .step(game, action, frameCount);
         Mockito.verify(game, Mockito.times(1))
                 .setState(Mockito.any(CreditsState.class));
+        Mockito.verify(particleController, Mockito.times(1))
+                .step(game, action, frameCount);
     }
 }

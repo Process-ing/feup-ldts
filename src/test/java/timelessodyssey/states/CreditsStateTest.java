@@ -17,13 +17,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class CreditsStateTest {
-    Credits model;
-    SpriteLoader spriteLoader;
-    Game game;
-    ResizableGUI gui;
-    Controller<Credits> stateController;
-    ScreenViewer<Credits> stateScreenViewer;
-    CreditsState state;
+    private Credits model;
+    private SpriteLoader spriteLoader;
+    private Game game;
+    private ResizableGUI gui;
+    private Controller<Credits> stateController;
+    private ScreenViewer<Credits> stateScreenViewer;
+    private CreditsState state;
 
     @SuppressWarnings("unchecked")
     private void mockControllerAndViewer() {
@@ -41,7 +41,7 @@ public class CreditsStateTest {
     }
 
     @Test
-    public void CreditsStep() throws IOException, URISyntaxException, FontFormatException {
+    public void creditsStep() throws IOException, URISyntaxException, FontFormatException {
         long frameCount = 0;
         Mockito.when(gui.getNextAction()).thenReturn(GUI.Action.NONE);
         this.state = new CreditsState(model, spriteLoader){

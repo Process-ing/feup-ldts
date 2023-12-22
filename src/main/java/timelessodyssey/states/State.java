@@ -23,7 +23,7 @@ public abstract class State<T> {
         this.controller = createController();
     }
 
-    protected abstract ScreenViewer<T> createScreenViewer(ViewerProvider viewerProvider) throws IOException;
+    protected abstract ScreenViewer<T> createScreenViewer(ViewerProvider viewerProvider);
     protected abstract Controller<T> createController();
     protected abstract boolean allowArrowSpam();
 

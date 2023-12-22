@@ -9,7 +9,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MenuTest {
-
     private Menu menu;
     private List<Entry> entryList;
 
@@ -29,7 +28,7 @@ public class MenuTest {
     }
 
     @Test
-    public void MenuTestEntries(){
+    public void menuTestEntries(){
         assertEquals(3, menu.getNumberEntries());
         assertEquals(entryList, menu.getEntries());
 

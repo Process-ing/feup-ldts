@@ -20,7 +20,7 @@ public class SpikeViewer implements ElementViewer<Spike> {
     }
 
     @Override
-    public void draw(Spike model, GUI gui, long frameCount) throws IOException {
+    public void draw(Spike model, GUI gui, long frameCount) {
         Sprite sprite = spikeMap.get(model.getCharacter());
         sprite.draw(gui, model.getPosition().x(), model.getPosition().y());
     }

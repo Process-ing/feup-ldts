@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Objects;
 
 public class LanternaScreenCreator implements ScreenCreator {
     private final DefaultTerminalFactory terminalFactory;
@@ -43,7 +44,7 @@ public class LanternaScreenCreator implements ScreenCreator {
 
     private AWTTerminalFontConfiguration loadFont(int fontSize) throws URISyntaxException, IOException, FontFormatException {
         URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
-        File fontFile = new File(resource.toURI());
+        File fontFile = new File(Objects.requireNonNull(resource).toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.PLAIN, fontSize);
         return AWTTerminalFontConfiguration.newInstance(font);
     }

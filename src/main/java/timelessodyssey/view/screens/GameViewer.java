@@ -45,16 +45,16 @@ public class GameViewer extends ScreenViewer<Scene> {
         gui.refresh();
     }
 
-    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer, long frameCount) throws IOException {
+    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer, long frameCount) {
         viewer.draw(element, gui, frameCount);
     }
 
-    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer, long frameCount) throws IOException {
+    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer, long frameCount) {
         for (T element: elements)
             drawElement(gui, element, viewer, frameCount);
     }
 
-    private <T extends Element> void drawElements(GUI gui, T[][] elements, ElementViewer<T> viewer, long frameCount) throws IOException {
+    private <T extends Element> void drawElements(GUI gui, T[][] elements, ElementViewer<T> viewer, long frameCount) {
         for (T[] elementLine : elements) {
             for (T element : elementLine) {
                 if (element != null)

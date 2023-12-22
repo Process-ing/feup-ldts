@@ -11,11 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class IdleStateTest {
-
     private Player player;
-
     private IdleState idleState;
-
     private Scene mockedScene;
 
     @BeforeEach
@@ -67,7 +64,7 @@ class IdleStateTest {
 
     @Test
     void getNextStateDead() {
-        when(mockedScene.isDying()).thenReturn(true);
+        when(mockedScene.isPlayerDying()).thenReturn(true);
 
         PlayerState nextState = idleState.getNextState();
 
