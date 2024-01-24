@@ -9,7 +9,7 @@
 Timeless Odyssey is a 2D platformer game where the main character explores a futuristic world full of obstacles through the use of jumping and dashing mechanics, while also collecting stars to increase the score in search for a potential treasure. There are multiple consecutive "levels" with varying difficulty that blend through progressive scenery changes.
 
 ><p align="center">
->This project was developed by Bruno Oliveira (up202208700@fe.up.pt), João Mendes (up202208783@fe.up.pt) and Rodrigo Coelho (up202205188@fe.up.pt) for LDTS 2023/24
+>This project was developed by <a href="https://github.com/Process-ing">Bruno Oliveira</a> (up202208700@fe.up.pt), <a href="https://github.com/The-Memechanic">João Mendes</a> (up202208783@fe.up.pt) and <a href="https://github.com/racoelhosilva">Rodrigo Coelho</a> (up202205188@fe.up.pt) for LDTS 2023/24
 ></p>
 
 ## IMPLEMENTED FEATURES
@@ -76,3 +76,11 @@ Timeless Odyssey is a 2D platformer game where the main character explores a fut
 <p align="center">
   <img src="docs/resources/uml/class/structure.png"/>
 </p>
+
+## RESULTS
+
+ - Intermediate delivery (10%): 20.0/20
+ - Final Product (60%): 19.1/20
+ - Final Report (30%): 20.0/20
+
+ - Final Grade: 19.5/20
